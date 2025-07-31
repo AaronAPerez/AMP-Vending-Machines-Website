@@ -20,7 +20,7 @@ const Footer = () => {
                 alt="AMP Vending Logo"
                 width={100}
                 height={100}
-                className="h-14 w-auto"
+                className="h-14 w-20"
               />
             </div>
             <p className="text-[#A5ACAF] text-sm leading-relaxed max-w-xs">

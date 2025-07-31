@@ -3,7 +3,7 @@ import "./globals.css";
 import StyledComponentsRegistry from '../lib/registry';
 import { Analytics } from "@vercel/analytics/react";
 import { Inter } from 'next/font/google';
-import Footer from "@/components/contact/ContactInfoSection";
+import Footer from "@/components/layout/Footer";
 import FeedbackWidget from "@/components/feedback/FeedbackWidget";
 import ResizableNavbar from "@/components/layout/ResizableNavbar";
 import { SpeedInsights } from '@vercel/speed-insights/next';
