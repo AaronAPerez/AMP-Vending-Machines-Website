@@ -35,6 +35,7 @@ yarn-error.log*
 .env
 # Environment files
 .env.local
+.env.example
 .env.production
 .env*.local
 

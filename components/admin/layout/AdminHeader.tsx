@@ -3,7 +3,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowRightOnRectangleIcon } from '@heroicons/react/24/outline';
+import { ArrowRightIcon } from 'lucide-react';
+
 
 
 export default function AdminHeader() {
@@ -52,7 +53,7 @@ export default function AdminHeader() {
                 onClick={handleLogout}
                 className="flex items-center w-full px-4 py-2 text-sm text-red-400 hover:bg-[#333333] hover:text-red-300 transition-colors"
               >
-                <ArrowRightOnRectangleIcon className="w-4 h-4 mr-3" />
+                <ArrowRightIcon className="w-4 h-4 mr-3" />
                 Sign Out
               </button>
             </div>

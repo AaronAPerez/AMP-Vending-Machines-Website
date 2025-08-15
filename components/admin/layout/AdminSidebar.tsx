@@ -1,19 +1,13 @@
-// components/admin/layout/AdminSidebar.tsx
 'use client';
 
+import { BuildingIcon, ChartBarIcon, CogIcon, HomeIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { 
-  HomeIcon, 
-  UserGroupIcon, 
-  ChartBarIcon, 
-  CogIcon,
-  BuildingOfficeIcon
-} from '@heroicons/react/24/outline';
+
 
 const navigation = [
   { name: 'Dashboard', href: '/admin', icon: HomeIcon },
-  { name: 'Business Profile', href: '/admin/business-profile', icon: BuildingOfficeIcon },
+  { name: 'Business Profile', href: '/admin/business-profile', icon: BuildingIcon },
   { name: 'Analytics', href: '/admin/analytics', icon: ChartBarIcon },
   { name: 'Settings', href: '/admin/settings', icon: CogIcon },
 ];
