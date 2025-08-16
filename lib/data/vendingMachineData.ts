@@ -629,6 +629,233 @@ const vendingMachineData: Record<string, MachineData> = {
     ],
   },
 
+   "vendo-821-v21-blue-refresh-high-capacity": {
+    id: "vendo-821-v21-blue-refresh-high-capacity",
+    name: "Vendo 821 V21 Blue Refresh High-Capacity Beverage Machine",
+    seoTitle: "Vendo 821 V21 Blue Refresh - High-Capacity Commercial Vending Machine",
+    metaDescription: "Professional Vendo 821 V21 Blue Refresh vending machine with 800 can capacity, LED lighting, and live display. Perfect for high-traffic commercial locations.",
+    shortDescription: "High-capacity commercial beverage vending machine with live display and 800 can capacity",
+    description: `The Vendo 821 V21 Blue Refresh represents the pinnacle of high-capacity commercial vending technology. 
+      Designed specifically for high-volume locations, this machine combines exceptional capacity with reliable performance 
+      and energy-efficient operation. Featuring a sophisticated live display system that eliminates the need for product 
+      labels, customers can see exactly what's available through the transparent product windows. With the ability to hold 
+      up to 800 12-oz cans across 10 selections, this machine is ideal for busy workplaces, hospitals, universities, and 
+      other high-traffic commercial environments where consistent beverage availability is crucial.`,
+    
+    images: [
+      {
+        id: 1,
+        src: "/images/machines/refrigerated-vending-machine-blue-refresh.png",
+        alt: "Vendo 821 V21 Blue Refresh high-capacity vending machine front view with LED lighting"
+      },
+      // {
+      //   id: 2,
+      //   src: "/images/machines/vendo-821-v21-blue-refresh-side.jpg", 
+      //   alt: "Vendo 821 V21 Blue Refresh side profile showing depth and ventilation"
+      // },
+      // {
+      //   id: 3,
+      //   src: "/images/machines/vendo-821-v21-blue-refresh-interior.jpg",
+      //   alt: "Vendo 821 V21 Blue Refresh interior showing 10-selection capacity and loading system"
+      // },
+      // {
+      //   id: 4,
+      //   src: "/images/machines/vendo-821-v21-blue-refresh-display.jpg",
+      //   alt: "Vendo 821 V21 Blue Refresh live display window showing product visibility"
+      // }
+    ],
+
+    // Comprehensive technical specifications
+    specifications: [
+      {
+        category: "Capacity & Selections",
+        items: [
+          { label: "Product Selections", value: "10 selections" },
+          { label: "12 oz Can Capacity", value: "800 cans total" },
+          { label: "20 oz Bottle Capacity", value: "360 bottles total" },
+          { label: "24 oz Bottle Capacity", value: "300 bottles total" },
+          { label: "Display Type", value: "Live product display (no labels required)" }
+        ]
+      },
+      {
+        category: "Physical Dimensions",
+        items: [
+          { label: "Height", value: '72" (183 cm)' },
+          { label: "Width", value: '32.5" (83 cm)' },
+          { label: "Depth", value: '31.5" (80 cm)' },
+          { label: "Shipping Weight", value: "680 lbs (308 kg)" },
+          { label: "Operating Weight", value: "750 lbs (340 kg) fully loaded" }
+        ]
+      },
+      {
+        category: "Electrical & Power",
+        items: [
+          { label: "Power Requirements", value: "115 VAC, 60 Hz" },
+          { label: "Current Draw", value: "12 amps maximum" },
+          { label: "Energy Efficiency", value: "LED lighting system" },
+          { label: "Refrigeration", value: "R134a refrigerant system" },
+          { label: "Temperature Range", value: "35°F - 42°F (2°C - 6°C)" }
+        ]
+      },
+      {
+        category: "Control Systems",
+        items: [
+          { label: "Controller", value: "V21 full function MDB controller" },
+          { label: "Display Options", value: ["Red LED display", "LCD dual-line display"] },
+          { label: "Telemetry Support", value: "DEX/UCS and wireless compatible" },
+          { label: "Payment Systems", value: "MDB interface, credit card capable" },
+          { label: "Recycler Compatible", value: "Yes, with proper adapter" }
+        ]
+      },
+      {
+        category: "Vending Mechanisms",
+        items: [
+          { label: "Vend System", value: "Self-priming vend mechanisms" },
+          { label: "Product Loading", value: "Flexible shimless loading system" },
+          { label: "Vend Motor", value: "24V, 1 amp metal casing motor" },
+          { label: "Control Boards", value: "Interchangeable for easy service" },
+          { label: "Vend Reliability", value: "Commercial-grade mechanisms" }
+        ]
+      }
+    ],
+
+    // Key product features highlighting commercial benefits
+    features: [
+      {
+        title: "High-Volume Capacity",
+        description: "Holds up to 800 12-oz cans across 10 selections, perfect for high-traffic locations with consistent demand",
+        icon: "package"
+      },
+      {
+        title: "Live Product Display", 
+        description: "No product labels needed - customers see actual products through transparent display windows",
+        icon: "eye"
+      },
+      {
+        title: "Energy-Efficient LED Lighting",
+        description: "Modern LED lighting system reduces energy consumption while providing excellent product visibility",
+        icon: "zap"
+      },
+      {
+        title: "Flexible Product Loading",
+        description: "Shimless loading system accommodates bottles, cans, and cartons for optimal product mix",
+        icon: "settings"
+      },
+      {
+        title: "Self-Priming Vend Mechanisms",
+        description: "Advanced vending technology ensures reliable product delivery with minimal maintenance",
+        icon: "gear"
+      },
+      {
+        title: "MDB Payment Integration",
+        description: "Full MDB interface supports modern payment systems including credit cards and mobile payments",
+        icon: "credit-card"
+      },
+      {
+        title: "Superior Refrigeration",
+        description: "Advanced refrigeration system maintains optimal temperature while maximizing energy efficiency",
+        icon: "thermometer"
+      },
+      {
+        title: "Easy Service Access",
+        description: "Interchangeable control boards and accessible design simplify maintenance and repairs",
+        icon: "wrench"
+      }
+    ],
+
+    // Product compatibility and options
+    productOptions: [
+      "12 oz aluminum cans (Coca-Cola, Pepsi, energy drinks)",
+      "16 oz plastic bottles (water, sports drinks)",
+      "20 oz plastic bottles (sodas, juices)",
+      "24 oz bottles (premium beverages)",
+      "Energy drinks and specialty beverages", 
+      "Mixed product configurations available"
+    ],
+
+    // Target market and optimal use cases
+    bestFor: [
+      "High-traffic office buildings and corporate campuses",
+      "Hospitals and medical facilities with 24/7 operations", 
+      "Universities and educational institutions",
+      "Manufacturing facilities and industrial sites",
+      "Hotels and hospitality venues",
+      "Government buildings and public facilities",
+      "Transportation hubs (airports, train stations)",
+      "Large retail locations and shopping centers",
+      "Sports and recreation facilities",
+      "Any location requiring consistent high-volume beverage service"
+    ],
+
+    // SEO-optimized related machine suggestions
+    relatedMachines: [
+      {
+        id: "premium-snack-vending-machine-touchscreen",
+        name: "Premium Snack Vending Machine with Touchscreen", 
+        image: "/images/machines/amp-premium-touchscreen-vending-machine.png"
+      },
+      {
+        id: "refrigerated-touchscreen-vending-machine",
+        name: "Refrigerated Touchscreen Vending Machine",
+        image: "/images/machines/amp-refrigerated-vending-machine.png"
+      },
+      {
+        id: "commercial-coffee-vending-machine",
+        name: "Commercial Coffee Vending Machine",
+        image: "/images/machines/commercial-coffee-vending-machine.jpg"
+      }
+    ],
+
+    category: "refrigerated" as const,
+
+    // Machine highlights for quick reference
+    highlights: [
+      "Highest Capacity Available - 800 Can Storage",
+      "Live Display Technology - No Labels Required", 
+      "Energy-Efficient LED Lighting System",
+      "Professional Installation & Maintenance Included",
+      "MDB Payment System Integration Ready",
+      "Commercial-Grade Reliability & Performance"
+    ],
+
+    // SEO keyword optimization
+    keywords: [
+      "high capacity vending machine",
+      "commercial beverage vending machine", 
+      "vendo 821 v21 blue refresh",
+      "office beverage machine",
+      "hospital vending machine",
+      "university vending machine",
+      "live display vending machine"
+    ],
+
+    // Local SEO targeting
+    localKeywords: [
+      "commercial vending machine Modesto CA",
+      "high capacity beverage machine Central California", 
+      "office vending service Central Valley",
+      "hospital vending machine Northern California"
+    ],
+
+    // Business-focused keywords
+    businessKeywords: [
+      "workplace beverage solutions",
+      "commercial vending service",
+      "high-volume vending machine rental",
+      "office beverage program",
+      "employee break room vending"
+    ],
+
+    // Physical dimensions for space planning
+    dimensions: [
+      { label: "Height", value: '72" (6 feet)' },
+      { label: "Width", value: '32.5" (2.7 feet)' },
+      { label: "Depth", value: '31.5" (2.6 feet)' },
+      { label: "Clearance Required", value: "6 inches on sides, 12 inches on back" },
+      { label: "Door Swing", value: "Right-hand opening, 36 inches clearance needed" }
+    ]
+  },
+
   // Compact Office Refrigerated Vending Machine
   "compact-office-refrigerated-vending-machine": {
     id: "compact-office-refrigerated-vending-machine",

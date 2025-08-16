@@ -200,6 +200,8 @@ const DynamicMachineDetailPage = () => {
     }
   }, [machineId]);
 
+  
+
   // Handle keyboard navigation for image gallery
   const handleImageKeyPress = (event: React.KeyboardEvent, index: number) => {
     if (event.key === 'Enter' || event.key === ' ') {
