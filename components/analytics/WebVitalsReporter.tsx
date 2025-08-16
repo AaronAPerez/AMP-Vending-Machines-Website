@@ -1,8 +1,10 @@
+// components/analytics/WebVitalsReporter.tsx - Fixed import
+
 'use client';
 
 import { useEffect, useState } from 'react';
 import { useReportWebVitals } from 'next/web-vitals';
-import { initializeWebVitalsWithConfig } from '@/lib/performance/core-web-vitals';
+import { initializeWebVitals } from '@/lib/performance/core-web-vitals';
 
 /**
  * Web Vitals Reporter Component
@@ -39,15 +41,16 @@ export function WebVitalsReporter({
   // Initialize custom web vitals tracking
   useEffect(() => {
     try {
-      initializeWebVitalsWithConfig({
-        enableConsoleLogging: enableDebugMode,
-        enableCustomAnalytics: true,
-        reportAllChanges,
-      });
+      // Use the basic initialize function instead of the config version
+      initializeWebVitals();
+      
+      if (enableDebugMode) {
+        console.log('📊 Web Vitals tracking initialized');
+      }
     } catch (error) {
       console.warn('Failed to initialize custom web vitals:', error);
     }
-  }, [enableDebugMode, reportAllChanges]);
+  }, [enableDebugMode]);
 
   return null; // This component doesn't render anything
 }
@@ -57,8 +60,8 @@ export function WebVitalsReporter({
  */
 function sendMetricToAnalytics(metric: any) {
   // Send to Google Analytics
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', metric.name, {
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+    (window as any).gtag('event', metric.name, {
       event_category: 'Web Vitals',
       event_label: metric.id,
       value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),

@@ -350,3 +350,37 @@ export const SATISFACTION_LEVELS = [
   { value: 4, label: 'Satisfied', color: '#22c55e' },
   { value: 5, label: 'Very Satisfied', color: '#16a34a' }
 ] as const;
+
+
+export interface ReviewMetrics {
+  timeFrame: TimeFrame;
+  totalRequests: number;
+  reviewsReceived: number;
+  averageRating: number;
+  responseRate: number;
+}
+
+export interface ReviewRequestData {
+  customer: ReviewCustomer;
+  serviceType: ServiceType;
+  serviceDate: string;
+  machineModel?: string;
+}
+
+// Additional types for review system
+export type TimeFrame = 'day' | 'week' | 'month' | 'quarter' | 'year';
+
+export interface ReviewMetrics {
+  timeFrame: TimeFrame;
+  totalRequests: number;
+  reviewsReceived: number;
+  averageRating: number;
+  responseRate: number;
+}
+
+export interface ReviewRequestData {
+  customer: ReviewCustomer;
+  serviceType: ServiceType;
+  serviceDate: string;
+  machineModel?: string;
+}

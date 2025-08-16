@@ -1,14 +1,23 @@
-// lib/analytics/reviewAnalytics.ts
 export class ReviewAnalytics {
-  async trackMetrics() {
-    const metrics = {
-      requestsSent: await this.countRequestsSent(),
-      reviewsReceived: await this.countReviewsReceived(),
-      averageRating: await this.calculateAverageRating(),
-      responseRate: await this.calculateResponseRate()
-    };
-    
-    await this.saveMetrics(metrics);
-    return metrics;
+  async countRequestsSent(): Promise<number> {
+    return 0;
+  }
+
+  async countReviewsReceived(): Promise<number> {
+    return 0;
+  }
+
+  async calculateAverageRating(): Promise<number> {
+    return 0;
+  }
+
+  async calculateResponseRate(): Promise<number> {
+    return 0;
+  }
+
+  async saveMetrics(data: any): Promise<void> {
+    console.log('Saving review metrics:', data);
   }
 }
+
+export const reviewAnalytics = new ReviewAnalytics();

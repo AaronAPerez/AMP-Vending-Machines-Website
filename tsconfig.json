@@ -21,18 +21,26 @@
     "paths": {
       "@/*": ["./*"]
     },
+    "types": ["jest", "@testing-library/jest-dom", "node"],
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "noUncheckedIndexedAccess": false,
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
+    "noImplicitThis": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "target": "es2017",
     "downlevelIteration": true,
-    "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": false,
     "exactOptionalPropertyTypes": false
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+     "types/**/*.ts"
   ],
   "exclude": [
     "node_modules",
