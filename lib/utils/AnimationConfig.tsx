@@ -185,11 +185,11 @@ export const ANIMATION_CLASSES = {
 // Import React for the hook
 import React from 'react';
 
-export default {
-  getAnimationStyles,
-  getAnimationCustomProperties,
-  ANIMATION_PRESETS,
-  useAnimation,
-  createStaggeredDelay,
-  ANIMATION_CLASSES,
-};
+// export default {
+//   getAnimationStyles,
+//   getAnimationCustomProperties,
+//   ANIMATION_PRESETS,
+//   useAnimation,
+//   createStaggeredDelay,
+//   ANIMATION_CLASSES,
+// };

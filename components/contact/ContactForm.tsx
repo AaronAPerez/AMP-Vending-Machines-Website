@@ -118,7 +118,7 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="rounded-xl overflow-hidden bg-[#111111] border border-[#333333] p-4 sm:p-6 overflow-hidden shadow-2xl bg-black">
+    <div className="rounded-xl overflow-hidden bg-[#111111] border border-[#333333] p-4 sm:p-6 shadow-2xl">
       <div className="flex flex-col md:flex-row">
         {/* Form Section */}
         <div className="w-full md:w-1/2 p-4 sm:p-6 md:p-8 lg:p-12">
@@ -147,7 +147,7 @@ export default function ContactForm() {
                 role="alert"
                 className="p-4 bg-green-900/50 border border-green-600 rounded-lg text-green-200"
               >
-                Thank you! Your message has been sent successfully. We'll get back to you within 24 hours.
+                Thank you! Your message has been sent successfully. We&apos;ll get back to you within 24 hours.
               </div>
             )}
 
@@ -331,7 +331,7 @@ export default function ContactForm() {
                 {isSubmitting ? 'Sending...' : 'Request Information'}
               </button>
               <p id="submit-help" className="mt-2 text-[#A5ACAF] text-xs">
-                We'll respond within 24 hours
+                We&apos;ll respond within 24 hours
               </p>
             </div>
           </form>
