@@ -24,6 +24,15 @@ interface ReviewRequestData {
 }
 
 export class ReviewService {
+  verifyWebhookSignature(arg0: string, signature: string) {
+    throw new Error("Method not implemented.");
+  }
+  handleNewReview(review: any) {
+    throw new Error("Method not implemented.");
+  }
+  handleUpdatedReview(review: any) {
+    throw new Error("Method not implemented.");
+  }
   async sendReviewRequest(data: ReviewRequestData): Promise<{ success: boolean; error?: string }> {
     try {
       // Create email data
