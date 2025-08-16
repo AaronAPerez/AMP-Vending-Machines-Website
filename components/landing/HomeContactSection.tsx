@@ -3,6 +3,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import ContactForm from '../contact/ContactForm';
+import { Mail } from 'lucide-react';
+import AMP_VENDING_BUSINESS_INFO from '@/lib/data/businessData';
+import Section from '../ui/shared/Section';
 
 /**
  * HomeContactSection Component
@@ -11,24 +14,31 @@ import ContactForm from '../contact/ContactForm';
  */
 const HomeContactSection = () => {
   return (
-    <div className="relative overflow-hidden">
-      {/* Background decoration elements */}
-      <div className="absolute inset-0 z-0">
-        {/* Abstract dots pattern */}
-        <div className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='1' fill='%23FD5A1E' fill-opacity='0.8'/%3E%3C/svg%3E")`,
-            backgroundSize: '20px 20px'
-          }}
-        ></div>
+    <>
+ 
+        {/* Contact Section */}
+        <Section
+          id="contact"
+          background="gradient"
+          spacing="lg"
+        >
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center px-4 py-2 bg-[#FD5A1E]/10 rounded-full mb-6">
+              <span className="text-[#FD5A1E] font-medium text-sm">Get Started</span>
+            </div>
 
-        {/* Gradient accents */}
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-[#FD5A1E]/20 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-[#FD5A1E]/10 to-transparent rounded-full blur-3xl"></div>
-      </div>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-[#F5F5F5]">
+              Ready to <span className="text-[#FD5A1E]">Upgrade</span> Your Workplace?
+            </h2>
+
+            <p className="text-lg text-[#A5ACAF] max-w-3xl mx-auto">
+              Contact {AMP_VENDING_BUSINESS_INFO.name} today for your consultation
+            </p>
+          </div>
+
 
       {/* Content area */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10">
         {/* Section Header */}
         {/* <motion.div 
           className="text-center mb-12"
@@ -147,7 +157,8 @@ const HomeContactSection = () => {
           </p>
         </motion.div>
       </div>
-    </div>
+    </Section>
+    </>
   );
 };
 

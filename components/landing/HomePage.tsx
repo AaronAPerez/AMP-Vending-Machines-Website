@@ -18,7 +18,6 @@ import { ResponsiveHero } from '../hero/ResponsiveHero';
 import WorkplaceTransformSection from './WorkplaceTransformSection';
 import ProductSection from './ProductSection';
 import ProcessSection from './ProcessSection';
-import ServiceAreaSection from './ServiceAreaSection';
 import FAQSection from './FAQSection';
 import HomeContactSection from './HomeContactSection';
 import CTASection from './CTASection';
@@ -379,7 +378,7 @@ const HomePage = () => {
             </p>
           </div>
 
-          <ServiceAreaSection />
+         
         </Section>
 
         {/* FAQ Section */}

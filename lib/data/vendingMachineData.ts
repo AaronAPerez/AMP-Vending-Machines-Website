@@ -857,364 +857,364 @@ const vendingMachineData: Record<string, MachineData> = {
   },
 
   // Compact Office Refrigerated Vending Machine
-  "compact-office-refrigerated-vending-machine": {
-    id: "compact-office-refrigerated-vending-machine",
-    name: "Compact Office Refrigerated Vending Machine",
-    seoTitle: "Compact Refrigerated Vending Machine for Small Offices | AMP Vending",
-    metaDescription: "Space-saving refrigerated vending machine perfect for small offices and break rooms. Energy-efficient cooling with professional installation in Modesto, CA.",
-    shortDescription: "Space-efficient refrigerated vending solution with modern payment systems and energy-efficient cooling, designed specifically for smaller office environments and limited-space locations.",
-    description: "Our compact office refrigerated vending machine is engineered for businesses where space is premium but quality refreshment options remain essential. Despite its smaller footprint, this commercial-grade machine delivers advanced technology, reliable refrigeration, and professional service. Featuring energy-efficient cooling, versatile payment options, and capacity for a variety of refrigerated products, it's the perfect solution for small offices, medical practices, boutique businesses, and areas with space constraints throughout Central California.",
-    images: [
-      {
-        id: 1,
-        src: "/images/machines/compact-refrigerated-vending-machine.jpg",
-        alt: "Compact refrigerated vending machine for small offices and break rooms in Modesto California",
-      },
-    ],
-    dimensions: [
-      { label: "Width", value: "30 inches (76 cm)" },
-      { label: "Depth", value: "28 inches (71 cm)" },
-      { label: "Height", value: "76.7 inches (195 cm)" },
-      { label: "Weight", value: "550 lbs (250 kg)" },
-      { label: "Capacity", value: "30+ product selections" },
-      { label: "Power", value: "120V / 60Hz" },
-    ],
-    features: [
-      {
-        title: "Space-Saving Commercial Design",
-        description: "Optimized dimensions specifically designed for small office environments while maintaining substantial product capacity and professional appearance that fits seamlessly into your workspace.",
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" /></svg>',
-      },
-      {
-        title: "Energy-Efficient Compact Refrigeration",
-        description: "Advanced compact refrigeration system maintains optimal temperature for beverages and fresh food while minimizing power consumption, perfect for cost-conscious small businesses.",
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>',
-      },
-      {
-        title: "Modern Small Business Payment Interface",
-        description: "Integrated payment system accepts credit/debit cards, mobile payments, and cash, ensuring maximum convenience for employees and visitors in your small office environment.",
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" /></svg>',
-      },
-      {
-        title: "Optimized Small Office Product Layout",
-        description: "Specially designed interior configuration maximizes product variety despite compact external dimensions, offering the perfect balance of selection and space efficiency for small businesses.",
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" /></svg>',
-      },
-      {
-        title: "Smart Small Business Inventory Management",
-        description: "Remote monitoring system tracks product levels in real-time, ensuring timely restocking and minimizing out-of-stock situations perfect for busy small office environments.",
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" /><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" /></svg>',
-      },
-      {
-        title: "Efficient LED Product Illumination",
-        description: "Energy-efficient LED lighting system attractively showcases beverages and snacks while consuming minimal power and generating less heat, perfect for small office environments.",
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>',
-      },
-    ],
-    specifications: [
-      {
-        category: "Physical Specifications",
-        items: [
-          { label: "Dimensions", value: '30"W x 28"D x 76.7"H' },
-          { label: "Weight", value: "550 lbs (250 kg)" },
-          { label: "Cabinet Construction", value: "Commercial-grade powder-coated steel" },
-          { label: "Front Glass", value: "Tempered safety glass with energy-efficient coating" },
-          { label: "Insulation", value: "High-density foam insulation for energy efficiency" },
-        ],
-      },
-      {
-        category: "Capacity & Configuration",
-        items: [
-          { label: "Product Selections", value: "30+ different beverages and food items" },
-          { label: "Shelving", value: "4 adjustable refrigerated shelves" },
-          { label: "Maximum Products", value: "Up to 240 items depending on product size" },
-        ],
-      },
-      {
-        category: "Technology Features",
-        items: [
-          { label: "Display", value: '7" LCD screen with user-friendly interface' },
-          { label: "Controller", value: "Compact commercial microprocessor control system" },
-          { label: "Connectivity", value: "4G LTE cellular, Wi-Fi wireless option" },
-          { label: "Remote Monitoring", value: "Real-time inventory tracking and diagnostic alerts" },
-        ],
-      },
-      {
-        category: "Payment Systems",
-        items: [
-          { label: "Card Reader", value: "EMV chip compliant credit/debit processing" },
-          { label: "Contactless", value: "NFC mobile payment capability (Apple Pay, Google Pay)" },
-          { label: "Cash Handling", value: "Bill acceptor for $1-$20 denominations" },
-          { label: "Coin Mechanism", value: "Multi-coin acceptor with automatic change dispensing" },
-        ],
-      },
-      {
-        category: "Refrigeration System",
-        items: [
-          { label: "Cooling System", value: "Compact energy-efficient commercial compressor" },
-          { label: "Temperature Range", value: "35°F to 41°F (1.7°C to 5°C)" },
-          { label: "Defrost System", value: "Automatic cycle defrost technology" },
-          { label: "Refrigerant", value: "R290 environmentally friendly refrigerant" },
-        ],
-      },
-      {
-        category: "Electrical Requirements",
-        items: [
-          { label: "Power Requirements", value: "120V AC, 60Hz standard commercial power" },
-          { label: "Power Consumption", value: "Average 6.5 kWh/day energy efficient operation" },
-          { label: "Lighting", value: "LED interior lighting with automatic sensors" },
-          { label: "Certifications", value: "UL Listed, Energy Star qualified for commercial use" },
-        ],
-      },
-    ],
-    productOptions: [
-      "Bottled water and premium sparkling water",
-      "Soft drinks and sodas (compact size options)",
-      "Energy drinks and coffee beverages",
-      "Sports drinks and fitness beverages",
-      "Yogurt cups and dairy products",
-      "Fresh sandwiches and wraps",
-      "Protein bars and nutrition bars",
-      "Healthy snack alternatives",
-      "Small chips and savory snacks",
-      "Candy and chocolate selections",
-      "Pastries and cookies",
-      "Fresh fruit cups and produce",
-      "Ready-to-eat salads",
-      "Cheese and cracker packs",
-      "Hummus and veggie packs",
-    ],
-    bestFor: [
-      "Small offices and professional practices",
-      "Limited space business environments",
-      "Boutique retail locations and specialty shops",
-      "Small employee break rooms",
-      "Medical and dental office waiting areas",
-      "Small fitness centers and studios",
-      "Beauty salons and spas",
-      "Small educational facilities and tutoring centers",
-      "Narrow corridors and compact alcoves",
-      "Start-up companies and co-working spaces",
-    ],
-    relatedMachines: [
-      {
-        id: "refrigerated-touchscreen-vending-machine",
-        name: "Refrigerated Touchscreen Vending Machine",
-        image: "/images/machines/amp-refrigerated-vending-machine.png",
-      },
-      {
-        id: "premium-snack-vending-machine-touchscreen",
-        name: "Premium Snack Vending Machine with Touchscreen",
-        image: "/images/machines/amp-premium-touchscreen-vending-machine.png",
-      },
-      {
-        id: "commercial-snack-vending-machine",
-        name: "Commercial Snack Vending Machine",
-        image: "/images/machines/standard-non-refrigerated.jpg",
-      },
-    ],
-    category: "refrigerated",
-    highlights: [
-      "Space-Saving Commercial Design",
-      "Energy-Efficient Compact Refrigeration",
-      "30+ Beverage & Food Product Capacity",
-      "Professional Installation & Maintenance Service",
-    ],
-    keywords: [
-      "compact vending machine",
-      "small office vending machine",
-      "space saving vending machine",
-      "mini refrigerated vending machine",
-      "break room vending machine"
-    ],
-    localKeywords: [
-      "compact vending machine Modesto CA",
-      "small office vending Central California",
-      "space saving vending Central Valley"
-    ],
-    businessKeywords: [
-      "small business vending solutions",
-      "compact office refreshment",
-      "space efficient vending service",
-      "small office break room solutions"
-    ],
-  },
+  // "compact-office-refrigerated-vending-machine": {
+  //   id: "compact-office-refrigerated-vending-machine",
+  //   name: "Compact Office Refrigerated Vending Machine",
+  //   seoTitle: "Compact Refrigerated Vending Machine for Small Offices | AMP Vending",
+  //   metaDescription: "Space-saving refrigerated vending machine perfect for small offices and break rooms. Energy-efficient cooling with professional installation in Modesto, CA.",
+  //   shortDescription: "Space-efficient refrigerated vending solution with modern payment systems and energy-efficient cooling, designed specifically for smaller office environments and limited-space locations.",
+  //   description: "Our compact office refrigerated vending machine is engineered for businesses where space is premium but quality refreshment options remain essential. Despite its smaller footprint, this commercial-grade machine delivers advanced technology, reliable refrigeration, and professional service. Featuring energy-efficient cooling, versatile payment options, and capacity for a variety of refrigerated products, it's the perfect solution for small offices, medical practices, boutique businesses, and areas with space constraints throughout Central California.",
+  //   images: [
+  //     {
+  //       id: 1,
+  //       src: "/images/machines/compact-refrigerated-vending-machine.jpg",
+  //       alt: "Compact refrigerated vending machine for small offices and break rooms in Modesto California",
+  //     },
+  //   ],
+  //   dimensions: [
+  //     { label: "Width", value: "30 inches (76 cm)" },
+  //     { label: "Depth", value: "28 inches (71 cm)" },
+  //     { label: "Height", value: "76.7 inches (195 cm)" },
+  //     { label: "Weight", value: "550 lbs (250 kg)" },
+  //     { label: "Capacity", value: "30+ product selections" },
+  //     { label: "Power", value: "120V / 60Hz" },
+  //   ],
+  //   features: [
+  //     {
+  //       title: "Space-Saving Commercial Design",
+  //       description: "Optimized dimensions specifically designed for small office environments while maintaining substantial product capacity and professional appearance that fits seamlessly into your workspace.",
+  //       icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" /></svg>',
+  //     },
+  //     {
+  //       title: "Energy-Efficient Compact Refrigeration",
+  //       description: "Advanced compact refrigeration system maintains optimal temperature for beverages and fresh food while minimizing power consumption, perfect for cost-conscious small businesses.",
+  //       icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>',
+  //     },
+  //     {
+  //       title: "Modern Small Business Payment Interface",
+  //       description: "Integrated payment system accepts credit/debit cards, mobile payments, and cash, ensuring maximum convenience for employees and visitors in your small office environment.",
+  //       icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" /></svg>',
+  //     },
+  //     {
+  //       title: "Optimized Small Office Product Layout",
+  //       description: "Specially designed interior configuration maximizes product variety despite compact external dimensions, offering the perfect balance of selection and space efficiency for small businesses.",
+  //       icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" /></svg>',
+  //     },
+  //     {
+  //       title: "Smart Small Business Inventory Management",
+  //       description: "Remote monitoring system tracks product levels in real-time, ensuring timely restocking and minimizing out-of-stock situations perfect for busy small office environments.",
+  //       icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" /><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" /></svg>',
+  //     },
+  //     {
+  //       title: "Efficient LED Product Illumination",
+  //       description: "Energy-efficient LED lighting system attractively showcases beverages and snacks while consuming minimal power and generating less heat, perfect for small office environments.",
+  //       icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>',
+  //     },
+  //   ],
+  //   specifications: [
+  //     {
+  //       category: "Physical Specifications",
+  //       items: [
+  //         { label: "Dimensions", value: '30"W x 28"D x 76.7"H' },
+  //         { label: "Weight", value: "550 lbs (250 kg)" },
+  //         { label: "Cabinet Construction", value: "Commercial-grade powder-coated steel" },
+  //         { label: "Front Glass", value: "Tempered safety glass with energy-efficient coating" },
+  //         { label: "Insulation", value: "High-density foam insulation for energy efficiency" },
+  //       ],
+  //     },
+  //     {
+  //       category: "Capacity & Configuration",
+  //       items: [
+  //         { label: "Product Selections", value: "30+ different beverages and food items" },
+  //         { label: "Shelving", value: "4 adjustable refrigerated shelves" },
+  //         { label: "Maximum Products", value: "Up to 240 items depending on product size" },
+  //       ],
+  //     },
+  //     {
+  //       category: "Technology Features",
+  //       items: [
+  //         { label: "Display", value: '7" LCD screen with user-friendly interface' },
+  //         { label: "Controller", value: "Compact commercial microprocessor control system" },
+  //         { label: "Connectivity", value: "4G LTE cellular, Wi-Fi wireless option" },
+  //         { label: "Remote Monitoring", value: "Real-time inventory tracking and diagnostic alerts" },
+  //       ],
+  //     },
+  //     {
+  //       category: "Payment Systems",
+  //       items: [
+  //         { label: "Card Reader", value: "EMV chip compliant credit/debit processing" },
+  //         { label: "Contactless", value: "NFC mobile payment capability (Apple Pay, Google Pay)" },
+  //         { label: "Cash Handling", value: "Bill acceptor for $1-$20 denominations" },
+  //         { label: "Coin Mechanism", value: "Multi-coin acceptor with automatic change dispensing" },
+  //       ],
+  //     },
+  //     {
+  //       category: "Refrigeration System",
+  //       items: [
+  //         { label: "Cooling System", value: "Compact energy-efficient commercial compressor" },
+  //         { label: "Temperature Range", value: "35°F to 41°F (1.7°C to 5°C)" },
+  //         { label: "Defrost System", value: "Automatic cycle defrost technology" },
+  //         { label: "Refrigerant", value: "R290 environmentally friendly refrigerant" },
+  //       ],
+  //     },
+  //     {
+  //       category: "Electrical Requirements",
+  //       items: [
+  //         { label: "Power Requirements", value: "120V AC, 60Hz standard commercial power" },
+  //         { label: "Power Consumption", value: "Average 6.5 kWh/day energy efficient operation" },
+  //         { label: "Lighting", value: "LED interior lighting with automatic sensors" },
+  //         { label: "Certifications", value: "UL Listed, Energy Star qualified for commercial use" },
+  //       ],
+  //     },
+  //   ],
+  //   productOptions: [
+  //     "Bottled water and premium sparkling water",
+  //     "Soft drinks and sodas (compact size options)",
+  //     "Energy drinks and coffee beverages",
+  //     "Sports drinks and fitness beverages",
+  //     "Yogurt cups and dairy products",
+  //     "Fresh sandwiches and wraps",
+  //     "Protein bars and nutrition bars",
+  //     "Healthy snack alternatives",
+  //     "Small chips and savory snacks",
+  //     "Candy and chocolate selections",
+  //     "Pastries and cookies",
+  //     "Fresh fruit cups and produce",
+  //     "Ready-to-eat salads",
+  //     "Cheese and cracker packs",
+  //     "Hummus and veggie packs",
+  //   ],
+  //   bestFor: [
+  //     "Small offices and professional practices",
+  //     "Limited space business environments",
+  //     "Boutique retail locations and specialty shops",
+  //     "Small employee break rooms",
+  //     "Medical and dental office waiting areas",
+  //     "Small fitness centers and studios",
+  //     "Beauty salons and spas",
+  //     "Small educational facilities and tutoring centers",
+  //     "Narrow corridors and compact alcoves",
+  //     "Start-up companies and co-working spaces",
+  //   ],
+  //   relatedMachines: [
+  //     {
+  //       id: "refrigerated-touchscreen-vending-machine",
+  //       name: "Refrigerated Touchscreen Vending Machine",
+  //       image: "/images/machines/amp-refrigerated-vending-machine.png",
+  //     },
+  //     {
+  //       id: "premium-snack-vending-machine-touchscreen",
+  //       name: "Premium Snack Vending Machine with Touchscreen",
+  //       image: "/images/machines/amp-premium-touchscreen-vending-machine.png",
+  //     },
+  //     {
+  //       id: "commercial-snack-vending-machine",
+  //       name: "Commercial Snack Vending Machine",
+  //       image: "/images/machines/standard-non-refrigerated.jpg",
+  //     },
+  //   ],
+  //   category: "refrigerated",
+  //   highlights: [
+  //     "Space-Saving Commercial Design",
+  //     "Energy-Efficient Compact Refrigeration",
+  //     "30+ Beverage & Food Product Capacity",
+  //     "Professional Installation & Maintenance Service",
+  //   ],
+  //   keywords: [
+  //     "compact vending machine",
+  //     "small office vending machine",
+  //     "space saving vending machine",
+  //     "mini refrigerated vending machine",
+  //     "break room vending machine"
+  //   ],
+  //   localKeywords: [
+  //     "compact vending machine Modesto CA",
+  //     "small office vending Central California",
+  //     "space saving vending Central Valley"
+  //   ],
+  //   businessKeywords: [
+  //     "small business vending solutions",
+  //     "compact office refreshment",
+  //     "space efficient vending service",
+  //     "small office break room solutions"
+  //   ],
+  // },
 
   // Commercial Snack Vending Machine
-  "commercial-snack-vending-machine": {
-    id: "commercial-snack-vending-machine",
-    name: "Commercial Snack Vending Machine",
-    seoTitle: "Commercial Snack Vending Machine for Businesses | AMP Vending",
-    metaDescription: "Reliable commercial snack vending machine for offices and businesses. Multiple payment options with professional installation and maintenance in Modesto, CA.",
-    shortDescription: "Reliable commercial-grade snack vending machine designed for consistent performance in business environments, offering diverse snack options with modern payment processing capabilities.",
-    description: "Our commercial snack vending machine provides dependable service for businesses seeking reliable snack dispensing solutions. Built for commercial environments with durable construction and modern payment systems, this machine offers excellent value for offices, facilities, and commercial locations throughout Central California. Professional installation and comprehensive maintenance ensure consistent operation while providing employees and customers with convenient access to quality snack options.",
-    images: [
-      {
-        id: 1,
-        src: "/images/machines/standard-non-refrigerated.jpg",
-        alt: "Commercial snack vending machine for offices and businesses in Central California",
-      },
-    ],
-    dimensions: [
-      { label: "Width", value: "40.4 inches (103 cm)" },
-      { label: "Depth", value: "31 inches (79 cm)" },
-      { label: "Height", value: "76.7 inches (195 cm)" },
-      { label: "Weight", value: "650 lbs (295 kg)" },
-      { label: "Capacity", value: "40+ product selections" },
-      { label: "Power", value: "120V / 60Hz" },
-    ],
-    features: [
-      {
-        title: "Reliable Commercial Construction",
-        description: "Built with commercial-grade materials and components designed for consistent daily operation in business environments, ensuring long-term reliability and minimal downtime.",
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>',
-      },
-      {
-        title: "Smart Business Inventory Tracking",
-        description: "Real-time monitoring system tracks product levels and purchase patterns, automatically optimizing restocking schedules to ensure your business vending machine stays well-stocked.",
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" /></svg>',
-      },
-      {
-        title: "Comprehensive Business Payment Processing",
-        description: "Accept all major credit cards, debit cards, mobile payments (Apple Pay, Google Pay), and cash, ensuring maximum convenience for employees, customers, and visitors.",
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.75c.414 0 .75.336.75.75v.75m0 0H18a2.25 2.25 0 002.25-2.25V4.5a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 4.5m10.5-1.5h.75c.414 0 .75.336.75.75v.75M3 18.75v.75c0 .414.336.75.75.75h.75M3.75 18h16.5m-16.5 0h-.75a.75.75 0 01-.75-.75v-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25" /></svg>',
-      },
-      {
-        title: "Flexible Commercial Product Configuration",
-        description: "Configurable shelf system accommodates various snack sizes and types, allowing you to customize your product selection based on your business needs and customer preferences.",
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>',
-      },
-      {
-        title: "Remote Business Diagnostic Monitoring",
-        description: "Advanced monitoring system alerts our service technicians to potential issues before they impact your business operations, ensuring maximum uptime and customer satisfaction.",
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" /></svg>',
-      },
-      {
-        title: "Energy-Saving Business Design",
-        description: "Intelligent power management reduces electricity consumption during low-traffic periods while maintaining product quality, helping reduce your business operational costs.",
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>',
-      },
-    ],
-    specifications: [
-      {
-        category: "Physical Specifications",
-        items: [
-          { label: "Dimensions", value: '40.4"W x 31"D x 76.7"H' },
-          { label: "Weight", value: "650 lbs (295 kg)" },
-          { label: "Cabinet Construction", value: "Commercial-grade powder-coated steel" },
-          { label: "Front Glass", value: "Tempered safety glass with anti-glare coating" },
-          { label: "Insulation", value: "Energy-efficient foam insulation" },
-        ],
-      },
-      {
-        category: "Capacity & Configuration",
-        items: [
-          { label: "Product Selections", value: "40+ different snack and convenience products" },
-          { label: "Shelving", value: "5 adjustable shelves for various product sizes" },
-          { label: "Maximum Products", value: "Up to 360 items depending on product configuration" },
-        ],
-      },
-      {
-        category: "Technology Features",
-        items: [
-          { label: "Display", value: '7" LCD screen with user-friendly interface' },
-          { label: "Controller", value: "Commercial microprocessor control system" },
-          { label: "Connectivity", value: "4G LTE cellular, Wi-Fi wireless option" },
-          { label: "Remote Monitoring", value: "Real-time inventory tracking and diagnostic alerts" },
-        ],
-      },
-      {
-        category: "Payment Systems",
-        items: [
-          { label: "Card Reader", value: "EMV chip compliant credit/debit processing" },
-          { label: "Contactless", value: "NFC mobile payment capability (Apple Pay, Google Pay)" },
-          { label: "Cash Handling", value: "Bill acceptor for $1-$20 denominations" },
-          { label: "Coin Mechanism", value: "Multi-coin acceptor with automatic change dispensing" },
-        ],
-      },
-      {
-        category: "Electrical Requirements",
-        items: [
-          { label: "Power Requirements", value: "120V AC, 60Hz standard commercial power" },
-          { label: "Power Consumption", value: "Average 7.2 kWh/day energy efficient operation" },
-          { label: "Lighting", value: "LED interior lighting with automatic sensors" },
-          { label: "Certifications", value: "UL Listed, Energy Star qualified for commercial use" },
-        ],
-      },
-    ],
-    productOptions: [
-      "Premium chips and savory snacks (variety of brands)",
-      "Candy and chocolate bars (popular selections)",
-      "Cookies and pastries (fresh options)",
-      "Crackers and pretzels (healthy alternatives)",
-      "Nuts and trail mixes (protein-rich snacks)",
-      "Granola and protein bars (fitness options)",
-      "Dried fruits and jerky (natural snacks)",
-      "Mints and gum (fresh breath products)",
-      "Energy bars and nutrition supplements",
-      "Popcorn varieties and corn-based snacks",
-      "Rice cakes and corn cakes (light options)",
-      "Instant noodles and cup soups",
-      "Cereal bars and breakfast items",
-      "Fruit snacks and gummies",
-      "Gluten-free snack options",
-      "Vegan snack choices",
-    ],
-    bestFor: [
-      "Medium-sized offices and business centers",
-      "Educational facilities and schools",
-      "Healthcare facilities and medical centers",
-      "Small retail locations and shops",
-      "Fitness centers and gyms",
-      "Hotel lobbies and hospitality venues",
-      "Community centers and public facilities",
-      "Mid-traffic public areas and lobbies",
-      "Employee break rooms and cafeterias",
-      "Locations with moderate foot traffic",
-    ],
-    relatedMachines: [
-      {
-        id: "premium-snack-vending-machine-touchscreen",
-        name: "Premium Snack Vending Machine with Touchscreen",
-        image: "/images/machines/amp-premium-touchscreen-vending-machine.png",
-      },
-      {
-        id: "compact-office-refrigerated-vending-machine",
-        name: "Compact Office Refrigerated Vending Machine",
-        image: "/images/machines/compact-refrigerated-vending-machine.jpg",
-      },
-      {
-        id: "refrigerated-touchscreen-vending-machine",
-        name: "Refrigerated Touchscreen Vending Machine",
-        image: "/images/machines/amp-refrigerated-vending-machine.png",
-      },
-    ],
-    category: "non-refrigerated",
-    highlights: [
-      "Reliable Commercial Construction",
-      "Comprehensive Business Payment Processing",
-      "40+ Snack Product Capacity",
-      "Professional Installation & Maintenance Service",
-    ],
-    keywords: [
-      "commercial snack vending machine",
-      "business vending machine",
-      "office snack machine",
-      "reliable vending machine",
-      "snack vending service"
-    ],
-    localKeywords: [
-      "commercial vending machine Modesto CA",
-      "business snack machine Central California",
-      "office vending service Central Valley"
-    ],
-    businessKeywords: [
-      "business snack solutions",
-      "commercial vending service",
-      "office snack machine rental",
-      "workplace convenience vending"
-    ],
-  },
+  // "commercial-snack-vending-machine": {
+  //   id: "commercial-snack-vending-machine",
+  //   name: "Commercial Snack Vending Machine",
+  //   seoTitle: "Commercial Snack Vending Machine for Businesses | AMP Vending",
+  //   metaDescription: "Reliable commercial snack vending machine for offices and businesses. Multiple payment options with professional installation and maintenance in Modesto, CA.",
+  //   shortDescription: "Reliable commercial-grade snack vending machine designed for consistent performance in business environments, offering diverse snack options with modern payment processing capabilities.",
+  //   description: "Our commercial snack vending machine provides dependable service for businesses seeking reliable snack dispensing solutions. Built for commercial environments with durable construction and modern payment systems, this machine offers excellent value for offices, facilities, and commercial locations throughout Central California. Professional installation and comprehensive maintenance ensure consistent operation while providing employees and customers with convenient access to quality snack options.",
+  //   images: [
+  //     {
+  //       id: 1,
+  //       src: "/images/machines/standard-non-refrigerated.jpg",
+  //       alt: "Commercial snack vending machine for offices and businesses in Central California",
+  //     },
+  //   ],
+  //   dimensions: [
+  //     { label: "Width", value: "40.4 inches (103 cm)" },
+  //     { label: "Depth", value: "31 inches (79 cm)" },
+  //     { label: "Height", value: "76.7 inches (195 cm)" },
+  //     { label: "Weight", value: "650 lbs (295 kg)" },
+  //     { label: "Capacity", value: "40+ product selections" },
+  //     { label: "Power", value: "120V / 60Hz" },
+  //   ],
+  //   features: [
+  //     {
+  //       title: "Reliable Commercial Construction",
+  //       description: "Built with commercial-grade materials and components designed for consistent daily operation in business environments, ensuring long-term reliability and minimal downtime.",
+  //       icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>',
+  //     },
+  //     {
+  //       title: "Smart Business Inventory Tracking",
+  //       description: "Real-time monitoring system tracks product levels and purchase patterns, automatically optimizing restocking schedules to ensure your business vending machine stays well-stocked.",
+  //       icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" /></svg>',
+  //     },
+  //     {
+  //       title: "Comprehensive Business Payment Processing",
+  //       description: "Accept all major credit cards, debit cards, mobile payments (Apple Pay, Google Pay), and cash, ensuring maximum convenience for employees, customers, and visitors.",
+  //       icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.75c.414 0 .75.336.75.75v.75m0 0H18a2.25 2.25 0 002.25-2.25V4.5a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 4.5m10.5-1.5h.75c.414 0 .75.336.75.75v.75M3 18.75v.75c0 .414.336.75.75.75h.75M3.75 18h16.5m-16.5 0h-.75a.75.75 0 01-.75-.75v-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25" /></svg>',
+  //     },
+  //     {
+  //       title: "Flexible Commercial Product Configuration",
+  //       description: "Configurable shelf system accommodates various snack sizes and types, allowing you to customize your product selection based on your business needs and customer preferences.",
+  //       icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>',
+  //     },
+  //     {
+  //       title: "Remote Business Diagnostic Monitoring",
+  //       description: "Advanced monitoring system alerts our service technicians to potential issues before they impact your business operations, ensuring maximum uptime and customer satisfaction.",
+  //       icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" /></svg>',
+  //     },
+  //     {
+  //       title: "Energy-Saving Business Design",
+  //       description: "Intelligent power management reduces electricity consumption during low-traffic periods while maintaining product quality, helping reduce your business operational costs.",
+  //       icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>',
+  //     },
+  //   ],
+  //   specifications: [
+  //     {
+  //       category: "Physical Specifications",
+  //       items: [
+  //         { label: "Dimensions", value: '40.4"W x 31"D x 76.7"H' },
+  //         { label: "Weight", value: "650 lbs (295 kg)" },
+  //         { label: "Cabinet Construction", value: "Commercial-grade powder-coated steel" },
+  //         { label: "Front Glass", value: "Tempered safety glass with anti-glare coating" },
+  //         { label: "Insulation", value: "Energy-efficient foam insulation" },
+  //       ],
+  //     },
+  //     {
+  //       category: "Capacity & Configuration",
+  //       items: [
+  //         { label: "Product Selections", value: "40+ different snack and convenience products" },
+  //         { label: "Shelving", value: "5 adjustable shelves for various product sizes" },
+  //         { label: "Maximum Products", value: "Up to 360 items depending on product configuration" },
+  //       ],
+  //     },
+  //     {
+  //       category: "Technology Features",
+  //       items: [
+  //         { label: "Display", value: '7" LCD screen with user-friendly interface' },
+  //         { label: "Controller", value: "Commercial microprocessor control system" },
+  //         { label: "Connectivity", value: "4G LTE cellular, Wi-Fi wireless option" },
+  //         { label: "Remote Monitoring", value: "Real-time inventory tracking and diagnostic alerts" },
+  //       ],
+  //     },
+  //     {
+  //       category: "Payment Systems",
+  //       items: [
+  //         { label: "Card Reader", value: "EMV chip compliant credit/debit processing" },
+  //         { label: "Contactless", value: "NFC mobile payment capability (Apple Pay, Google Pay)" },
+  //         { label: "Cash Handling", value: "Bill acceptor for $1-$20 denominations" },
+  //         { label: "Coin Mechanism", value: "Multi-coin acceptor with automatic change dispensing" },
+  //       ],
+  //     },
+  //     {
+  //       category: "Electrical Requirements",
+  //       items: [
+  //         { label: "Power Requirements", value: "120V AC, 60Hz standard commercial power" },
+  //         { label: "Power Consumption", value: "Average 7.2 kWh/day energy efficient operation" },
+  //         { label: "Lighting", value: "LED interior lighting with automatic sensors" },
+  //         { label: "Certifications", value: "UL Listed, Energy Star qualified for commercial use" },
+  //       ],
+  //     },
+  //   ],
+  //   productOptions: [
+  //     "Premium chips and savory snacks (variety of brands)",
+  //     "Candy and chocolate bars (popular selections)",
+  //     "Cookies and pastries (fresh options)",
+  //     "Crackers and pretzels (healthy alternatives)",
+  //     "Nuts and trail mixes (protein-rich snacks)",
+  //     "Granola and protein bars (fitness options)",
+  //     "Dried fruits and jerky (natural snacks)",
+  //     "Mints and gum (fresh breath products)",
+  //     "Energy bars and nutrition supplements",
+  //     "Popcorn varieties and corn-based snacks",
+  //     "Rice cakes and corn cakes (light options)",
+  //     "Instant noodles and cup soups",
+  //     "Cereal bars and breakfast items",
+  //     "Fruit snacks and gummies",
+  //     "Gluten-free snack options",
+  //     "Vegan snack choices",
+  //   ],
+  //   bestFor: [
+  //     "Medium-sized offices and business centers",
+  //     "Educational facilities and schools",
+  //     "Healthcare facilities and medical centers",
+  //     "Small retail locations and shops",
+  //     "Fitness centers and gyms",
+  //     "Hotel lobbies and hospitality venues",
+  //     "Community centers and public facilities",
+  //     "Mid-traffic public areas and lobbies",
+  //     "Employee break rooms and cafeterias",
+  //     "Locations with moderate foot traffic",
+  //   ],
+  //   relatedMachines: [
+  //     {
+  //       id: "premium-snack-vending-machine-touchscreen",
+  //       name: "Premium Snack Vending Machine with Touchscreen",
+  //       image: "/images/machines/amp-premium-touchscreen-vending-machine.png",
+  //     },
+  //     {
+  //       id: "compact-office-refrigerated-vending-machine",
+  //       name: "Compact Office Refrigerated Vending Machine",
+  //       image: "/images/machines/compact-refrigerated-vending-machine.jpg",
+  //     },
+  //     {
+  //       id: "refrigerated-touchscreen-vending-machine",
+  //       name: "Refrigerated Touchscreen Vending Machine",
+  //       image: "/images/machines/amp-refrigerated-vending-machine.png",
+  //     },
+  //   ],
+  //   category: "non-refrigerated",
+  //   highlights: [
+  //     "Reliable Commercial Construction",
+  //     "Comprehensive Business Payment Processing",
+  //     "40+ Snack Product Capacity",
+  //     "Professional Installation & Maintenance Service",
+  //   ],
+  //   keywords: [
+  //     "commercial snack vending machine",
+  //     "business vending machine",
+  //     "office snack machine",
+  //     "reliable vending machine",
+  //     "snack vending service"
+  //   ],
+  //   localKeywords: [
+  //     "commercial vending machine Modesto CA",
+  //     "business snack machine Central California",
+  //     "office vending service Central Valley"
+  //   ],
+  //   businessKeywords: [
+  //     "business snack solutions",
+  //     "commercial vending service",
+  //     "office snack machine rental",
+  //     "workplace convenience vending"
+  //   ],
+  // },
 };
 
 export default vendingMachineData;

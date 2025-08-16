@@ -430,7 +430,7 @@ export const MachineCard = ({
         )}
 
         {/* Specifications Grid - Hidden for compact variant */}
-        {variant !== 'compact' && (
+        {/* {variant !== 'compact' && (
           <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3 mb-6">
             <div className="bg-[#000000]/50 p-3 rounded-lg border border-[#333333]">
               <div className="text-[#A5ACAF] text-xs mb-1 uppercase tracking-wide">
@@ -453,7 +453,7 @@ export const MachineCard = ({
               </div>
             </div>
           </div>
-        )}
+        )} */}
 
         {/* Action Buttons */}
         {showActions && (

@@ -11,7 +11,7 @@ import { CheckCircle, ArrowRight } from 'lucide-react';
  */
 const CTASection = () => {
   return (
-    <section className="relative overflow-hidden">
+    <>
       {/* Background graphic elements */}
       <div className="absolute inset-0 z-0">
         {/* Abstract shapes */}
@@ -99,7 +99,7 @@ const CTASection = () => {
           </div>
         </motion.div>
       </div> 
-    </section>
+    </>
   );
 };
 

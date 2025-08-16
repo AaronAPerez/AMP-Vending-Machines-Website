@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { HelpCircle, Search, Zap, CreditCard } from 'lucide-react';
+import Section from '../ui/shared/Section';
 
 /**
  * FAQSection Component
@@ -9,7 +10,7 @@ import { HelpCircle, Search, Zap, CreditCard } from 'lucide-react';
  * Updated to remove cost references and focus on service benefits
  */
 const FAQSection = () => {
-  
+
 
 
 
@@ -44,27 +45,45 @@ const FAQSection = () => {
       category: "payment"
     }
   ];
-  
+
   // Animation variants for staggered children
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { 
+    visible: {
       opacity: 1,
-      transition: { 
+      transition: {
         staggerChildren: 0.1
       }
     }
   };
-  
+
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <Section
+      id="faq"
+      background="dark"
+      spacing="lg"
+    // className='max-w-7xl'
+    >
+      <div className="text-center mb-12">
+        <div className="inline-flex items-center px-4 py-2 bg-[#FD5A1E]/10 rounded-full mb-6">
+          <span className="text-[#FD5A1E] font-medium text-sm">Quick Answers</span>
+        </div>
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-[#F5F5F5]">
+          Frequently <span className="text-[#FD5A1E]">Asked Questions</span>
+        </h2>
+
+        <p className="text-lg text-[#A5ACAF] max-w-3xl mx-auto">
+          Everything you need to know about our professional vending solutions in Central California
+        </p>
+      </div>
+
       {/* FAQ Grid */}
-      <motion.div 
+      <motion.div
         className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-12"
         variants={containerVariants}
         initial="hidden"
@@ -83,11 +102,11 @@ const FAQSection = () => {
               </div>
               <h3 className="text-lg font-bold text-[#F5F5F5]">{item.question}</h3>
             </div>
-            
+
             {/* Answer */}
             <div className="p-6">
               <p className="text-[#A5ACAF]">{item.answer}</p>
-              
+
               {/* Category Tag */}
               <div className="mt-4 flex items-center justify-between">
                 <span className="text-xs py-1 px-3 bg-[#333333] text-[#A5ACAF] rounded-full">
@@ -98,9 +117,9 @@ const FAQSection = () => {
           </motion.div>
         ))}
       </motion.div>
-      
+
       {/* Additional Questions Section */}
-      <motion.div 
+      <motion.div
         className="bg-[#0a0a0a] rounded-xl p-8 border border-[#333333] mb-12 text-center"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -110,7 +129,7 @@ const FAQSection = () => {
           Have More Questions?
         </h3>
         <p className="text-[#A5ACAF] max-w-2xl mx-auto mb-6">
-          Our team is ready to answer any questions about our vending solutions, 
+          Our team is ready to answer any questions about our vending solutions,
           technology features, service packages, and installation process.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -123,7 +142,7 @@ const FAQSection = () => {
           </Link>
         </div>
       </motion.div>
-    </div>
+    </Section>
   );
 };
 
