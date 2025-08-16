@@ -37,7 +37,7 @@ const ServiceAreaSection = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {/* Section Header */}
-      {/* <motion.div 
+      <motion.div 
         className="text-center mb-16"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -53,7 +53,7 @@ const ServiceAreaSection = () => {
           AMP Vending provides premium vending solutions throughout Central California. 
           Our service area includes Modesto and surrounding communities.
         </p>
-      </motion.div> */}
+      </motion.div>
       
       {/* Map and Service Areas */}
       <div className="grid md:grid-cols-2 gap-8 items-stretch mb-16">
