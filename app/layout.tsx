@@ -17,9 +17,11 @@ import StyledComponentsRegistry from '../lib/registry';
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Inter } from 'next/font/google';
-import Footer from "@/components/contact/ContactInfoSection";
 import FeedbackWidget from "@/components/feedback/FeedbackWidget";
 import ResizableNavbar from "@/components/layout/ResizableNavbar";
+import { WebVitalsReporter } from "@/components/analytics/WebVitalsReporter";
+import Footer from "@/components/layout/Footer";
+
 
 // Optimized font loading for performance
 const inter = Inter({
@@ -318,7 +320,19 @@ export default function RootLayout({
                 },
                 {
                   "@type": "City",
+                  name: "Manteca, CA"
+                },
+                {
+                  "@type": "City",
+                  name: "Lathrop, CA"
+                },
+                {
+                  "@type": "City",
                   name: "Stockton, CA"
+                },
+                {
+                  "@type": "City",
+                  name: "Lodi, CA"
                 },
                 {
                   "@type": "City",
@@ -489,6 +503,7 @@ export default function RootLayout({
             {children}
             <SpeedInsights />
             <Analytics />
+            <WebVitalsReporter/>
           </StyledComponentsRegistry>
         </main>
 

@@ -6,7 +6,7 @@ import Script from 'next/script';
 import GoogleMapComponent from '@/components/GoogleMapComponent';
 import ContactForm from '@/components/contact/ContactForm';
 import { motion } from 'framer-motion';
-import { Link, HelpCircle, CreditCard, Search, Zap } from 'lucide-react';
+import { HelpCircle, CreditCard, Search, Zap } from 'lucide-react';
 import { ContactBreadcrumbs } from '@/components/seo/BreadcrumbSchema';
 
 
@@ -150,6 +150,7 @@ export default function ContactPage() {
         </div>
 
         {/* Contact Form Section */}
+        
         <div className="pb-16">
           <ContactForm />
         </div>

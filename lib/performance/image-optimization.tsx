@@ -1,3 +1,4 @@
+import Image from 'next/image';
 /**
  * Advanced image optimization utilities
  * Implements responsive images, lazy loading, and format optimization

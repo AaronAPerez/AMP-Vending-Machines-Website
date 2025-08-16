@@ -1,8 +1,11 @@
-import { emailTemplates } from '@/lib/email/emailBranding';
 import { emailService } from '@/lib/services/emailService';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 
+/**
+ * Contact Form API Route
+ * Uses existing professional email templates from emailBranding.ts
+ */
 
 const contactFormSchema = z.object({
   firstName: z.string().min(1, 'First name is required').max(50, 'First name is too long'),
@@ -16,179 +19,153 @@ const contactFormSchema = z.object({
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    console.log('📧 Contact form submission received:', body);
+    console.log('📧 Contact form submission received:', {
+      email: body.email,
+      company: body.companyName,
+      timestamp: new Date().toISOString()
+    });
 
     // Validate the form data
     const validatedData = contactFormSchema.parse(body);
     
-    const timestamp = new Date().toISOString();
     const customerData = {
       ...validatedData,
-      submittedAt: timestamp,
+      submittedAt: new Date().toISOString(),
       source: 'website_contact_form',
       ipAddress: request.headers.get('x-forwarded-for') || 'unknown',
       userAgent: request.headers.get('user-agent') || 'unknown'
     };
 
-    // Prepare emails
-    const emailPromises = [];
+    // Send emails using your professional templates
+    const { customerResult, businessResult } = await emailService.sendContactFormEmails(customerData);
 
-    // 1. Send confirmation email to customer
-    try {
-      const customerConfirmationEmail = {
-        to: customerData.email,
-        subject: `Thank you for contacting AMP Vending, ${customerData.firstName}!`,
-        html: emailTemplates.contactConfirmation(customerData),
-        from: 'AMP Vending <ampdesignandconsulting@gmail.com>'
-      };
-
-      emailPromises.push(
-        emailService.sendEmail(customerConfirmationEmail)
-          .then(result => ({ type: 'customer_confirmation', result }))
-          .catch(error => ({ type: 'customer_confirmation', error }))
-      );
-    } catch (error) {
-      console.error('Error preparing customer confirmation email:', error);
+    // Log results
+    if (customerResult.success) {
+      console.log('✅ Customer confirmation email sent successfully');
+    } else {
+      console.error('❌ Customer confirmation email failed:', customerResult.error);
     }
 
-    // 2. Send notification email to business
-    try {
-      const businessNotificationEmail = {
-        to: 'ampdesignandconsulting@gmail.com',
-        subject: `🔔 New Contact Form: ${customerData.firstName} ${customerData.lastName} - ${customerData.companyName}`,
-        html: emailTemplates.contactNotification(customerData),
-        from: 'AMP Vending Website <ampdesignandconsulting@gmail.com>'
-      };
-
-      emailPromises.push(
-        emailService.sendEmail(businessNotificationEmail)
-          .then(result => ({ type: 'business_notification', result }))
-          .catch(error => ({ type: 'business_notification', error }))
-      );
-    } catch (error) {
-      console.error('Error preparing business notification email:', error);
+    if (businessResult.success) {
+      console.log('✅ Business notification email sent successfully');
+    } else {
+      console.error('❌ Business notification email failed:', businessResult.error);
     }
 
-    // Send emails concurrently
-    const emailResults = await Promise.all(emailPromises);
-    
-    // Analyze results
-    const customerEmailResult = emailResults.find(r => r.type === 'customer_confirmation');
-    const businessEmailResult = emailResults.find(r => r.type === 'business_notification');
-
-    let customerEmailSuccess = false;
-    let businessEmailSuccess = false;
-
-    if (customerEmailResult) {
-      if ('result' in customerEmailResult && customerEmailResult.result?.success) {
-        customerEmailSuccess = true;
-        console.log('✅ Customer confirmation email sent successfully');
-      } else {
-        console.error('❌ Customer confirmation email failed:', 'error' in customerEmailResult ? customerEmailResult.error : customerEmailResult.result?.error);
-      }
-    }
-
-    if (businessEmailResult) {
-      if ('result' in businessEmailResult && businessEmailResult.result?.success) {
-        businessEmailSuccess = true;
-        console.log('✅ Business notification email sent successfully');
-      } else {
-        console.error('❌ Business notification email failed:', 'error' in businessEmailResult ? businessEmailResult.error : businessEmailResult.result?.error);
-      }
-    }
-
-    // Log the submission for analytics (implement your logging service)
+    // Log the submission for analytics
     await logContactSubmission(customerData, {
-      customerEmailSuccess,
-      businessEmailSuccess
+      customerEmailSuccess: customerResult.success,
+      businessEmailSuccess: businessResult.success
     });
 
     // Determine response based on email results
-    if (customerEmailSuccess && businessEmailSuccess) {
+    const submissionId = `contact_${Date.now()}`;
+    
+    if (customerResult.success && businessResult.success) {
       return NextResponse.json({
         success: true,
         message: 'Thank you for your inquiry! We\'ve sent a confirmation email and will respond within 24 hours.',
-        submissionId: `contact_${Date.now()}`,
+        submissionId,
         emailStatus: {
           customerConfirmation: 'sent',
           businessNotification: 'sent'
         }
       }, { status: 200 });
     } 
-    else if (customerEmailSuccess) {
+    else if (businessResult.success) {
+      // Business got the email, that's most important
       return NextResponse.json({
         success: true,
-        message: 'Thank you for your inquiry! We\'ve sent a confirmation email and will respond within 24 hours.',
-        submissionId: `contact_${Date.now()}`,
+        message: 'Thank you for your inquiry! We will respond within 24 hours.',
+        submissionId,
         emailStatus: {
-          customerConfirmation: 'sent',
-          businessNotification: 'failed'
-        },
-        warning: 'Internal notification had issues, but your message was received.'
+          customerConfirmation: customerResult.success ? 'sent' : 'failed',
+          businessNotification: 'sent'
+        }
       }, { status: 200 });
     }
     else {
-      // Even if emails fail, we should accept the submission
-      console.error('⚠️ Both emails failed, but submission is still recorded');
+      // Both emails failed, but don't fail the submission
+      console.error('❌ All emails failed, but submission logged');
       return NextResponse.json({
         success: true,
-        message: 'Thank you for your inquiry! We have received your message and will respond within 24 hours.',
-        submissionId: `contact_${Date.now()}`,
+        message: 'Thank you for your inquiry! We have received your submission and will respond within 24 hours.',
+        submissionId,
         emailStatus: {
           customerConfirmation: 'failed',
           businessNotification: 'failed'
-        },
-        fallbackContact: {
-          phone: '(209) 403-5450',
-          email: 'ampdesignandconsulting@gmail.com'
         }
       }, { status: 200 });
     }
 
   } catch (error) {
-    console.error('❌ Contact form error:', error);
+    console.error('❌ Contact form submission error:', error);
 
+    // Handle validation errors
     if (error instanceof z.ZodError) {
       return NextResponse.json({
         success: false,
-        error: 'Validation failed',
-        details: error.errors.reduce((acc, err) => {
-          const field = err.path[0];
-          if (field) {
-            acc[field] = { _errors: [err.message] };
-          }
-          return acc;
-        }, {} as Record<string, { _errors: string[] }>)
+        message: 'Please check your form data.',
+        errors: error.errors.map(err => ({
+          field: err.path.join('.'),
+          message: err.message
+        }))
       }, { status: 400 });
     }
 
+    // Handle other errors
     return NextResponse.json({
       success: false,
-      error: 'Failed to process contact form submission',
-      message: 'An unexpected error occurred. Please try again or contact us directly.',
-      fallbackContact: {
-        phone: '(209) 403-5450',
-        email: 'ampdesignandconsulting@gmail.com'
-      }
+      message: 'An error occurred while processing your request. Please try again.',
+      error: process.env.NODE_ENV === 'development' ? error instanceof Error ? error.message : 'Unknown error' : undefined
     }, { status: 500 });
   }
 }
 
-// Helper function to log contact submissions
-async function logContactSubmission(data: any, emailStatus: any) {
+/**
+ * Log contact submission for analytics
+ */
+async function logContactSubmission(
+  data: any,
+  emailStatus: { customerEmailSuccess: boolean; businessEmailSuccess: boolean }
+): Promise<void> {
   try {
-    // Implement your analytics/logging service here
     console.log('📊 Contact submission logged:', {
-      timestamp: new Date().toISOString(),
-      customer: `${data.firstName} ${data.lastName}`,
       company: data.companyName,
+      email: data.email,
+      timestamp: data.submittedAt,
       emailStatus
     });
-    
-    // You could save to database, send to analytics service, etc.
-    // await analyticsService.track('contact_form_submission', data);
-    
+
+    // In production, send to your analytics service
+    if (process.env.NODE_ENV === 'production') {
+      // Example: Send to analytics endpoint
+      // await fetch('/api/analytics/contact-submission', { ... });
+    }
   } catch (error) {
-    console.error('Failed to log contact submission:', error);
+    console.warn('⚠️ Failed to log contact submission:', error);
+  }
+}
+
+/**
+ * Health check endpoint
+ */
+export async function GET() {
+  try {
+    const emailServiceReady = await emailService.verifyConnection();
+    
+    return NextResponse.json({
+      status: 'healthy',
+      timestamp: new Date().toISOString(),
+      services: {
+        emailService: emailServiceReady ? 'ready' : 'not_configured'
+      }
+    });
+  } catch (error) {
+    return NextResponse.json({
+      status: 'error',
+      timestamp: new Date().toISOString(),
+      error: error instanceof Error ? error.message : 'Unknown error'
+    }, { status: 500 });
   }
 }

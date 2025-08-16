@@ -1,8 +1,13 @@
+import { emailTemplates } from '@/lib/email/emailBranding';
+
 /**
  * Email Service for AMP Vending
  * 
- * Handles email sending with fallbacks for development and production environments.
- * Supports multiple email providers and degradation.
+ * Build Process Documentation:
+ * 1. Uses existing professional email templates from emailBranding.ts
+ * 2. Integrates with Resend API for reliable delivery
+ * 3. Maintains your established branding and styling
+ * 4. Removes duplicate template code
  */
 
 interface EmailConfig {
@@ -18,51 +23,16 @@ interface EmailResponse {
   error?: string;
 }
 
-/**
- * Email Service Class
- * Provides abstraction over different email providers
- */
 export class EmailService {
   private static instance: EmailService;
   
   private constructor() {}
   
-  /**
-   * Singleton pattern for email service
-   */
   public static getInstance(): EmailService {
     if (!EmailService.instance) {
       EmailService.instance = new EmailService();
     }
     return EmailService.instance;
-  }
-
-  /**
-   * Verify email service connection
-   * Returns true if email service is properly configured
-   */
-  async verifyConnection(): Promise<boolean> {
-    try {
-      // In development, always return true (we'll use console logging)
-      if (process.env.NODE_ENV === 'development') {
-        console.log('📧 Email Service: Development mode - using console logging');
-        return true;
-      }
-
-      // Check if any email service is configured
-      const hasNodemailer = process.env.EMAIL_HOST && process.env.EMAIL_USER;
-      const hasResend = process.env.RESEND_API_KEY;
-      
-      if (!hasNodemailer && !hasResend) {
-        console.warn('⚠️ No email service configured. Using fallback mode.');
-        return false;
-      }
-
-      return true;
-    } catch (error) {
-      console.error('Email service verification failed:', error);
-      return false;
-    }
   }
 
   /**
@@ -75,11 +45,9 @@ export class EmailService {
         return this.sendEmailDevelopment(config);
       }
 
-      // Production mode - try different providers
+      // Production mode - use Resend
       if (process.env.RESEND_API_KEY) {
         return await this.sendEmailResend(config);
-      } else if (process.env.EMAIL_HOST) {
-        return await this.sendEmailNodemailer(config);
       } else {
         return this.sendEmailFallback(config);
       }
@@ -93,16 +61,127 @@ export class EmailService {
   }
 
   /**
-   * Development email handler - logs to console
+   * Send contact form emails using existing professional templates
    */
+  async sendContactFormEmails(data: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone?: string;
+    companyName: string;
+    message?: string;
+    submittedAt: string;
+    source: string;
+  }): Promise<{ customerResult: EmailResponse; businessResult: EmailResponse }> {
+    
+    // Use your existing professional templates
+    const customerHtml = emailTemplates.contactConfirmation(data);
+    const businessHtml = emailTemplates.contactNotification(data);
+
+    const [customerResult, businessResult] = await Promise.allSettled([
+      this.sendEmail({
+        to: data.email,
+        subject: `Thank you for contacting AMP Vending, ${data.firstName}!`,
+        html: customerHtml,
+        from: process.env.FROM_EMAIL || 'AMP Vending <ampdesignandconsulting@gmail.com>',
+      }),
+      
+      this.sendEmail({
+        to: process.env.TO_EMAIL || 'ampdesignandconsulting@gmail.com',
+        subject: `🔔 New Contact: ${data.firstName} ${data.lastName} from ${data.companyName}`,
+        html: businessHtml,
+        from: process.env.FROM_EMAIL || 'AMP Vending <ampdesignandconsulting@gmail.com>',
+      })
+    ]);
+
+    return {
+      customerResult: customerResult.status === 'fulfilled' ? customerResult.value : { success: false, error: 'Customer email failed' },
+      businessResult: businessResult.status === 'fulfilled' ? businessResult.value : { success: false, error: 'Business email failed' }
+    };
+  }
+
+  /**
+   * Send feedback form emails using existing professional templates
+   */
+  async sendFeedbackFormEmails(data: {
+    name: string;
+    email: string;
+    category: string;
+    locationName?: string;
+    message: string;
+    submittedAt: string;
+    id: string;
+  }): Promise<{ customerResult: EmailResponse; businessResult: EmailResponse }> {
+    
+    // Use your existing professional templates
+    const customerHtml = emailTemplates.feedbackConfirmation(data);
+    const businessHtml = emailTemplates.feedbackNotification ? emailTemplates.feedbackNotification(data) : this.generateSimpleFeedbackNotification(data);
+
+    // Determine urgency for business notification
+    const urgentCategories = ['Complaint', 'Technical Issue'];
+    const isUrgent = urgentCategories.includes(data.category);
+
+    const [customerResult, businessResult] = await Promise.allSettled([
+      this.sendEmail({
+        to: data.email,
+        subject: `Thank you for your feedback, ${data.name.split(' ')[0]}!`,
+        html: customerHtml,
+        from: process.env.FROM_EMAIL || 'AMP Vending <ampdesignandconsulting@gmail.com>',
+      }),
+      
+      this.sendEmail({
+        to: process.env.TO_EMAIL || 'ampdesignandconsulting@gmail.com',
+        subject: `${isUrgent ? '🚨 URGENT' : '📝'} ${data.category}: ${data.name}`,
+        html: businessHtml,
+        from: process.env.FROM_EMAIL || 'AMP Vending <ampdesignandconsulting@gmail.com>',
+      })
+    ]);
+
+    return {
+      customerResult: customerResult.status === 'fulfilled' ? customerResult.value : { success: false, error: 'Customer email failed' },
+      businessResult: businessResult.status === 'fulfilled' ? businessResult.value : { success: false, error: 'Business email failed' }
+    };
+  }
+
+  /**
+   * Verify email service connection
+   */
+  async verifyConnection(): Promise<boolean> {
+    try {
+      if (process.env.NODE_ENV === 'development') {
+        console.log('📧 Email Service: Development mode - using console logging');
+        return true;
+      }
+
+      if (!process.env.RESEND_API_KEY) {
+        console.warn('⚠️ RESEND_API_KEY not configured. Using fallback mode.');
+        return false;
+      }
+
+      const response = await fetch('https://api.resend.com/domains', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+        },
+      });
+
+      return response.ok;
+    } catch (error) {
+      console.error('Email service verification failed:', error);
+      return false;
+    }
+  }
+
+  // Private methods...
   private sendEmailDevelopment(config: EmailConfig): EmailResponse {
     console.log('\n📧 =====================================');
     console.log('📧 EMAIL SENT (DEVELOPMENT MODE)');
     console.log('📧 =====================================');
     console.log('📧 To:', config.to);
     console.log('📧 Subject:', config.subject);
-    console.log('📧 HTML Content:');
-    console.log(config.html);
+    console.log('📧 From:', config.from || 'default@ampvending.com');
+    console.log('📧 HTML Preview (first 300 chars):');
+    console.log(config.html.substring(0, 300).replace(/<[^>]*>/g, '') + '...');
     console.log('📧 =====================================\n');
     
     return {
@@ -111,9 +190,6 @@ export class EmailService {
     };
   }
 
-  /**
-   * Resend email provider (recommended for production)
-   */
   private async sendEmailResend(config: EmailConfig): Promise<EmailResponse> {
     try {
       const response = await fetch('https://api.resend.com/emails', {
@@ -133,7 +209,7 @@ export class EmailService {
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.message || 'Resend API error');
+        throw new Error(result.message || `Resend API error: ${response.status}`);
       }
 
       return {
@@ -149,56 +225,13 @@ export class EmailService {
     }
   }
 
-
-  /**
-   * Nodemailer email provider (SMTP)
-   */
-  private async sendEmailNodemailer(config: EmailConfig): Promise<EmailResponse> {
-    try {
-      // Note: You'll need to install nodemailer for this to work
-      // npm install nodemailer @types/nodemailer
-      const nodemailer = require('nodemailer');
-
-      const transporter = nodemailer.createTransporter({
-        host: process.env.EMAIL_HOST,
-        port: parseInt(process.env.EMAIL_PORT || '587'),
-        secure: process.env.EMAIL_SECURE === 'true',
-        auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASSWORD,
-        },
-      });
-
-      const info = await transporter.sendMail({
-        from: config.from || process.env.EMAIL_FROM || 'noreply@ampvendingmachines.com',
-        to: config.to,
-        subject: config.subject,
-        html: config.html,
-      });
-
-      return {
-        success: true,
-        messageId: info.messageId
-      };
-    } catch (error) {
-      console.error('Nodemailer email failed:', error);
-      return {
-        success: false,
-        error: error instanceof Error ? error.message : 'SMTP email failed'
-      };
-    }
-  }
-
-  /**
-   * Fallback when no email service is configured
-   */
   private sendEmailFallback(config: EmailConfig): EmailResponse {
     console.log('\n⚠️ =====================================');
     console.log('⚠️ EMAIL FALLBACK MODE (NO SERVICE CONFIGURED)');
     console.log('⚠️ =====================================');
     console.log('⚠️ To:', config.to);
     console.log('⚠️ Subject:', config.subject);
-    console.log('⚠️ Configure an email service for production!');
+    console.log('⚠️ Configure RESEND_API_KEY for production!');
     console.log('⚠️ =====================================\n');
     
     return {
@@ -208,120 +241,32 @@ export class EmailService {
   }
 
   /**
-   * Send contact form email
+   * Fallback simple feedback notification if not in emailBranding
    */
-  async sendContactFormEmail(data: any): Promise<EmailResponse> {
-    const html = this.generateContactFormHTML(data);
-    
-    return this.sendEmail({
-      to: 'ampdesignandconsulting@gmail.com',
-      subject: `New Contact Form Submission from ${data.firstName} ${data.lastName}`,
-      html,
-    });
-  }
-
-  /**
-   * Send feedback form email
-   */
-  async sendFeedbackEmail(data: any): Promise<EmailResponse> {
-    const html = this.generateFeedbackHTML(data);
-    
-    return this.sendEmail({
-      to: 'ampdesignandconsulting@gmail.com',
-      subject: `New Feedback: ${data.category} from ${data.name}`,
-      html,
-    });
-  }
-
-  /**
-   * Generate HTML for contact form emails
-   */
-  private generateContactFormHTML(data: any): string {
+  private generateSimpleFeedbackNotification(data: any): string {
     return `
       <!DOCTYPE html>
       <html>
       <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>New Contact Form Submission</title>
+        <title>New Feedback - AMP Vending</title>
         <style>
           body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
           .container { max-width: 600px; margin: 0 auto; padding: 20px; }
           .header { background-color: #FD5A1E; color: white; padding: 20px; text-align: center; }
-          .content { background-color: #f9f9f9; padding: 20px; }
-          .field { margin-bottom: 15px; }
+          .content { padding: 20px; background-color: #f9f9fa; }
+          .field { margin-bottom: 15px; padding: 10px; background-color: white; border-left: 4px solid #FD5A1E; }
           .label { font-weight: bold; color: #FD5A1E; }
-          .footer { background-color: #333; color: white; padding: 15px; text-align: center; font-size: 12px; }
         </style>
       </head>
       <body>
         <div class="container">
           <div class="header">
-            <h1>New Contact Form Submission</h1>
-            <p>AMP Vending Website</p>
+            <h1>📝 New Feedback Received</h1>
           </div>
-          
           <div class="content">
             <div class="field">
-              <span class="label">Name:</span> ${data.firstName} ${data.lastName}
-            </div>
-            <div class="field">
-              <span class="label">Email:</span> ${data.email}
-            </div>
-            ${data.phone ? `<div class="field"><span class="label">Phone:</span> ${data.phone}</div>` : ''}
-            <div class="field">
-              <span class="label">Company:</span> ${data.companyName}
-            </div>
-            ${data.message ? `
-              <div class="field">
-                <span class="label">Message:</span><br>
-                <p style="background: white; padding: 15px; border-left: 4px solid #FD5A1E; margin: 10px 0;">${data.message}</p>
-              </div>
-            ` : ''}
-          </div>
-          
-          <div class="footer">
-            <p>Submitted from AMP Vending website on ${new Date().toLocaleString()}</p>
-            <p>AMP Vending | 4120 Dale Rd ste j8 1005, Modesto, CA 95354</p>
-          </div>
-        </div>
-      </body>
-      </html>
-    `;
-  }
-
-  /**
-   * Generate HTML for feedback emails
-   */
-  private generateFeedbackHTML(data: any): string {
-    return `
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>New Feedback Submission</title>
-        <style>
-          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-          .header { background-color: #FD5A1E; color: white; padding: 20px; text-align: center; }
-          .content { background-color: #f9f9f9; padding: 20px; }
-          .field { margin-bottom: 15px; }
-          .label { font-weight: bold; color: #FD5A1E; }
-          .category { background-color: #FD5A1E; color: white; padding: 5px 10px; border-radius: 15px; font-size: 12px; }
-          .footer { background-color: #333; color: white; padding: 15px; text-align: center; font-size: 12px; }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <div class="header">
-            <h1>New Feedback Received</h1>
-            <span class="category">${data.category}</span>
-          </div>
-          
-          <div class="content">
-            <div class="field">
-              <span class="label">Name:</span> ${data.name}
+              <span class="label">From:</span> ${data.name}
             </div>
             <div class="field">
               <span class="label">Email:</span> ${data.email}
@@ -330,16 +275,12 @@ export class EmailService {
               <span class="label">Category:</span> ${data.category}
             </div>
             ${data.locationName ? `<div class="field"><span class="label">Location:</span> ${data.locationName}</div>` : ''}
-            
             <div class="field">
-              <span class="label">Message:</span><br>
-              <p style="background: white; padding: 15px; border-left: 4px solid #FD5A1E; margin: 10px 0; white-space: pre-line;">${data.message}</p>
+              <span class="label">Message:</span><br><br>${data.message.replace(/\n/g, '<br>')}
             </div>
-          </div>
-          
-          <div class="footer">
-            <p>Feedback submitted from AMP Vending website on ${new Date().toLocaleString()}</p>
-            <p>Contact consent: ${data.contactConsent ? 'Yes' : 'No'}</p>
+            <div class="field">
+              <span class="label">Submitted:</span> ${new Date(data.submittedAt).toLocaleString()}
+            </div>
           </div>
         </div>
       </body>

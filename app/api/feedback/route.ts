@@ -1,9 +1,11 @@
-//api/feedback/route.ts
-import { emailTemplates } from '@/lib/email/emailBranding';
 import { emailService } from '@/lib/services/emailService';
 import { NextRequest, NextResponse } from 'next/server';
-import z from 'zod';
+import { z } from 'zod';
 
+/**
+ * Feedback Form API Route
+ * Uses existing professional email templates from emailBranding.ts
+ */
 
 const FEEDBACK_CATEGORIES = [
   'Question',
@@ -30,206 +32,168 @@ const feedbackFormSchema = z.object({
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    console.log('📝 Feedback submission received:', body);
+    console.log('📝 Feedback submission received:', {
+      email: body.email,
+      category: body.category,
+      timestamp: new Date().toISOString()
+    });
 
     // Validate the form data
     const validatedData = feedbackFormSchema.parse(body);
     
-    const timestamp = new Date().toISOString();
     const feedbackData = {
       ...validatedData,
-      submittedAt: timestamp,
+      submittedAt: new Date().toISOString(),
       source: 'website_feedback_form',
       ipAddress: request.headers.get('x-forwarded-for') || 'unknown',
       userAgent: request.headers.get('user-agent') || 'unknown',
       id: `feedback_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
     };
 
-    // Prepare emails
-    const emailPromises = [];
+    // Send emails using your professional templates
+    const { customerResult, businessResult } = await emailService.sendFeedbackFormEmails(feedbackData);
 
-    // 1. Send confirmation email to customer
-    try {
-      const customerConfirmationEmail = {
-        to: feedbackData.email,
-        subject: `Thank you for your feedback, ${feedbackData.name}!`,
-        html: emailTemplates.feedbackConfirmation(feedbackData),
-        from: 'AMP Vending <ampdesignandconsulting@gmail.com>'
-      };
-
-      emailPromises.push(
-        emailService.sendEmail(customerConfirmationEmail)
-          .then(result => ({ type: 'customer_confirmation', result }))
-          .catch(error => ({ type: 'customer_confirmation', error }))
-      );
-    } catch (error) {
-      console.error('Error preparing customer feedback confirmation:', error);
+    // Log results
+    if (customerResult.success) {
+      console.log('✅ Customer feedback confirmation sent successfully');
+    } else {
+      console.error('❌ Customer feedback confirmation failed:', customerResult.error);
     }
 
-    // 2. Send notification email to business
-    try {
-      // Determine urgency based on category
-      const urgentCategories = ['Complaint', 'Technical Issue'];
-      const isUrgent = urgentCategories.includes(feedbackData.category);
-      
-      const businessNotificationEmail = {
-        to: 'ampdesignandconsulting@gmail.com',
-        subject: `${isUrgent ? '🚨 URGENT' : '📝'} Feedback: ${feedbackData.category} from ${feedbackData.name}`,
-        html: emailTemplates.feedbackNotification(feedbackData),
-        from: 'AMP Vending Website <ampdesignandconsulting@gmail.com>'
-      };
-
-      emailPromises.push(
-        emailService.sendEmail(businessNotificationEmail)
-          .then(result => ({ type: 'business_notification', result }))
-          .catch(error => ({ type: 'business_notification', error }))
-      );
-    } catch (error) {
-      console.error('Error preparing business feedback notification:', error);
+    if (businessResult.success) {
+      console.log('✅ Business feedback notification sent successfully');
+    } else {
+      console.error('❌ Business feedback notification failed:', businessResult.error);
     }
 
-    // Send emails concurrently
-    const emailResults = await Promise.all(emailPromises);
-    
-    // Analyze results
-    const customerEmailResult = emailResults.find(r => r.type === 'customer_confirmation');
-    const businessEmailResult = emailResults.find(r => r.type === 'business_notification');
-
-    let customerEmailSuccess = false;
-    let businessEmailSuccess = false;
-
-    if (customerEmailResult) {
-      if ('result' in customerEmailResult && customerEmailResult.result?.success) {
-        customerEmailSuccess = true;
-        console.log('✅ Customer feedback confirmation sent successfully');
-      } else {
-        console.error(
-          '❌ Customer feedback confirmation failed:',
-          'error' in customerEmailResult
-            ? customerEmailResult.error
-            : ('result' in customerEmailResult ? customerEmailResult.result?.error : undefined)
-        );
-      }
-    }
-
-    if (businessEmailResult) {
-      if ('result' in businessEmailResult && businessEmailResult.result?.success) {
-        businessEmailSuccess = true;
-        console.log('✅ Business feedback notification sent successfully');
-      } else {
-        console.error(
-          '❌ Business feedback notification failed:',
-          'error' in businessEmailResult
-            ? businessEmailResult.error
-            : businessEmailResult.result?.error
-        );
-      }
-    }
-
-    // Log the feedback for analytics
+    // Log feedback submission
     await logFeedbackSubmission(feedbackData, {
-      customerEmailSuccess,
-      businessEmailSuccess
+      customerEmailSuccess: customerResult.success,
+      businessEmailSuccess: businessResult.success
     });
 
-    // Determine response based on email results and feedback category
-    const responseMessage = getFeedbackResponseMessage(feedbackData.category, customerEmailSuccess);
-    
-    return NextResponse.json({
-      success: true,
-      message: responseMessage,
-      submissionId: feedbackData.id,
-      category: feedbackData.category,
-      emailStatus: {
-        customerConfirmation: customerEmailSuccess ? 'sent' : 'failed',
-        businessNotification: businessEmailSuccess ? 'sent' : 'failed'
-      },
-      responseTime: getExpectedResponseTime(feedbackData.category)
-    }, { status: 200 });
+    // Determine urgency and response message
+    const urgentCategories = ['Complaint', 'Technical Issue'];
+    const isUrgent = urgentCategories.includes(feedbackData.category);
+    const submissionId = feedbackData.id;
+
+    if (customerResult.success && businessResult.success) {
+      return NextResponse.json({
+        success: true,
+        message: `Thank you for your ${feedbackData.category.toLowerCase()}! We've sent a confirmation email and will ${isUrgent ? 'prioritize your feedback' : 'respond within 24-48 hours'}.`,
+        submissionId,
+        feedbackId: feedbackData.id,
+        category: feedbackData.category,
+        isUrgent,
+        emailStatus: {
+          customerConfirmation: 'sent',
+          businessNotification: 'sent'
+        }
+      }, { status: 200 });
+    } 
+    else if (businessResult.success) {
+      return NextResponse.json({
+        success: true,
+        message: `Thank you for your ${feedbackData.category.toLowerCase()}! We will ${isUrgent ? 'prioritize your feedback' : 'respond within 24-48 hours'}.`,
+        submissionId,
+        feedbackId: feedbackData.id,
+        category: feedbackData.category,
+        isUrgent,
+        emailStatus: {
+          customerConfirmation: customerResult.success ? 'sent' : 'failed',
+          businessNotification: 'sent'
+        }
+      }, { status: 200 });
+    }
+    else {
+      // Both emails failed, but don't fail the submission
+      console.error('❌ All feedback emails failed, but submission logged');
+      return NextResponse.json({
+        success: true,
+        message: `Thank you for your ${feedbackData.category.toLowerCase()}! We have received your feedback and will ${isUrgent ? 'prioritize it' : 'respond within 24-48 hours'}.`,
+        submissionId,
+        feedbackId: feedbackData.id,
+        category: feedbackData.category,
+        isUrgent,
+        emailStatus: {
+          customerConfirmation: 'failed',
+          businessNotification: 'failed'
+        }
+      }, { status: 200 });
+    }
 
   } catch (error) {
-    console.error('❌ Feedback form error:', error);
+    console.error('❌ Feedback submission error:', error);
 
+    // Handle validation errors
     if (error instanceof z.ZodError) {
       return NextResponse.json({
         success: false,
-        error: 'Validation failed',
-        details: error.errors.reduce((acc, err) => {
-          const field = err.path[0];
-          if (field) {
-            acc[field] = { _errors: [err.message] };
-          }
-          return acc;
-        }, {} as Record<string, { _errors: string[] }>)
+        message: 'Please check your feedback form data.',
+        errors: error.errors.map(err => ({
+          field: err.path.join('.'),
+          message: err.message
+        }))
       }, { status: 400 });
     }
 
+    // Handle other errors
     return NextResponse.json({
       success: false,
-      error: 'Failed to process feedback submission',
-      message: 'An unexpected error occurred. Please try again or contact us directly.',
-      fallbackContact: {
-        phone: '(209) 403-5450',
-        email: 'ampdesignandconsulting@gmail.com'
-      }
+      message: 'An error occurred while submitting your feedback. Please try again.',
+      error: process.env.NODE_ENV === 'development' ? error instanceof Error ? error.message : 'Unknown error' : undefined
     }, { status: 500 });
   }
 }
 
-// Helper functions for feedback processing
-function getFeedbackResponseMessage(category: string, emailSent: boolean): string {
-  const baseMessage = emailSent 
-    ? "Thank you for your feedback! We've sent a confirmation email and will respond"
-    : "Thank you for your feedback! We have received your message and will respond";
-
-  switch (category) {
-    case 'Complaint':
-    case 'Technical Issue':
-      return `${baseMessage} within 4-6 hours to address your concerns.`;
-    case 'Question':
-      return `${baseMessage} within 24 hours with detailed information.`;
-    case 'Suggestion':
-    case 'Product Request':
-      return `${baseMessage} within 48 hours to discuss your suggestions.`;
-    case 'Compliment':
-      return `${baseMessage} soon to thank you personally!`;
-    default:
-      return `${baseMessage} within 24-48 hours.`;
-  }
-}
-
-function getExpectedResponseTime(category: string): string {
-  switch (category) {
-    case 'Complaint':
-    case 'Technical Issue':
-      return '4-6 hours';
-    case 'Question':
-      return '24 hours';
-    case 'Suggestion':
-    case 'Product Request':
-      return '48 hours';
-    case 'Compliment':
-      return '24 hours';
-    default:
-      return '24-48 hours';
-  }
-}
-
-async function logFeedbackSubmission(data: any, emailStatus: any) {
+/**
+ * Log feedback submission for analytics
+ */
+async function logFeedbackSubmission(
+  data: any,
+  emailStatus: { customerEmailSuccess: boolean; businessEmailSuccess: boolean }
+): Promise<void> {
   try {
     console.log('📊 Feedback submission logged:', {
-      timestamp: new Date().toISOString(),
+      id: data.id,
       category: data.category,
-      customer: data.name,
-      location: data.locationName,
-      emailStatus,
-      urgent: ['Complaint', 'Technical Issue'].includes(data.category)
+      email: data.email,
+      timestamp: data.submittedAt,
+      emailStatus
     });
-    
-    // Implement your analytics/logging service here
-    // await analyticsService.track('feedback_submission', data);
-    
+
+    // In production, send to analytics service
+    if (process.env.NODE_ENV === 'production') {
+      // Example: Track feedback metrics
+      // await sendToAnalytics('feedback_submission', { ... });
+    }
   } catch (error) {
-    console.error('Failed to log feedback submission:', error);
+    console.warn('⚠️ Failed to log feedback submission:', error);
+  }
+}
+
+/**
+ * Health check endpoint for feedback service
+ */
+export async function GET() {
+  try {
+    const emailServiceReady = await emailService.verifyConnection();
+    
+    return NextResponse.json({
+      status: 'healthy',
+      service: 'feedback',
+      timestamp: new Date().toISOString(),
+      categories: FEEDBACK_CATEGORIES,
+      services: {
+        emailService: emailServiceReady ? 'ready' : 'not_configured'
+      }
+    });
+  } catch (error) {
+    return NextResponse.json({
+      status: 'error',
+      service: 'feedback',
+      timestamp: new Date().toISOString(),
+      error: error instanceof Error ? error.message : 'Unknown error'
+    }, { status: 500 });
   }
 }
