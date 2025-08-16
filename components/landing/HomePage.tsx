@@ -379,7 +379,7 @@ const HomePage = () => {
             </p>
           </div>
 
-          <ServiceAreaSection />
+         
         </Section>
 
         {/* FAQ Section */}
