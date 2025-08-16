@@ -51,7 +51,7 @@ export function generateImageSizes(
     desktop: 1280
   }
 ): string {
-  const sizeEntries = Object.entries(breakpoints).map(([device, width]) => {
+  const sizeEntries = Object.entries(breakpoints).map(([, width]) => {
     const calculatedWidth = Math.min(baseWidth, width);
     return `(max-width: ${width}px) ${calculatedWidth}px`;
   });

@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Container from '@/components/ui/core/Container';
 import Text from '@/components/ui/Text';
+import Link from 'next/link';
 
 /**
  * Metadata for Accessibility Statement page
@@ -40,13 +41,13 @@ export default function AccessibilityPage() {
       {/* Breadcrumb Navigation */}
       <nav className="bg-[#000000]/50 border-b border-[#4d4d4d]" aria-label="Breadcrumb">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center text-sm text-[#A5ACAF]">
-          <a 
+          <Link 
             href="/" 
             className="hover:text-[#FD5A1E] transition-colors focus:outline-none focus:text-[#FD5A1E]"
             aria-label="Navigate to homepage"
           >
             Home
-          </a>
+          </Link>
           <span className="mx-2" aria-hidden="true">/</span>
           <span className="text-[#F5F5F5]" aria-current="page">Accessibility Statement</span>
         </div>

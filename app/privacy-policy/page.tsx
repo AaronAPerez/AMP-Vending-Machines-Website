@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Container from '@/components/ui/core/Container';
 import Text from '@/components/ui/Text';
+import Link from 'next/link';
 
 /**
  * Metadata for Privacy Policy page
@@ -41,12 +42,12 @@ export default function PrivacyPolicyPage() {
       {/* Breadcrumb Navigation */}
       <div className="bg-[#000000]/50 border-b border-[#4d4d4d]">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center text-sm text-[#A5ACAF]">
-          <a 
+          <Link 
             href="/" 
             className="hover:text-[#FD5A1E] transition-colors focus:outline-none focus:text-[#FD5A1E]"
           >
             Home
-          </a>
+          </Link>
           <span className="mx-2" aria-hidden="true">/</span>
           <span className="text-[#F5F5F5]">Privacy Policy</span>
         </div>
@@ -73,7 +74,7 @@ export default function PrivacyPolicyPage() {
                     Introduction
                   </Text>
                 <Text variant="body" color="muted" className="mb-4">
-                  AMP Design and Consulting LLC, doing business as AMP Vending ("we," "us," or "our"), 
+                  AMP Design and Consulting LLC, doing business as AMP Vending (&quot;we,&quot;us,&quot; or &quot;our&quot;), 
                   is committed to protecting your privacy. This Privacy Policy explains how we collect, 
                   use, disclose, and safeguard your information when you visit our website 
                   <strong className="text-[#FD5A1E]"> ampvendingmachines.com</strong> or use our services.
@@ -381,7 +382,7 @@ export default function PrivacyPolicyPage() {
               {/* Children's Privacy */}
               <section className="mb-8" aria-labelledby="childrens-privacy" id="childrens-privacy">
                 <Text variant="h2" className="text-[#F5F5F5] mb-4">
-                  Children's Privacy
+                  Children&apos;s Privacy
                 </Text>
                 <Text variant="body" color="muted">
                   Our services are not directed to children under 18 years of age. We do not knowingly 
@@ -402,7 +403,7 @@ export default function PrivacyPolicyPage() {
                 </Text>
                 <ul className="text-[#A5ACAF] space-y-2 ml-6 list-disc">
                   <li>Posting the updated policy on our website</li>
-                  <li>Updating the "Last Updated" date at the top of this policy</li>
+                  <li>Updating the &quot;Last Updated&quot; date at the top of this policy</li>
                   <li>Sending email notification for significant changes (if you have provided your email)</li>
                 </ul>
               </section>
@@ -422,7 +423,7 @@ export default function PrivacyPolicyPage() {
                   </Text>
                   <Text variant="body-sm" color="muted">
                     <strong>Privacy Officer:</strong> For privacy-related inquiries, please contact us using the information above 
-                    with "Privacy Inquiry" in the subject line.
+                    with &quot;Privacy Inquiry&quot; in the subject line.
                   </Text>
                 </div>
               </section>

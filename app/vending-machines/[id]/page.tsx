@@ -226,8 +226,7 @@ const DynamicMachineDetailPage = () => {
           <h1 className="text-2xl font-bold text-[#F5F5F5] mb-4">
             {error || 'Vending Machine Not Found'}
           </h1>
-          <p className="text-[#A5ACAF] mb-6">
-            We couldn't find the commercial vending machine you're looking for. It may have been moved or the URL may be incorrect.
+          <p className="text-[#A5ACAF] mb-6">&apos;re looking for. It may have been moved or the URL may be incorrect.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <button

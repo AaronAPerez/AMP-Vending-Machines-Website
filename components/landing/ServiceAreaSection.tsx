@@ -74,7 +74,7 @@ export default function ServiceAreaSection({ className = '' }: ServiceAreaSectio
 
         <div className="text-center mt-12">
           <p className="text-gray-600 mb-4">
-            Don't see your city? We're always expanding our service area.
+            Don&apos;t see your city? We&apos;re always expanding our service area.
           </p>
           <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
             Contact Us About Your Location

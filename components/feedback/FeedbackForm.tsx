@@ -481,7 +481,7 @@ export default function FeedbackForm({ className = '', onSubmitSuccess }: Feedba
                 <span className="text-[#FD5A1E]" aria-label="required">*</span>
               </label>
               <p id="consent-help" className="text-[#A5ACAF] text-xs mt-1">
-                We'll only use your contact information to respond to your feedback
+                We&apos;ll only use your contact information to respond to your feedback
               </p>
               {errors.contactConsent && (
                 <p id="consent-error" className="text-red-500 text-xs mt-1" role="alert">
@@ -530,14 +530,14 @@ export default function FeedbackForm({ className = '', onSubmitSuccess }: Feedba
               )}
             </button>
             <p id="submit-help" className="mt-2 text-[#A5ACAF] text-xs text-center">
-              We'll respond within 24-48 hours
+              We&apos;ll respond within 24-48 hours
             </p>
           </div>
           
           {/* Privacy Note */}
           <div className="text-center text-[#A5ACAF] text-sm bg-[#111111] rounded-lg p-4 border border-[#333333]">
             <p>
-              🔒 Your feedback helps us improve. We'll only use your contact information 
+              🔒 Your feedback helps us improve. We&apos;ll only use your contact information 
               to respond to your feedback and will never share it with third parties.
             </p>
           </div>

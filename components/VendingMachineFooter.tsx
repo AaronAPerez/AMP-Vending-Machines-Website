@@ -4,6 +4,7 @@
 // Provides phone, email, and QR code for website scanning
 // Can be placed over any background
 
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
 interface VendingMachineFooterProps {
@@ -38,7 +39,7 @@ const VendingMachineFooter = ({
         <div className="flex flex-col items-center">
           <div className="w-24 h-24 bg-white p-2 rounded-lg flex items-center justify-center">
             {isQrLoaded ? (
-              <img 
+              <Image 
                 src={qrCodeSrc} 
                 alt={`QR Code to ${website}`} 
                 width="80" 
@@ -56,7 +57,7 @@ const VendingMachineFooter = ({
         <div className="flex flex-col">
           <div className="mb-1">
             <h2 className="text-[#FD5A1E] font-bold text-lg">Questions or Feedback?</h2>
-            <p className="text-white">We'd love to hear from you!</p>
+            <p className="text-white">We&apos;d love to hear from you!</p>
           </div>
           <div>
             <a 
