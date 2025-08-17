@@ -622,6 +622,7 @@ export type BreadcrumbItem = { name: string; url: string };
  * Default export containing all SEO constants and utilities
  * Use this for importing all SEO-related functionality
  */
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   SEO_CONSTANTS,
   SCHEMA_TYPES,
