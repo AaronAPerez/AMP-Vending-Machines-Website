@@ -259,18 +259,18 @@ const MachineCard = ({
       </div>
 
       {/* Card Content Section - Improved spacing */}
-      <div className="p-4 sm:p-6 h-2/5 flex flex-col justify-between relative z-5">
+      <div className="p-4 sm:p-6 h-3/5 flex flex-col justify-between relative z-5">
         {/* Machine Information */}
         <div className="space-y-2 sm:space-y-3 pb-6">
           <div>
             <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#F5F5F5] mb-1 line-clamp-1 group-hover:text-[#FD5A1E] transition-colors">
               {machine.name}
             </h3>
-            {machine.model && (
+            {/* {machine.model && (
               <p className="text-[#FD5A1E] font-semibold text-xs sm:text-sm">
                 Model: {machine.model}
               </p>
-            )}
+            )} */}
           </div>
 
           {/* Short Description */}
@@ -295,7 +295,7 @@ const MachineCard = ({
         </div>
 
         {/* Bottom Section */}
-        <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-[#333333]">
+        <div className="flex items-center justify-between pt-3 sm:p-4 border-t border-[#333333]">
           <div className="space-y-1 flex-1 min-w-0">
             <p className="text-[#A5ACAF] text-xs truncate">
               Best for: {machine.bestFor?.split(',')[0] || 'Offices & Businesses'}
