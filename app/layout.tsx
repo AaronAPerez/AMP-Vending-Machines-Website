@@ -49,6 +49,7 @@ export const metadata: Metadata = {
   keywords: [
     "commercial vending machines Central California",
     "office vending machines Modesto CA",
+    "free vending machines Modesto CA",
     "touchscreen vending machines",
     "workplace vending solutions",
     "refrigerated vending machines",
@@ -56,7 +57,11 @@ export const metadata: Metadata = {
     "business vending service",
     "employee break room solutions",
     "AMP Vending Modesto",
+    "AMP Vending Machines",
     "vending machines Stockton Fresno",
+    "vending machines near me",
+    "vending machine supplier",
+    "vending machine provider",
     "contactless payment vending",
     "maintenance-free vending machines"
   ].join(", "),
