@@ -250,7 +250,7 @@ const MachineCard = ({
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         
         {/* Quick View Button */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:translate-y-0">
           <div className="bg-[#FD5A1E] text-[#000000] px-6 py-3 rounded-full font-bold flex items-center space-x-2 shadow-lg backdrop-blur-sm">
             <span>View Details</span>
             <ArrowRightIcon size={16} />
@@ -261,7 +261,7 @@ const MachineCard = ({
       {/* Card Content Section - Improved spacing */}
       <div className="p-4 sm:p-6 h-2/5 flex flex-col justify-between relative z-5">
         {/* Machine Information */}
-        <div className="space-y-2 sm:space-y-3">;
+        <div className="space-y-2 sm:space-y-3 pb-6">
           <div>
             <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#F5F5F5] mb-1 line-clamp-1 group-hover:text-[#FD5A1E] transition-colors">
               {machine.name}

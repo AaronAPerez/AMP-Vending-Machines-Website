@@ -471,6 +471,7 @@ const EnhancedMachineDetailPage = () => {
         </nav>
 
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+          
           {/* Hero Section */}
           <motion.section
             className="mb-20"
@@ -478,6 +479,12 @@ const EnhancedMachineDetailPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
+                             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#F5F5F5] mb-4 leading-tight">
+                    {machineData.name}
+                  </h1>
+                                   <p className="text-xl sm:text-2xl text-[#FD5A1E] font-semibold mb-6">
+                    Commercial {machineData.category === 'refrigerated' ? 'Refrigerated' : 'Snack'} Vending Machine
+                  </p>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
               {/* Enhanced Image Gallery */}
               <ImageGallery
@@ -493,13 +500,13 @@ const EnhancedMachineDetailPage = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#F5F5F5] mb-4 leading-tight">
+                  {/* <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#F5F5F5] mb-4 leading-tight">
                     {machineData.name}
-                  </h1>
+                  </h1> */}
                   
-                  <p className="text-xl sm:text-2xl text-[#FD5A1E] font-semibold mb-6">
+                  {/* <p className="text-xl sm:text-2xl text-[#FD5A1E] font-semibold mb-6">
                     Commercial {machineData.category === 'refrigerated' ? 'Refrigerated' : 'Snack'} Vending Machine
-                  </p>
+                  </p> */}
                   
                   <p className="text-lg text-[#A5ACAF] leading-relaxed">
                     {machineData.shortDescription}
