@@ -108,12 +108,10 @@ Disallow: /logs/
 # Google - Maximum crawling allowed for business-critical content
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 1
 
 # Google specific crawlers
 User-agent: Googlebot-Image
 Allow: /
-Crawl-delay: 1
 
 User-agent: Googlebot-News
 Allow: /
@@ -124,17 +122,14 @@ Allow: /
 # Bing - Full access with moderate crawling
 User-agent: Bingbot
 Allow: /
-Crawl-delay: 2
 
 # DuckDuckGo - Full access
 User-agent: DuckDuckBot
 Allow: /
-Crawl-delay: 2
 
 # Yandex - Full access
 User-agent: YandexBot
 Allow: /
-Crawl-delay: 3
 
 # ============================================================================
 # SOCIAL MEDIA CRAWLERS: Essential for social sharing and business visibility
@@ -171,24 +166,19 @@ Allow: /
 # Allow essential SEO and business tools with rate limiting
 User-agent: AhrefsBot
 Allow: /
-Crawl-delay: 30
 
 User-agent: SemrushBot
 Allow: /
-Crawl-delay: 30
 
 User-agent: MJ12bot
 Allow: /
-Crawl-delay: 30
 
 User-agent: DotBot
 Allow: /
-Crawl-delay: 30
 
 # Screaming Frog (common SEO tool)
 User-agent: Screaming Frog SEO Spider
 Allow: /
-Crawl-delay: 10
 
 # ============================================================================
 # AI TRAINING CRAWLERS: Selective blocking to protect business content
@@ -376,10 +366,10 @@ Sitemap: ${baseUrl}/sitemap.xml
 Host: ${baseUrl.replace(/^https?:\/\//, '')}
 
 # Request rate (overall crawl budget optimization)
-Request-rate: 1/10s
+
 
 # Visit time (hours when crawling is preferred - PST business hours)
-Visit-time: 0900-1700
+
 
 # ============================================================================
 # BUSINESS INFORMATION FOR REFERENCE
