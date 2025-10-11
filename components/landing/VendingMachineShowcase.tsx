@@ -94,7 +94,7 @@ const VendingMachineShowcase = ({
         >
           <Link
             href="/vending-machines"
-            className="inline-flex items-center px-8 py-4 bg-[#333333] text-[#F5F5F5] font-medium rounded-full hover:bg-[#444444] hover:text-[#FD5A1E] active:bg-[#555555] transition-all duration-300 shadow-lg focus:outline-none focus:ring-2 focus:ring-[#333333] focus:ring-offset-2 focus:ring-offset-black touch-manipulation"
+            className="inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 bg-[#FD5A1E] text-[#000000] font-medium rounded-full shadow-lg hover:bg-[#F5F5F5] hover:text-[#000000] transition-colors hover:shadow-xl hover:scale-105 duration-300 focus:outline-none focus:ring-2 focus:ring-[#FD5A1E] focus:ring-offset-2 focus:ring-offset-black"
             aria-label="View complete vending machine collection and specifications"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
