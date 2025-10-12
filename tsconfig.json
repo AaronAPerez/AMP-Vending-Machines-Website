@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -17,30 +21,33 @@
         "name": "next"
       }
     ],
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     },
-    "types": ["jest", "@testing-library/jest-dom", "node"],
-    "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
-    "noUncheckedIndexedAccess": false,
-    "noImplicitAny": false,
-    "noImplicitReturns": false,
-    "noImplicitThis": false,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "target": "es2017",
-    "downlevelIteration": true,
-    "noFallthroughCasesInSwitch": true,
-    "exactOptionalPropertyTypes": false
+    "target": "ES2017"
+    // "types": ["jest", "@testing-library/jest-dom", "node"],
+    // "forceConsistentCasingInFileNames": true,
+    // "allowSyntheticDefaultImports": true,
+    // "noUncheckedIndexedAccess": false,
+    // "noImplicitAny": false,
+    // "noImplicitReturns": false,
+    // "noImplicitThis": false,
+    // "noUnusedLocals": false,
+    // "noUnusedParameters": false,
+    // "target": "es2017",
+    // "downlevelIteration": true,
+    // "noFallthroughCasesInSwitch": true,
+    // "exactOptionalPropertyTypes": false
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-     "types/**/*.ts"
+    "types/**/*.ts",
+    "types/**/*.d.ts"
   ],
   "exclude": [
     "node_modules",

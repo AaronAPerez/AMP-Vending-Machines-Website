@@ -57,11 +57,14 @@ export const metadata: Metadata = {
     "business vending service",
     "employee break room solutions",
     "AMP Vending Modesto",
+    "AMP Vending Modesto ca",
     "AMP Vending Machines",
+    "vending machines",
     "vending machines Stockton Fresno",
     "vending machines near me",
     "vending machine supplier",
     "vending machine provider",
+    "vending machine vendor",
     "contactless payment vending",
     "maintenance-free vending machines"
   ].join(", "),
@@ -155,7 +158,7 @@ export const metadata: Metadata = {
     'ICBM': '37.6390972, -120.9968782',
 
     // Business information
-    'coverage': 'Central California',
+    'coverage': 'Northern California',
     'distribution': 'global',
     'rating': 'general',
     'revisit-after': '7 days',
@@ -256,9 +259,9 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//vercel-analytics.com" />
 
         {/* Preconnect to critical external domains */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        {/* <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://vercel-analytics.com" />
+        <link rel="preconnect" href="https://vercel-analytics.com" /> */}
 
         {/* Enhanced mobile optimization */}
         <meta name="mobile-web-app-capable" content="yes" />
@@ -283,7 +286,7 @@ export default function RootLayout({
               name: "AMP Vending",
               alternateName: "AMP Design and Consulting",
               url: "https://www.ampvendingmachines.com",
-              logo: "https://www.ampvendingmachines.com/images/logo/AMP_logo.png",
+              logo: "https://www.ampvendingmachines.com/images/logo/AMP-Vending-Logo.jpg",
               image: [
                 "https://www.ampvendingmachines.com/images/machines/amp-premium-touchscreen-vending-machine.png",
                 "https://www.ampvendingmachines.com/images/machines/amp-refrigerated-vending-machine.png"

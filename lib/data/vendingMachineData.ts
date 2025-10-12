@@ -268,187 +268,6 @@ export const getMachinesByLocation = (location: string): MachineData[] => {
  * Targeting keywords: vending machine, office vending, commercial vending, etc.
  */
 const vendingMachineData: Record<string, MachineData> = {
- 
-
-  // Premium Snack Vending Machine with Touchscreen
-  "premium-snack-vending-machine-touchscreen": {
-    id: "premium-snack-vending-machine-touchscreen",
-    name: "Premium Snack Vending Machine with Touchscreen",
-    seoTitle: "Commercial Snack Vending Machine with 21.5\" Touchscreen | AMP Vending",
-    metaDescription: "Premium snack vending machine with large touchscreen display for offices and businesses. 50+ product options with professional installation in Modesto, CA.",
-    shortDescription: "Advanced snack vending machine featuring a large 21.5\" HD touchscreen display, designed for high-capacity snack and convenience item dispensing in commercial environments.",
-    description: "Our premium snack vending machine with touchscreen technology represents the pinnacle of commercial vending solutions. Featuring a stunning 21.5\" HD touchscreen interface and capacity for 50+ different snack products, this machine delivers an exceptional user experience while maximizing your product variety. Perfect for offices, schools, hospitals, and high-traffic commercial locations throughout Central California. Professional installation and comprehensive maintenance ensure reliable operation and customer satisfaction.",
-    images: [
-      {
-        id: 1,
-        src: "/images/machines/amp-premium-touchscreen-vending-machine.png",
-        alt: "Premium commercial snack vending machine with 21.5 inch touchscreen for offices and businesses in Central California",
-      },
-    ],
-    dimensions: [
-      { label: "Width", value: "50 inches (127 cm)" },
-      { label: "Depth", value: "30.2 inches (77 cm)" },
-      { label: "Height", value: "76.7 inches (195 cm)" },
-      { label: "Weight", value: "700 lbs (318 kg)" },
-      { label: "Capacity", value: "50+ product selections" },
-      { label: "Power", value: "120V / 60Hz" },
-    ],
-    features: [
-      {
-        title: '21.5" Commercial HD Touchscreen Display',
-        description: "Large interactive high-definition touchscreen with intuitive navigation enhances customer experience and showcases your snack products with vibrant graphics and easy selection.",
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" /></svg>',
-      },
-      {
-        title: "Comprehensive Payment Processing System",
-        description: "Integrated payment system accepts all major credit/debit cards, mobile payments (Apple Pay, Google Pay, Samsung Pay), and traditional cash for maximum customer convenience.",
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" /></svg>',
-      },
-      {
-        title: "Advanced Bill Recycler Technology",
-        description: "State-of-the-art cash handling system uses accepted bills for change dispensing, reducing service calls and ensuring customers always receive proper change for their purchases.",
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.75c.414 0 .75.336.75.75v.75m0 0H18a2.25 2.25 0 002.25-2.25V4.5a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 4.5m10.5-1.5h.75c.414 0 .75.336.75.75v.75M3 18.75v.75c0 .414.336.75.75.75h.75M3.75 18h16.5m-16.5 0h-.75a.75.75 0 01-.75-.75v-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25" /></svg>',
-      },
-      {
-        title: "Adjustable Product Spiral Configuration",
-        description: "Customizable product spirals accommodate various snack sizes from small candy bars to large bags of chips, maximizing your product offering flexibility and revenue potential.",
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.505-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.107-1.204l-.527-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>',
-      },
-      {
-        title: "Cloud-Based Inventory Management",
-        description: "Real-time cloud monitoring provides detailed analytics on product levels, sales patterns, and machine performance, enabling data-driven restocking and product optimization decisions.",
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>',
-      },
-      {
-        title: "Energy-Efficient Commercial Operation",
-        description: "Optimized power consumption with energy-saving LED lighting and intelligent standby modes that reduce electrical usage during low-traffic periods while maintaining product quality.",
-        icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>',
-      },
-    ],
-    specifications: [
-      {
-        category: "Physical Specifications",
-        items: [
-          { label: "Dimensions", value: '50"W x 30.2"D x 76.7"H' },
-          { label: "Weight", value: "700 lbs (318 kg)" },
-          { label: "Cabinet Construction", value: "Commercial-grade powder-coated steel" },
-          { label: "Front Glass", value: "Triple-pane heated glass with anti-glare coating" },
-          { label: "Insulation", value: "High-efficiency thermal insulation" },
-        ],
-      },
-      {
-        category: "Capacity & Configuration",
-        items: [
-          { label: "Product Selections", value: "50+ different snack and convenience products" },
-          { label: "Spirals", value: "Adjustable spirals for various product sizes" },
-          { label: "Maximum Products", value: "Up to 500+ items depending on product configuration" },
-        ],
-      },
-      {
-        category: "Technology Features",
-        items: [
-          { label: "Display", value: '21.5" HD touchscreen with multi-touch capability' },
-          { label: "Controller", value: "Advanced commercial microprocessor system" },
-          { label: "Connectivity", value: "4G LTE cellular, Wi-Fi wireless, Ethernet" },
-          { label: "Remote Monitoring", value: "Real-time inventory tracking and diagnostic alerts" },
-        ],
-      },
-      {
-        category: "Payment Systems",
-        items: [
-          { label: "Card Reader", value: "EMV chip compliant with contactless NFC" },
-          { label: "Mobile Payments", value: "Apple Pay, Google Pay, Samsung Pay support" },
-          { label: "Cash Handling", value: "Bill recycler system for $1-$100 denominations" },
-          { label: "Coin Mechanism", value: "Multi-coin acceptor with precise change dispensing" },
-        ],
-      },
-      {
-        category: "Electrical Requirements",
-        items: [
-          { label: "Power Requirements", value: "120V AC, 60Hz standard commercial power" },
-          { label: "Power Consumption", value: "Average 4.5 kWh/day energy efficient operation" },
-          { label: "Lighting", value: "Energy-efficient LED lighting with motion sensors" },
-          { label: "Certifications", value: "UL Listed, Energy Star qualified for commercial use" },
-        ],
-      },
-    ],
-    productOptions: [
-      "Premium chips and savory snacks (Lays, Doritos, Cheetos)",
-      "Candy and chocolate bars (Snickers, Kit Kat, M&Ms)",
-      "Cookies and pastries (Oreos, Pop-Tarts, pastries)",
-      "Crackers and pretzels (variety pack options)",
-      "Nuts and trail mixes (healthy snack alternatives)",
-      "Granola and protein bars (fitness-focused options)",
-      "Dried fruits and jerky (premium snack choices)",
-      "Mints and gum (fresh breath products)",
-      "Energy bars and nutrition supplements",
-      "Popcorn varieties and corn-based snacks",
-      "Rice cakes and corn cakes (health-conscious options)",
-      "Instant noodles and cup soups",
-      "Cereal bars and breakfast items",
-      "Fruit snacks and gummies",
-      "Gluten-free snack options",
-      "Vegan snack choices",
-      "Organic selections and natural products",
-      "International snacks and specialty items",
-      "Seasonal specialty items and limited editions",
-      "Personal care items and convenience products",
-    ],
-    bestFor: [
-      "Large corporate offices and business complexes",
-      "Schools, universities, and educational institutions",
-      "Manufacturing facilities and industrial locations",
-      "Hospitals and healthcare facilities",
-      "Retail locations and shopping centers",
-      "Transportation hubs (airports, train stations)",
-      "Government buildings and public facilities",
-      "Conference centers and event venues",
-      "High-traffic public areas and lobbies",
-      "24/7 facilities and round-the-clock operations",
-    ],
-    relatedMachines: [
-      {
-        id: "refrigerated-touchscreen-vending-machine",
-        name: "Refrigerated Touchscreen Vending Machine",
-        image: "/images/machines/amp-refrigerated-vending-machine.png",
-      },
-      {
-        id: "compact-office-refrigerated-vending-machine",
-        name: "Compact Office Refrigerated Vending Machine",
-        image: "/images/machines/compact-refrigerated-vending-machine.jpg",
-      },
-      {
-        id: "commercial-snack-vending-machine",
-        name: "Commercial Snack Vending Machine",
-        image: "/images/machines/standard-non-refrigerated.jpg",
-      },
-    ],
-    category: "non-refrigerated",
-    highlights: [
-      '21.5" Commercial HD Touchscreen Display',
-      "Comprehensive Payment Processing System",
-      "50+ Snack Product Capacity",
-      "Professional Installation & Maintenance Service",
-    ],
-    keywords: [
-      "snack vending machine",
-      "touchscreen vending machine",
-      "commercial vending machine",
-      "office snack machine",
-      "large capacity vending machine"
-    ],
-    localKeywords: [
-      "snack vending machine Modesto CA",
-      "office vending Central California",
-      "commercial snack machine Central Valley"
-    ],
-    businessKeywords: [
-      "employee snack solutions",
-      "workplace convenience vending",
-      "business snack machine service",
-      "office break room vending"
-    ],
-  },
 
    "vendo-821-v21-blue-refresh-high-capacity": {
     id: "vendo-821-v21-blue-refresh-high-capacity",
@@ -677,6 +496,188 @@ const vendingMachineData: Record<string, MachineData> = {
       { label: "Door Swing", value: "Right-hand opening, 36 inches clearance needed" }
     ]
   },
+
+  
+  // Premium Snack Vending Machine with Touchscreen
+  "premium-snack-vending-machine-touchscreen": {
+    id: "premium-snack-vending-machine-touchscreen",
+    name: "Premium Snack Vending Machine with Touchscreen",
+    seoTitle: "Commercial Snack Vending Machine with 21.5\" Touchscreen | AMP Vending",
+    metaDescription: "Premium snack vending machine with large touchscreen display for offices and businesses. 50+ product options with professional installation in Modesto, CA.",
+    shortDescription: "Advanced snack vending machine featuring a large 21.5\" HD touchscreen display, designed for high-capacity snack and convenience item dispensing in commercial environments.",
+    description: "Our premium snack vending machine with touchscreen technology represents the pinnacle of commercial vending solutions. Featuring a stunning 21.5\" HD touchscreen interface and capacity for 50+ different snack products, this machine delivers an exceptional user experience while maximizing your product variety. Perfect for offices, schools, hospitals, and high-traffic commercial locations throughout Central California. Professional installation and comprehensive maintenance ensure reliable operation and customer satisfaction.",
+    images: [
+      {
+        id: 1,
+        src: "/images/machines/amp-premium-touchscreen-vending-machine.png",
+        alt: "Premium commercial snack vending machine with 21.5 inch touchscreen for offices and businesses in Central California",
+      },
+    ],
+    dimensions: [
+      { label: "Width", value: "50 inches (127 cm)" },
+      { label: "Depth", value: "30.2 inches (77 cm)" },
+      { label: "Height", value: "76.7 inches (195 cm)" },
+      { label: "Weight", value: "700 lbs (318 kg)" },
+      { label: "Capacity", value: "50+ product selections" },
+      { label: "Power", value: "120V / 60Hz" },
+    ],
+    features: [
+      {
+        title: '21.5" Commercial HD Touchscreen Display',
+        description: "Large interactive high-definition touchscreen with intuitive navigation enhances customer experience and showcases your snack products with vibrant graphics and easy selection.",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" /></svg>',
+      },
+      {
+        title: "Comprehensive Payment Processing System",
+        description: "Integrated payment system accepts all major credit/debit cards, mobile payments (Apple Pay, Google Pay, Samsung Pay), and traditional cash for maximum customer convenience.",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" /></svg>',
+      },
+      {
+        title: "Advanced Bill Recycler Technology",
+        description: "State-of-the-art cash handling system uses accepted bills for change dispensing, reducing service calls and ensuring customers always receive proper change for their purchases.",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.75c.414 0 .75.336.75.75v.75m0 0H18a2.25 2.25 0 002.25-2.25V4.5a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 4.5m10.5-1.5h.75c.414 0 .75.336.75.75v.75M3 18.75v.75c0 .414.336.75.75.75h.75M3.75 18h16.5m-16.5 0h-.75a.75.75 0 01-.75-.75v-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25" /></svg>',
+      },
+      {
+        title: "Adjustable Product Spiral Configuration",
+        description: "Customizable product spirals accommodate various snack sizes from small candy bars to large bags of chips, maximizing your product offering flexibility and revenue potential.",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.505-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.107-1.204l-.527-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>',
+      },
+      {
+        title: "Cloud-Based Inventory Management",
+        description: "Real-time cloud monitoring provides detailed analytics on product levels, sales patterns, and machine performance, enabling data-driven restocking and product optimization decisions.",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>',
+      },
+      {
+        title: "Energy-Efficient Commercial Operation",
+        description: "Optimized power consumption with energy-saving LED lighting and intelligent standby modes that reduce electrical usage during low-traffic periods while maintaining product quality.",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>',
+      },
+    ],
+    specifications: [
+      {
+        category: "Physical Specifications",
+        items: [
+          { label: "Dimensions", value: '50"W x 30.2"D x 76.7"H' },
+          { label: "Weight", value: "700 lbs (318 kg)" },
+          { label: "Cabinet Construction", value: "Commercial-grade powder-coated steel" },
+          { label: "Front Glass", value: "Triple-pane heated glass with anti-glare coating" },
+          { label: "Insulation", value: "High-efficiency thermal insulation" },
+        ],
+      },
+      {
+        category: "Capacity & Configuration",
+        items: [
+          { label: "Product Selections", value: "50+ different snack and convenience products" },
+          { label: "Spirals", value: "Adjustable spirals for various product sizes" },
+          { label: "Maximum Products", value: "Up to 500+ items depending on product configuration" },
+        ],
+      },
+      {
+        category: "Technology Features",
+        items: [
+          { label: "Display", value: '21.5" HD touchscreen with multi-touch capability' },
+          { label: "Controller", value: "Advanced commercial microprocessor system" },
+          { label: "Connectivity", value: "4G LTE cellular, Wi-Fi wireless, Ethernet" },
+          { label: "Remote Monitoring", value: "Real-time inventory tracking and diagnostic alerts" },
+        ],
+      },
+      {
+        category: "Payment Systems",
+        items: [
+          { label: "Card Reader", value: "EMV chip compliant with contactless NFC" },
+          { label: "Mobile Payments", value: "Apple Pay, Google Pay, Samsung Pay support" },
+          { label: "Cash Handling", value: "Bill recycler system for $1-$100 denominations" },
+          { label: "Coin Mechanism", value: "Multi-coin acceptor with precise change dispensing" },
+        ],
+      },
+      {
+        category: "Electrical Requirements",
+        items: [
+          { label: "Power Requirements", value: "120V AC, 60Hz standard commercial power" },
+          { label: "Power Consumption", value: "Average 4.5 kWh/day energy efficient operation" },
+          { label: "Lighting", value: "Energy-efficient LED lighting with motion sensors" },
+          { label: "Certifications", value: "UL Listed, Energy Star qualified for commercial use" },
+        ],
+      },
+    ],
+    productOptions: [
+      "Premium chips and savory snacks (Lays, Doritos, Cheetos)",
+      "Candy and chocolate bars (Snickers, Kit Kat, M&Ms)",
+      "Cookies and pastries (Oreos, Pop-Tarts, pastries)",
+      "Crackers and pretzels (variety pack options)",
+      "Nuts and trail mixes (healthy snack alternatives)",
+      "Granola and protein bars (fitness-focused options)",
+      "Dried fruits and jerky (premium snack choices)",
+      "Mints and gum (fresh breath products)",
+      "Energy bars and nutrition supplements",
+      "Popcorn varieties and corn-based snacks",
+      "Rice cakes and corn cakes (health-conscious options)",
+      "Instant noodles and cup soups",
+      "Cereal bars and breakfast items",
+      "Fruit snacks and gummies",
+      "Gluten-free snack options",
+      "Vegan snack choices",
+      "Organic selections and natural products",
+      "International snacks and specialty items",
+      "Seasonal specialty items and limited editions",
+      "Personal care items and convenience products",
+    ],
+    bestFor: [
+      "Large corporate offices and business complexes",
+      "Schools, universities, and educational institutions",
+      "Manufacturing facilities and industrial locations",
+      "Hospitals and healthcare facilities",
+      "Retail locations and shopping centers",
+      "Transportation hubs (airports, train stations)",
+      "Government buildings and public facilities",
+      "Conference centers and event venues",
+      "High-traffic public areas and lobbies",
+      "24/7 facilities and round-the-clock operations",
+    ],
+    relatedMachines: [
+      {
+        id: "refrigerated-touchscreen-vending-machine",
+        name: "Refrigerated Touchscreen Vending Machine",
+        image: "/images/machines/amp-refrigerated-vending-machine.png",
+      },
+      {
+        id: "compact-office-refrigerated-vending-machine",
+        name: "Compact Office Refrigerated Vending Machine",
+        image: "/images/machines/compact-refrigerated-vending-machine.jpg",
+      },
+      {
+        id: "commercial-snack-vending-machine",
+        name: "Commercial Snack Vending Machine",
+        image: "/images/machines/standard-non-refrigerated.jpg",
+      },
+    ],
+    category: "non-refrigerated",
+    highlights: [
+      '21.5" Commercial HD Touchscreen Display',
+      "Comprehensive Payment Processing System",
+      "50+ Snack Product Capacity",
+      "Professional Installation & Maintenance Service",
+    ],
+    keywords: [
+      "snack vending machine",
+      "touchscreen vending machine",
+      "commercial vending machine",
+      "office snack machine",
+      "large capacity vending machine"
+    ],
+    localKeywords: [
+      "snack vending machine Modesto CA",
+      "office vending Central California",
+      "commercial snack machine Central Valley"
+    ],
+    businessKeywords: [
+      "employee snack solutions",
+      "workplace convenience vending",
+      "business snack machine service",
+      "office break room vending"
+    ],
+  },
+
  // Premium Refrigerated Touchscreen Vending Machine
   "refrigerated-touchscreen-vending-machine": {
     id: "refrigerated-touchscreen-vending-machine",
