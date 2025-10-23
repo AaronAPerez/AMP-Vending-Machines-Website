@@ -114,9 +114,9 @@ const Footer = () => {
 
           {/* Contact Info Section - Fixed Email Alignment */}
           <div className="space-y-4">
-            <h3 className="text-[#F5F5F5] font-semibold text-lg">
+          <div className="text-[#F5F5F5] font-semibold text-lg">
               Contact Info
-            </h3>
+            </div>
 
             <div className="space-y-3">
               {/* Address */}
