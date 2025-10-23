@@ -23,12 +23,14 @@ import { WebVitalsReporter } from "@/components/analytics/WebVitalsReporter";
 import Footer from "@/components/layout/Footer";
 
 
-// Optimized font loading for performance
+// Optimized font loading for performance with adjustFontFallback
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
-  preload: true, // Preload for better LCP
+  preload: true,
+  adjustFontFallback: true, // Reduces CLS by matching fallback font metrics
+  fallback: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
 });
 
 /**
@@ -244,6 +246,13 @@ export default function RootLayout({
   return (
     <html lang="en-US" suppressHydrationWarning>
       <head>
+        {/* Inline critical CSS for immediate render */}
+        <style dangerouslySetInnerHTML={{__html: `
+          body{background:#000;color:#fff;font-family:var(--font-inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+          *{box-sizing:border-box;margin:0;padding:0}
+          #hero-heading{font-display:swap;text-rendering:optimizeSpeed}
+        `}} />
+
         {/* Critical resource preloading for performance */}
         <link
           rel="preload"
@@ -253,15 +262,9 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
 
-        {/* DNS prefetch for external resources */}
-        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+        {/* Preconnect to critical external domains for faster resource loading */}
+        <link rel="preconnect" href="https://vercel-analytics.com" />
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
-        <link rel="dns-prefetch" href="//vercel-analytics.com" />
-
-        {/* Preconnect to critical external domains */}
-        {/* <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://vercel-analytics.com" /> */}
 
         {/* Enhanced mobile optimization */}
         <meta name="mobile-web-app-capable" content="yes" />
