@@ -344,4 +344,4 @@ const ResizableNavbar = () => {
    );
 };
 
-      export default ResizableNavbar;
+export default ResizableNavbar;
