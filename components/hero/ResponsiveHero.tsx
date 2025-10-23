@@ -41,12 +41,12 @@ export const ResponsiveHero = ({
       />
 
       {/* Critical Path: Hero Content (No JS dependencies) */}
-      <div className="relative z-30 text-center px-4 sm:px-6 mb-6 max-w-5xl">
+      <div className="relative z-30 text-center px-4 sm:px-6 mb-12 max-w-5xl">
         {/* LCP Element - Optimized with CSS-only animations */}
         <h1
           id="hero-heading"
           className={cn(
-            "text-4xl md:text-5xl lg:text-6xl font-bold text-[#F5F5F5] mb-6 drop-shadow-xl",
+            "text-4xl md:text-5xl lg:text-6xl font-bold text-[#F5F5F5] mb-6 sm:mb-4 drop-shadow-xl",
             // CSS-only fade-in animation (no JS blocking)
             "animate-in fade-in duration-700 fill-mode-forwards"
           )}
