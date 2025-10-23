@@ -1,5 +1,7 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
+    "target": "ES2017",
     "lib": [
       "dom",
       "dom.iterable",
@@ -22,24 +24,8 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./*"
-      ]
-    },
-    "target": "ES2017"
-    // "types": ["jest", "@testing-library/jest-dom", "node"],
-    // "forceConsistentCasingInFileNames": true,
-    // "allowSyntheticDefaultImports": true,
-    // "noUncheckedIndexedAccess": false,
-    // "noImplicitAny": false,
-    // "noImplicitReturns": false,
-    // "noImplicitThis": false,
-    // "noUnusedLocals": false,
-    // "noUnusedParameters": false,
-    // "target": "es2017",
-    // "downlevelIteration": true,
-    // "noFallthroughCasesInSwitch": true,
-    // "exactOptionalPropertyTypes": false
+      "@/*": ["./*"]
+    }
   },
   "include": [
     "next-env.d.ts",

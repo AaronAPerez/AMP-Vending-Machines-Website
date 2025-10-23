@@ -93,9 +93,9 @@ const Footer = () => {
 
           {/* Our Services Section */}
           <div className="space-y-4">
-            <h3 className="text-[#F5F5F5] font-semibold text-lg">
+            <div className="text-[#F5F5F5] font-semibold text-lg">
               Our Services
-            </h3>
+            </div>
             <ul className="space-y-3">
               {[
                 'Zero-Cost Installation',
