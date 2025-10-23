@@ -1,12 +1,14 @@
-// lib/performance/core-web-vitals.ts - Fixed TypeScript errors
+// lib/performance/core-web-vitals.ts - Consolidated web vitals tracking
 
-import { onCLS, onFCP, onLCP, onTTFB, onINP } from 'web-vitals';
+'use client';
 
-interface WebVitalsMetric {
+import type { Metric } from 'web-vitals';
+
+export interface WebVitalsMetric {
   name: string;
   value: number;
-  rating: 'good' | 'needs-improvement' | 'poor';
-  delta: number;
+  rating?: 'good' | 'needs-improvement' | 'poor';
+  delta?: number;
   id: string;
 }
 
@@ -23,17 +25,42 @@ interface AnalyticsGlobals {
   ) => void;
 }
 
-function sendToAnalytics(metric: WebVitalsMetric): void {
+export const PERFORMANCE_BUDGETS = {
+  FCP: { good: 1800, poor: 3000 },
+  LCP: { good: 2500, poor: 4000 },
+  FID: { good: 100, poor: 300 },
+  INP: { good: 200, poor: 500 },
+  CLS: { good: 0.1, poor: 0.25 },
+  TTFB: { good: 800, poor: 1800 },
+} as const;
+
+/**
+ * Get performance rating for a metric
+ */
+export function getMetricRating(name: string, value: number): 'good' | 'needs-improvement' | 'poor' {
+  const threshold = PERFORMANCE_BUDGETS[name as keyof typeof PERFORMANCE_BUDGETS];
+  if (!threshold) return 'good';
+
+  if (value <= threshold.good) return 'good';
+  if (value <= threshold.poor) return 'needs-improvement';
+  return 'poor';
+}
+
+export function sendToAnalytics(metric: WebVitalsMetric): void {
   if (typeof window === 'undefined') return;
 
   const analytics = window as Window & AnalyticsGlobals;
+  const rating = metric.rating || getMetricRating(metric.name, metric.value);
+  const delta = metric.delta || 0;
 
-  console.log(`Core Web Vital: ${metric.name}`, {
-    value: metric.value,
-    rating: metric.rating,
-    delta: metric.delta,
-    id: metric.id,
-  });
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`Core Web Vital: ${metric.name}`, {
+      value: metric.value,
+      rating,
+      delta,
+      id: metric.id,
+    });
+  }
 
   // Send to Google Analytics 4
   if (analytics.gtag) {
@@ -41,10 +68,7 @@ function sendToAnalytics(metric: WebVitalsMetric): void {
       event_category: 'Web Vitals',
       event_label: metric.id,
       value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
-      custom_map: {
-        metric_rating: metric.rating,
-        metric_delta: metric.delta,
-      },
+      non_interaction: true,
     });
   }
 
@@ -54,55 +78,27 @@ function sendToAnalytics(metric: WebVitalsMetric): void {
       name: `web_vital_${metric.name.toLowerCase()}`,
       data: {
         value: metric.value,
-        rating: metric.rating,
-        delta: metric.delta,
+        rating,
+        delta,
         metric_id: metric.id,
       },
     });
   }
-
-  sendToCustomAnalytics(metric);
 }
 
-async function sendToCustomAnalytics(metric: WebVitalsMetric): Promise<void> {
+export async function initializeWebVitals(): Promise<void> {
   try {
-    if (process.env.NODE_ENV !== 'production') return;
+    // Dynamic import to ensure client-side only loading
+    if (typeof window === 'undefined') return;
 
-    await fetch('/api/analytics/web-vitals', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: metric.name,
-        value: metric.value,
-        rating: metric.rating,
-        delta: metric.delta,
-        id: metric.id,
-        url: typeof window !== 'undefined' ? window.location.href : '',
-        timestamp: Date.now(),
-        userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : '',
-      }),
-    });
-  } catch (error) {
-    console.warn('Failed to send web vitals to custom analytics:', error);
-  }
-}
+    const { onCLS, onFCP, onLCP, onTTFB, onINP } = await import('web-vitals');
 
-export function initializeWebVitals(): void {
-  try {
-    onCLS(sendToAnalytics);
-    onFCP(sendToAnalytics);
-    onINP(sendToAnalytics);
-    onLCP(sendToAnalytics);
-    onTTFB(sendToAnalytics);
+    onCLS(sendToAnalytics as (metric: Metric) => void);
+    onFCP(sendToAnalytics as (metric: Metric) => void);
+    onINP(sendToAnalytics as (metric: Metric) => void);
+    onLCP(sendToAnalytics as (metric: Metric) => void);
+    onTTFB(sendToAnalytics as (metric: Metric) => void);
   } catch (error) {
     console.warn('Failed to initialize Web Vitals tracking:', error);
   }
 }
-
-export const PERFORMANCE_BUDGETS = {
-  FCP: 1800,
-  LCP: 2500,
-  INP: 200,
-  CLS: 0.1,
-  TTFB: 800,
-} as const;
