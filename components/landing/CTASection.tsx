@@ -1,7 +1,7 @@
 import React from 'react';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { CheckCircle, ArrowRight } from 'lucide-react';
+import { AccessibleButton } from '@/components/ui/AccessibleButton';
 
 
 /**
@@ -80,21 +80,15 @@ const CTASection = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <Link
+              <AccessibleButton
+                variant="cta"
+                size="xl"
                 href="/contact"
-                className="group relative inline-flex items-center px-8 py-4 bg-white text-black font-medium rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden"
+                rightIcon={<ArrowRight size={20} />}
+                animate
               >
-                {/* Button background animation */}
-                <span className="absolute inset-0 w-0 bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
-                
-                {/* Button content */}
-                <span className="relative flex items-center">
-                  <span className="mr-2 transition-colors duration-300 group-hover:text-white">Get Started</span>
-                  <span className="relative z-10 w-8 h-8 flex items-center justify-center bg-[#FD5A1E] rounded-full transition-transform duration-300 group-hover:translate-x-1">
-                    <ArrowRight size={16} className="text-white" />
-                  </span>
-                </span>
-              </Link>
+                Get Started
+              </AccessibleButton>
             </motion.div>
           </div>
         </motion.div>

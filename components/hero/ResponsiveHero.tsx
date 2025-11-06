@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
-import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { AccessibleButton } from '@/components/ui/AccessibleButton';
 
 interface HeroProps {
   title: React.ReactNode;
@@ -71,23 +71,27 @@ export const ResponsiveHero = ({
         {/* CTA Buttons - Deferred loading */}
         <div className="flex flex-wrap justify-center gap-4 animate-in slide-in-from-bottom-4 duration-700 delay-300 fill-mode-forwards">
           {primaryCta && (
-            <Link
+            <AccessibleButton
+              variant="gradient"
+              size="lg"
               href={primaryCta.href}
-              className="px-8 py-4 bg-[#FD5A1E] text-[#000000] font-medium rounded-full shadow-lg hover:bg-[#F5F5F5] hover:text-[#000000] transition-colors"
+              animate
               aria-label={primaryCta.text}
             >
               {primaryCta.text}
-            </Link>
+            </AccessibleButton>
           )}
-          
+
           {secondaryCta && (
-            <Link
+            <AccessibleButton
+              variant="outline"
+              size="lg"
               href={secondaryCta.href}
-              className="px-8 py-4 border-2 border-[#F5F5F5] text-[#F5F5F5] font-medium rounded-full hover:bg-[#FD5A1E] hover:border-[#FD5A1E] transition-colors"
+              animate
               aria-label={secondaryCta.text}
             >
               {secondaryCta.text}
-            </Link>
+            </AccessibleButton>
           )}
         </div>
       </div>

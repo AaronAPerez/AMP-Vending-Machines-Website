@@ -1,9 +1,11 @@
 "use client";
 
-import { useState, FormEvent } from 'react';
-import { toast } from 'sonner';
+import { useState } from 'react';
 import Card from '../ui/core/Card';
 import Text from '../ui/Text';
+import { trackFormSubmission, trackPhoneCall } from '@/lib/analytics/gtag';
+import { AccessibleButton } from '@/components/ui/AccessibleButton';
+import { Send } from 'lucide-react';
 
 interface ContactFormProps {
   className?: string;
@@ -24,6 +26,10 @@ interface FormErrors {
   companyName?: string;
 }
 
+
+
+
+
 export default function ContactForm({ className = '' }: ContactFormProps) {
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
@@ -37,6 +43,7 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
 
   // Handle form input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -75,6 +82,8 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
     return Object.keys(newErrors).length === 0;
   };
 
+
+
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -103,6 +112,7 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
 
       if (result.success) {
         setSubmitStatus('success');
+        trackFormSubmission('Contact Form');
         // Reset form on success
         setFormData({
           firstName: '',
@@ -326,15 +336,20 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
 
             {/* Submit Button */}
             <div>
-              <button
+              <AccessibleButton
                 type="submit"
+                variant="primary"
+                size="lg"
+                loading={isSubmitting}
+                loadingText="Sending..."
                 disabled={isSubmitting}
-                aria-busy={isSubmitting}
+                rightIcon={<Send size={18} />}
+                animate
                 aria-describedby="submit-help"
-                className="w-full sm:w-auto px-6 py-3 bg-[#FD5A1E] text-[#000000] font-medium rounded-xl shadow-lg hover:bg-[#F5F5F5] hover:text-[#000000] transition-colors disabled:opacity-70 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#FD5A1E] focus:ring-offset-2 focus:ring-offset-black"
+                className="w-full sm:w-auto"
               >
-                {isSubmitting ? 'Sending...' : 'Request Information'}
-              </button>
+                Request Information
+              </AccessibleButton>
               <p id="submit-help" className="mt-2 text-[#A5ACAF] text-xs">
                 We&apos;ll respond within 24 hours
               </p>
@@ -372,6 +387,7 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
                 <Text variant="body-sm" color="default" className="font-medium">Phone</Text>
 
                 <a href="tel:+12094035450"
+                  onClick={() => trackPhoneCall()}
                   className="text-[#A5ACAF] hover:text-[#FD5A1E] text-sm sm:text-base transition-colors focus:outline-none focus:text-[#FD5A1E]"
                   aria-label="Call us at (209) 403-5450"
                 >

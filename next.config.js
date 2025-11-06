@@ -127,28 +127,38 @@ const nextConfig = {
   distDir: '.next',
 
   // Image optimization configuration
-  images: {
-    // Configure allowed domains for external images
+   images: {
+    // Define domains for external images
     remotePatterns: [
-      // Add any external domains you need
-      // {
-      //   protocol: 'https',
-      //   hostname: 'example.com',
-      //   port: '',
-      //   pathname: '/images/**',
-      // },
+      {
+        protocol: 'https',
+        hostname: '**.supabase.co',
+      },
     ],
-    // Configure supported formats (AVIF first for better compression)
-    formats: ['image/avif', 'image/webp'],
+    
     // Configure device sizes for responsive images
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    
+    // Configure image sizes for different use cases
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    // Cache optimization
-    minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
-    // Loader configuration (quality is set per-image or via default loader)
+    
+    // Image formats to support (webp is highly recommended)
+    formats: ['image/webp'],
+    
+    // Minimize quality to improve loading without visible quality loss
+    minimumCacheTTL: 60,
+    
+    // Disable static imports in favor of dynamic optimization
     dangerouslyAllowSVG: true,
-    contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+  },
+  
+  // Enable React strict mode for better development experience
+  reactStrictMode: true,
+  
+  // Experimental features
+  experimental: {
+    optimizeCss: true,
   },
 
   // HTTP headers configuration
