@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from 'react';
-import { useState } from 'react';
 import Card from '../ui/core/Card';
 import Text from '../ui/Text';
 import { trackFormSubmission, trackPhoneCall } from '@/lib/analytics/gtag';
@@ -396,7 +395,6 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
                 <Text variant="body-sm" color="default" className="font-medium">Phone</Text>
 
                 <a href="tel:+12094035450"
-                  onClick={() => trackPhoneCall()}
                   onClick={() => trackPhoneCall()}
                   className="text-[#A5ACAF] hover:text-[#FD5A1E] text-sm sm:text-base transition-colors focus:outline-none focus:text-[#FD5A1E]"
                   aria-label="Call us at (209) 403-5450"
