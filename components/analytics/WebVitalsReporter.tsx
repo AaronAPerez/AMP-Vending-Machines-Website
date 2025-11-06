@@ -1,4 +1,4 @@
-// components/analytics/WebVitalsReporter.tsx - Consolidated web vitals reporting
+// components/analytics/WebVitalsReporter.tsx 
 
 'use client';
 
@@ -15,22 +15,38 @@ interface WebVitalsReporterProps {
   enableDebugMode?: boolean;
 }
 
-export function WebVitalsReporter({
-  enableDebugMode = process.env.NODE_ENV === 'development',
-}: WebVitalsReporterProps) {
-
-  // Use Next.js built-in web vitals reporting
+export function WebVitalsReporter() {
   useReportWebVitals((metric) => {
-    // Log in development mode
-    if (enableDebugMode) {
-      console.log('📊 Next.js Web Vital:', metric);
+    // Log in development
+    if (process.env.NODE_ENV === 'development') {
+      console.log(metric);
     }
 
-    // Send to analytics services using consolidated function
-    sendToAnalytics(metric as WebVitalsMetric);
+    // Send to Google Analytics (if available)
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', metric.name, {
+        value: Math.round(
+          metric.name === 'CLS' ? metric.value * 1000 : metric.value
+        ),
+        event_category: 'Web Vitals',
+        event_label: metric.id,
+        non_interaction: true,
+      });
+    }
   });
 
   return null;
+}
+
+// Extend Window interface for TypeScript
+declare global {
+  interface Window {
+    gtag: (
+      command: string,
+      targetId: string,
+      config?: Record<string, unknown>
+    ) => void;
+  }
 }
 
 /**
