@@ -21,6 +21,7 @@ import FeedbackWidget from "@/components/feedback/FeedbackWidget";
 import ResizableNavbar from "@/components/layout/ResizableNavbar";
 import { WebVitalsReporter } from "@/components/analytics/WebVitalsReporter";
 import Footer from "@/components/layout/Footer";
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 
 
 // Optimized font loading for performance with adjustFontFallback
@@ -188,8 +189,8 @@ export const metadata: Metadata = {
     // Search engine verification codes (add when available)
     'google-site-verification': 'GOOGLE_VERIFICATION_CODE',
     // 'google-site-verification': 'GOOGLE_VERIFICATION_CODE',
-    // 'msvalidate.01': 'YOUR_BING_VERIFICATION_CODE',
-    // 'yandex-verification': 'YOUR_YANDEX_VERIFICATION_CODE',
+    // 'msvalidate.01': 'BING_VERIFICATION_CODE',
+    // 'yandex-verification': 'YANDEX_VERIFICATION_CODE',
 
     // Structured data markup indicators
     'structured-data': 'LocalBusiness, WebSite, Organization',
@@ -205,10 +206,10 @@ export const metadata: Metadata = {
 
   // Verification codes for search engines (add when configured)
   verification: {
-    // google: 'YOUR_GOOGLE_VERIFICATION_CODE',
-    // yandex: 'YOUR_YANDEX_VERIFICATION_CODE',
-    // yahoo: 'YOUR_YAHOO_VERIFICATION_CODE',
-    // other: 'YOUR_OTHER_VERIFICATION_CODE',
+    // google: 'GOOGLE_VERIFICATION_CODE',
+    // yandex: 'YANDEX_VERIFICATION_CODE',
+    // yahoo: 'YAHOO_VERIFICATION_CODE',
+    // other: 'OTHER_VERIFICATION_CODE',
   },
 
   // Icons and manifest
@@ -487,7 +488,13 @@ export default function RootLayout({
         <link rel="alternate" hrefLang="x-default" href="https://www.ampvendingmachines.com" />
       </head>
 
+
+
       <body className={`${inter.variable} font-sans antialiased bg-black text-white min-h-screen`}>
+        
+        {/* Google Analytics*/}
+        <GoogleAnalytics />
+
         {/* Enhanced skip navigation for accessibility */}
         <a
           href="#main-content"
@@ -510,7 +517,6 @@ export default function RootLayout({
           aria-label="Main content"
         >
           <StyledComponentsRegistry>
-
             {children}
             <SpeedInsights />
             <Analytics />
