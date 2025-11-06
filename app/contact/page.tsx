@@ -2,12 +2,11 @@
 
 import React from 'react';
 import Script from 'next/script';
-// import { Metadata } from 'next';
-import GoogleMapComponent from '@/components/GoogleMapComponent';
 import ContactForm from '@/components/contact/ContactForm';
 import { motion } from 'framer-motion';
 import { HelpCircle, CreditCard, Search, Zap } from 'lucide-react';
 import { ContactBreadcrumbs } from '@/components/seo/BreadcrumbSchema';
+import { trackPhoneCall } from '@/lib/analytics/gtag';
 
 
 
@@ -36,6 +35,9 @@ import { ContactBreadcrumbs } from '@/components/seo/BreadcrumbSchema';
 // };
 
 export default function ContactPage() {
+  const handlePhoneClick = () => {
+    trackPhoneCall();
+  };
   // FAQ data structure with categories - updated content
   const faqItems = [
     {
@@ -214,7 +216,11 @@ export default function ContactPage() {
                   <br />
                   Phone:
                   <br />
-                  <a href="tel:+12094035450" className="text-[#FD5A1E] hover:underline">
+                  <a 
+                    href="tel:+12094035450"
+                    onClick={handlePhoneClick}
+                    className="text-[#FD5A1E] hover:underline"
+                  >
                     (209) 403-5450
                   </a>
                 </p>
