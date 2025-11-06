@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { generatePageMetadata } from '@/lib/seo/metadata';
-import { generateLocalBusinessSchema } from '@/lib/seo/schema';
+import { generateEnhancedLocalBusinessSchema } from '@/lib/seo/local-schema';
 import { PhoneButton } from '@/components/ui/PhoneButton';
 
 // Define service areas
@@ -101,7 +101,7 @@ export default function CityPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
-            ...JSON.parse(JSON.stringify(generateLocalBusinessSchema())),
+            ...JSON.parse(JSON.stringify(generateEnhancedLocalBusinessSchema())),
           }),
         }}
       />
@@ -133,7 +133,7 @@ export default function CityPage({ params }: PageProps) {
                   Touchscreen Technology
                 </h3>
                 <p className="text-silver">
-                  21.5" HD touchscreen interfaces with contactless payment options.
+                  21.5quot; HD touchscreen interfaces with contactless payment options.
                 </p>
               </div>
 
@@ -173,9 +173,9 @@ export default function CityPage({ params }: PageProps) {
                   Advanced Technology for Modern Workplaces
                 </h3>
                 <p className="text-silver">
-                  Our 21.5" touchscreen vending machines bring cutting-edge technology to {city.name}. 
+                  Our 21.5&quot;touchscreen vending machines bring cutting-edge technology to {city.name}. 
                   Features include contactless payment, real-time inventory tracking, and customizable 
-                  product selections tailored to your team's preferences.
+                  product selections tailored to your team&apos;s preferences.
                 </p>
               </div>
 

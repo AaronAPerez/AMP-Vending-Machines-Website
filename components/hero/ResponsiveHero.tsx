@@ -86,6 +86,7 @@ export const ResponsiveHero = ({
             <AccessibleButton
               variant="outline"
               size="lg"
+              className='rounded-full'
               href={secondaryCta.href}
               animate
               aria-label={secondaryCta.text}
