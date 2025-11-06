@@ -23,12 +23,14 @@ import { WebVitalsReporter } from "@/components/analytics/WebVitalsReporter";
 import Footer from "@/components/layout/Footer";
 
 
-// Optimized font loading for performance
+// Optimized font loading for performance with adjustFontFallback
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
-  preload: true, // Preload for better LCP
+  preload: true,
+  adjustFontFallback: true, // Reduces CLS by matching fallback font metrics
+  fallback: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
 });
 
 /**
@@ -49,6 +51,7 @@ export const metadata: Metadata = {
   keywords: [
     "commercial vending machines Central California",
     "office vending machines Modesto CA",
+    "free vending machines Modesto CA",
     "touchscreen vending machines",
     "workplace vending solutions",
     "refrigerated vending machines",
@@ -56,7 +59,14 @@ export const metadata: Metadata = {
     "business vending service",
     "employee break room solutions",
     "AMP Vending Modesto",
+    "AMP Vending Modesto ca",
+    "AMP Vending Machines",
+    "vending machines",
     "vending machines Stockton Fresno",
+    "vending machines near me",
+    "vending machine supplier",
+    "vending machine provider",
+    "vending machine vendor",
     "contactless payment vending",
     "maintenance-free vending machines"
   ].join(", "),
@@ -150,7 +160,7 @@ export const metadata: Metadata = {
     'ICBM': '37.6390972, -120.9968782',
 
     // Business information
-    'coverage': 'Central California',
+    'coverage': 'Northern California',
     'distribution': 'global',
     'rating': 'general',
     'revisit-after': '7 days',
@@ -236,6 +246,13 @@ export default function RootLayout({
   return (
     <html lang="en-US" suppressHydrationWarning>
       <head>
+        {/* Inline critical CSS for immediate render */}
+        <style dangerouslySetInnerHTML={{__html: `
+          body{background:#000;color:#fff;font-family:var(--font-inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+          *{box-sizing:border-box;margin:0;padding:0}
+          #hero-heading{font-display:swap;text-rendering:optimizeSpeed}
+        `}} />
+
         {/* Critical resource preloading for performance */}
         <link
           rel="preload"
@@ -245,15 +262,9 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
 
-        {/* DNS prefetch for external resources */}
-        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="//www.google-analytics.com" />
-        <link rel="dns-prefetch" href="//vercel-analytics.com" />
-
-        {/* Preconnect to critical external domains */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Preconnect to critical external domains for faster resource loading */}
         <link rel="preconnect" href="https://vercel-analytics.com" />
+        <link rel="dns-prefetch" href="//www.google-analytics.com" />
 
         {/* Enhanced mobile optimization */}
         <meta name="mobile-web-app-capable" content="yes" />
@@ -278,7 +289,7 @@ export default function RootLayout({
               name: "AMP Vending",
               alternateName: "AMP Design and Consulting",
               url: "https://www.ampvendingmachines.com",
-              logo: "https://www.ampvendingmachines.com/images/logo/AMP_logo.png",
+              logo: "https://www.ampvendingmachines.com/images/logo/AMP-Vending-Logo.jpg",
               image: [
                 "https://www.ampvendingmachines.com/images/machines/amp-premium-touchscreen-vending-machine.png",
                 "https://www.ampvendingmachines.com/images/machines/amp-refrigerated-vending-machine.png"
@@ -481,7 +492,7 @@ export default function RootLayout({
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-orange-600 focus:text-white focus:top-4 focus:left-4 focus:rounded-md focus:outline-none focus:ring-2 focus:ring-white"
-          tabIndex={1}
+          tabIndex={0}
         >
           Skip to main content
         </a>

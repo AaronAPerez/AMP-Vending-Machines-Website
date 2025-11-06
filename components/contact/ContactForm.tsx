@@ -1,7 +1,13 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
+import { toast } from 'sonner';
+import Card from '../ui/core/Card';
+import Text from '../ui/Text';
 
+interface ContactFormProps {
+  className?: string;
+}
 interface FormData {
   firstName: string;
   lastName: string;
@@ -18,7 +24,7 @@ interface FormErrors {
   companyName?: string;
 }
 
-export default function ContactForm() {
+export default function ContactForm({ className = '' }: ContactFormProps) {
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
     lastName: '',
@@ -36,7 +42,7 @@ export default function ContactForm() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    
+
     // Clear error when user starts typing
     if (errors[name as keyof FormErrors]) {
       setErrors(prev => ({ ...prev, [name]: undefined }));
@@ -72,7 +78,7 @@ export default function ContactForm() {
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
@@ -94,7 +100,7 @@ export default function ContactForm() {
       }
 
       const result = await response.json();
-      
+
       if (result.success) {
         setSubmitStatus('success');
         // Reset form on success
@@ -118,20 +124,19 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="rounded-xl overflow-hidden bg-[#111111] border border-[#333333] p-4 sm:p-6 shadow-2xl">
+    <Card
+      variant="default"
+      className={`overflow-hidden shadow-2xl bg-black ${className}`}
+    >
       <div className="flex flex-col md:flex-row">
-        {/* Form Section */}
+        {/* Form Column */}
         <div className="w-full md:w-1/2 p-4 sm:p-6 md:p-8 lg:p-12">
-          <h3
-            id="contact-form-heading"
-            className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight text-[#F5F5F5] mb-4 text-left"
-          >
+          <Text variant="h3" className="mb-4 text-left">
             Ready to Enhance Your Workplace?
-          </h3>
-          
-          <p className="text-base sm:text-lg leading-relaxed text-[#A5ACAF] mb-6 text-left">
+          </Text>
+          <Text variant="body" color="muted" className="mb-6 text-left">
             Fill out the form and our team will get back to you within 24 hours to discuss your premium vending needs.
-          </p>
+          </Text>
 
           {/* FIXED: Added role="form" and proper ARIA labeling */}
           <form
@@ -143,7 +148,7 @@ export default function ContactForm() {
           >
             {/* Success/Error Messages */}
             {submitStatus === 'success' && (
-              <div 
+              <div
                 role="alert"
                 className="p-4 bg-green-900/50 border border-green-600 rounded-lg text-green-200"
               >
@@ -152,7 +157,7 @@ export default function ContactForm() {
             )}
 
             {submitStatus === 'error' && (
-              <div 
+              <div
                 role="alert"
                 className="p-4 bg-red-900/50 border border-red-600 rounded-lg text-red-200"
               >
@@ -337,99 +342,134 @@ export default function ContactForm() {
           </form>
         </div>
 
-        {/* Contact Information Section */}
-        <div className="w-full md:w-1/2 p-4 sm:p-6 md:p-8 lg:p-12 bg-[#1a1a1a] border-l border-[#333333]">
-          <h3
-            id="contact-info-heading"
-            className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight text-[#F5F5F5] mb-8 text-left"
-          >
+        {/* Contact Info Column */}
+        <div className="w-full md:w-1/2 bg-gradient-to-br from-[#FD5A1E]/20 to-black relative p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-center text-left">
+          <Text variant="h3" className="mb-8 text-left">
             Contact Information
-          </h3>
+          </Text>
 
-          {/* Phone */}
-          <div className="mb-6">
-            <h4 className="text-lg font-semibold text-[#F5F5F5] mb-2">Call Us</h4>
-            <a
-              href="tel:+12094035450"
-              aria-label="Call us at (209) 403-5450"
-              className="text-[#A5ACAF] hover:text-[#FD5A1E] text-sm sm:text-base transition-colors focus:outline-none focus:text-[#FD5A1E]"
-            >
-              (209) 403-5450
-            </a>
+          <div className="space-y-6">
+            {/* Contact items */}
+            <div className="flex items-start">
+              <div className="flex-shrink-0 p-2 bg-[#FD5A1E]/10 rounded-full text-[#FD5A1E] mr-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <Text variant="body-sm" color="default" className="font-medium">Phone</Text>
+
+                <a href="tel:+12094035450"
+                  className="text-[#A5ACAF] hover:text-[#FD5A1E] text-sm sm:text-base transition-colors focus:outline-none focus:text-[#FD5A1E]"
+                  aria-label="Call us at (209) 403-5450"
+                >
+                  (209) 403-5450
+                </a>
+              </div>
+            </div>
+
+            <div className="flex items-start">
+              <div className="flex-shrink-0 p-2 bg-[#FD5A1E]/10 rounded-full text-[#FD5A1E] mr-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <Text variant="body-sm" color="default" className="font-medium">Email</Text>
+                {/* Email with overflow-wrap for better breaking */}
+                <a
+                  href="mailto:ampdesignandconsulting@gmail.com"
+                  className="block hover:text-[#FD5A1E] transition-colors text-[#A5ACAF]"
+                  style={{
+                    wordBreak: 'break-all',      // CSS property for aggressive breaking
+                    overflowWrap: 'break-word',  // More intelligent word breaking
+                    hyphens: 'auto'              // Add hyphens where appropriate
+                  }}
+                >
+                  ampdesignandconsulting@gmail.com
+                </a>
+              </div>
+            </div>
+
+            <div className="flex items-start">
+              <div className="flex-shrink-0 p-2 bg-[#FD5A1E]/10 rounded-full text-[#FD5A1E] mr-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <Text variant="body-sm" color="default" className="font-medium">Location</Text>
+                <p className="text-[#A5ACAF] text-sm sm:text-base">Modesto, CA 95354</p>
+              </div>
+            </div>
           </div>
 
-          {/* Email */}
-          <div className="mb-6">
-            <h4 className="text-lg font-semibold text-[#F5F5F5] mb-2">Email</h4>
-            <a
-              href="mailto:ampdesignandconsulting@gmail.com"
-              className="block hover:text-[#FD5A1E] transition-colors text-[#A5ACAF]"
-              style={{ wordBreak: 'break-all', overflowWrap: 'break-word', hyphens: 'auto' }}
-            >
-              ampdesignandconsulting@gmail.com
-            </a>
-          </div>
-
-          {/* Location */}
-          <div className="mb-8">
-            <h4 className="text-lg font-semibold text-[#F5F5F5] mb-2">Location</h4>
-            <p className="text-[#A5ACAF] text-sm sm:text-base">
-              Serving Modesto, CA and surrounding areas
+          <div className="mt-10">
+            {/* Left-aligned heading */}
+            <h3 className="text-xl font-bold text-white mb-4 text-left">Business Hours</h3>
+            <p className="text-[#A5ACAF]">
+              Monday - Friday: 8AM - 8PM<br />
+              Saturday - Sunday: 8AM - 8PM
             </p>
+            <p className="text-[#FD5A1E] mt-2 font-medium">Professional Support Available</p>
           </div>
 
-          {/* Business Hours */}
-          <div className="mb-8">
-            <h3 className="text-xl font-bold text-white mb-4 text-left">
-              Business Hours
-            </h3>
+          {/* Value Proposition */}
+          <div className="mt-8 p-4 bg-[#000000]/50 rounded-lg border border-[#FD5A1E]/20">
+            <h4 className="text-lg font-semibold text-[#F5F5F5] mb-2">Why Choose AMP Vending?</h4>
             <ul className="text-[#A5ACAF] text-sm space-y-1">
-              <li>
-                <p className="text-sm leading-relaxed text-[#F5F5F5] font-medium">
-                  Monday - Friday: 8:00 AM - 6:00 PM
-                </p>
-              </li>
-              <li>
-                <p className="text-sm leading-relaxed text-[#F5F5F5] font-medium">
-                  Saturday: 9:00 AM - 4:00 PM
-                </p>
-              </li>
-              <li>
-                <p className="text-sm leading-relaxed text-[#F5F5F5] font-medium">
-                  Sunday: Closed
-                </p>
-              </li>
-              <li>
-                <p className="text-[#A5ACAF] text-sm sm:text-base">
-                  Emergency service available 24/7
-                </p>
-              </li>
-              <li>
-                <p className="text-[#A5ACAF]">
-                  Response time: Within 24 hours
-                </p>
-              </li>
+              <li>• 21.5&quot; HD touchscreen technology</li>
+              <li>• Contactless payment systems</li>
+              <li>• 50+ customizable product options</li>
+              <li>• Professional installation & maintenance</li>
+              <li>• Enhanced employee satisfaction</li>
             </ul>
-          </div>
-
-          {/* Why Choose AMP */}
-          <div>
-            <h4 className="text-lg font-semibold text-[#F5F5F5] mb-2">
-              Why Choose AMP Vending?
-            </h4>
-            <p className="text-[#A5ACAF] text-sm sm:text-base">
-              Premium vending solutions with 24/7 support, fresh products, and customizable options for your workplace.
-            </p>
-            
-            {submitStatus === 'error' && (
-              <p className="text-[#FD5A1E] mt-2 font-medium">
-                Having trouble with the form? Call us directly at (209) 403-5450
-              </p>
-            )}
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 }
 

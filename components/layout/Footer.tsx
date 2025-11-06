@@ -30,20 +30,20 @@ import FooterEmailLink from '../contact/FooterEmailLink';
  */
 const Footer = () => {
   return (
-    <footer 
+    <footer
       className="bg-[#111111] border-t border-[#333333] py-12 sm:py-16"
       role="contentinfo"
       aria-label="Site footer with company information and links"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          
+
           {/* Company Info Section - Fixed Logo Sizing */}
           <div className="space-y-4">
             {/* Logo with Fixed Sizing */}
             <div className="flex items-start">
-              <Link 
-                href="/" 
+              <Link
+                href="/"
                 className="inline-block focus:outline-none focus:ring-2 focus:ring-[#FD5A1E] focus:ring-offset-2 focus:ring-offset-[#111111] rounded"
                 aria-label="AMP Vending homepage"
               >
@@ -57,7 +57,7 @@ const Footer = () => {
                 />
               </Link>
             </div>
-            
+
             {/* Company Description */}
             <p className="text-[#A5ACAF] text-sm leading-relaxed max-w-xs">
               Premium vending solutions with zero-cost installation and maintenance-free operation for modern workplaces.
@@ -66,9 +66,9 @@ const Footer = () => {
 
           {/* Quick Links Section */}
           <div className="space-y-4">
-            <h3 className="text-[#F5F5F5] font-semibold text-lg">
+            <div className="text-[#F5F5F5] font-semibold text-lg">
               Quick Links
-            </h3>
+            </div>
             <nav aria-label="Footer navigation">
               <ul className="space-y-3">
                 {[
@@ -93,9 +93,9 @@ const Footer = () => {
 
           {/* Our Services Section */}
           <div className="space-y-4">
-            <h3 className="text-[#F5F5F5] font-semibold text-lg">
+            <div className="text-[#F5F5F5] font-semibold text-lg">
               Our Services
-            </h3>
+            </div>
             <ul className="space-y-3">
               {[
                 'Zero-Cost Installation',
@@ -114,10 +114,10 @@ const Footer = () => {
 
           {/* Contact Info Section - Fixed Email Alignment */}
           <div className="space-y-4">
-            <h3 className="text-[#F5F5F5] font-semibold text-lg">
+          <div className="text-[#F5F5F5] font-semibold text-lg">
               Contact Info
-            </h3>
-            
+            </div>
+
             <div className="space-y-3">
               {/* Address */}
               <div>
@@ -149,28 +149,28 @@ const Footer = () => {
         {/* Bottom Footer */}
         <div className="mt-12 pt-8 border-t border-[#333333]">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            
+
             {/* Copyright */}
             <div className="text-[#A5ACAF] text-sm">
               © 2025 AMP Design and Consulting LLC. All rights reserved.
             </div>
-            
+
             {/* Legal Links */}
             <nav className="flex flex-wrap justify-center md:justify-end gap-4 md:gap-6 text-sm">
-              <a 
-                href="/privacy-policy" 
+              <a
+                href="/privacy-policy"
                 className="text-[#A5ACAF] hover:text-[#FD5A1E] transition-colors focus:outline-none focus:text-[#FD5A1E]"
               >
                 Privacy Policy
               </a>
-              <a 
-                href="/terms-of-service" 
+              <a
+                href="/terms-of-service"
                 className="text-[#A5ACAF] hover:text-[#FD5A1E] transition-colors focus:outline-none focus:text-[#FD5A1E]"
               >
                 Terms of Service
               </a>
-              <a 
-                href="/accessibility" 
+              <a
+                href="/accessibility"
                 className="text-[#A5ACAF] hover:text-[#FD5A1E] transition-colors focus:outline-none focus:text-[#FD5A1E]"
               >
                 Accessibility

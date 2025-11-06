@@ -4,6 +4,7 @@ import ResponsiveGrid from '@/components/layout/ResponsiveGrid';
 
 import Image from 'next/image';
 import {useEffect, useState} from 'react';
+import Section from '../ui/shared/Section';
 
 
 /**
@@ -255,6 +256,34 @@ const ProductSection = () => {
 
   return (
     <>
+     <Section
+          id="products"
+          background="gradient"
+          spacing="lg"
+        >
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center px-4 py-2 bg-[#FD5A1E]/10 rounded-full mb-6">
+              <svg
+                className="w-5 h-5 text-[#FD5A1E] mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+              </svg>
+              <span className="text-[#FD5A1E] font-medium text-sm">50+ Options</span>
+            </div>
+
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-[#F5F5F5]">
+              Customizable <span className="text-[#FD5A1E]">Product Selection</span>
+            </h2>
+
+            <p className="text-lg text-[#A5ACAF] max-w-3xl mx-auto  pb-4">
+              Tailored refreshment options to match your workplace preferences throughout Central California
+            </p>
+          </div>
+
       {/* Product Category Filters */}
       <div className="mb-8 overflow-x-auto pb-4 -mx-4 px-4">
         <div className="flex flex-nowrap gap-2 justify-start md:justify-center md:flex-wrap">
@@ -316,6 +345,7 @@ const ProductSection = () => {
           </button>
         </div>
       )}
+      </Section>
     </>
   );
 };

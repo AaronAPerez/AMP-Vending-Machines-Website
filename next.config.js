@@ -41,10 +41,12 @@ const nextConfig = {
   // Compiler optimizations (Fixed syntax)
   compiler: {
     // Remove console.log statements in production
-    removeConsole: process.env.NODE_ENV === 'production',
+    removeConsole: process.env.NODE_ENV === 'production' ? {
+      exclude: ['error', 'warn'], // Keep errors and warnings
+    } : false,
     // Remove React properties in production
-    reactRemoveProperties: process.env.NODE_ENV === 'production' ? { 
-      properties: ['^data-testid$'] 
+    reactRemoveProperties: process.env.NODE_ENV === 'production' ? {
+      properties: ['^data-testid$']
     } : false,
   },
 
@@ -136,13 +138,17 @@ const nextConfig = {
       //   pathname: '/images/**',
       // },
     ],
-    // Configure supported formats
-    formats: ['image/webp', 'image/avif'],
+    // Configure supported formats (AVIF first for better compression)
+    formats: ['image/avif', 'image/webp'],
     // Configure device sizes for responsive images
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     // Cache optimization
     minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
+    // Loader configuration (quality is set per-image or via default loader)
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
   // HTTP headers configuration
