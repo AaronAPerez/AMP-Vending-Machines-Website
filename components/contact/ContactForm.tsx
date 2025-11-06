@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import { useState } from 'react';
 import Card from '../ui/core/Card';
 import Text from '../ui/Text';
 import { trackFormSubmission, trackPhoneCall } from '@/lib/analytics/gtag';
@@ -30,6 +31,10 @@ interface FormErrors {
 
 
 
+
+
+
+
 export default function ContactForm({ className = '' }: ContactFormProps) {
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
@@ -43,6 +48,7 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
 
 
   // Handle form input changes
@@ -84,6 +90,8 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
 
 
 
+
+
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -112,6 +120,7 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
 
       if (result.success) {
         setSubmitStatus('success');
+        trackFormSubmission('Contact Form');
         trackFormSubmission('Contact Form');
         // Reset form on success
         setFormData({
@@ -388,6 +397,7 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
 
                 <a href="tel:+12094035450"
                   onClick={() => trackPhoneCall()}
+                  onClick={() => trackPhoneCall()}
                   className="text-[#A5ACAF] hover:text-[#FD5A1E] text-sm sm:text-base transition-colors focus:outline-none focus:text-[#FD5A1E]"
                   aria-label="Call us at (209) 403-5450"
                 >
@@ -488,5 +498,6 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
     </Card>
   );
 }
+
 
 

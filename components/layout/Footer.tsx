@@ -135,6 +135,7 @@ const Footer = () => {
                 <a
                   href="tel:+12094035450"
                   onClick={() => trackPhoneCall()}
+                  onClick={() => trackPhoneCall()}
                   className="text-[#A5ACAF] text-sm hover:text-[#FD5A1E] transition-colors duration-300 focus:outline-none focus:text-[#FD5A1E] focus:underline"
                   aria-label="Call us at (209) 403-5450"
                 >
