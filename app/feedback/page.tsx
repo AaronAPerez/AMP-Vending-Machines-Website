@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { FeedbackBreadcrumbs } from "@/components/seo/BreadcrumbSchema";
 import FeedbackForm from "@/components/feedback/FeedbackForm";
+import { PhoneButton } from "@/components/ui/PhoneButton";
 
 // Define metadata for SEO
 export const metadata: Metadata = {
@@ -118,12 +119,12 @@ export default function FeedbackPage() {
               </div>
               <p className="text-[#A5ACAF] text-center md:text-left">
                 For immediate assistance, please call our support team at:
-                <a
-                  href="tel:+12094035450"
+                <PhoneButton
+                  phoneNumber="+12094035450"
                   className="block text-[#FD5A1E] hover:underline mt-2"
                 >
                   (209) 403-5450
-                </a>
+                </PhoneButton>
               </p>
             </div>
 

@@ -1,16 +1,16 @@
-declare global {
-  interface Window {
-    google: typeof google;
-    gtag?: (
-      command: 'config' | 'event' | 'js',
-      targetId: string,
-      config?: Record<string, any>
-    ) => void;
-    va?: (
-      event: 'event' | 'beforeSend' | 'pageview',
-      properties?: unknown
-    ) => void;
-  }
+// declare global {
+//   interface Window {
+//     google: typeof google;
+//     gtag?: (
+//       command: 'config' | 'event' | 'js',
+//       targetId: string,
+//       config?: Record<string, any>
+//     ) => void;
+//     va?: (
+//       event: 'event' | 'beforeSend' | 'pageview',
+//       properties?: unknown
+//     ) => void;
+//   }
 
   namespace google {
     namespace maps {
