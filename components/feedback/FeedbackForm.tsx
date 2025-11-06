@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { z } from 'zod';
+import { trackFormSubmission, trackPhoneCall } from '@/lib/analytics/gtag';
 
 /**
  * Feedback Categories - Centralized for consistency
@@ -203,14 +204,15 @@ export default function FeedbackForm({ className = '', onSubmitSuccess }: Feedba
       // Success handling
       toast.success('Thank you! Your feedback has been submitted successfully.');
       setSubmissionStatus('success');
-      
+      trackFormSubmission('Feedback Form');
+
       // Reset form
       setFormData({
         category: 'Question',
         contactConsent: false
       });
       setErrors({});
-      
+
       // Call success callback
       onSubmitSuccess?.();
       
@@ -574,6 +576,7 @@ export default function FeedbackForm({ className = '', onSubmitSuccess }: Feedba
           
           <a
             href="tel:+12094035450"
+            onClick={() => trackPhoneCall()}
             className="inline-flex items-center px-4 py-2 bg-[#111111] text-[#F5F5F5] rounded-full hover:bg-[#222222] transition-colors border border-[#333333] text-sm"
             aria-label="Call us at (209) 403-5450"
           >
