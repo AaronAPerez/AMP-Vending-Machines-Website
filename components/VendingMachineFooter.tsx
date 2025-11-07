@@ -3,6 +3,7 @@
 // A footer component designed to display contact information for AMP Vending
 // Provides phone, email, and QR code for website scanning
 // Can be placed over any background
+'use client';
 
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
@@ -18,7 +19,7 @@ const VendingMachineFooter = ({
   phone = '(209) 403-5450',
   email = 'ampdesignandconsulting@gmail.com',
   website = 'www.ampvendingmachines.com',
-  qrCodeSrc = '/api/placeholder/200/200', // Replace with actual QR code path
+  qrCodeSrc = '/images/optimized/AMP-qr-Code.webp', // Replace with actual QR code path
 }: VendingMachineFooterProps) => {
   const [isQrLoaded, setIsQrLoaded] = useState(false);
 

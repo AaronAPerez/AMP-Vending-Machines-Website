@@ -192,6 +192,9 @@ export class EmailService {
 
   private async sendEmailResend(config: EmailConfig): Promise<EmailResponse> {
     try {
+      // Support multiple recipients (comma-separated)
+      const recipients = config.to.split(',').map(email => email.trim());
+
       const response = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
@@ -200,7 +203,7 @@ export class EmailService {
         },
         body: JSON.stringify({
           from: config.from || 'AMP Vending <noreply@ampvendingmachines.com>',
-          to: [config.to],
+          to: recipients,
           subject: config.subject,
           html: config.html,
         }),

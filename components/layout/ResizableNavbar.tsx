@@ -4,7 +4,8 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
-import { usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation';
+import { AccessibleButton } from '@/components/ui/AccessibleButton';
 
 // Define types for nav items
 interface NavItem {
@@ -69,18 +70,6 @@ const ResizableNavbar = () => {
       setIsScrolled(false);
     }
   });
-
-  // Close menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = () => {
-      if (isMenuOpen) {
-        setIsMenuOpen(false);
-      }
-    };
-
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, [isMenuOpen]);
 
   // Navigation items
   const navItems: NavItem[] = [
@@ -216,16 +205,16 @@ const ResizableNavbar = () => {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
+                className="hidden md:block"
               >
-                <Link
+                <AccessibleButton
                   href="/contact"
-                  className={`hidden md:inline-block ${isScrolled ?
-                    'px-4 py-2 text-sm' :
-                    'px-5 py-2.5 text-base'
-                    } bg-[#FD5A1E] text-[#000000] rounded-full hover:bg-[#F5F5F5] hover:text-[#000000] transition-all duration-300 font-medium`}
+                  variant="cta"
+                  size={isScrolled ? 'sm' : 'sm'}
+                  animate
                 >
                   Free Consultation
-                </Link>
+                </AccessibleButton>
               </motion.div>
 
               {/* Mobile menu button */}
@@ -278,6 +267,19 @@ const ResizableNavbar = () => {
               >
                 {/* Improved mobile menu layout */}
                 <div className="px-4 py-4 space-y-4">
+                  {/* Mobile CTA Button */}
+                  <div className="pb-2">
+                    <AccessibleButton
+                      href="/contact"
+                      variant="cta"
+                      size="md"
+                      fullWidth
+                      animate
+                    >
+                      Free Consultation
+                    </AccessibleButton>
+                  </div>
+
                   {navItems.map((item) => (
                     <div key={item.name} className="py-1">
                       {item.children ? (

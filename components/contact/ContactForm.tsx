@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import { toast } from 'sonner';
 import Card from '../ui/core/Card';
 import Text from '../ui/Text';
 import { trackFormSubmission, trackPhoneCall } from '@/lib/analytics/gtag';
@@ -96,11 +97,13 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
     e.preventDefault();
 
     if (!validateForm()) {
+      toast.error('Please fix the errors below before submitting.');
       return;
     }
 
     setIsSubmitting(true);
     setSubmitStatus('idle');
+    const loadingToast = toast.loading('Sending your message...');
 
     try {
       const response = await fetch('/api/contact', {
@@ -109,6 +112,7 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
+        signal: AbortSignal.timeout(10000), // 10 second timeout
       });
 
       if (!response.ok) {
@@ -117,9 +121,11 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
 
       const result = await response.json();
 
+      toast.dismiss(loadingToast);
+
       if (result.success) {
         setSubmitStatus('success');
-        trackFormSubmission('Contact Form');
+        toast.success('Thank you! Your message has been sent successfully. We\'ll get back to you within 24 hours.');
         trackFormSubmission('Contact Form');
         // Reset form on success
         setFormData({
@@ -130,12 +136,39 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
           companyName: '',
           message: '',
         });
+
+        // Reset status after delay
+        setTimeout(() => {
+          setSubmitStatus('idle');
+        }, 5000);
       } else {
         throw new Error(result.message || 'Submission failed');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
+      toast.dismiss(loadingToast);
       setSubmitStatus('error');
+
+      // Handle different error types
+      if (error instanceof Error) {
+        if (error.name === 'AbortError' || error.message.includes('timeout')) {
+          toast.error('Request timed out. Please try again or call us at (209) 403-5450.');
+        } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+          toast.error(
+            'Unable to submit online. Please contact us directly at ampdesignandconsulting@gmail.com or (209) 403-5450.',
+            { duration: 8000 }
+          );
+        } else {
+          toast.error('Failed to submit. Please try again or contact us directly.');
+        }
+      } else {
+        toast.error('An unexpected error occurred. Please try again.');
+      }
+
+      // Reset status after delay
+      setTimeout(() => {
+        setSubmitStatus('idle');
+      }, 5000);
     } finally {
       setIsSubmitting(false);
     }
