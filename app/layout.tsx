@@ -22,6 +22,7 @@ import ResizableNavbar from "@/components/layout/ResizableNavbar";
 import { WebVitalsReporter } from "@/components/analytics/WebVitalsReporter";
 import Footer from "@/components/layout/Footer";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
+import { Toaster } from "sonner";
 
 
 // Optimized font loading for performance with adjustFontFallback
@@ -491,9 +492,22 @@ export default function RootLayout({
 
 
       <body className={`${inter.variable} font-sans antialiased bg-black text-white min-h-screen`}>
-        
+
         {/* Google Analytics*/}
         <GoogleAnalytics />
+
+        {/* Toast notifications with proper z-index */}
+        <Toaster
+          position="top-right"
+          richColors
+          closeButton
+          toastOptions={{
+            style: {
+              zIndex: 9999,
+            },
+            className: 'z-[9999]',
+          }}
+        />
 
         {/* Enhanced skip navigation for accessibility */}
         <a
