@@ -144,12 +144,20 @@ export const generateEmailHTML = (
         }
         
         .header {
-            background: linear-gradient(135deg, ${BRAND_COLORS.primary} 0%, #e54d1a 100%);
-            color: #ffffff;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            color: ${BRAND_COLORS.dark};
             padding: 40px 20px;
             text-align: center;
+            border-bottom: 4px solid ${BRAND_COLORS.primary};
         }
-        
+
+        .header img {
+            max-height: 80px;
+            width: auto;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
         .header h1 {
             margin: 0;
             font-size: 28px;
@@ -231,11 +239,19 @@ export const generateEmailHTML = (
                 width: 100% !important;
                 margin: 0 !important;
             }
-            
+
+            .header {
+                padding: 30px 20px !important;
+            }
+
+            .header img {
+                max-height: 60px !important;
+            }
+
             .content {
                 padding: 30px 20px !important;
             }
-            
+
             .content h1 {
                 font-size: 24px !important;
             }
@@ -251,7 +267,14 @@ export const generateEmailHTML = (
     
     <div class="email-container">
         <div class="header">
-            <img src="${BUSINESS_INFO.logo}" alt="${BUSINESS_INFO.name}" style="max-height: 60px;">
+            <img
+                src="${BUSINESS_INFO.logo}"
+                alt="${BUSINESS_INFO.name} - Premium Vending Solutions"
+                title="${BUSINESS_INFO.name}"
+                style="max-height: 80px; width: auto; display: inline-block;"
+                role="img"
+                aria-label="${BUSINESS_INFO.name} logo"
+            >
         </div>
         
         <div class="content">
