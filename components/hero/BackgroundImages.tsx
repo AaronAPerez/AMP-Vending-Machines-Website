@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 const productImages = [
-    '/images/products/lays.jpg',
-    '/images/products/doritos.jpg',
-    '/images/products/snickers.jpg',
-    '/images/products/kitkat.jpg',
-    '/images/products/coke.jpg',
-    '/images/products/monster.jpg',
+    '/images/products/drpepper.jpg',
+    '/images/products/doritos-nacho-cheese.jpg',
     '/images/products/redbull.jpg',
-    '/images/products/gatorade.jpg',
-    '/images/products/starburst.jpg',
+    '/images/products/snickers.jpg',
     '/images/products/cheetos.jpg',
+    '/images/products/skittles.jpg',
+    '/images/products/kitkat.jpg',
+    '/images/products/monster.jpg',
+    '/images/products/poptarts.jpg',
+    '/images/products/starburst.jpg',
     '/images/products/mms.jpg',
-    '/images/products/orangecrush.jpg',
+    '/images/products/orange-crush.jpg',
 ];
 
 export const BackgroundImages = () => {
@@ -44,8 +44,8 @@ export const BackgroundImages = () => {
     return (
         <>
             <div
-                  className="absolute inset-0 grid grid-cols-3 sm:grid-cols-4 gap-2 p-2 z-10"
-        aria-hidden="true"
+                className="absolute inset-0 grid grid-cols-3 sm:grid-cols-4 gap-2 p-2 z-10"
+                aria-hidden="true"
             >
                 {productImages.map((src, index) => {
                     const offset = Math.min(scrollY * 0.1 * (index % 6 + 1) * 0.2, 100);
