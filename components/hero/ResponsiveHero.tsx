@@ -72,7 +72,7 @@ export const ResponsiveHero = ({
         <div className="flex flex-wrap justify-center gap-4 animate-in slide-in-from-bottom-4 duration-700 delay-300 fill-mode-forwards">
           {primaryCta && (
             <AccessibleButton
-              variant="gradient"
+              variant="cta"
               size="lg"
               href={primaryCta.href}
               animate
