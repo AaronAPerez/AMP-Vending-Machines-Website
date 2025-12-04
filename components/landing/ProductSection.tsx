@@ -127,7 +127,7 @@ const ProductSection = () => {
 
     // Candy
     { id: 'snickers', name: 'Snickers', category: 'candy', image: '/images/products/snickers.jpg', popular: true },
-    { id: 'kitkat', name: 'Kit Kat', category: 'candy', image: '/images/products/kitkat.jpg' },
+    { id: 'kitkat', name: 'Kit Kat', category: 'candy', image: '/images/products/placeholder.jpg' },
     { id: '3musketeers', name: '3 Musketeers', category: 'candy', image: '/images/products/3musketeers.jpg' },
     { id: 'mms', name: 'M&Ms', category: 'candy', image: '/images/products/mms.jpg', popular: true },
     { id: 'skittles', name: 'Skittles', category: 'candy', image: '/images/products/skittles.jpg' },
