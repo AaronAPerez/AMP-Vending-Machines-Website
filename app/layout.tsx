@@ -60,8 +60,8 @@ export default function RootLayout({
           type="font/woff2"
           crossOrigin="anonymous"
         />
-        <link rel="preconnect" href="https://vercel-analytics.com" />
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
+        <link rel="dns-prefetch" href="//www.googletagmanager.com" />
 
         {/* Mobile optimization */}
         <meta name="mobile-web-app-capable" content="yes" />

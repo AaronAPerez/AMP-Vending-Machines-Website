@@ -12,9 +12,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   /* Core Configuration - Fixed for Next.js 15+ */
-  
+
   // Enable React strict mode for better development experience
-  reactStrictMode: true, // This should be at root level, not in compiler
+  reactStrictMode: true,
+
+  // Use SWC minification for better performance
+  swcMinify: true,
   
   // Configure TypeScript build behavior
   // typescript: {
@@ -183,6 +186,28 @@ const nextConfig = {
           {
             key: 'Referrer-Policy',
             value: 'strict-origin-when-cross-origin',
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload',
+          },
+          {
+            key: 'Cross-Origin-Opener-Policy',
+            value: 'same-origin',
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com",
+              "style-src 'self' 'unsafe-inline'",
+              "img-src 'self' data: https: blob:",
+              "font-src 'self' data:",
+              "connect-src 'self' https://www.google-analytics.com https://vercel-analytics.com https://vitals.vercel-insights.com",
+              "frame-ancestors 'none'",
+              "base-uri 'self'",
+              "form-action 'self'",
+            ].join('; '),
           },
         ],
       },

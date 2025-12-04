@@ -133,7 +133,7 @@ const ProductSection = () => {
 
     // Candy & Chocolate ($1.75)
     { id: 'snickers', name: 'Snickers', category: 'candy', image: '/images/products/snickers.jpg', popular: true },
-    { id: 'kitkat', name: 'Kit Kat', category: 'candy', image: '/images/products/kitkat.jpg' },
+    { id: 'kitkat', name: 'Kit Kat', category: 'candy', image: '/images/products/kit-kat.jpg' },
     { id: 'threemusketeers', name: '3 Musketeers', category: 'candy', image: '/images/products/threemusketeers.jpg' },
     { id: 'mms', name: 'M&Ms', category: 'candy', image: '/images/products/mms.jpg', popular: true },
     { id: 'skittles', name: 'Skittles', category: 'candy', image: '/images/products/skittles.jpg' },

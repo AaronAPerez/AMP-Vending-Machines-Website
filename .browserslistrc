@@ -1,16 +1,15 @@
-# Modern browsers only - reduces polyfills and transpilation
-# This aligns with Lighthouse recommendation to avoid legacy JavaScript
+# Browsers that we support
+# This reduces JavaScript polyfills for modern browsers
 
-# Production
 [production]
->0.5%
-last 2 versions
-Firefox ESR
+>0.2%
 not dead
-not IE 11
 not op_mini all
+Chrome >= 92
+Firefox >= 90
+Safari >= 14
+Edge >= 92
 
-# Development
 [development]
 last 1 chrome version
 last 1 firefox version
