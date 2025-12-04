@@ -347,8 +347,9 @@ const MachineCard: React.FC<MachineCardProps> = ({
         >
           <motion.div
             animate={{
-              backgroundColor: isHovered ? '#FD5A1E' : 'transparent'
+              backgroundColor: isHovered ? '#FD5A1E' : 'rgba(0, 0, 0, 0)'
             }}
+            style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
             className="w-full py-3 px-4 border border-[#FD5A1E] rounded-lg text-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#FD5A1E] focus:ring-offset-2 focus:ring-offset-black"
             tabIndex={0}
             role="button"

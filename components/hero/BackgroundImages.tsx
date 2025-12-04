@@ -13,7 +13,7 @@ const productImages = [
     '/images/products/poptarts.jpg',
     '/images/products/starburst.jpg',
     '/images/products/mms.jpg',
-    '/images/products/orange-crush.jpg',
+    '/images/products/orangecrush.jpg',
 ];
 
 export const BackgroundImages = () => {
@@ -62,7 +62,7 @@ export const BackgroundImages = () => {
                         >
                             <Image
                                 src={src}
-                                alt=""
+                                alt="hero product images"
                                 fill
                                 sizes="(max-width: 768px) 25vw, 20vw"
                                 className="object-cover"

@@ -131,6 +131,7 @@ const ResizableNavbar = () => {
                     width={100}
                     height={100}
                     className={`transition-all duration-300 bg-transparent z-0 ${isScrolled ? 'w-20 h-12' : 'w-20 h-12'}`}
+                    style={{ height: 'auto' }}
                     priority
                   />
                 </Link>
