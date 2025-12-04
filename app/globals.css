@@ -566,3 +566,148 @@
     display: block !important;
   }
 }
+
+@layer base {
+  /* Global focus styles for all interactive elements */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-[#FD5A1E] ring-offset-2 ring-offset-black;
+    /* Ensures 3:1 contrast ratio for focus indicators */
+  }
+  
+  /* Enhanced focus for links */
+  a:focus-visible {
+    @apply outline-none ring-2 ring-[#FD5A1E] ring-offset-2 ring-offset-black;
+    text-decoration: underline;
+    text-decoration-color: #FD5A1E;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+  
+  /* Enhanced focus for buttons */
+  button:focus-visible {
+    @apply outline-none ring-2 ring-[#FD5A1E] ring-offset-2 ring-offset-black;
+    transform: scale(1.02);
+    transition: transform 0.15s ease-in-out;
+  }
+  
+  /* Enhanced focus for form inputs */
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    @apply outline-none ring-2 ring-[#FD5A1E] ring-offset-2 ring-offset-black;
+    border-color: #FD5A1E;
+  }
+}
+
+/* Color Contrast Improvements */
+@layer components {
+  /* Ensure text on dark backgrounds meets 4.5:1 ratio */
+  .text-muted-accessible {
+    color: #C5CCCD; /* Improved from #A5ACAF for better contrast */
+  }
+  
+  /* Enhanced link visibility */
+  .link-accessible {
+    @apply text-[#F5F5F5] underline decoration-[#FD5A1E]/50 
+           hover:decoration-[#FD5A1E] transition-all duration-200;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+  
+  /* Skip to content link - visible on focus */
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:absolute focus:z-50 
+           focus:top-4 focus:left-4 focus:px-6 focus:py-3 
+           focus:bg-[#FD5A1E] focus:text-white focus:rounded-lg
+           focus:shadow-lg focus:ring-2 focus:ring-white focus:ring-offset-2;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+}
+
+/* Reduced Motion for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High Contrast Mode Support */
+/* @media (prefers-contrast: high) {
+  /* Increase contrast for all text
+  .text-[\\#A5ACAF] {
+    color: #FFFFFF !important;
+  } */
+  
+  /* Increase border visibility */
+  /* .border-[\\#4d4d4d],
+  .border-[\\#333333] {
+    border-color: #FFFFFF !important;
+    border-width: 2px !important;
+  } */
+/* } */
+
+/* Focus-Within for Container Elements */
+@layer utilities {
+  .focus-within-ring:focus-within {
+    @apply ring-2 ring-[#FD5A1E] ring-offset-2 ring-offset-black;
+  }
+}
+
+/* ============================================================================
+   KEYBOARD NAVIGATION ENHANCEMENTS
+   ============================================================================ */
+
+/* Visible keyboard navigation indicators */
+.keyboard-nav:focus-within {
+  box-shadow: 0 0 0 3px rgba(253, 90, 30, 0.5);
+}
+
+/* Tab order visualization (dev mode only) */
+@media (prefers-reduced-motion: no-preference) {
+  [tabindex]:focus {
+    animation: focusPulse 2s ease-in-out infinite;
+  }
+}
+
+@keyframes focusPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 2px rgba(253, 90, 30, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(253, 90, 30, 0.4);
+  }
+}
+
+/* ============================================================================
+   SCREEN READER OPTIMIZATIONS
+   ============================================================================ */
+
+/* Improved screen reader only class */
+.sr-only-improved {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only-improved:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}

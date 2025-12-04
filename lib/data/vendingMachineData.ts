@@ -35,6 +35,7 @@ export interface SpecificationGroup {
  * All fields optimized for search engine visibility
  */
 export interface MachineData {
+  image: any;
   id: string; // SEO-friendly slug (e.g., "refrigerated-touchscreen-vending-machine")
   name: string; // Keyword-rich machine name
   seoTitle?: string; // Optional custom SEO title tag
