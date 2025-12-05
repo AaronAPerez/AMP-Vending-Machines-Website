@@ -9,22 +9,20 @@ import Section from '../ui/shared/Section';
  * Background Overlay Card Component
  */
 const BackgroundOverlayCard = ({ product }: { product: Product }) => {
-  const imageSrc = product.image || '/images/products/placeholder.jpg';
+  const [imgError, setImgError] = useState(false);
+  const imageSrc = imgError || !product.image ? '/images/placeholder.svg' : product.image;
 
   return (
     <div className="relative group h-60 sm:h-72 overflow-hidden rounded-xl shadow-xl">
       {/* Background Image */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a]">
         <Image
           src={imageSrc}
           alt={product.name}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
           className="object-cover transition-transform duration-500 group-hover:scale-110"
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.src = '/images/products/placeholder.jpg';
-          }}
+          onError={() => setImgError(true)}
         />
       </div>
 
@@ -104,10 +102,10 @@ const ProductSection = () => {
    */
   const productCatalog: Product[] = [
     // Chips
-    { id: 'lays-classic', name: 'Lays Classic', category: 'chips', image: '/images/products/placeholder.jpg', popular: true },
+    { id: 'lays-classic', name: 'Lays Classic', category: 'chips', image: '/images/products/lays.jpg', popular: true },
     { id: 'doritos-nacho', name: 'Doritos Nacho Cheese', category: 'chips', image: '/images/products/doritos-nacho.jpg', popular: true },
     { id: 'cheetos', name: 'Cheetos', category: 'chips', image: '/images/products/cheetos.jpg' },
-    { id: 'lays-sourcream', name: 'Lays Sour Cream & Onion', category: 'chips', image: '/images/products/placeholder.jpg' },
+    { id: 'lays-sourcream', name: 'Lays Sour Cream & Onion', category: 'chips' },
     { id: 'doritos-cool-ranch', name: 'Doritos Cool Ranch', category: 'chips', image: '/images/products/doritos-cool-ranch.jpg' },
     // { id: 'ruffles-cheddar', name: 'Ruffles Cheddar & Sour Cream', category: 'chips', image: '/images/products/placeholder.jpg' },
     // { id: 'lays-bbq', name: 'Lays BBQ', category: 'chips', image: '/images/products/placeholder.jpg' },
@@ -133,9 +131,9 @@ const ProductSection = () => {
     { id: 'skittles', name: 'Skittles', category: 'candy', image: '/images/products/skittles.jpg' },
     { id: 'starburst', name: 'Starburst', category: 'candy', image: '/images/products/starburst.jpg' },
     { id: 'twix', name: 'Twix', category: 'candy', image: '/images/products/twix.jpg' },
-    { id: 'milkyway', name: 'Milky Way', category: 'candy', image: '/images/products/placeholder.jpg' },
-    { id: 'hershey', name: 'Hershey Bar', category: 'candy', image: '/images/products/placeholder.jpg' },
-    { id: 'butterfinger', name: 'Butterfinger', category: 'candy', image: '/images/products/placeholder.jpg' },
+    { id: 'milkyway', name: 'Milky Way', category: 'candy' },
+    { id: 'hershey', name: 'Hershey Bar', category: 'candy' },
+    { id: 'butterfinger', name: 'Butterfinger', category: 'candy' },
     // { id: 'snickers', name: 'Snickers', category: 'candy', image: '/images/products/snickers.jpg', popular: true },
     // { id: 'kitkat', name: 'Kit Kat', category: 'candy', image: '/images/products/kitkat.jpg' },
     // { id: '3musketeers', name: '3 Musketeers', category: 'candy', image: '/images/products/3musketeers.jpg' },
@@ -164,10 +162,10 @@ const ProductSection = () => {
 
     // Nuts & Crackers
     { id: 'ritz', name: 'Ritz Crackers w/ Peanut Butter', category: 'nuts', image: '/images/products/ritz.jpg' },
-    // { id: 'planters', name: 'Planters Peanuts', category: 'nuts', image: '/images/products/planters.jpg' },
-    { id: 'blue-diamond', name: 'Blue Diamond Almonds', category: 'nuts', image: '/images/products/placeholder.jpg', healthy: true, details: '100 calories per pack' },
-    { id: 'trail-mix', name: 'Trail Mix', category: 'nuts', image: '/images/products/placeholder.jpg', healthy: true },
-    { id: 'cashews', name: 'Roasted Cashews', category: 'nuts', image: '/images/products/placeholder.jpg', healthy: true },
+    { id: 'planters', name: 'Planters Peanuts', category: 'nuts', image: '/images/products/peanuts.jpg' },
+    { id: 'blue-diamond', name: 'Blue Diamond Almonds', category: 'nuts', healthy: true, details: '100 calories per pack' },
+    { id: 'trail-mix', name: 'Trail Mix', category: 'nuts', healthy: true },
+    { id: 'cashews', name: 'Roasted Cashews', category: 'nuts', healthy: true },
     // { id: 'ritz', name: 'Ritz Crackers w/ Peanut Butter', category: 'nuts', image: '/images/products/ritz.jpg' },
     // { id: 'planters', name: 'Planters Peanuts', category: 'nuts', image: '/images/products/planters.jpg' },
     // { id: 'blue-diamond', name: 'Blue Diamond Almonds', category: 'nuts', image: '/images/products/blue-diamond.jpg', healthy: true, details: '100 calories per pack' },
@@ -185,7 +183,7 @@ const ProductSection = () => {
     // { id: 'fruit-snacks', name: 'Fruit Snacks', category: 'snacks', image: '/images/products/fruit-snacks.jpg' },
 
     // Beverages
-    { id: 'coke', name: 'Coca-Cola', category: 'beverages', image: '/images/products/coke.jpg', popular: true },
+    { id: 'coke', name: 'Coca-Cola', category: 'beverages', popular: true },
     { id: 'coke-zero', name: 'Coca-Cola Zero', category: 'beverages', image: '/images/products/coke-zero.jpg', popular: true },
     { id: 'diet-coke', name: 'Diet Coke', category: 'beverages', image: '/images/products/diet-coke.jpg', healthy: true },
     { id: 'drpepper', name: 'Dr Pepper', category: 'beverages', image: '/images/products/drpepper.jpg' },
@@ -211,12 +209,12 @@ const ProductSection = () => {
     // { id: 'fanta', name: 'Fanta Orange', category: 'beverages', image: '/images/products/fanta.jpg' },
 
     // Energy Drinks
-    // { id: 'redbull-sf', name: 'Sugar Free Red Bull', category: 'energy', image: '/images/products/placeholder.jpg', healthy: true, details: '8.4 oz sugar free' },
+    { id: 'redbull-sf', name: 'Sugar Free Red Bull', category: 'energy', healthy: true, details: '8.4 oz sugar free' },
     { id: 'redbull', name: 'Red Bull', category: 'energy', image: '/images/products/redbull.jpg', details: '12 fl oz' },
     { id: 'monster', name: 'Monster Energy', category: 'energy', image: '/images/products/monster.jpg', popular: true },
-    // { id: 'monster-zero', name: 'Monster Zero Ultra', category: 'energy', image: '/images/products/placeholder.jpg', healthy: true },
-    // { id: 'bang', name: 'Bang Energy Drink', category: 'energy', image: '/images/products/placeholder.jpg' },
-    // { id: 'rockstar', name: 'Rockstar Energy', category: 'energy', image: '/images/products/placeholder.jpg' },
+    { id: 'monster-zero', name: 'Monster Zero Ultra', category: 'energy', healthy: true },
+    { id: 'bang', name: 'Bang Energy Drink', category: 'energy' },
+    { id: 'rockstar', name: 'Rockstar Energy', category: 'energy' },
     // { id: 'redbull-sf', name: 'Sugar Free Red Bull', category: 'energy', image: '/images/products/redbull-sf.jpg', healthy: true, details: '8.4 oz sugar free' },
     // { id: 'redbull', name: 'Red Bull', category: 'energy', image: '/images/products/redbull.jpg', details: '12 fl oz' },
     // { id: 'monster', name: 'Monster Energy', category: 'energy', image: '/images/products/monster.jpg', popular: true },
@@ -225,14 +223,10 @@ const ProductSection = () => {
     // { id: 'rockstar', name: 'Rockstar Energy', category: 'energy', image: '/images/products/rockstar.jpg' },
 
     // Healthy Options
-    // { id: 'baked-lays', name: 'Baked Lays', category: 'healthy', image: '/images/products/placeholder.jpg', healthy: true },
-    // { id: 'veggie-chips', name: 'Veggie Chips', category: 'healthy', image: '/images/products/placeholder.jpg', healthy: true },
-    // { id: 'skinny-pop', name: 'Skinny Pop Popcorn', category: 'healthy', image: '/images/products/placeholder.jpg', healthy: true },
-    // { id: 'dried-fruit', name: 'Dried Fruit Mix', category: 'healthy', image: '/images/products/placeholder.jpg', healthy: true }
-    // { id: 'baked-lays', name: 'Baked Lays', category: 'healthy', image: '/images/products/baked-lays.jpg', healthy: true },
-    // { id: 'veggie-chips', name: 'Veggie Chips', category: 'healthy', image: '/images/products/veggie-chips.jpg', healthy: true },
-    // { id: 'skinny-pop', name: 'Skinny Pop Popcorn', category: 'healthy', image: '/images/products/skinny-pop.jpg', healthy: true },
-    // { id: 'dried-fruit', name: 'Dried Fruit Mix', category: 'healthy', image: '/images/products/dried-fruit.jpg', healthy: true }
+    { id: 'baked-lays', name: 'Baked Lays', category: 'healthy', healthy: true },
+    { id: 'veggie-chips', name: 'Veggie Chips', category: 'healthy', healthy: true },
+    { id: 'skinny-pop', name: 'Skinny Pop Popcorn', category: 'healthy', healthy: true },
+    { id: 'dried-fruit', name: 'Dried Fruit Mix', category: 'healthy', healthy: true }
   ];
 
   const productCategories = [
