@@ -10,7 +10,7 @@ import Section from '../ui/shared/Section';
  */
 const BackgroundOverlayCard = ({ product }: { product: Product }) => {
   const [imgError, setImgError] = useState(false);
-  const imageSrc = imgError || !product.image ? '/images/placeholder.svg' : product.image;
+  const imageSrc = imgError || !product.image ? '/images/placeholder.jpg' : product.image;
 
   return (
     <div className="relative group h-60 sm:h-72 overflow-hidden rounded-xl shadow-xl">
