@@ -127,12 +127,12 @@ const ProductSection = () => {
 
     // Candy
     { id: 'snickers', name: 'Snickers', category: 'candy', image: '/images/products/snickers.jpg', popular: true },
-    { id: 'kitkat', name: 'Kit Kat', category: 'candy', image: '/images/products/placeholder.jpg' },
+    { id: 'kitkat', name: 'Kit Kat', category: 'candy', image: '/images/products/kitkat.jpg' },
     { id: '3musketeers', name: '3 Musketeers', category: 'candy', image: '/images/products/3musketeers.jpg' },
     { id: 'mms', name: 'M&Ms', category: 'candy', image: '/images/products/mms.jpg', popular: true },
     { id: 'skittles', name: 'Skittles', category: 'candy', image: '/images/products/skittles.jpg' },
     { id: 'starburst', name: 'Starburst', category: 'candy', image: '/images/products/starburst.jpg' },
-    { id: 'twix', name: 'Twix', category: 'candy', image: '/images/products/placeholder.jpg' },
+    { id: 'twix', name: 'Twix', category: 'candy', image: '/images/products/twix.jpg' },
     { id: 'milkyway', name: 'Milky Way', category: 'candy', image: '/images/products/placeholder.jpg' },
     { id: 'hershey', name: 'Hershey Bar', category: 'candy', image: '/images/products/placeholder.jpg' },
     { id: 'butterfinger', name: 'Butterfinger', category: 'candy', image: '/images/products/placeholder.jpg' },

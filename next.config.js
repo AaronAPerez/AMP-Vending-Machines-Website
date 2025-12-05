@@ -16,31 +16,11 @@ const nextConfig = {
   // Enable React strict mode for better development experience
   reactStrictMode: true,
 
-  // Use SWC minification for better performance
-  swcMinify: true,
-  
   // Configure TypeScript build behavior
-  // typescript: {
-  //   // Set to true only if you want to skip type checking during build (not recommended)
-  //   ignoreBuildErrors: false,
-  // },
-
-  // // Configure ESLint behavior during build
-  // eslint: {
-  //   // Set to true only if you want to skip ESLint during build (not recommended)
-  //   ignoreDuringBuilds: false,
-  //   // Specify directories to run ESLint on during build
-  //   dirs: ['pages', 'components', 'lib', 'src', 'app'],
-  // },
- typescript: {
+  typescript: {
     ignoreBuildErrors: true,
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  experimental: {
-    appDir: true,
-  },
+
   // Compiler optimizations (Fixed syntax)
   compiler: {
     // Remove console.log statements in production
@@ -53,21 +33,17 @@ const nextConfig = {
     } : false,
   },
 
-  // Experimental features for optimization (Updated for Next.js 15+)
+  // Experimental features for optimization (Updated for Next.js 16+)
   experimental: {
     // Optimize package imports for better tree shaking
     optimizePackageImports: ['lucide-react', 'framer-motion'],
     // Enable CSS optimization
     optimizeCss: true,
-    // Other experimental features available in Next.js 15
-    // turbo: {
-    //   rules: {
-    //     '*.svg': {
-    //       loaders: ['@svgr/webpack'],
-    //       as: '*.js',
-    //     },
-    //   },
-    // },
+  },
+
+  // Turbopack configuration
+  turbopack: {
+    root: process.cwd(),
   },
 
   // Webpack configuration for build optimization
@@ -130,48 +106,25 @@ const nextConfig = {
   distDir: '.next',
 
   // Image optimization configuration
-   images: {
-      formats: ['image/avif', 'image/webp'],
-  deviceSizes: [640, 750, 828, 1080, 1200, 1920],
-  imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-  minimumCacheTTL: 60 * 60 * 24 * 365, // 1 year
-  dangerouslyAllowSVG: true,
-  contentDispositionType: 'attachment',
-  contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-  remotePatterns: [
-    {
-      protocol: 'https',
-      hostname: '**.ampvendingmachines.com',
-      protocol: 'https',
-      hostname: '**.supabase.co',
-    },
-  ],
-  // Optimize for Core Web Vitals
-  unoptimized: false,
-    
-    // Configure device sizes for responsive images
+  images: {
+    formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    
-    // Configure image sizes for different use cases
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    
-    // Image formats to support (webp is highly recommended)
-    formats: ['image/webp'],
-    
-    // Minimize quality to improve loading without visible quality loss
-    minimumCacheTTL: 60,
-    
-    // Disable static imports in favor of dynamic optimization
+    minimumCacheTTL: 60 * 60 * 24 * 365, // 1 year
     dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-  },
-  
-  // Enable React strict mode for better development experience
-  reactStrictMode: true,
-  
-  // Experimental features
-  experimental: {
-    optimizeCss: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.ampvendingmachines.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.supabase.co',
+      },
+    ],
+    unoptimized: false,
   },
 
   // HTTP headers configuration

@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const productImages = [
     '/images/products/drpepper.jpg',
-    '/images/products/doritos-nacho-cheese.jpg',
+    '/images/products/doritos-nacho.jpg',
     '/images/products/redbull.jpg',
     '/images/products/snickers.jpg',
     '/images/products/cheetos.jpg',

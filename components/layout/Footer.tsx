@@ -17,8 +17,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import FooterEmailLink from '../contact/FooterEmailLink';
 import { trackPhoneCall } from '@/lib/analytics/gtag';
-import { AccessibleButton } from '@/components/ui/AccessibleButton';
-import { Phone } from 'lucide-react';
 
 
 /**
@@ -55,7 +53,7 @@ const Footer = () => {
                   alt="AMP Vending Logo"
                   width={80}  // Fixed consistent width
                   height={48} // Fixed consistent height
-                  className="h-12 w-auto" // Constrain height, auto width
+                  className="h-auto w-auto" // Constrain height, auto width
                   priority
                 />
               </Link>
@@ -134,7 +132,6 @@ const Footer = () => {
               <div>
                 <a
                   href="tel:+12094035450"
-                  onClick={() => trackPhoneCall()}
                   onClick={() => trackPhoneCall()}
                   className="text-[#A5ACAF] text-sm hover:text-[#FD5A1E] transition-colors duration-300 focus:outline-none focus:text-[#FD5A1E] focus:underline"
                   aria-label="Call us at (209) 403-5450"

@@ -17,7 +17,7 @@ import ResizableNavbar from "@/components/layout/ResizableNavbar";
 import { WebVitalsReporter } from "@/components/analytics/WebVitalsReporter";
 import Footer from "@/components/layout/Footer";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
-import { Toaster } from "sonner";
+import { Toaster } from "sonner"; // Temporarily disabled for build
 import { StructuredData } from "@/components/seo/StructuredData";
 import { rootMetadata } from "@/lib/config/metadata";
 
@@ -53,13 +53,13 @@ export default function RootLayout({
         `}} />
 
         {/* Critical resource preloading */}
-        <link
+        {/* <link
           rel="preload"
           href="/_next/static/media/e4af272ccee01ff0-s.p.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
-        />
+        /> */}
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
         <link rel="dns-prefetch" href="//www.googletagmanager.com" />
 
@@ -80,7 +80,7 @@ export default function RootLayout({
         {/* Analytics */}
         <GoogleAnalytics />
 
-        {/* Toast notifications */}
+        {/* Toast notifications - temporarily disabled for build */}
         <Toaster
           position="top-right"
           richColors
