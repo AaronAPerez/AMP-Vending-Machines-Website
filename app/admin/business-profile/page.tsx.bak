@@ -11,8 +11,10 @@
 
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
-import { Metadata, Viewport } from 'next';
+import { useState, useEffect } from 'react';
+
+// Force dynamic rendering (disable static generation)
+export const dynamic = 'force-dynamic';
 
 // Static imports to prevent circular dependencies
 import { 
@@ -510,9 +512,5 @@ export default function BusinessProfilePage() {
     return <BusinessProfileSkeleton />;
   }
 
-  return (
-    <Suspense fallback={<BusinessProfileSkeleton />}>
-      <BusinessProfileContent />
-    </Suspense>
-  );
+  return <BusinessProfileContent />;
 }

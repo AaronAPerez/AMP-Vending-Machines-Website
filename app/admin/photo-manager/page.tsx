@@ -1,18 +1,18 @@
 /**
- * Admin Photo Manager Page - SSR Safe Implementation
- * 
+ * Admin Photo Manager Page - Client Component
+ *
  * Build Process Documentation:
  * 1. Implements dynamic imports for client-only components
- * 2. Uses proper metadata and viewport exports for Next.js 14+
+ * 2. Uses Client Component to support dynamic imports with ssr: false
  * 3. Includes SSR safety checks for window object access
  * 4. Adds proper loading states and error boundaries
  * 5. Follows accessibility best practices
  */
 
-import { Suspense } from 'react';
+'use client';
 
-import { Metadata, Viewport } from 'next';
-import dynamic from 'next/dist/shared/lib/dynamic';
+import { Suspense } from 'react';
+import dynamic from 'next/dynamic';
 
 // Dynamic import for client-only photo manager component
 const PhotoManagerClient = dynamic(
@@ -22,33 +22,6 @@ const PhotoManagerClient = dynamic(
     loading: () => <PhotoManagerLoadingSkeleton />
   }
 );
-
-/**
- * Metadata configuration (server-side safe)
- */
-export const metadata: Metadata = {
-  title: 'Photo Manager | AMP Vending Admin',
-  description: 'Manage vending machine images and product photos',
-  robots: {
-    index: false,
-    follow: false,
-  },
-};
-
-/**
- * Viewport configuration (Next.js 14+ requirement)
- * Fixes the metadata viewport warnings
- */
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#FD5A1E' },
-    { media: '(prefers-color-scheme: dark)', color: '#000000' }
-  ],
-};
 
 /**
  * Loading skeleton component for photo manager
