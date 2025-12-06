@@ -102,7 +102,7 @@ const ProductSection = () => {
    */
   const productCatalog: Product[] = [
     // Chips
-    { id: 'lays-classic', name: 'Lays Classic', category: 'chips', image: '/images/products/lays.jpg', popular: true },
+    { id: 'lays-classic', name: 'Lays Classic', category: 'chips', image: '/images/products/lays.webp', popular: true },
     { id: 'doritos-nacho', name: 'Doritos Nacho Cheese', category: 'chips', image: '/images/products/doritos-nacho.jpg', popular: true },
     { id: 'cheetos', name: 'Cheetos', category: 'chips', image: '/images/products/cheetos.jpg' },
     { id: 'lays-sourcream', name: 'Lays Sour Cream & Onion', category: 'chips' },
