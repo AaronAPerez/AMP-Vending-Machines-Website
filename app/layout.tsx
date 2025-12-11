@@ -52,16 +52,10 @@ export default function RootLayout({
           #hero-heading{font-display:swap;text-rendering:optimizeSpeed}
         `}} />
 
-        {/* Critical resource preloading */}
-        {/* <link
-          rel="preload"
-          href="/_next/static/media/e4af272ccee01ff0-s.p.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        /> */}
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
         <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+
+        <meta name="google-site-verification" content="rQUz_b0dTF5gHNCSHXdNfzEI6LDoPxg54ZppJQjiFFg" />
 
         {/* Mobile optimization */}
         <meta name="mobile-web-app-capable" content="yes" />

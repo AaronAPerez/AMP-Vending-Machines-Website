@@ -170,10 +170,10 @@ interface MachineCardProps {
  * PremiumFeature Component
  * Displays individual premium features with visual emphasis and accessibility
  */
-const PremiumFeature: React.FC<PremiumFeatureProps> = ({ 
-  feature, 
-  delay = 0, 
-  variant = 'default' 
+const PremiumFeature: React.FC<PremiumFeatureProps> = ({
+  feature,
+  delay = 0,
+  variant = 'default'
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '0px 0px -100px 0px' });
@@ -195,7 +195,7 @@ const PremiumFeature: React.FC<PremiumFeatureProps> = ({
       tabIndex={0}
     >
       {/* Icon container with hover effects */}
-      <div 
+      <div
         className={`
           flex-shrink-0 bg-[#FD5A1E]/10 rounded-full 
           flex items-center justify-center 
@@ -232,10 +232,10 @@ const PremiumFeature: React.FC<PremiumFeatureProps> = ({
  * UpgradeMetric Component
  * Displays quantifiable benefits with responsive sizing
  */
-const UpgradeMetric: React.FC<UpgradeMetricProps> = ({ 
-  metric, 
-  delay = 0, 
-  size = 'medium' 
+const UpgradeMetric: React.FC<UpgradeMetricProps> = ({
+  metric,
+  delay = 0,
+  size = 'medium'
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '0px 0px -50px 0px' });
@@ -262,8 +262,8 @@ const UpgradeMetric: React.FC<UpgradeMetricProps> = ({
       aria-label={`Metric: ${metric.metric} ${metric.label}`}
       tabIndex={0}
     >
-      <div 
-        className="text-[#FD5A1E] text-3xl mb-3 flex justify-center group-hover:scale-110 transition-transform duration-300" 
+      <div
+        className="text-[#FD5A1E] text-3xl mb-3 flex justify-center group-hover:scale-110 transition-transform duration-300"
         aria-hidden="true"
       >
         {metric.icon}
@@ -285,7 +285,7 @@ const UpgradeMetric: React.FC<UpgradeMetricProps> = ({
  * MachineCard Component
  * Interactive showcase card for vending machine features
  */
-const MachineCard: React.FC<MachineCardProps> = ({ 
+const MachineCard: React.FC<MachineCardProps> = ({
   title = "Professional Grade Vending Machine",
   description = "Advanced technology meets workplace convenience with our premium vending solution.",
   features = MACHINE_CARD_FEATURES,
@@ -356,11 +356,11 @@ const MachineCard: React.FC<MachineCardProps> = ({
           >
             <span className={`transition-colors duration-300 ${isHovered ? 'text-[#000000]' : 'text-[#FD5A1E]'}`}>
               View Machine Details
-              <ArrowRightIcon 
-                size={16} 
-                className="inline-block ml-2 transition-transform duration-300" 
-                aria-hidden="true" 
-              />  
+              <ArrowRightIcon
+                size={16}
+                className="inline-block ml-2 transition-transform duration-300"
+                aria-hidden="true"
+              />
             </span>
           </motion.div>
         </Link>
@@ -405,7 +405,7 @@ const WorkplaceTransformSection: React.FC<WorkplaceTransformSectionProps> = ({
   }, []);
 
   return (
-    <section 
+    <section
       className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${className}`}
       aria-labelledby={renderHeading ? "transform-heading" : undefined}
     >
@@ -429,7 +429,7 @@ const WorkplaceTransformSection: React.FC<WorkplaceTransformSectionProps> = ({
             <span className="text-[#FD5A1E]">Latest Technology</span>
           </h2>
           <p className="text-lg sm:text-xl lg:text-2xl text-[#A5ACAF] max-w-4xl mx-auto leading-relaxed">
-            Discover how our advanced vending solutions enhance employee satisfaction 
+            Discover how our advanced vending solutions enhance employee satisfaction
             and workplace convenience with measurable results.
           </p>
         </motion.header>
@@ -445,65 +445,63 @@ const WorkplaceTransformSection: React.FC<WorkplaceTransformSectionProps> = ({
         {/* Machine Showcase Card */}
         <div className="space-y-6">
 
-           {/* Machine Image */}
-      <div className="relative aspect-[4/3] overflow-hidden">
-        <Image
-          src="/images/machines/amp-vending-machines.jpg"
-          alt="AMP Premium Vending Machine with 21.5 inch touchscreen interface"
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover transition-transform duration-500 rounded-xl"
-          // style={{
-          //   transform: isHovered ? 'scale(1.05)' : 'scale(1)',
-          // }}
-          priority
-        />
-        
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/80 to-transparent opacity-60" />
-        
-        {/* Technology badges */}
-        <div className="absolute top-4 left-4 right-4 flex justify-between">
-          <span className="bg-[#FD5A1E] text-[#000000] px-3 py-1 rounded-full text-xs font-bold flex items-center">
-            <MonitorIcon size={12} className="mr-1" />
-            21.5&quot; HD
-          </span>
-          <span className="bg-[#000000]/90 text-[#FD5A1E] px-3 py-1 rounded-full text-xs font-bold border border-[#FD5A1E]/30">
-            Touchscreen
-          </span>
-        </div>
+          {/* Machine Image */}
+          <div className="relative aspect-[4/3] overflow-hidden">
+            <Image
+              src="/images/machines/amp-vending-machines.jpg"
+              alt="AMP Premium Vending Machine with 21.5 inch touchscreen interface"
+              width={600}
+              height={400}
+              loading="lazy" // Explicit lazy loading
+              quality={85}
+              className="object-cover transition-transform duration-500 rounded-xl"
+            />
 
-        {/* Interactive indicators at bottom */}
-        <div className="absolute bottom-4 left-4 right-4">
-          <div className="flex justify-between items-center">
-            <div className="flex space-x-2">
-              {[CreditCardIcon, WifiIcon, ZapIcon].map((Icon, index) => (
-                <motion.div
-                  key={index}
-                  className="w-8 h-8 bg-[#FD5A1E]/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-[#FD5A1E]/30"
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: index * 0.1 + 0.3 }}
-                  whileHover={{ scale: 1.1 }}
-                >
-                  <Icon size={14} className="text-[#FD5A1E]" />
-                </motion.div>
-              ))}
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/80 to-transparent opacity-60" />
+
+            {/* Technology badges */}
+            <div className="absolute top-4 left-4 right-4 flex justify-between">
+              <span className="bg-[#FD5A1E] text-[#000000] px-3 py-1 rounded-full text-xs font-bold flex items-center">
+                <MonitorIcon size={12} className="mr-1" />
+                21.5&quot; HD
+              </span>
+              <span className="bg-[#000000]/90 text-[#FD5A1E] px-3 py-1 rounded-full text-xs font-bold border border-[#FD5A1E]/30">
+                Touchscreen
+              </span>
             </div>
-            <motion.div
-              className="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5 }}
-            >
-              <CheckCircleIcon size={12} className="mr-1" />
-              Available Now
-            </motion.div>
+
+            {/* Interactive indicators at bottom */}
+            <div className="absolute bottom-4 left-4 right-4">
+              <div className="flex justify-between items-center">
+                <div className="flex space-x-2">
+                  {[CreditCardIcon, WifiIcon, ZapIcon].map((Icon, index) => (
+                    <motion.div
+                      key={index}
+                      className="w-8 h-8 bg-[#FD5A1E]/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-[#FD5A1E]/30"
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: index * 0.1 + 0.3 }}
+                      whileHover={{ scale: 1.1 }}
+                    >
+                      <Icon size={14} className="text-[#FD5A1E]" />
+                    </motion.div>
+                  ))}
+                </div>
+                <motion.div
+                  className="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <CheckCircleIcon size={12} className="mr-1" />
+                  Available Now
+                </motion.div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
           <MachineCard variant="premium" />
-             
+
         </div>
 
         {/* Premium Features List */}

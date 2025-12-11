@@ -1,6 +1,6 @@
 /**
  * Next.js Configuration - Fixed for Next.js 15.3.4
- * 
+ *
  * Build Process Documentation:
  * 1. Fixes configuration options that are invalid in Next.js 15+
  * 2. Removes deprecated options and uses correct syntax
@@ -24,19 +24,25 @@ const nextConfig = {
   // Compiler optimizations (Fixed syntax)
   compiler: {
     // Remove console.log statements in production
-    removeConsole: process.env.NODE_ENV === 'production' ? {
-      exclude: ['error', 'warn'], // Keep errors and warnings
-    } : false,
+    removeConsole:
+      process.env.NODE_ENV === "production"
+        ? {
+            exclude: ["error", "warn"], // Keep errors and warnings
+          }
+        : false,
     // Remove React properties in production
-    reactRemoveProperties: process.env.NODE_ENV === 'production' ? {
-      properties: ['^data-testid$']
-    } : false,
+    reactRemoveProperties:
+      process.env.NODE_ENV === "production"
+        ? {
+            properties: ["^data-testid$"],
+          }
+        : false,
   },
 
   // Experimental features for optimization (Updated for Next.js 16+)
   experimental: {
     // Optimize package imports for better tree shaking
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
+    optimizePackageImports: ["lucide-react", "framer-motion"],
     // Enable CSS optimization
     optimizeCss: true,
   },
@@ -51,7 +57,7 @@ const nextConfig = {
     // Optimize bundle splitting for client-side code
     if (!isServer) {
       config.optimization.splitChunks = {
-        chunks: 'all',
+        chunks: "all",
         cacheGroups: {
           default: {
             minChunks: 2,
@@ -60,12 +66,12 @@ const nextConfig = {
           },
           vendor: {
             test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
+            name: "vendors",
             priority: -10,
-            chunks: 'all',
+            chunks: "all",
           },
           common: {
-            name: 'common',
+            name: "common",
             minChunks: 2,
             priority: -30,
             reuseExistingChunk: true,
@@ -86,7 +92,7 @@ const nextConfig = {
     // Handle SVG imports
     config.module.rules.push({
       test: /\.svg$/,
-      use: ['@svgr/webpack'],
+      use: ["@svgr/webpack"],
     });
 
     return config;
@@ -94,36 +100,33 @@ const nextConfig = {
 
   // Environment variables available to the client
   env: {
-    CUSTOM_KEY: process.env.CUSTOM_KEY || '',
+    CUSTOM_KEY: process.env.CUSTOM_KEY || "",
     NEXT_PUBLIC_APP_ENV: process.env.NODE_ENV,
   },
 
   // Configure output behavior
-  output: process.env.BUILD_STANDALONE === 'true' ? 'standalone' : undefined,
+  output: process.env.BUILD_STANDALONE === "true" ? "standalone" : undefined,
   trailingSlash: false,
   compress: true,
   poweredByHeader: false,
-  distDir: '.next',
+  distDir: ".next",
 
   // Image optimization configuration
   images: {
-    formats: ['image/avif', 'image/webp'],
+    formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60 * 60 * 24 * 365, // 1 year
     dangerouslyAllowSVG: true,
-    contentDispositionType: 'attachment',
+    contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: '**.ampvendingmachines.com',
-      },
-      {
-        protocol: 'https',
-        hostname: '**.supabase.co',
+        protocol: "https",
+        hostname: "**.ampvendingmachines.com",
       },
     ],
+    // Optimize for Core Web Vitals
     unoptimized: false,
   },
 
@@ -132,34 +135,34 @@ const nextConfig = {
     return [
       {
         // Security headers for all routes
-        source: '/(.*)',
+        source: "/(.*)",
         headers: [
           {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
+            key: "X-Content-Type-Options",
+            value: "nosniff",
           },
           {
-            key: 'X-Frame-Options',
-            value: 'DENY',
+            key: "X-Frame-Options",
+            value: "DENY",
           },
           {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block',
+            key: "X-XSS-Protection",
+            value: "1; mode=block",
           },
           {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
           },
           {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=63072000; includeSubDomains; preload',
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
           },
           {
-            key: 'Cross-Origin-Opener-Policy',
-            value: 'same-origin',
+            key: "Cross-Origin-Opener-Policy",
+            value: "same-origin",
           },
           {
-            key: 'Content-Security-Policy',
+            key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com",
@@ -170,51 +173,52 @@ const nextConfig = {
               "frame-ancestors 'none'",
               "base-uri 'self'",
               "form-action 'self'",
-            ].join('; '),
+            ].join("; "),
           },
         ],
       },
       {
         // API route headers
-        source: '/api/:path*',
+        source: "/api/:path*",
         headers: [
           {
-            key: 'Access-Control-Allow-Origin',
-            value: process.env.NODE_ENV === 'development' 
-              ? '*' 
-              : 'https://www.ampvendingmachines.com',
+            key: "Access-Control-Allow-Origin",
+            value:
+              process.env.NODE_ENV === "development"
+                ? "*"
+                : "https://www.ampvendingmachines.com",
           },
           {
-            key: 'Access-Control-Allow-Methods',
-            value: 'GET, POST, PUT, DELETE, OPTIONS',
+            key: "Access-Control-Allow-Methods",
+            value: "GET, POST, PUT, DELETE, OPTIONS",
           },
           {
-            key: 'Access-Control-Allow-Headers',
-            value: 'Content-Type, Authorization, X-Requested-With',
+            key: "Access-Control-Allow-Headers",
+            value: "Content-Type, Authorization, X-Requested-With",
           },
           {
-            key: 'Access-Control-Max-Age',
-            value: '86400',
+            key: "Access-Control-Max-Age",
+            value: "86400",
           },
         ],
       },
       {
         // Static asset caching
-        source: '/_next/static/(.*)',
+        source: "/_next/static/(.*)",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },
       {
         // Image caching
-        source: '/images/(.*)',
+        source: "/images/(.*)",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },
@@ -255,11 +259,11 @@ const nextConfig = {
   },
 
   // Page extensions configuration
-  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+  pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
 
   // Build-specific optimizations
   productionBrowserSourceMaps: false, // Disable source maps in production for smaller bundles
-  
+
   // Configure which files should be treated as pages
   excludeDefaultMomentLocales: true,
 };

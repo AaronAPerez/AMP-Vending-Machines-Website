@@ -64,10 +64,10 @@ export const BackgroundImages = () => {
                                 src={src}
                                 alt="hero product images"
                                 fill
-                                sizes="(max-width: 768px) 25vw, 20vw"
+                                sizes="(max-width: 768px) 25vw"
                                 className="object-cover"
-                                loading="lazy"
-                                quality={75}
+                                priority // Load immediately for LCP
+                                quality={90}
                             />
                             <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/50" />
                         </div>

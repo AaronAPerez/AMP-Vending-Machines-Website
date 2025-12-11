@@ -1,6 +1,5 @@
 /**
  * Dynamic Sitemap Generation for Google Indexing
- * Week 1 Technical Foundation Enhancement
  */
 
 import { getAllVendingMachines } from '@/lib/data/vendingMachineData';
@@ -106,15 +105,7 @@ export async function GET(): Promise<Response> {
       }
     );
     
-    // 6. About page (if it exists)
-    urls.push({
-      loc: `${baseUrl}/about`,
-      lastmod: currentDate,
-      changefreq: 'monthly',
-      priority: 0.7
-    });
-    
-    // 7. Accessibility statement
+    // 6. Accessibility statement
     urls.push({
       loc: `${baseUrl}/accessibility`,
       lastmod: currentDate,
@@ -122,7 +113,7 @@ export async function GET(): Promise<Response> {
       priority: 0.5
     });
     
-    // 8. Terms of Service and Privacy Policy
+    // 7. Terms of Service and Privacy Policy
     urls.push(
       {
         loc: `${baseUrl}/terms-of-service`,

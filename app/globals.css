@@ -567,6 +567,8 @@
   }
 }
 
+
+
 @layer base {
   /* Global focus styles for all interactive elements */
   *:focus-visible {

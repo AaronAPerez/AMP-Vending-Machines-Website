@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { cn } from '@/lib/utils';
 import { AccessibleButton } from '@/components/ui/AccessibleButton';
+import BackgroundImages from './BackgroundImages';
 
 interface HeroProps {
   title: React.ReactNode;
@@ -98,9 +99,8 @@ export const ResponsiveHero = ({
       </div>
 
       {/* Non-Critical: Background Images (Lazy Loaded) */}
-      <Suspense fallback={null}>
-        <LazyBackgroundImages />
-      </Suspense>
+  
+        <BackgroundImages />
     </div>
   );
 };
