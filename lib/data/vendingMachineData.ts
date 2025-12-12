@@ -139,7 +139,7 @@ export const normalizeMachineData = (machine: MachineData | undefined) => {
   }
 
   // Safely extract image with SEO-optimized fallback
-  const image = machine.images?.[0]?.src || "/images/vending-machines/placeholder-vending-machine.jpg";
+  const image = machine.images?.[0]?.src || "/images/vending-machines/placeholder-vending-machine.webp";
 
   // Safely handle dimensions conversion
   let dimensions: string;
@@ -292,17 +292,17 @@ const vendingMachineData: Record<string, MachineData> = {
       
       // {
       //   id: 2,
-      //   src: "/images/machines/vendo-821-v21-blue-refresh-side.jpg", 
+      //   src: "/images/machines/vendo-821-v21-blue-refresh-side.webp", 
       //   alt: "Vendo 821 V21 Blue Refresh side profile showing depth and ventilation"
       // },
       // {
       //   id: 3,
-      //   src: "/images/machines/vendo-821-v21-blue-refresh-interior.jpg",
+      //   src: "/images/machines/vendo-821-v21-blue-refresh-interior.webp",
       //   alt: "Vendo 821 V21 Blue Refresh interior showing 10-selection capacity and loading system"
       // },
       // {
       //   id: 4,
-      //   src: "/images/machines/vendo-821-v21-blue-refresh-display.jpg",
+      //   src: "/images/machines/vendo-821-v21-blue-refresh-display.webp",
       //   alt: "Vendo 821 V21 Blue Refresh live display window showing product visibility"
       // }
     ],
@@ -444,7 +444,7 @@ const vendingMachineData: Record<string, MachineData> = {
       {
         id: "commercial-coffee-vending-machine",
         name: "Commercial Coffee Vending Machine",
-        image: "/images/machines/commercial-coffee-vending-machine.jpg"
+        image: "/images/machines/commercial-coffee-vending-machine.webp"
       }
     ],
 
@@ -644,12 +644,12 @@ const vendingMachineData: Record<string, MachineData> = {
       {
         id: "compact-office-refrigerated-vending-machine",
         name: "Compact Office Refrigerated Vending Machine",
-        image: "/images/machines/compact-refrigerated-vending-machine.jpg",
+        image: "/images/machines/compact-refrigerated-vending-machine.webp",
       },
       {
         id: "commercial-snack-vending-machine",
         name: "Commercial Snack Vending Machine",
-        image: "/images/machines/standard-non-refrigerated.jpg",
+        image: "/images/machines/standard-non-refrigerated.webp",
       },
     ],
     category: "non-refrigerated",
@@ -825,12 +825,12 @@ const vendingMachineData: Record<string, MachineData> = {
       {
         id: "compact-office-refrigerated-vending-machine",
         name: "Compact Office Refrigerated Vending Machine",
-        image: "/images/machines/compact-refrigerated-vending-machine.jpg",
+        image: "/images/machines/compact-refrigerated-vending-machine.webp",
       },
       {
         id: "commercial-snack-vending-machine",
         name: "Commercial Snack Vending Machine",
-        image: "/images/machines/standard-refrigerated-vending-machine.jpg",
+        image: "/images/machines/standard-refrigerated-vending-machine.webp",
       },
     ],
     category: "refrigerated",
@@ -871,7 +871,7 @@ const vendingMachineData: Record<string, MachineData> = {
     images: [
       {
         id: 1,
-        src: "/images/machines/standard-non-refrigerated.jpg",
+        src: "/images/machines/standard-non-refrigerated.webp",
         alt: "Commercial snack vending machine for offices and businesses in Central California",
       },
     ],
@@ -1001,7 +1001,7 @@ const vendingMachineData: Record<string, MachineData> = {
       {
         id: "compact-office-refrigerated-vending-machine",
         name: "Compact Office Refrigerated Vending Machine",
-        image: "/images/machines/compact-refrigerated-vending-machine.jpg",
+        image: "/images/machines/compact-refrigerated-vending-machine.webp",
       },
       {
         id: "refrigerated-touchscreen-vending-machine",
@@ -1046,7 +1046,7 @@ const vendingMachineData: Record<string, MachineData> = {
   //   images: [
   //     {
   //       id: 1,
-  //       src: "/images/machines/compact-refrigerated-vending-machine.jpg",
+  //       src: "/images/machines/compact-refrigerated-vending-machine.webp",
   //       alt: "Compact refrigerated vending machine for small offices and break rooms in Modesto California",
   //     },
   //   ],
@@ -1189,7 +1189,7 @@ const vendingMachineData: Record<string, MachineData> = {
   //     {
   //       id: "commercial-snack-vending-machine",
   //       name: "Commercial Snack Vending Machine",
-  //       image: "/images/machines/standard-non-refrigerated.jpg",
+  //       image: "/images/machines/standard-non-refrigerated.webp",
   //     },
   //   ],
   //   category: "refrigerated",
