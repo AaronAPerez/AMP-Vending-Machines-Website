@@ -448,7 +448,7 @@ const WorkplaceTransformSection: React.FC<WorkplaceTransformSectionProps> = ({
           {/* Machine Image */}
           <div className="relative aspect-[4/3] overflow-hidden">
             <Image
-              src="/images/machines/amp-vending-machines.jpg"
+              src="/images/machines/amp-vending-machines.webp"
               alt="AMP Premium Vending Machine with 21.5 inch touchscreen interface"
               width={600}
               height={400}
