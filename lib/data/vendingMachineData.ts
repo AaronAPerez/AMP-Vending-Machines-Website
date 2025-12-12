@@ -270,9 +270,10 @@ export const getMachinesByLocation = (location: string): MachineData[] => {
  */
 const vendingMachineData: Record<string, MachineData> = {
 
-   "vendo-821-v21-blue-refresh-high-capacity": {
+  "vendo-821-v21-blue-refresh-high-capacity": {
     id: "vendo-821-v21-blue-refresh-high-capacity",
     name: "Vendo 821 V21 Blue Refresh High-Capacity Beverage Machine",
+    image: "/images/machines/refrigerated-vending-machine-blue-refresh.png",
     seoTitle: "Vendo 821 V21 Blue Refresh - High-Capacity Commercial Vending Machine",
     metaDescription: "Professional Vendo 821 V21 Blue Refresh vending machine with 800 can capacity, LED lighting, and live display. Perfect for high-traffic commercial locations.",
     shortDescription: "High-capacity commercial beverage vending machine with live display and 800 can capacity",
@@ -503,6 +504,7 @@ const vendingMachineData: Record<string, MachineData> = {
   "premium-snack-vending-machine-touchscreen": {
     id: "premium-snack-vending-machine-touchscreen",
     name: "Premium Snack Vending Machine with Touchscreen",
+    image: "/images/machines/amp-premium-touchscreen-vending-machine.png",
     seoTitle: "Commercial Snack Vending Machine with 21.5\" Touchscreen | AMP Vending",
     metaDescription: "Premium snack vending machine with large touchscreen display for offices and businesses. 50+ product options with professional installation in Modesto, CA.",
     shortDescription: "Advanced snack vending machine featuring a large 21.5\" HD touchscreen display, designed for high-capacity snack and convenience item dispensing in commercial environments.",
@@ -683,6 +685,7 @@ const vendingMachineData: Record<string, MachineData> = {
   "refrigerated-touchscreen-vending-machine": {
     id: "refrigerated-touchscreen-vending-machine",
     name: "Refrigerated Touchscreen Vending Machine",
+    image: "/images/machines/amp-refrigerated-vending-machine.png",
     seoTitle: "Commercial Refrigerated Vending Machine with Touchscreen | AMP Vending",
     metaDescription: "Premium refrigerated vending machine with touchscreen technology for offices, schools, and commercial spaces. Professional installation and maintenance included in Modesto, CA.",
     shortDescription: "Advanced refrigerated vending machine with touchscreen interface, designed for high-traffic commercial locations requiring fresh beverages and food options.",
@@ -864,6 +867,7 @@ const vendingMachineData: Record<string, MachineData> = {
   "commercial-snack-vending-machine": {
     id: "commercial-snack-vending-machine",
     name: "Commercial Snack Vending Machine",
+    image: "/images/machines/standard-non-refrigerated.webp",
     seoTitle: "Commercial Snack Vending Machine for Businesses | AMP Vending",
     metaDescription:"Reliable commercial snack vending machine for offices and businesses. Multiple payment options with professional installation and maintenance in Modesto, CA.",
     shortDescription: "Reliable commercial-grade snack vending machine designed for consistent performance in business environments, offering diverse snack options with modern payment processing capabilities.",
