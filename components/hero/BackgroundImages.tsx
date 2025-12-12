@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 const productImages = [
-    '/images/products/drpepper.jpg',
-    '/images/products/doritos-nacho.jpg',
-    '/images/products/redbull.jpg',
-    '/images/products/snickers.jpg',
-    '/images/products/cheetos.jpg',
-    '/images/products/skittles.jpg',
-    '/images/products/kitkat.jpg',
-    '/images/products/monster.jpg',
-    '/images/products/poptarts.jpg',
-    '/images/products/starburst.jpg',
-    '/images/products/mms.jpg',
-    '/images/products/orangecrush.jpg',
+    '/images/products/drpepper.webp',
+    '/images/products/doritos-nacho.webp',
+    '/images/products/redbull.webp',
+    '/images/products/snickers.webp',
+    '/images/products/cheetos.webp',
+    '/images/products/skittles.webp',
+    '/images/products/kitkat.webp',
+    '/images/products/monster.webp',
+    '/images/products/poptarts.webp',
+    '/images/products/starburst.webp',
+    '/images/products/mms.webp',
+    '/images/products/orangecrush.webp',
 ];
 
 export const BackgroundImages = () => {
