@@ -29,7 +29,6 @@ export async function GET(): Promise<Response> {
       headers: {
         'Content-Type': 'text/plain; charset=utf-8',
         'Cache-Control': 'public, max-age=86400, s-maxage=86400, stale-while-revalidate=3600',
-        'X-Robots-Tag': 'noindex, nofollow', // Don't index robots.txt itself
         'Vary': 'User-Agent',
       },
     });
