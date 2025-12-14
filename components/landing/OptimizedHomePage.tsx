@@ -30,28 +30,29 @@ import {
  */
 export default function OptimizedHomePage() {
   return (
-    
+
     <main className="flex flex-col min-h-screen overflow-hidden bg-black/90">
-      
+
       {/* CRITICAL: Hero Section - Load immediately for LCP */}
       <Section id="hero" className="relative min-h-screen bg-black/90">
         <ResponsiveHero
           title={
             <>
-              Premium Commercial Vending Solutions
-              <br />for <span className="text-[#FD5A1E]">Modern Workplaces</span>
+              <h1 className="text-4xl sm:text-5xl font-bold text-[#F5F5F5]">
+                Premium Vending Machines in<br/><span className="text-[#FD5A1E]"> Northern California</span>
+              </h1>
             </>
           }
-          subtitle="Enhance your workplace with state-of-the-art vending machines featuring touchscreen technology."
+          subtitle=" Modern touchscreen vending solutions for workplaces across Modesto, Stockton, Turlock, and the Central Valley."
           primaryCta={{ text: "View Machines", href: "/vending-machines" }}
           secondaryCta={{ text: "Free Consultation", href: "/contact" }}
         />
       </Section>
 
       {/* VIEWPORT LAZY: Below-the-fold sections */}
-      
-      <ViewportLazy 
-        threshold={0.1} 
+
+      <ViewportLazy
+        threshold={0.1}
         rootMargin="150px"
         fallback={<SectionLoadingFallback />}
       >
@@ -62,8 +63,8 @@ export default function OptimizedHomePage() {
         </Section>
       </ViewportLazy>
 
-      <ViewportLazy 
-        threshold={0.1} 
+      <ViewportLazy
+        threshold={0.1}
         rootMargin="150px"
         fallback={<SectionLoadingFallback />}
       >
@@ -74,8 +75,8 @@ export default function OptimizedHomePage() {
         </Section>
       </ViewportLazy>
 
-      <ViewportLazy 
-        threshold={0.1} 
+      <ViewportLazy
+        threshold={0.1}
         rootMargin="150px"
         fallback={<SectionLoadingFallback />}
       >
@@ -86,8 +87,8 @@ export default function OptimizedHomePage() {
         </Section>
       </ViewportLazy>
 
-      <ViewportLazy 
-        threshold={0.1} 
+      <ViewportLazy
+        threshold={0.1}
         rootMargin="150px"
         fallback={<SectionLoadingFallback />}
       >
@@ -98,8 +99,8 @@ export default function OptimizedHomePage() {
         </Section>
       </ViewportLazy>
 
-      <ViewportLazy 
-        threshold={0.1} 
+      <ViewportLazy
+        threshold={0.1}
         rootMargin="150px"
         fallback={<SectionLoadingFallback />}
       >
@@ -110,8 +111,8 @@ export default function OptimizedHomePage() {
         </Section>
       </ViewportLazy>
 
-      <ViewportLazy 
-        threshold={0.1} 
+      <ViewportLazy
+        threshold={0.1}
         rootMargin="150px"
         fallback={<SectionLoadingFallback />}
       >
@@ -122,8 +123,8 @@ export default function OptimizedHomePage() {
         </Section>
       </ViewportLazy>
 
-      <ViewportLazy 
-        threshold={0.1} 
+      <ViewportLazy
+        threshold={0.1}
         rootMargin="150px"
         fallback={<SectionLoadingFallback />}
       >
@@ -134,8 +135,8 @@ export default function OptimizedHomePage() {
         </Section>
       </ViewportLazy>
 
-      <ViewportLazy 
-        threshold={0.1} 
+      <ViewportLazy
+        threshold={0.1}
         rootMargin="150px"
         fallback={<SectionLoadingFallback />}
       >

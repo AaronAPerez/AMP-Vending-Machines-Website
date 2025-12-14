@@ -47,7 +47,7 @@ const ServiceAreaSection = () => {
           Service Coverage
         </span>
         <h2 className="text-3xl md:text-4xl font-bold text-[#F5F5F5] mb-4">
-          Serving <span className="text-[#FD5A1E]">Central California</span>
+          Serving Businesses Across<span className="text-[#FD5A1E]"> Northern California</span>
         </h2>
         <p className="text-xl text-[#A5ACAF] max-w-3xl mx-auto">
           AMP Vending provides premium vending solutions throughout Central California. 
