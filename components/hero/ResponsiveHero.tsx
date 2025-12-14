@@ -28,26 +28,29 @@ export const ResponsiveHero = ({
   className = ''
 }: HeroProps) => {
   return (
-    <div 
+    <div
       className={cn(
-        "relative min-h-screen flex items-center justify-center overflow-hidden",
+        // Start below navbar with increased height
+        "relative min-h-screen md:min-h-[120vh] flex items-center justify-center overflow-hidden",
+        // Add top padding to account for fixed navbar
+        "pt-0 ",
         className
       )}
       aria-labelledby="hero-heading"
     >
       {/* Critical Path: Static Background (CSS Only) */}
-      <div 
+      <div
         className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/70 to-black z-10"
         aria-hidden="true"
       />
 
       {/* Critical Path: Hero Content (No JS dependencies) */}
-      <div className="relative z-30 text-center px-4 sm:px-6 mb-12 max-w-5xl">
+      <div className="relative z-30 text-center px-4 sm:px-6 max-w-5xl -mt-8 md:-mt-4 mb-6">
         {/* LCP Element - Optimized with CSS-only animations */}
         <h1
           id="hero-heading"
           className={cn(
-            "text-4xl md:text-5xl lg:text-6xl font-bold text-[#F5F5F5] mb-6 sm:mb-4 drop-shadow-xl",
+            "text-4xl md:text-5xl lg:text-6xl font-bold text-[#F5F5F5] mb-6 sm:mb-8 drop-shadow-xl",
             // CSS-only fade-in animation (no JS blocking)
             "animate-in fade-in duration-700 fill-mode-forwards"
           )}
@@ -59,16 +62,16 @@ export const ResponsiveHero = ({
         >
           {title}
         </h1>
-        
-        <p 
+
+        <p
           className={cn(
-            "text-xl md:text-2xl text-[#F5F5F5] mb-8 drop-shadow-lg max-w-3xl mx-auto",
+            "text-xl md:text-2xl text-[#F5F5F5] mb-8 md:mb-10 drop-shadow-lg max-w-3xl mx-auto",
             "animate-in slide-in-from-bottom-4 duration-700 delay-150 fill-mode-forwards"
           )}
         >
           {subtitle}
         </p>
-        
+
         {/* CTA Buttons - Deferred loading */}
         <div className="flex flex-wrap justify-center gap-4 animate-in slide-in-from-bottom-4 duration-700 delay-300 fill-mode-forwards">
           {primaryCta && (
@@ -97,15 +100,7 @@ export const ResponsiveHero = ({
           )}
         </div>
       </div>
-
-      {/* Non-Critical: Background Images (Lazy Loaded) */}
-  
         <BackgroundImages />
     </div>
   );
 };
-
-// Separate component for heavy background images
-const LazyBackgroundImages = React.lazy(() => 
-  import('./BackgroundImages').then(module => ({ default: module.BackgroundImages }))
-);

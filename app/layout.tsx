@@ -66,6 +66,26 @@ export default function RootLayout({
         {/* Theme colors */}
         <meta name="theme-color" content="#000000" />
         <meta name="msapplication-TileColor" content="#000000" />
+
+             {/* Performance optimization hints */}
+        <meta httpEquiv="x-dns-prefetch-control" content="on" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+
+        {/* Security headers */}
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+        <meta name="referrer" content="origin-when-cross-origin" />
+
+        {/* Additional SEO enhancements */}
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="bingbot" content="index, follow" />
+
+        {/* Canonical URL (will be overridden by page-specific canonical) */}
+        <link rel="canonical" href="https://www.ampvendingmachines.com" />
+
+        {/* Alternate language versions (add when implementing i18n) */}
+        <link rel="alternate" hrefLang="en-US" href="https://www.ampvendingmachines.com" />
+        <link rel="alternate" hrefLang="x-default" href="https://www.ampvendingmachines.com" />
       </head>
 
 
@@ -105,6 +125,7 @@ export default function RootLayout({
           className="relative z-10 bg-gradient-to-b from-black via-black to-gray-900 min-h-screen mt-8 md:mt-4"
           role="main"
           aria-label="Main content"
+          suppressHydrationWarning
         >
           <StyledComponentsRegistry>
             {children}

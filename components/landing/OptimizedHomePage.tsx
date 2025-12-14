@@ -1,6 +1,7 @@
 'use client';
 
-import React, { Suspense } from 'react';
+import React from 'react';
+import { Suspense } from 'react';
 import { ViewportLazy, Deferred } from '../ui/loading/LazyLoading';
 import { SectionLoadingFallback } from '@/components/ui/loading/LoadingFallbacks';
 import Section from '@/components/ui/shared/Section';
@@ -23,6 +24,7 @@ import {
 } from '../ui/loading/LazyComponents';
 
 
+
 /**
  * Performance-optimized HomePage with progressive loading
  */
@@ -40,7 +42,7 @@ export default function OptimizedHomePage() {
               <br />for <span className="text-[#FD5A1E]">Modern Workplaces</span>
             </>
           }
-          subtitle="Enhance your workplace with state-of-the-art vending machines featuring 21.5&quot; touchscreen technology."
+          subtitle="Enhance your workplace with state-of-the-art vending machines featuring touchscreen technology."
           primaryCta={{ text: "View Machines", href: "/vending-machines" }}
           secondaryCta={{ text: "Free Consultation", href: "/contact" }}
         />
@@ -152,3 +154,21 @@ export default function OptimizedHomePage() {
     </main>
   );
 }
+
+
+// Hero loading fallback for critical path
+const HeroLoadingFallback = React.memo(() => (
+  <div className="min-h-screen bg-black flex items-center justify-center">
+    <div className="text-center px-4">
+      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#F5F5F5] mb-6 animate-pulse">
+        Premium Commercial Vending Solutions
+        <br />for <span className="text-[#FD5A1E]">Modern Workplaces</span>
+      </h1>
+      <p className="text-xl md:text-2xl text-[#F5F5F5] mb-8 max-w-3xl mx-auto opacity-75">
+        Loading amazing vending solutions...
+      </p>
+    </div>
+  </div>
+));
+
+HeroLoadingFallback.displayName = 'HeroLoadingFallback';

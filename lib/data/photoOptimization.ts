@@ -10,7 +10,7 @@
  */
 
 import { z } from 'zod';
-import { AMP_VENDING_BUSINESS_INFO, getServiceAreaList } from './businessData';
+import { AMP_VENDING_BUSINESS_INFO } from './businessData';
 
 /**
  * Photo Category Enumeration for Google Business Profile

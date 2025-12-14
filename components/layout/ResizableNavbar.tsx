@@ -85,7 +85,7 @@ const ResizableNavbar = () => {
                   alt="AMP Vending Logo"
                   width={100}
                   height={100}
-                  className="w-22 h-16 transition-all duration-300"
+                  className="transition-all duration-300"
                   style={{ height: 'auto' }}
                   priority
                 />

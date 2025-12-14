@@ -1,27 +1,22 @@
 /**
- * Next.js Configuration - Fixed for Next.js 15.3.4
+ * Next.js Configuration - Optimized for Next.js 16.0.10
  *
- * Build Process Documentation:
- * 1. Fixes configuration options that are invalid in Next.js 15+
- * 2. Removes deprecated options and uses correct syntax
- * 3. Implements proper build optimization
- * 4. Adds proper TypeScript and ESLint configurations
- * 5. Includes performance optimizations
+ * Production-Ready Configuration:
+ * 1. Compiler optimizations for bundle size reduction
+ * 2. Advanced security headers (CSP, HSTS, COOP)
+ * 3. Image optimization with AVIF/WebP support
+ * 4. Aggressive caching strategy for static assets
+ * 5. Performance optimizations for Core Web Vitals
  */
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* Core Configuration - Fixed for Next.js 15+ */
+  /* Core Configuration */
 
   // Enable React strict mode for better development experience
   reactStrictMode: true,
 
-  // Configure TypeScript build behavior
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-
-  // Compiler optimizations (Fixed syntax)
+  // Compiler optimizations using SWC (default in Next.js 16)
   compiler: {
     // Remove console.log statements in production
     removeConsole:
@@ -39,64 +34,14 @@ const nextConfig = {
         : false,
   },
 
-  // Experimental features for optimization (Updated for Next.js 16+)
+  // Experimental features for optimization
   experimental: {
     // Optimize package imports for better tree shaking
     optimizePackageImports: ["lucide-react", "framer-motion"],
-    // Enable CSS optimization
-    optimizeCss: true,
   },
 
-  // Turbopack configuration
-  turbopack: {
-    root: process.cwd(),
-  },
-
-  // Webpack configuration for build optimization
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    // Optimize bundle splitting for client-side code
-    if (!isServer) {
-      config.optimization.splitChunks = {
-        chunks: "all",
-        cacheGroups: {
-          default: {
-            minChunks: 2,
-            priority: -20,
-            reuseExistingChunk: true,
-          },
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: "vendors",
-            priority: -10,
-            chunks: "all",
-          },
-          common: {
-            name: "common",
-            minChunks: 2,
-            priority: -30,
-            reuseExistingChunk: true,
-          },
-        },
-      };
-    }
-
-    // Add fallbacks for Node.js modules (prevents build errors)
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      fs: false,
-      net: false,
-      tls: false,
-      crypto: false,
-    };
-
-    // Handle SVG imports
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ["@svgr/webpack"],
-    });
-
-    return config;
-  },
+  // Turbopack is now default in Next.js 16 - empty config silences migration warning
+  turbopack: {},
 
   // Environment variables available to the client
   env: {
@@ -117,6 +62,7 @@ const nextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60 * 60 * 24 * 365, // 1 year
+    qualities: [75, 90], // list of allowed qualities
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
@@ -163,6 +109,9 @@ const nextConfig = {
           },
           {
             key: "Content-Security-Policy",
+            // NOTE: 'unsafe-inline' and 'unsafe-eval' reduce CSP protection but are
+            // required for Next.js runtime and third-party analytics.
+            // Consider tightening with nonces/hashes for stricter security.
             value: [
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com",
