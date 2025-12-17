@@ -50,7 +50,7 @@ const ServiceAreaSection = () => {
           Serving Businesses Across<span className="text-[#FD5A1E]"> Stanislaus County</span>
         </h2>
         <p className="text-xl text-[#A5ACAF] max-w-3xl mx-auto">
-          AMP Vending provides premium vending solutions throughout Central California. 
+          AMP Vending provides premium vending solutions throughout the Central Valley. 
           Our service area includes Modesto and surrounding communities.
         </p>
       </motion.div>
@@ -146,7 +146,7 @@ const ServiceAreaSection = () => {
               Areas We Serve
             </h3>
             <p className="text-[#A5ACAF] mt-2">
-              Our vending machines are available throughout these Central California locations:
+              Our vending machines are available throughout these Northern California Central Valley locations:
             </p>
           </div>
           

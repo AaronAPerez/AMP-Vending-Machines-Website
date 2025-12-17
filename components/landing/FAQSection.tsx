@@ -74,11 +74,11 @@ const FAQSection = () => {
           <span className="text-[#FD5A1E] font-medium text-sm">Quick Answers</span>
         </div>
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-[#F5F5F5]">
-          Vending Machine <span className="text-[#FD5A1E]">FAQs</span> - Modesto & Stanislaus County
+          Vending Machine <span className="text-[#FD5A1E]">FAQs</span>  
         </h2>
 
         <p className="text-lg text-[#A5ACAF] max-w-3xl mx-auto">
-          Everything you need to know about AMP Vending Machines in Modesto, Stanislaus County & Central California
+          Everything you need to know about AMP Vending Machines in Modesto, Stanislaus County to Stockton San Joaquin County.
         </p>
       </div>
 
@@ -126,7 +126,7 @@ const FAQSection = () => {
         transition={{ duration: 0.6, delay: 0.6 }}
       >
         <h3 className="text-xl font-bold text-[#F5F5F5] mb-4">
-          Have More Questions About Vending Machines in Modesto?
+          Have More Questions About AMP Vending Machines?
         </h3>
         <p className="text-[#A5ACAF] max-w-2xl mx-auto mb-6">
           Our Modesto-based team is ready to answer any questions about AMP Vending Machines,

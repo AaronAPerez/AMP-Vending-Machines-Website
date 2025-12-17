@@ -387,12 +387,12 @@ const WorkplaceTransformSection: React.FC<WorkplaceTransformSectionProps> = ({
             id="transform-heading"
             className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#F5F5F5] mb-4 sm:mb-6 leading-tight"
           >
-            Commercial Vending Machines for{' '}
-            <span className="text-[#FD5A1E]">Modesto & Stanislaus County</span>
+            Transform Your Workplace with{' '}
+            <span className="text-[#FD5A1E]">Latest Technology</span>
           </h2>
           <p className="text-lg sm:text-xl lg:text-2xl text-[#A5ACAF] max-w-4xl mx-auto leading-relaxed">
-            ampvendingmachines.com delivers premium touchscreen vending solutions to businesses
-            in Modesto, Turlock, Ceres, and throughout Stanislaus County with measurable results.
+            Discover how our advanced vending solutions enhance employee satisfaction
+            and workplace convenience with measurable results.
           </p>
         </motion.header>
       )}
@@ -469,7 +469,7 @@ const WorkplaceTransformSection: React.FC<WorkplaceTransformSectionProps> = ({
         {/* Premium Features List */}
         <div>
           <h3 className="text-2xl sm:text-3xl font-bold text-[#F5F5F5] mb-8 leading-tight">
-            Premium Vending Machine Features for Businesses in Modesto CA
+            Premium Features for Modern Workplaces
           </h3>
           <div className="space-y-4">
             {PREMIUM_FEATURES.map((feature, index) => (
@@ -492,10 +492,10 @@ const WorkplaceTransformSection: React.FC<WorkplaceTransformSectionProps> = ({
       >
         <div className="text-center mb-12">
           <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#F5F5F5] mb-4">
-            Complete Vending Solutions for Stanislaus County
+              Elevate your Work Environment
           </h3>
           <p className="text-lg text-[#A5ACAF] max-w-3xl mx-auto">
-            Everything you need for successful vending in Modesto and throughout Central California
+         AMP Vending Machines delivers convenient premium touchscreen vending solutions 
           </p>
         </div>
 
@@ -523,11 +523,11 @@ const WorkplaceTransformSection: React.FC<WorkplaceTransformSectionProps> = ({
             <div className="relative px-4 sm:px-6 lg:px-8 py-8 sm:py-10 border border-[#FD5A1E]/30 rounded-2xl bg-[#000000]/50">
               <SparklesIcon size={32} className="text-[#FD5A1E] mx-auto mb-4" aria-hidden="true" />
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#F5F5F5] mb-4">
-                Get Premium Vending Machines in Modesto & Stanislaus County
+                   Ready to Experience Advanced Vending Technology?
               </h3>
               <p className="text-sm sm:text-base lg:text-lg text-[#A5ACAF] mb-8 max-w-2xl mx-auto leading-relaxed">
-                Transform your Modesto or Stanislaus County workplace with AMP Vending Machines.
-                Free consultation and installation for qualified businesses in Central California.
+                   Transform your workplace today with state-of-the-art vending technology.
+                Enhanced employee satisfaction starts with a simple consultation.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md sm:max-w-none mx-auto">
                 <Link

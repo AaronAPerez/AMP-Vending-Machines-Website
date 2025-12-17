@@ -43,7 +43,7 @@ export default function OptimizedHomePage() {
               </h1>
             </>
           }
-          subtitle="AMP Vending Machines - Premier commercial vending solutions for businesses in Modesto, Turlock, Ceres, and throughout Stanislaus County & Central California."
+          subtitle="AMP Vending - Premier commercial vending solutions for businesses in Modesto, Turlock, Ceres, and surrounding areas."
           primaryCta={{ text: "View Our Machines", href: "/vending-machines" }}
           secondaryCta={{ text: "Get Started", href: "/contact" }}
         />

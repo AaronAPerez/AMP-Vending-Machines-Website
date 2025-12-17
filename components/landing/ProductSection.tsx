@@ -259,7 +259,7 @@ const ProductSection = () => {
           Customizable <span className="text-[#FD5A1E]">Product Selection</span>
         </h2>
         <p className="text-lg text-[#A5ACAF] max-w-3xl mx-auto pb-4">
-          Tailored refreshment options to match your workplace preferences throughout Central California
+          Tailored refreshment options to match your workplace preferences throughout the Central Valley, including San Joaquin County
         </p>
       </div>
       {/* Category Filters */}

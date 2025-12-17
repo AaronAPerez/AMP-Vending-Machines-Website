@@ -183,7 +183,7 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
         {/* Form Column */}
         <div className="w-full md:w-1/2 p-4 sm:p-6 md:p-8 lg:p-12">
           <Text variant="h3" className="mb-4 text-left">
-            Ready to Enhance Your Workplace?
+            Contact Us
           </Text>
           <Text variant="body" color="muted" className="mb-6 text-left">
             Fill out the form and our team will get back to you within 24 hours to discuss your premium vending needs.

@@ -94,7 +94,7 @@ const SEO_CONSTANTS = {
   DEFAULT_LOCALE: 'en_US',
   TWITTER_HANDLE: '@ampvending', // Update with actual handle
   BUSINESS_INFO: {
-    name: 'AMP Vending Machines',
+    name: 'AMP Vending',
     alternateName: 'ampvendingmachines',
     type: 'LocalBusiness',
     address: {
