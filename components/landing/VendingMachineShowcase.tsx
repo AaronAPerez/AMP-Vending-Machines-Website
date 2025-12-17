@@ -60,12 +60,98 @@ const VendingMachineShowcase = ({
 
         {/* Machine Cards using reusable component */}
         {vendingMachines.length > 0 ? (
-          <MachineGrid
-            machines={vendingMachines}
-            variant="showcase"
-            className="mb-16 sm:mb-20"
-            ariaLabel="Featured vending machines collection"
-          />
+          <>
+            <MachineGrid
+              machines={vendingMachines}
+              variant="showcase"
+              className="mb-12"
+              ariaLabel="Featured vending machines collection"
+            />
+
+            {/* Custom Request CTA Card */}
+            <motion.div
+              className="mb-16 sm:mb-20"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            >
+              <Link href="/contact">
+                <div className="group relative bg-gradient-to-br from-[#FD5A1E]/15 via-[#FD5A1E]/10 to-transparent border-2 border-[#FD5A1E]/40 rounded-2xl p-8 sm:p-10 overflow-hidden hover:border-[#FD5A1E]/60 transition-all duration-300 cursor-pointer hover:shadow-2xl hover:shadow-[#FD5A1E]/20">
+                  {/* Background Pattern */}
+                  <div className="absolute inset-0 opacity-5">
+                    <div className="absolute inset-0" style={{
+                      backgroundImage: 'radial-gradient(circle, #FD5A1E 1px, transparent 1px)',
+                      backgroundSize: '20px 20px'
+                    }} />
+                  </div>
+
+                  {/* Content */}
+                  <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6">
+                    <div className="flex-1 text-center lg:text-left">
+                      {/* Badge */}
+                      <motion.div
+                        className="inline-flex items-center px-4 py-1.5 bg-[#FD5A1E] text-[#000000] rounded-full text-xs font-bold mb-4 shadow-lg"
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                        CUSTOM SOLUTIONS AVAILABLE
+                      </motion.div>
+
+                      {/* Heading */}
+                      <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#F5F5F5] mb-3 group-hover:text-[#FD5A1E] transition-colors">
+                        Can&apos;t Find What You Need?
+                      </h3>
+
+                      {/* Description */}
+                      <p className="text-base sm:text-lg text-[#A5ACAF] mb-6 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        We&apos;ll order a <span className="text-[#F5F5F5] font-semibold">brand new vending machine</span> customized to your exact specifications - any capacity, features, or special requirements.
+                      </p>
+
+                      {/* Feature List */}
+                      <div className="grid sm:grid-cols-2 gap-3 mb-6 text-sm">
+                        {[
+                          'Custom capacity & dimensions',
+                          'Latest technology & features',
+                          'Factory-direct from top manufacturers',
+                          'Expert consultation included'
+                        ].map((feature, index) => (
+                          <motion.div
+                            key={index}
+                            className="flex items-center justify-center lg:justify-start gap-2 text-[#A5ACAF]"
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.4, delay: 0.7 + index * 0.1 }}
+                          >
+                            <svg className="w-5 h-5 text-[#FD5A1E] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                            </svg>
+                            <span>{feature}</span>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* CTA Button */}
+                    <motion.div
+                      className="flex-shrink-0"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <div className="inline-flex items-center px-8 py-4 bg-[#FD5A1E] text-[#000000] rounded-full font-bold text-lg shadow-xl group-hover:shadow-2xl group-hover:shadow-[#FD5A1E]/30 transition-all whitespace-nowrap">
+                        Request Custom Machine
+                        <svg className="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </div>
+                    </motion.div>
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+          </>
         ) : (
           <div className="text-center mb-16 sm:mb-20">
             <div className="bg-[#0a0a0a] rounded-xl p-8 border border-[#333333] max-w-2xl mx-auto">
@@ -84,7 +170,7 @@ const VendingMachineShowcase = ({
             </div>
           </div>
         )}
-        
+
         {/* Call to Action */}
         <motion.div
           className="text-center"

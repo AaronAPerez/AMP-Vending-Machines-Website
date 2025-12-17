@@ -5,17 +5,18 @@ import { Metadata } from "next";
 // lib/data/seoData.ts
 export const SEO_CONSTANTS = {
   // Website Identity
-  SITE_NAME: 'AMP Vending',
-  SITE_TITLE: 'AMP Vending | Premium Vending Machines for Workplaces',
-  SITE_DESCRIPTION: 'AMP Vending provides professional, maintenance-free vending machines with 21.5" touchscreen interfaces and 50+ customizable product options for workplaces in Central California.',
+  SITE_NAME: 'AMP Vending Machines',
+  SITE_TITLE: 'AMP Vending Machines | Modesto & Stanislaus County | Premium Commercial Vending',
+  SITE_DESCRIPTION: 'ampvendingmachines.com - Leading vending machine provider in Modesto, Stanislaus County & Central California. Professional touchscreen vending machines with 50+ products. Free installation. Call (209) 403-5450',
   
   // URLs and Domains
   BASE_URL: 'https://www.ampvendingmachines.com',
   DOMAIN: 'ampvendingmachines.com',
   
   // Business Information
-  BUSINESS_NAME: 'AMP Vending',
+  BUSINESS_NAME: 'AMP Vending Machines',
   BUSINESS_LEGAL_NAME: 'AMP Design and Consulting LLC',
+  BRAND_KEYWORDS: ['ampvendingmachines', 'amp vending machines', 'amp vending', 'ampvending'],
   
   // Contact Information
   PHONE: '+12094035450',
@@ -27,7 +28,9 @@ export const SEO_CONSTANTS = {
   ADDRESS: {
     STREET: '4120 Dale Rd ste j8 1005',
     CITY: 'Modesto',
+    COUNTY: 'Stanislaus County',
     STATE: 'CA',
+    STATE_FULL: 'California',
     ZIP: '95354',
     COUNTRY: 'US',
     COORDINATES: {
@@ -37,33 +40,80 @@ export const SEO_CONSTANTS = {
   },
   
   // Service Area
-  SERVICE_AREA: 'Central California',
+  SERVICE_AREA: 'Modesto, Stanislaus County & Central California',
+  SERVICE_COUNTY: 'Stanislaus County',
   PRIMARY_CITIES: [
-    'Modesto', 'Stockton', 'Turlock', 'Manteca', 'Tracy', 
-    'Merced', 'Riverbank', 'Oakdale', 'Ceres', 'Patterson'
+    'Modesto', 'Turlock', 'Ceres', 'Riverbank', 'Oakdale', 'Patterson', 'Waterford', 'Hughson',
+    'Stockton', 'Manteca', 'Tracy', 'Merced', 'Fresno', 'Salinas', 'San Jose', 'Sacramento'
+  ],
+  STANISLAUS_COUNTY_CITIES: [
+    'Modesto', 'Turlock', 'Ceres', 'Riverbank', 'Oakdale', 'Patterson', 'Waterford', 'Hughson', 'Newman'
   ],
   
   // Industry Keywords
   PRIMARY_KEYWORDS: [
-    'vending machines',
-    'vending machines supplier',
-    'amp vending',
+    // Brand Keywords
+    'ampvendingmachines',
+    'ampvendingmachines.com',
     'amp vending machines',
+    'amp vending',
+    'ampvending',
+
+    // Location + Service Keywords (Highest Priority)
+    'vending machines Modesto',
+    'vending machines Modesto CA',
+    'Modesto vending machines',
+    'vending machines Stanislaus County',
+    'Stanislaus County vending machines',
+    'vending machines near me Modesto',
+    'Modesto CA vending machines',
+
+    // Central Valley Cities
+    'vending machines Turlock',
+    'vending machines Ceres',
+    'vending machines Riverbank',
+    'vending machines Oakdale',
+    'vending machines Stockton',
+    'vending machines Manteca',
+    'vending machines Tracy',
+    'vending machines Merced',
+    'vending machines Fresno',
+    'Central California vending machines',
+    'Central Valley vending machines',
+
+    // Service Type Keywords
+    'commercial vending machines',
+    'office vending machines',
+    'workplace vending machines',
+    'business vending machines',
+    'company vending machines',
+    'employee vending machines',
+
+    // Feature Keywords
+    'touchscreen vending machines',
+    'modern vending machines',
+    'smart vending machines',
+    'contactless vending machines',
+    'cashless vending machines',
+    'refrigerated vending machines',
+
+    // Service Keywords
+    'vending machine supplier',
+    'vending machine provider',
+    'vending machine vendor',
+    'vending machine installation',
+    'vending machine rental',
+    'vending machine service',
+    'vending machine maintenance',
+    'free vending machines',
+
+    // Industry Terms
     'premium vending machines',
     'professional vending',
-    'workplace vending',
-    'touchscreen vending',
-    'touchscreen vending machines',
     'maintenance-free vending',
-    'employee satisfaction',
-    'custom vending Machines',
-    'Modesto vending machines',
-    'vending machines near me',
-    'Modesto vending machines',
-    'vending machines modesto',
-    'vending machines ca',
-    'vending central vally',
-    'Central California vending',
+    'full service vending',
+    'custom vending solutions',
+    'vending machines for businesses',
   ],
 
   // Open Graph Image Defaults
@@ -101,8 +151,8 @@ export const PAGE_METADATA = {
       canonical: SEO_CONSTANTS.BASE_URL,
     },
     openGraph: {
-      title: 'Premium Vending Machines for Modern Workplaces | AMP Vending',
-      description: 'Enhance your workplace with advanced vending technology featuring 21.5" touchscreen interfaces and 50+ customizable product options.',
+      title: 'AMP Vending Machines | Modesto & Stanislaus County Vending Solutions',
+      description: 'Leading vending machine provider in Modesto, Stanislaus County & Central California. Premium touchscreen vending machines with free installation.',
       url: SEO_CONSTANTS.BASE_URL,
       siteName: SEO_CONSTANTS.SITE_NAME,
       images: [{
@@ -116,16 +166,16 @@ export const PAGE_METADATA = {
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Premium Vending Machines for Modern Workplaces | AMP Vending',
-      description: 'Professional vending machines with touchscreen technology for enhanced workplace satisfaction.',
+      title: 'AMP Vending Machines | Modesto & Stanislaus County',
+      description: 'ampvendingmachines.com - Top vending machine provider in Modesto, Stanislaus County & Central California with touchscreen technology.',
       images: [SEO_CONSTANTS.DEFAULT_OG_IMAGE_FULL],
     },
   } satisfies Metadata,
 
   VENDING_MACHINES: {
-    title: 'Premium Vending Machines | Touchscreen Technology | AMP Vending',
-    description: 'Explore our premium vending machines featuring 21.5" touchscreen interfaces, tap-to-pay technology, and customizable product selections. Professional installation available.',
-    keywords: 'premium vending machines, touchscreen vending, workplace vending Machines, professional vending machines, Modesto',
+    title: 'Vending Machines Modesto | Stanislaus County | Commercial & Office Solutions',
+    description: 'ampvendingmachines.com offers premium commercial vending machines in Modesto, Stanislaus County & Central California. Free installation, 21.5" touchscreen, 50+ products. Call (209) 403-5450',
+    keywords: 'vending machines Modesto, vending machines Stanislaus County, Modesto vending machines, ampvendingmachines, commercial vending machines, office vending machines Modesto CA, touchscreen vending, workplace vending solutions',
     alternates: {
       canonical: `${SEO_CONSTANTS.BASE_URL}/vending-machines`,
     },
@@ -177,9 +227,9 @@ export const PAGE_METADATA = {
 // } satisfies Metadata,
 
   CONTACT: {
-    title: 'Contact AMP Vending | Professional Vending Machine Consultation',
-    description: 'Contact AMP Vending for consultation on premium vending machines. Professional installation, maintenance-free operation, and 24/7 support in Central California.',
-    keywords: 'contact vending machine company, consultation, professional installation, Modesto vending, Central California',
+    title: 'Contact AMP Vending Machines | Modesto & Stanislaus County | (209) 403-5450',
+    description: 'Contact ampvendingmachines.com for free vending machine consultation in Modesto, Stanislaus County & Central California. Professional installation & service. Call (209) 403-5450 today!',
+    keywords: 'contact AMP vending machines, vending machines Modesto, Modesto vending company, Stanislaus County vending, ampvendingmachines contact, vending machine consultation',
     alternates: {
       canonical: `${SEO_CONSTANTS.BASE_URL}/contact`,
     },
@@ -331,23 +381,37 @@ export const BASE_ORGANIZATION_SCHEMA = {
   url: SEO_CONSTANTS.BASE_URL,
   logo: SEO_CONSTANTS.LOGO_FULL_URL,
   image: SEO_CONSTANTS.DEFAULT_OG_IMAGE_FULL,
-  description: SEO_CONSTANTS.SITE_DESCRIPTION,
+  description: 'ampvendingmachines.com - Premier vending machine provider serving Modesto, Stanislaus County & Central California with professional touchscreen vending solutions.',
   telephone: SEO_CONSTANTS.PHONE,
   email: SEO_CONSTANTS.EMAIL,
   priceRange: 'Free installation and maintenance',
-  areaServed: {
-    '@type': SCHEMA_TYPES.PLACE,
-    name: SEO_CONSTANTS.SERVICE_AREA,
-    geo: {
-      '@type': 'GeoCircle',
-      geoMidpoint: {
-        '@type': 'GeoCoordinates',
-        latitude: SEO_CONSTANTS.ADDRESS.COORDINATES.LAT,
-        longitude: SEO_CONSTANTS.ADDRESS.COORDINATES.LNG,
+  areaServed: [
+    {
+      '@type': SCHEMA_TYPES.PLACE,
+      name: 'Stanislaus County, California',
+      geo: {
+        '@type': 'GeoCircle',
+        geoMidpoint: {
+          '@type': 'GeoCoordinates',
+          latitude: SEO_CONSTANTS.ADDRESS.COORDINATES.LAT,
+          longitude: SEO_CONSTANTS.ADDRESS.COORDINATES.LNG,
+        },
+        geoRadius: '50 miles',
       },
-      geoRadius: '50 miles',
     },
-  },
+    {
+      '@type': 'City',
+      name: 'Modesto, CA',
+    },
+    {
+      '@type': 'City',
+      name: 'Turlock, CA',
+    },
+    {
+      '@type': 'City',
+      name: 'Ceres, CA',
+    },
+  ],
   address: {
     '@type': SCHEMA_TYPES.POSTAL_ADDRESS,
     streetAddress: SEO_CONSTANTS.ADDRESS.STREET,

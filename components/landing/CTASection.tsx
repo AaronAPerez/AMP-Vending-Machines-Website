@@ -36,10 +36,11 @@ const CTASection = () => {
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Advanced Machines, <span className="text-[#FD5A1E]">Complete Service</span>
+            Modesto's Premier <span className="text-[#FD5A1E]">Vending Machine Provider</span>
           </h2>
           <p className="text-xl text-white/80 max-w-3xl mx-auto mb-8">
-            Join leading workplaces enjoying state-of-the-art vending with comprehensive maintenance and support.
+            Join leading Modesto and Stanislaus County businesses enjoying ampvendingmachines.com's
+            state-of-the-art vending solutions with comprehensive maintenance and support.
           </p>
           
           {/* Key Benefits */}
@@ -87,7 +88,7 @@ const CTASection = () => {
                 rightIcon={<ArrowRight size={20} />}
                 animate
               >
-                Get Started
+                Get Free Quote - Modesto CA
               </AccessibleButton>
             </motion.div>
           </div>

@@ -153,7 +153,7 @@ export default function ContactPage() {
 
         {/* Contact Form Section */}
         
-        <div className="pb-16">
+        <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
           <ContactForm />
         </div>
 

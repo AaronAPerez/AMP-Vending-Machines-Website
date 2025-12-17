@@ -115,7 +115,8 @@ export function GoogleIndexingOptimization({
         publisher: {
           '@type': 'LocalBusiness',
           '@id': `${baseUrl}/#organization`,
-          name: 'AMP Vending',
+          name: 'AMP Vending Machines',
+          alternateName: 'ampvendingmachines',
           url: baseUrl,
           logo: `${baseUrl}/images/logo/AMP_logo.png`,
           address: {
@@ -123,6 +124,7 @@ export function GoogleIndexingOptimization({
             streetAddress: '4120 Dale Rd ste j8 1005',
             addressLocality: 'Modesto',
             addressRegion: 'CA',
+            addressCounty: 'Stanislaus County',
             postalCode: '95354',
             addressCountry: 'US',
           },
@@ -200,16 +202,21 @@ export function GoogleIndexingOptimization({
    */
   const generatePageKeywords = (): string => {
     const baseKeywords = [
-      'AMP Vending',
-      'vending machines',
-      'office vending',
-      'commercial vending',
-      'Central California',
-      'Modesto vending',
-      'touchscreen vending',
-      'workplace solutions',
+      'ampvendingmachines',
+      'ampvendingmachines.com',
+      'AMP Vending Machines',
+      'vending machines Modesto',
+      'vending machines Stanislaus County',
+      'Modesto vending machines',
+      'Stanislaus County vending machines',
+      'vending machines Modesto CA',
+      'commercial vending Modesto',
+      'office vending Modesto CA',
+      'Central California vending machines',
+      'touchscreen vending machines',
+      'workplace vending solutions Modesto',
     ];
-    
+
     return [...baseKeywords, ...keywords].join(', ');
   };
 
@@ -256,14 +263,15 @@ export function GoogleIndexingOptimization({
       
       {/* Geographic and business information */}
       <meta name="geo.region" content="US-CA" />
-      <meta name="geo.placename" content="Modesto, California" />
+      <meta name="geo.placename" content="Modesto, Stanislaus County, California" />
       <meta name="geo.position" content="37.6390972;-120.9968782" />
       <meta name="ICBM" content="37.6390972, -120.9968782" />
+      <meta name="geo.county" content="Stanislaus County" />
       
       {/* Business-specific meta tags */}
-      <meta name="author" content="AMP Vending" />
-      <meta name="publisher" content="AMP Vending" />
-      <meta name="coverage" content="Central California" />
+      <meta name="author" content="AMP Vending Machines" />
+      <meta name="publisher" content="AMP Vending Machines" />
+      <meta name="coverage" content="Modesto, Stanislaus County, Central California" />
       <meta name="distribution" content="global" />
       <meta name="rating" content="general" />
       

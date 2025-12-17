@@ -19,15 +19,25 @@ interface SitemapUrl {
 
 /**
  * Service areas for local SEO
+ * Prioritizing Stanislaus County cities for top local rankings
  */
 const SERVICE_AREAS = [
-  'modesto',
-  'stockton',
-  'turlock',
-  'fresno',
-  'merced',
-  'tracy',
-  'manteca'
+  // Stanislaus County (Highest Priority)
+  { slug: 'modesto', name: 'Modesto', priority: 0.9 },
+  { slug: 'turlock', name: 'Turlock', priority: 0.85 },
+  { slug: 'ceres', name: 'Ceres', priority: 0.85 },
+  { slug: 'riverbank', name: 'Riverbank', priority: 0.8 },
+  { slug: 'oakdale', name: 'Oakdale', priority: 0.8 },
+  { slug: 'patterson', name: 'Patterson', priority: 0.8 },
+  { slug: 'waterford', name: 'Waterford', priority: 0.75 },
+  { slug: 'hughson', name: 'Hughson', priority: 0.75 },
+
+  // Nearby Major Cities
+  { slug: 'stockton', name: 'Stockton', priority: 0.8 },
+  { slug: 'manteca', name: 'Manteca', priority: 0.8 },
+  { slug: 'tracy', name: 'Tracy', priority: 0.8 },
+  { slug: 'merced', name: 'Merced', priority: 0.75 },
+  { slug: 'fresno', name: 'Fresno', priority: 0.75 },
 ];
 
 /**
@@ -45,12 +55,13 @@ export async function GET(): Promise<Response> {
     urls.push({
       loc: baseUrl,
       lastmod: currentDate,
-      changefreq: 'weekly',
+      changefreq: 'daily',
       priority: 1.0,
       images: [{
         loc: `${baseUrl}/images/hero/amp-vending-hero.jpg`,
-        caption: 'AMP Vending - Premium Commercial Vending Machines',
-        title: 'Modern Touchscreen Vending Solutions'
+        caption: 'ampvendingmachines.com - Premium Vending Machines in Modesto & Stanislaus County',
+        title: 'AMP Vending Machines - Modesto, Stanislaus County & Central California',
+        geoLocation: 'Modesto, Stanislaus County, CA'
       }]
     });
     
@@ -79,23 +90,43 @@ export async function GET(): Promise<Response> {
       });
     });
     
-    // 4. Service area pages for local SEO
+    // 4. Service area pages for local SEO (with dynamic priority)
     SERVICE_AREAS.forEach(area => {
       urls.push({
-        loc: `${baseUrl}/service-areas/${area}`,
+        loc: `${baseUrl}/service-areas/${area.slug}`,
         lastmod: currentDate,
-        changefreq: 'monthly',
-        priority: 0.7
+        changefreq: 'weekly',
+        priority: area.priority,
+        images: [{
+          loc: `${baseUrl}/images/service-areas/${area.slug}.jpg`,
+          caption: `Vending Machines in ${area.name}, CA - ampvendingmachines.com`,
+          title: `Commercial Vending Solutions for ${area.name}`,
+          geoLocation: `${area.name}, CA`
+        }]
       });
     });
+
+    // 5. Stanislaus County specific page
+    urls.push({
+      loc: `${baseUrl}/stanislaus-county`,
+      lastmod: currentDate,
+      changefreq: 'weekly',
+      priority: 0.95,
+      images: [{
+        loc: `${baseUrl}/images/service-areas/stanislaus-county.jpg`,
+        caption: 'Vending Machines in Stanislaus County - ampvendingmachines.com',
+        title: 'Premier Vending Machine Provider for Stanislaus County',
+        geoLocation: 'Stanislaus County, CA'
+      }]
+    });
     
-    // 5. Contact and feedback pages
+    // 6. Contact and feedback pages
     urls.push(
       {
         loc: `${baseUrl}/contact`,
         lastmod: currentDate,
         changefreq: 'monthly',
-        priority: 0.8
+        priority: 0.85
       },
       {
         loc: `${baseUrl}/feedback`,
@@ -105,15 +136,15 @@ export async function GET(): Promise<Response> {
       }
     );
     
-    // 6. Accessibility statement
+    // 7. Accessibility statement
     urls.push({
       loc: `${baseUrl}/accessibility`,
       lastmod: currentDate,
       changefreq: 'yearly',
       priority: 0.5
     });
-    
-    // 7. Terms of Service and Privacy Policy
+
+    // 8. Terms of Service and Privacy Policy
     urls.push(
       {
         loc: `${baseUrl}/terms-of-service`,

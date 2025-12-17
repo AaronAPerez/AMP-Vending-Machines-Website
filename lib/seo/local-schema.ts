@@ -8,9 +8,9 @@ export function generateEnhancedLocalBusinessSchema(): LocalBusiness {
   return {
     '@type': 'LocalBusiness',
     '@id': 'https://www.ampvendingmachines.com/#localbusiness',
-    name: 'AMP Vending',
-    alternateName: 'AMP Design and Consulting',
-    description: 'Professional vending machine services in Central California with state-of-the-art touchscreen technology and full-service maintenance packages.',
+    name: 'AMP Vending Machines',
+    alternateName: ['ampvendingmachines', 'AMP Vending', 'AMP Design and Consulting'],
+    description: 'ampvendingmachines.com - Premier vending machine provider serving Modesto, Stanislaus County & Central California with state-of-the-art touchscreen technology and full-service maintenance packages.',
     
     // Contact information
     telephone: '+12094035450',
@@ -24,7 +24,7 @@ export function generateEnhancedLocalBusinessSchema(): LocalBusiness {
       addressRegion: 'CA',
       postalCode: '95354',
       addressCountry: 'US',
-      streetAddress: 'Modesto',
+      streetAddress: '4120 Dale Rd ste j8 1005',
     },
     
     // Geographic coordinates
@@ -37,29 +37,64 @@ export function generateEnhancedLocalBusinessSchema(): LocalBusiness {
     // Service area (all cities served)
     areaServed: [
       {
+        '@type': 'AdministrativeArea',
+        name: 'Stanislaus County, California',
+        '@id': 'https://en.wikipedia.org/wiki/Stanislaus_County,_California',
+      },
+      {
         '@type': 'City',
-        name: 'Modesto',
+        name: 'Modesto, CA',
         '@id': 'https://en.wikipedia.org/wiki/Modesto,_California',
       },
       {
         '@type': 'City',
-        name: 'Stockton',
-        '@id': 'https://en.wikipedia.org/wiki/Stockton,_California',
-      },
-      {
-        '@type': 'City',
-        name: 'Turlock',
+        name: 'Turlock, CA',
         '@id': 'https://en.wikipedia.org/wiki/Turlock,_California',
       },
       {
         '@type': 'City',
-        name: 'Manteca',
+        name: 'Ceres, CA',
+        '@id': 'https://en.wikipedia.org/wiki/Ceres,_California',
+      },
+      {
+        '@type': 'City',
+        name: 'Riverbank, CA',
+        '@id': 'https://en.wikipedia.org/wiki/Riverbank,_California',
+      },
+      {
+        '@type': 'City',
+        name: 'Oakdale, CA',
+        '@id': 'https://en.wikipedia.org/wiki/Oakdale,_California',
+      },
+      {
+        '@type': 'City',
+        name: 'Patterson, CA',
+        '@id': 'https://en.wikipedia.org/wiki/Patterson,_California',
+      },
+      {
+        '@type': 'City',
+        name: 'Stockton, CA',
+        '@id': 'https://en.wikipedia.org/wiki/Stockton,_California',
+      },
+      {
+        '@type': 'City',
+        name: 'Manteca, CA',
         '@id': 'https://en.wikipedia.org/wiki/Manteca,_California',
       },
       {
         '@type': 'City',
-        name: 'Tracy',
+        name: 'Tracy, CA',
         '@id': 'https://en.wikipedia.org/wiki/Tracy,_California',
+      },
+      {
+        '@type': 'City',
+        name: 'Merced, CA',
+        '@id': 'https://en.wikipedia.org/wiki/Merced,_California',
+      },
+      {
+        '@type': 'City',
+        name: 'Fresno, CA',
+        '@id': 'https://en.wikipedia.org/wiki/Fresno,_California',
       },
     ],
     
@@ -151,8 +186,8 @@ export function generateServiceAreaSchema(): Place {
   return {
     '@type': 'Place',
     '@id': 'https://www.ampvendingmachines.com/#servicearea',
-    name: 'AMP Vending Service Area',
-    description: 'We serve businesses throughout Central California',
+    name: 'AMP Vending Machines Service Area - Modesto & Stanislaus County',
+    description: 'ampvendingmachines.com serves businesses throughout Modesto, Stanislaus County, and Central California',
     geo: {
       '@type': 'GeoCircle',
       geoMidpoint: {

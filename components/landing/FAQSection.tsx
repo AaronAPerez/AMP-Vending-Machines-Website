@@ -18,8 +18,8 @@ const FAQSection = () => {
   const faqItems = [
     {
       id: 1,
-      question: "What makes your vending machines different?",
-      answer: "Our machines feature 21.5\" HD touchscreen interfaces, contactless payment technology, and smart inventory monitoring. We provide comprehensive service packages including installation, maintenance, and restocking.",
+      question: "What makes AMP Vending Machines different in Modesto?",
+      answer: "ampvendingmachines.com provides Modesto and Stanislaus County businesses with 21.5\" HD touchscreen vending machines, contactless payment technology, and smart inventory monitoring. We offer comprehensive service including free installation, maintenance, and restocking throughout Central California.",
       icon: <Zap size={20} />,
       category: "technology"
     },
@@ -74,11 +74,11 @@ const FAQSection = () => {
           <span className="text-[#FD5A1E] font-medium text-sm">Quick Answers</span>
         </div>
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-[#F5F5F5]">
-          Frequently <span className="text-[#FD5A1E]">Asked Questions</span>
+          Vending Machine <span className="text-[#FD5A1E]">FAQs</span> - Modesto & Stanislaus County
         </h2>
 
         <p className="text-lg text-[#A5ACAF] max-w-3xl mx-auto">
-          Everything you need to know about our professional vending solutions in Central California
+          Everything you need to know about AMP Vending Machines in Modesto, Stanislaus County & Central California
         </p>
       </div>
 
@@ -126,11 +126,11 @@ const FAQSection = () => {
         transition={{ duration: 0.6, delay: 0.6 }}
       >
         <h3 className="text-xl font-bold text-[#F5F5F5] mb-4">
-          Have More Questions?
+          Have More Questions About Vending Machines in Modesto?
         </h3>
         <p className="text-[#A5ACAF] max-w-2xl mx-auto mb-6">
-          Our team is ready to answer any questions about our vending solutions,
-          technology features, service packages, and installation process.
+          Our Modesto-based team is ready to answer any questions about AMP Vending Machines,
+          technology features, service packages, and installation process for Stanislaus County businesses.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link

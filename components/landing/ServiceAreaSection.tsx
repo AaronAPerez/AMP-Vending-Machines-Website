@@ -78,7 +78,7 @@ const ServiceAreaSection = () => {
           <div className="relative h-[300px]">
             {/* Static map image */}
             <HydrationSafeImage 
-              src="/images/central-california-map.jpg" 
+              src="/images/central-california-map.webp" 
               alt="Central California service area map" 
               width={800}
               height={600}

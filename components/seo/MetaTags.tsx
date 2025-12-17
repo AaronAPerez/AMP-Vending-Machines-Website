@@ -88,18 +88,20 @@ interface MetaTagsProps {
  * SEO Constants for AMP Vending
  */
 const SEO_CONSTANTS = {
-  SITE_NAME: 'AMP Vending',
+  SITE_NAME: 'AMP Vending Machines',
   BASE_URL: 'https://www.ampvendingmachines.com',
   DEFAULT_IMAGE: '/images/logo/AMP_logo.png',
   DEFAULT_LOCALE: 'en_US',
   TWITTER_HANDLE: '@ampvending', // Update with actual handle
   BUSINESS_INFO: {
-    name: 'AMP Vending',
+    name: 'AMP Vending Machines',
+    alternateName: 'ampvendingmachines',
     type: 'LocalBusiness',
     address: {
       streetAddress: '4120 Dale Rd ste j8 1005',
       addressLocality: 'Modesto',
       addressRegion: 'CA',
+      addressCounty: 'Stanislaus County',
       postalCode: '95354',
       addressCountry: 'US',
     },
@@ -108,7 +110,7 @@ const SEO_CONSTANTS = {
     url: 'https://www.ampvendingmachines.com',
     logo: 'https://www.ampvendingmachines.com/images/logo/AMP_logo.png',
     priceRange: 'Professional vending solutions',
-    areaServed: 'Central California',
+    areaServed: 'Modesto, Stanislaus County, Central California',
   },
 } as const;
 
@@ -251,7 +253,8 @@ export default function MetaTags({
       <meta name="publisher" content={SEO_CONSTANTS.SITE_NAME} />
       <meta name="format-detection" content="telephone=yes" />
       <meta name="geo.region" content="US-CA" />
-      <meta name="geo.placename" content="Modesto, California" />
+      <meta name="geo.placename" content="Modesto, Stanislaus County, California" />
+      <meta name="geo.county" content="Stanislaus County" />
       <meta name="geo.position" content="37.6390972;-120.9968782" />
       <meta name="ICBM" content="37.6390972, -120.9968782" />
 

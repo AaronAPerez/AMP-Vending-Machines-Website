@@ -39,13 +39,13 @@ export default function OptimizedHomePage() {
           title={
             <>
               <h1 className="text-4xl sm:text-5xl font-bold text-[#F5F5F5]">
-                Premium Vending Machines in<br/><span className="text-[#FD5A1E]"> Northern California</span>
+                Vending Machines in<br/><span className="text-[#FD5A1E]"> Modesto & Stanislaus County</span>
               </h1>
             </>
           }
-          subtitle=" Modern touchscreen vending solutions for workplaces across Modesto, Stockton, Turlock, and the Central Valley."
-          primaryCta={{ text: "View Machines", href: "/vending-machines" }}
-          secondaryCta={{ text: "Free Consultation", href: "/contact" }}
+          subtitle="AMP Vending Machines - Premier commercial vending solutions for businesses in Modesto, Turlock, Ceres, and throughout Stanislaus County & Central California."
+          primaryCta={{ text: "View Our Machines", href: "/vending-machines" }}
+          secondaryCta={{ text: "Get Free Quote", href: "/contact" }}
         />
       </Section>
 
@@ -162,11 +162,11 @@ const HeroLoadingFallback = React.memo(() => (
   <div className="min-h-screen bg-black flex items-center justify-center">
     <div className="text-center px-4">
       <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#F5F5F5] mb-6 animate-pulse">
-        Premium Commercial Vending Solutions
-        <br />for <span className="text-[#FD5A1E]">Modern Workplaces</span>
+        Vending Machines in Modesto
+        <br />& <span className="text-[#FD5A1E]">Stanislaus County</span>
       </h1>
       <p className="text-xl md:text-2xl text-[#F5F5F5] mb-8 max-w-3xl mx-auto opacity-75">
-        Loading amazing vending solutions...
+        AMP Vending Machines - Loading your commercial vending solutions...
       </p>
     </div>
   </div>

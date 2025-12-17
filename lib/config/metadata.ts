@@ -14,34 +14,68 @@ import { AMP_VENDING_BUSINESS_INFO } from '@/lib/data/businessData';
 export const rootMetadata: Metadata = {
   // Basic SEO metadata
   title: {
-    default: "AMP Vending | Premium Commercial Vending Machines | Central California",
-    template: "%s | AMP Vending - Commercial Vending Solutions"
+    default: "AMP Vending Machines | Modesto & Stanislaus County | ampvendingmachines.com",
+    template: "%s | AMP Vending Machines - Modesto & Stanislaus County"
   },
 
   // Optimized description for Google search results (under 160 characters)
-  description: `Professional commercial vending machines with 21.5" touchscreen technology. Free installation & maintenance in Central California. Call ${AMP_VENDING_BUSINESS_INFO.contact.phone}.`,
+  description: `ampvendingmachines.com - #1 vending machines in Modesto & Stanislaus County CA. Touchscreen technology, free installation. Call ${AMP_VENDING_BUSINESS_INFO.contact.phone}`,
 
   // Enhanced keywords targeting local and commercial searches
   keywords: [
-    "commercial vending machines Central California",
+    // Brand Keywords (Exact Match)
+    "ampvendingmachines",
+    "ampvendingmachines.com",
+    "amp vending machines",
+    "ampvending",
+
+    // Location + Service (Top Priority)
+    "vending machines Modesto",
+    "vending machines Modesto CA",
+    "Modesto vending machines",
+    "vending machines Stanislaus County",
+    "Stanislaus County vending machines",
+    "vending machines Modesto California",
+    "Modesto CA vending machines",
+    "vending machines near me Modesto",
+
+    // Stanislaus County Cities
+    "vending machines Turlock CA",
+    "vending machines Ceres CA",
+    "vending machines Riverbank CA",
+    "vending machines Oakdale CA",
+    "vending machines Patterson CA",
+
+    // Commercial Keywords
+    "commercial vending machines Modesto",
     "office vending machines Modesto CA",
+    "workplace vending machines Stanislaus County",
+    "business vending machines Modesto",
+    "company vending machines Central California",
+
+    // Features
+    "touchscreen vending machines Modesto",
+    "contactless vending machines",
+    "smart vending machines Modesto",
+    "modern vending machines",
+    "refrigerated vending machines Modesto",
+
+    // Services
+    "vending machine supplier Modesto",
+    "vending machine provider Stanislaus County",
+    "vending machine installation Modesto",
     "free vending machines Modesto CA",
-    "touchscreen vending machines",
-    "workplace vending solutions",
-    "refrigerated vending machines",
+    "vending machine rental Modesto",
+    "vending machine service Stanislaus County",
+
+    // Regional
+    "Central California vending machines",
+    "Central Valley vending machines",
+    "Northern California vending",
+
+    // General
+    "AMP Vending Machines Modesto",
     "professional vending installation",
-    "business vending service",
-    "employee break room solutions",
-    "AMP Vending Modesto",
-    "AMP Vending Modesto ca",
-    "AMP Vending Machines",
-    "vending machines",
-    "vending machines Stockton Fresno",
-    "vending machines near me",
-    "vending machine supplier",
-    "vending machine provider",
-    "vending machine vendor",
-    "contactless payment vending",
     "maintenance-free vending machines"
   ].join(", "),
 
@@ -83,9 +117,9 @@ export const rootMetadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: AMP_VENDING_BUSINESS_INFO.contact.website,
-    siteName: AMP_VENDING_BUSINESS_INFO.name,
-    title: "Premium Commercial Vending Machines | AMP Vending | Central California",
-    description: "Professional vending machines with touchscreen technology for enhanced workplace satisfaction. Free installation & maintenance throughout Central California.",
+    siteName: "AMP Vending Machines",
+    title: "AMP Vending Machines | Modesto & Stanislaus County | ampvendingmachines.com",
+    description: "ampvendingmachines.com - Premier vending machine provider in Modesto, Stanislaus County & Central California. Professional touchscreen vending with free installation.",
     images: [
       {
         url: `${AMP_VENDING_BUSINESS_INFO.contact.website}/images/og/amp-vending-hero.jpg`,
@@ -132,12 +166,12 @@ export const rootMetadata: Metadata = {
 
     // Geographic targeting
     'geo.region': 'US-CA',
-    'geo.placename': `${AMP_VENDING_BUSINESS_INFO.address.city}, California`,
+    'geo.placename': 'Modesto, Stanislaus County, California',
     'geo.position': `${AMP_VENDING_BUSINESS_INFO.address.coordinates.latitude};${AMP_VENDING_BUSINESS_INFO.address.coordinates.longitude}`,
     'ICBM': `${AMP_VENDING_BUSINESS_INFO.address.coordinates.latitude}, ${AMP_VENDING_BUSINESS_INFO.address.coordinates.longitude}`,
 
     // Business information
-    'coverage': 'Northern California',
+    'coverage': 'Modesto, Stanislaus County, Central California',
     'distribution': 'global',
     'rating': 'general',
     'revisit-after': '7 days',
