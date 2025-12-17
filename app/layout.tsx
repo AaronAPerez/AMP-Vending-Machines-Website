@@ -8,7 +8,6 @@
  */
 
 import "./globals.css";
-import StyledComponentsRegistry from '../lib/registry';
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Inter } from 'next/font/google';
@@ -46,11 +45,11 @@ export default function RootLayout({
         <StructuredData />
 
         {/* Inline critical CSS for immediate render */}
-        <style dangerouslySetInnerHTML={{__html: `
+        <style>{`
           body{background:#000;color:#fff;font-family:var(--font-inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
           *{box-sizing:border-box;margin:0;padding:0}
           #hero-heading{font-display:swap;text-rendering:optimizeSpeed}
-        `}} />
+        `}</style>
 
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
         <link rel="dns-prefetch" href="//www.googletagmanager.com" />
@@ -127,12 +126,10 @@ export default function RootLayout({
           aria-label="Main content"
           suppressHydrationWarning
         >
-          <StyledComponentsRegistry>
-            {children}
-            <SpeedInsights />
-            <Analytics />
-            <WebVitalsReporter />
-          </StyledComponentsRegistry>
+          {children}
+          <SpeedInsights />
+          <Analytics />
+          <WebVitalsReporter />
         </main>
 
         {/* Feedback widget */}

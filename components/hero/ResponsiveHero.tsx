@@ -47,7 +47,7 @@ export const ResponsiveHero = ({
       {/* Critical Path: Hero Content (No JS dependencies) */}
       <div className="relative z-30 text-center px-4 sm:px-6 max-w-5xl -mt-8 md:-mt-4 mb-6">
         {/* LCP Element - Optimized with CSS-only animations */}
-        <h1
+        <div
           id="hero-heading"
           className={cn(
             "text-4xl md:text-5xl lg:text-6xl font-bold text-[#F5F5F5] mb-6 sm:mb-8 drop-shadow-xl",
@@ -61,7 +61,7 @@ export const ResponsiveHero = ({
           }}
         >
           {title}
-        </h1>
+        </div>
 
         <p
           className={cn(

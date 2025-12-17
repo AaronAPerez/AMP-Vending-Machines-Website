@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import {
@@ -11,9 +11,6 @@ import {
   ZapIcon,
   SparklesIcon,
   ArrowRightIcon,
-  TrendingUpIcon,
-  UsersIcon,
-  ClockIcon,
   ShieldCheckIcon,
   CheckCircleIcon,
 } from 'lucide-react';
@@ -71,37 +68,32 @@ const PREMIUM_FEATURES = [
 ] as const;
 
 /**
- * Workplace impact metrics
- * Measurable improvements for client presentations
+ * Service benefits for Modesto & Stanislaus County businesses
  */
-const WORKPLACE_METRICS = [
+const SERVICE_BENEFITS = [
   {
-    id: 'satisfaction',
-    metric: '85%',
-    label: 'Employee satisfaction increase',
-    icon: <UsersIcon size={24} />,
-    description: 'Measured improvement in workplace satisfaction surveys',
+    id: 'installation',
+    title: 'Free Professional Installation',
+    description: 'Complete setup and configuration included for Modesto and Stanislaus County locations',
+    icon: <ZapIcon size={24} />,
   },
   {
-    id: 'time',
-    metric: '40%',
-    label: 'Reduced break time',
-    icon: <ClockIcon size={24} />,
-    description: 'Average time saved on refreshment breaks',
-  },
-  {
-    id: 'productivity',
-    metric: '25%',
-    label: 'Productivity boost',
-    icon: <TrendingUpIcon size={24} />,
-    description: 'Increased focus and energy levels reported',
-  },
-  {
-    id: 'reliability',
-    metric: '99.9%',
-    label: 'Uptime reliability',
+    id: 'maintenance',
+    title: 'Full-Service Maintenance',
+    description: 'Regular restocking, cleaning, and technical support throughout Central California',
     icon: <ShieldCheckIcon size={24} />,
-    description: 'Guaranteed operational availability',
+  },
+  {
+    id: 'customization',
+    title: 'Customized Product Selection',
+    description: 'Tailored to your team preferences with 50+ snack and beverage options',
+    icon: <ShoppingBagIcon size={24} />,
+  },
+  {
+    id: 'technology',
+    title: 'Modern Payment Technology',
+    description: 'Accept all payment methods including mobile wallets and contactless cards',
+    icon: <CreditCardIcon size={24} />,
   },
 ] as const;
 
@@ -144,12 +136,11 @@ interface PremiumFeatureProps {
 }
 
 /**
- * Upgrade metric component props for performance displays
+ * Service benefit component props
  */
-interface UpgradeMetricProps {
-  metric: typeof WORKPLACE_METRICS[number];
+interface ServiceBenefitProps {
+  benefit: typeof SERVICE_BENEFITS[number];
   delay?: number;
-  size?: 'small' | 'medium' | 'large';
 }
 
 /**
@@ -229,22 +220,15 @@ const PremiumFeature: React.FC<PremiumFeatureProps> = ({
 };
 
 /**
- * UpgradeMetric Component
- * Displays quantifiable benefits with responsive sizing
+ * ServiceBenefit Component
+ * Displays service benefits for Modesto and Stanislaus County businesses
  */
-const UpgradeMetric: React.FC<UpgradeMetricProps> = ({
-  metric,
+const ServiceBenefit: React.FC<ServiceBenefitProps> = ({
+  benefit,
   delay = 0,
-  size = 'medium'
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '0px 0px -50px 0px' });
-
-  const sizeClasses = {
-    small: 'p-4 text-lg',
-    medium: 'p-6 text-2xl sm:text-3xl',
-    large: 'p-8 text-3xl sm:text-4xl',
-  };
 
   return (
     <motion.div
@@ -252,31 +236,22 @@ const UpgradeMetric: React.FC<UpgradeMetricProps> = ({
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay, ease: 'easeOut' }}
-      className={`
-        text-center bg-[#111111] rounded-xl border border-[#333333] 
-        hover:border-[#FD5A1E] transition-all duration-300 group
-        focus-within:border-[#FD5A1E] focus-within:ring-2 focus-within:ring-[#FD5A1E]/30
-        ${sizeClasses[size]}
-      `}
+      className="bg-[#111111] rounded-xl border border-[#333333] p-6 hover:border-[#FD5A1E] transition-all duration-300 group"
       role="article"
-      aria-label={`Metric: ${metric.metric} ${metric.label}`}
-      tabIndex={0}
+      aria-label={benefit.title}
     >
       <div
-        className="text-[#FD5A1E] text-3xl mb-3 flex justify-center group-hover:scale-110 transition-transform duration-300"
+        className="text-[#FD5A1E] mb-4 flex justify-start group-hover:scale-110 transition-transform duration-300"
         aria-hidden="true"
       >
-        {metric.icon}
+        {benefit.icon}
       </div>
-      <div className={`font-bold text-[#FD5A1E] mb-2 ${sizeClasses[size].split(' ')[1]}`}>
-        {metric.metric}
-      </div>
-      <div className="text-[#A5ACAF] text-sm font-medium">
-        {metric.label}
-      </div>
-      <div className="text-[#666666] text-xs mt-1 leading-tight">
-        {metric.description}
-      </div>
+      <h4 className="text-lg font-bold text-[#F5F5F5] mb-2">
+        {benefit.title}
+      </h4>
+      <p className="text-[#A5ACAF] text-sm leading-relaxed">
+        {benefit.description}
+      </p>
     </motion.div>
   );
 };
@@ -286,8 +261,8 @@ const UpgradeMetric: React.FC<UpgradeMetricProps> = ({
  * Interactive showcase card for vending machine features
  */
 const MachineCard: React.FC<MachineCardProps> = ({
-  title = "Professional Grade Vending Machine",
-  description = "Advanced technology meets workplace convenience with our premium vending solution.",
+  title = "Commercial Vending Machines for Modesto Businesses",
+  description = "Premium touchscreen vending machines designed for workplaces in Modesto and Stanislaus County.",
   features = MACHINE_CARD_FEATURES,
   variant = 'default'
 }) => {
@@ -390,19 +365,6 @@ const WorkplaceTransformSection: React.FC<WorkplaceTransformSectionProps> = ({
   animationDelay = 0,
   showEnhancedCTA = true,
 }) => {
-  // Responsive behavior state
-  const [isMobileView, setIsMobileView] = useState(false);
-
-  // Mobile detection effect
-  useEffect(() => {
-    const checkMobileView = () => {
-      setIsMobileView(window.innerWidth < 768);
-    };
-
-    checkMobileView();
-    window.addEventListener('resize', checkMobileView);
-    return () => window.removeEventListener('resize', checkMobileView);
-  }, []);
 
   return (
     <section
@@ -521,7 +483,7 @@ const WorkplaceTransformSection: React.FC<WorkplaceTransformSectionProps> = ({
         </div>
       </motion.div>
 
-      {/* Workplace Impact Metrics */}
+      {/* Service Benefits for Modesto & Stanislaus County */}
       <motion.div
         className="mb-16 sm:mb-20"
         initial={{ opacity: 0, y: 30 }}
@@ -530,20 +492,19 @@ const WorkplaceTransformSection: React.FC<WorkplaceTransformSectionProps> = ({
       >
         <div className="text-center mb-12">
           <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#F5F5F5] mb-4">
-            Proven Results for Stanislaus County Businesses
+            Complete Vending Solutions for Stanislaus County
           </h3>
           <p className="text-lg text-[#A5ACAF] max-w-3xl mx-auto">
-            Real results from Modesto and Central California businesses that chose AMP Vending Machines
+            Everything you need for successful vending in Modesto and throughout Central California
           </p>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {WORKPLACE_METRICS.map((metric, index) => (
-            <UpgradeMetric
-              key={metric.id}
-              metric={metric}
-              delay={animationDelay + 0.1 * (index + 7)}
-              size={isMobileView ? 'small' : 'medium'}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {SERVICE_BENEFITS.map((benefit, index) => (
+            <ServiceBenefit
+              key={benefit.id}
+              benefit={benefit}
+              delay={animationDelay + 0.1 * (index + 1)}
             />
           ))}
         </div>

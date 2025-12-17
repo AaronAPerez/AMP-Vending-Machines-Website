@@ -83,7 +83,6 @@
     "resend": "^4.0.1",
     "schema-dts": "^1.1.5",
     "sonner": "^1.7.1",
-    "styled-components": "^6.1.15",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "web-vitals": "^3.5.0",

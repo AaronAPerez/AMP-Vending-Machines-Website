@@ -81,12 +81,11 @@ const ResizableNavbar = () => {
             >
               <Link href="/" aria-label="AMP Vending home page">
                 <Image
-                  src="/images/logo/AMP_logo.png"
+                  src="/images/logo/AMP_logo.webp"
                   alt="AMP Vending Logo"
                   width={100}
                   height={100}
-                  className="transition-all duration-300"
-                  style={{ height: 'auto' }}
+                  className="transition-all duration-300 h-16 w-22 object-contain"
                   priority
                 />
               </Link>

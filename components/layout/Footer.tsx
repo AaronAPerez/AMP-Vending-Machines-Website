@@ -49,7 +49,7 @@ const Footer = () => {
                 aria-label="AMP Vending homepage"
               >
                 <Image
-                  src="/images/logo/AMP_logo.png"
+                  src="/images/logo/AMP_logo.webp"
                   alt="AMP Vending Logo"
                   width={80}  // Fixed consistent width
                   height={48} // Fixed consistent height
