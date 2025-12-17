@@ -96,12 +96,12 @@ const TechIndicator = ({ icon: Icon, label, available }: TechIndicatorProps) => 
  * Individual clickable machine card component
  * Wraps the entire card in a Next.js Link for SEO-friendly navigation
  */
-const MachineCard = ({ 
-  machine, 
-  variant = 'grid', 
-  index = 0, 
+const MachineCard = ({
+  machine,
+  variant = 'grid',
+  index = 0,
   className = '',
-  onClick 
+  onClick
 }: MachineCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef, { once: true, margin: "-50px" });
@@ -144,22 +144,22 @@ const MachineCard = ({
   // Determine card size and layout based on variant
   const getCardClasses = () => {
     const baseClasses = "group relative bg-gradient-to-br from-[#111111] to-[#0a0a0a] rounded-2xl border border-[#333333] overflow-hidden transition-all duration-500 hover:border-[#FD5A1E]/50 hover:shadow-xl hover:shadow-[#FD5A1E]/10 focus-within:ring-2 focus-within:ring-[#FD5A1E] focus-within:ring-offset-2 focus-within:ring-offset-black";
-    
+
     switch (variant) {
       case 'showcase':
-        return `${baseClasses} h-[550px] sm:h-[600px] hover:-translate-y-2`;
+        return `${baseClasses} h-[480px] sm:h-[540px] hover:-translate-y-2`;
       case 'list':
         return `${baseClasses} h-[200px] flex flex-row hover:-translate-y-1`;
       default: // grid
-        return `${baseClasses} h-[500px] sm:h-[550px] hover:-translate-y-1`;
+        return `${baseClasses} h-[420px] sm:h-[480px] hover:-translate-y-1`;
     }
   };
 
   // Determine if card should have tech indicators
   const shouldShowTechIndicators = () => {
-    return machine.features?.some(f => 
-      f.title.includes('21.5') || 
-      f.title.includes('Touch') || 
+    return machine.features?.some(f =>
+      f.title.includes('21.5') ||
+      f.title.includes('Touch') ||
       f.title.includes('HD')
     ) || false;
   };
@@ -199,9 +199,8 @@ const MachineCard = ({
             src={machine.image}
             alt={`${machine.name} - Professional ${machine.category} vending machine`}
             fill
-            className={`object-contain transition-transform duration-700 group-hover:scale-105 ${
-              imageLoading ? 'opacity-0' : 'opacity-100'
-            }`}
+            className={`object-contain transition-transform duration-700 group-hover:scale-105 ${imageLoading ? 'opacity-0' : 'opacity-100'
+              }`}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             onLoad={handleImageLoad}
             onError={handleImageError}
@@ -221,11 +220,10 @@ const MachineCard = ({
 
         {/* Category Badge */}
         <div className="absolute top-4 left-4">
-          <span className={`px-3 py-1 text-xs font-bold rounded-full text-white ${
-            machine.category === 'refrigerated' 
-              ? 'bg-blue-600/90' 
+          <span className={`px-3 py-1 text-xs font-bold rounded-full text-white ${machine.category === 'refrigerated'
+              ? 'bg-blue-600/90'
               : 'bg-green-600/90'
-          }`}>
+            }`}>
             {machine.category === 'refrigerated' ? 'Refrigerated' : 'Non-Refrigerated'}
           </span>
         </div>
@@ -233,22 +231,22 @@ const MachineCard = ({
         {/* Technology Indicators */}
         {shouldShowTechIndicators() && (
           <div className="absolute top-4 right-4 flex flex-wrap gap-1 max-w-[140px]">
-            <TechIndicator 
-              icon={MonitorIcon} 
-              label="HD Touch" 
-              available={machine.features?.some(f => f.title.includes('21.5')) || false} 
+            <TechIndicator
+              icon={MonitorIcon}
+              label="HD Touch"
+              available={machine.features?.some(f => f.title.includes('21.5')) || false}
             />
-            <TechIndicator 
-              icon={CreditCardIcon} 
-              label="Tap Pay" 
-              available={true} 
+            <TechIndicator
+              icon={CreditCardIcon}
+              label="Tap Pay"
+              available={true}
             />
           </div>
         )}
 
         {/* Quick View Overlay on Hover */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        
+
         {/* Quick View Button */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:translate-y-0">
           <div className="bg-[#FD5A1E] text-[#000000] px-6 py-3 rounded-full font-bold flex items-center space-x-2 shadow-lg backdrop-blur-sm">
@@ -259,7 +257,7 @@ const MachineCard = ({
       </div>
 
       {/* Card Content Section - Improved spacing */}
-      <div className="p-4 sm:p-6 h-3/5 flex flex-col justify-between relative z-5">
+      <div className="p-4 sm:p-5 h-2/5 flex flex-col justify-between relative z-5">
         {/* Machine Information */}
         <div className="space-y-2 pb-6">
           <div>
@@ -282,7 +280,7 @@ const MachineCard = ({
           {machine.highlights && machine.highlights.length > 0 && (
             <div className="flex flex-wrap gap-1 sm:gap-2">
               {machine.highlights.slice(0, 2).map((highlight, idx) => (
-                <div 
+                <div
                   key={idx}
                   className="flex items-center px-2 sm:px-3 py-1 bg-[#FD5A1E]/10 rounded-full border border-[#FD5A1E]/20"
                 >
@@ -291,40 +289,37 @@ const MachineCard = ({
                 </div>
               ))}
             </div>
-            
+
           )}
-              {/* Bottom Section */}
-        <div className="flex items-center justify-between pt-3 sm:p-4 border-t border-[#333333]">
-          <div className="space-y-1 flex-1 min-w-0">
-            <p className="text-[#A5ACAF] text-xs truncate">
-              Best for: {machine.bestFor?.split(',')[0] || 'Offices & Businesses'}
-            </p>
-            <div className="flex items-center space-x-2 sm:space-x-3 text-xs text-[#FD5A1E]">
-              <span className="flex items-center flex-shrink-0">
-                <WifiIcon size={10} className="mr-1" aria-hidden="true" />
-                Smart Tech
-              </span>
-              <span className="flex items-center flex-shrink-0">
-                <ZapIcon size={10} className="mr-1" aria-hidden="true" />
-                Maintenance-Free
-              </span>
+          {/* Bottom Section */}
+          <div className="flex items-center justify-between pt-3 sm:p-4 border-t border-[#333333]">
+            <div className="space-y-1 flex-1 min-w-0">
+              <p className="text-[#A5ACAF] text-xs truncate">
+                Best for: {machine.bestFor?.split(',')[0] || 'Offices & Businesses'}
+              </p>
+              <div className="flex items-center space-x-2 sm:space-x-3 text-xs text-[#FD5A1E]">
+                <span className="flex items-center flex-shrink-0">
+                  <WifiIcon size={10} className="mr-1" aria-hidden="true" />
+                  Smart Tech
+                </span>
+                <span className="flex items-center flex-shrink-0">
+                  <ZapIcon size={10} className="mr-1" aria-hidden="true" />
+                  Maintenance-Free
+                </span>
+              </div>
+            </div>
+
+            {/* Call-to-Action Arrow */}
+            <div className="flex items-center text-[#FD5A1E] group-hover:text-[#F5F5F5] transition-colors flex-shrink-0 ml-2">
+              <span className="text-xs font-medium mr-1 sm:mr-2 hidden sm:inline">Learn More</span>
+              <ArrowRightIcon
+                size={14}
+                className="transition-transform group-hover:translate-x-1"
+                aria-hidden="true"
+              />
             </div>
           </div>
-
-          {/* Call-to-Action Arrow */}
-          <div className="flex items-center text-[#FD5A1E] group-hover:text-[#F5F5F5] transition-colors flex-shrink-0 ml-2">
-            <span className="text-xs font-medium mr-1 sm:mr-2 hidden sm:inline">Learn More</span>
-            <ArrowRightIcon 
-              size={14} 
-              className="transition-transform group-hover:translate-x-1" 
-              aria-hidden="true" 
-            />
-          </div>
         </div>
-        </div>
-
-       
-      
       </div>
 
       {/* Accessibility Enhancement: Focus indicator */}
@@ -339,13 +334,13 @@ const MachineCard = ({
  * Machine Grid Component
  * Renders a responsive grid of clickable machine cards
  */
-export const MachineGrid = ({ 
-  machines, 
-  variant = 'grid', 
-  className = '', 
+export const MachineGrid = ({
+  machines,
+  variant = 'grid',
+  className = '',
   ariaLabel = 'Vending machines collection',
   showTechIndicators = false,
-  maxDisplayed 
+  maxDisplayed
 }: MachineGridProps) => {
   // Limit displayed machines if maxDisplayed is set
   const displayedMachines = maxDisplayed ? machines.slice(0, maxDisplayed) : machines;
@@ -377,7 +372,7 @@ export const MachineGrid = ({
   }
 
   return (
-    <section 
+    <section
       className={`w-full ${className}`}
       aria-label={ariaLabel}
       role="region"
