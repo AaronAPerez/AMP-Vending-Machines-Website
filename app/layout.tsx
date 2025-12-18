@@ -16,7 +16,7 @@ import ResizableNavbar from "@/components/layout/ResizableNavbar";
 import { WebVitalsReporter } from "@/components/analytics/WebVitalsReporter";
 import Footer from "@/components/layout/Footer";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
-import { Toaster } from "sonner"; // Temporarily disabled for build
+import { ToasterProvider } from "@/components/ui/ToasterProvider";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { rootMetadata } from "@/lib/config/metadata";
 
@@ -93,16 +93,8 @@ export default function RootLayout({
         {/* Analytics */}
         <GoogleAnalytics />
 
-        {/* Toast notifications - temporarily disabled for build */}
-        <Toaster
-          position="top-right"
-          richColors
-          closeButton
-          toastOptions={{
-            style: { zIndex: 9999 },
-            className: 'z-[9999]',
-          }}
-        />
+        {/* Toast notifications */}
+        <ToasterProvider />
 
         {/* Skip navigation for accessibility */}
         <a

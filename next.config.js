@@ -41,7 +41,7 @@ const nextConfig = {
   },
 
   // Turbopack is now default in Next.js 16 - empty config silences migration warning
-  turbopack: {},
+  // turbopack: {},
 
   // Environment variables available to the client
   env: {
