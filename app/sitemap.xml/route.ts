@@ -58,7 +58,7 @@ export async function GET(): Promise<Response> {
       changefreq: 'daily',
       priority: 1.0,
       images: [{
-        loc: `${baseUrl}/images/hero/amp-vending-hero.jpg`,
+        loc: `${baseUrl}/images/hero/amp-vending-hero.webp`,
         caption: 'ampvendingmachines.com - Premium Vending Machines in Modesto & Stanislaus County',
         title: 'AMP Vending Machines - Modesto, Stanislaus County & Central California',
         geoLocation: 'Modesto, Stanislaus County, CA'
