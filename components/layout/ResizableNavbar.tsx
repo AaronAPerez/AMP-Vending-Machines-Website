@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { AccessibleButton } from '@/components/ui/AccessibleButton';
+import { X, Menu } from 'lucide-react';
 
 interface NavItem {
   name: string;
@@ -19,7 +20,7 @@ interface NavItem {
  */
 const ResizableNavbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const { scrollY } = useScroll();
   const pathname = usePathname();
   const menuRef = useRef<HTMLDivElement>(null);
@@ -27,18 +28,18 @@ const ResizableNavbar = () => {
   // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (isMenuOpen && menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        setIsMenuOpen(false);
+      if (isOpen && menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
       }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isMenuOpen]);
+  }, [isOpen]);
 
   // Close mobile menu on route change
   useEffect(() => {
-    setIsMenuOpen(false);
+    setIsOpen(false);
   }, [pathname]);
 
   // Handle scroll events for navbar resize
@@ -79,7 +80,9 @@ const ResizableNavbar = () => {
               transition={{ duration: 0.5 }}
               className="flex-shrink-0"
             >
-              <Link href="/" aria-label="AMP Vending home page">
+              <Link href="/"
+                aria-label="AMP Vending Machines Homepage"
+                aria-current={pathname === '/' ? 'page' : undefined}>
                 <Image
                   src="/images/logo/AMP_logo.webp"
                   alt="AMP Vending Logo"
@@ -92,17 +95,54 @@ const ResizableNavbar = () => {
             </motion.div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-1 lg:space-x-2" aria-label="Main navigation">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.path}
-                  className="px-3 py-2 rounded-lg text-[#F5F5F5] hover:text-[#FD5A1E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black text-md font-medium transition-colors"
-                  aria-current={pathname === item.path ? 'page' : undefined}
-                >
-                  {item.name}
-                </Link>
-              ))}
+            <nav className="hidden md:flex items-center gap-1"
+              aria-label="Main navigation">
+              <Link href="/"
+                aria-label="Navigate to homepage"
+                aria-current={pathname === '/' ? 'page' : undefined}
+                className={`px-4 py-2 rounded-lg text-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
+                  pathname === '/'
+                    ? 'text-[#FD5A1E] bg-[#FD5A1E]/10'
+                    : 'text-[#F5F5F5] hover:text-[#FD5A1E] hover:bg-[#4d4d4d]/20'
+                }`}>
+                Home
+              </Link>
+              <Link
+                href="/vending-machines"
+                aria-label="View our vending machines catalog"
+                aria-current={pathname === '/vending-machines' ? 'page' : undefined}
+                className={`px-4 py-2 rounded-lg text-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
+                  pathname === '/vending-machines'
+                    ? 'text-[#FD5A1E] bg-[#FD5A1E]/10'
+                    : 'text-[#F5F5F5] hover:text-[#FD5A1E] hover:bg-[#4d4d4d]/20'
+                }`}
+              >
+                Vending Machines
+              </Link>
+              <Link
+                href="/feedback"
+                aria-label="give us your feedback"
+                aria-current={pathname === '/feedback' ? 'page' : undefined}
+                className={`px-4 py-2 rounded-lg text-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
+                  pathname === '/feedback'
+                    ? 'text-[#FD5A1E] bg-[#FD5A1E]/10'
+                    : 'text-[#F5F5F5] hover:text-[#FD5A1E] hover:bg-[#4d4d4d]/20'
+                }`}
+              >
+                Feedback
+              </Link>
+              <Link
+                href="/contact"
+                aria-label="Contact us for a quote"
+                aria-current={pathname === '/contact' ? 'page' : undefined}
+                className={`px-4 py-2 rounded-lg text-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
+                  pathname === '/contact'
+                    ? 'text-[#FD5A1E] bg-[#FD5A1E]/10'
+                    : 'text-[#F5F5F5] hover:text-[#FD5A1E] hover:bg-[#4d4d4d]/20'
+                }`}
+              >
+                Contact
+              </Link>
             </nav>
 
             {/* CTA Button */}
@@ -124,37 +164,15 @@ const ResizableNavbar = () => {
 
             {/* Mobile menu button */}
             <div className="md:hidden">
+              {/* // Mobile menu button: */}
               <button
-                type="button"
-                className="inline-flex items-center justify-center p-2 rounded-md text-[#F5F5F5] hover:text-[#FD5A1E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-colors"
-                aria-expanded={isMenuOpen}
+                onClick={() => setIsOpen(!isOpen)}
+                aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
+                aria-expanded={isOpen}
                 aria-controls="mobile-menu"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setIsMenuOpen(!isMenuOpen);
-                }}
+                className="inline-flex items-center justify-center p-2 rounded-md text-[#F5F5F5] hover:text-[#FD5A1E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-colors"
               >
-                <span className="sr-only">{isMenuOpen ? 'Close menu' : 'Open menu'}</span>
-                <svg
-                  className={`${isMenuOpen ? 'hidden' : 'block'} h-6 w-6`}
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-                <svg
-                  className={`${isMenuOpen ? 'block' : 'hidden'} h-6 w-6`}
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                {isOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
             </div>
           </div>
@@ -162,7 +180,7 @@ const ResizableNavbar = () => {
 
         {/* Mobile menu */}
         <AnimatePresence>
-          {isMenuOpen && (
+          {isOpen && (
             <motion.nav
               id="mobile-menu"
               ref={menuRef}
@@ -188,17 +206,56 @@ const ResizableNavbar = () => {
                 </div>
 
                 {/* Mobile nav items */}
-                {navItems.map((item) => (
+                <div className="space-y-2">
                   <Link
-                    key={item.name}
-                    href={item.path}
-                    className="block px-4 py-3 rounded-lg text-base font-medium text-[#F5F5F5] hover:bg-[#4d4d4d]/20 hover:text-[#FD5A1E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-colors"
-                    aria-current={pathname === item.path ? 'page' : undefined}
-                    onClick={() => setIsMenuOpen(false)}
+                    href="/"
+                    aria-label="Navigate to homepage"
+                    aria-current={pathname === '/' ? 'page' : undefined}
+                    className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
+                      pathname === '/'
+                        ? 'text-[#FD5A1E] bg-[#FD5A1E]/10'
+                        : 'text-[#F5F5F5] hover:bg-[#4d4d4d]/20 hover:text-[#FD5A1E]'
+                    }`}
                   >
-                    {item.name}
+                    Home
                   </Link>
-                ))}
+                  <Link
+                    href="/vending-machines"
+                    aria-label="View our vending machines catalog"
+                    aria-current={pathname === '/vending-machines' ? 'page' : undefined}
+                    className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
+                      pathname === '/vending-machines'
+                        ? 'text-[#FD5A1E] bg-[#FD5A1E]/10'
+                        : 'text-[#F5F5F5] hover:bg-[#4d4d4d]/20 hover:text-[#FD5A1E]'
+                    }`}
+                  >
+                    Vending Machines
+                  </Link>
+                  <Link
+                    href="/feedback"
+                    aria-label="give us your feedback"
+                    aria-current={pathname === '/feedback' ? 'page' : undefined}
+                    className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
+                      pathname === '/feedback'
+                        ? 'text-[#FD5A1E] bg-[#FD5A1E]/10'
+                        : 'text-[#F5F5F5] hover:bg-[#4d4d4d]/20 hover:text-[#FD5A1E]'
+                    }`}
+                  >
+                    Feedback
+                  </Link>
+                  <Link
+                    href="/contact"
+                    aria-label="Contact us for a quote"
+                    aria-current={pathname === '/contact' ? 'page' : undefined}
+                    className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
+                      pathname === '/contact'
+                        ? 'text-[#FD5A1E] bg-[#FD5A1E]/10'
+                        : 'text-[#F5F5F5] hover:bg-[#4d4d4d]/20 hover:text-[#FD5A1E]'
+                    }`}
+                  >
+                    Contact
+                  </Link>
+                </div>
               </div>
             </motion.nav>
           )}

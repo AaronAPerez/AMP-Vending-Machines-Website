@@ -639,21 +639,29 @@
   }
 }
 
-/* High Contrast Mode Support */
-/* @media (prefers-contrast: high) {
-  /* Increase contrast for all text
-  .text-[\\#A5ACAF] {
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .text-A5ACAF {
     color: #FFFFFF !important;
-  } */
+  }
   
-  /* Increase border visibility */
-  /* .border-[\\#4d4d4d],
-  .border-[\\#333333] {
+  .border-4d4d4d,
+  .border-333333 {
     border-color: #FFFFFF !important;
     border-width: 2px !important;
-  } */
-/* } */
+  }
+}
 
+/* Touch Targets (Mobile) */
+@media (pointer: coarse) {
+  button,
+  a,
+  input[type="button"],
+  input[type="submit"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
 /* Focus-Within for Container Elements */
 @layer utilities {
   .focus-within-ring:focus-within {
