@@ -38,6 +38,7 @@ const nextConfig = {
   experimental: {
     // Optimize package imports for better tree shaking
     optimizePackageImports: ["lucide-react", "framer-motion"],
+    optimizeCss: true,
   },
 
   // Turbopack is now default in Next.js 16 - empty config silences migration warning

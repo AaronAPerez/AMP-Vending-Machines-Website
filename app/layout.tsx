@@ -11,7 +11,6 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Inter } from 'next/font/google';
-import FeedbackWidget from "@/components/feedback/FeedbackWidget";
 import ResizableNavbar from "@/components/layout/ResizableNavbar";
 import { WebVitalsReporter } from "@/components/analytics/WebVitalsReporter";
 import Footer from "@/components/layout/Footer";
@@ -19,6 +18,8 @@ import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { ToasterProvider } from "@/components/ui/ToasterProvider";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { rootMetadata } from "@/lib/config/metadata";
+import FeedbackWidget from "@/components/feedback/FeedbackWidget";
+
 
 // Optimized font loading for performance
 const inter = Inter({
