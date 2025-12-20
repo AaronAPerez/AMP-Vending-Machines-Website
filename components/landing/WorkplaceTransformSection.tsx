@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Link from 'next/link';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import {
   MonitorIcon,
   CreditCardIcon,
@@ -13,14 +13,8 @@ import {
   ArrowRightIcon,
   ShieldCheckIcon,
   CheckCircleIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  ChevronDownIcon,
-  PlayIcon,
-  PauseIcon,
 } from 'lucide-react';
 import Image from 'next/image';
-import { koolMoreVendingMachineData, ANIMATION } from '../vending-machines';
 
 // =============================================================================
 // DATA CONSTANTS - Single source of truth for all features and metrics
@@ -371,74 +365,12 @@ const WorkplaceTransformSection: React.FC<WorkplaceTransformSectionProps> = ({
   animationDelay = 0,
   showEnhancedCTA = true,
 }) => {
-    const [activeFeature, setActiveFeature] = useState('touchscreen');
-    const [expandedFeature, setExpandedFeature] = useState<string | null>(null);
-    const [activeImageIndex, setActiveImageIndex] = useState(0);
-    const [autoRotate, setAutoRotate] = useState(true);
-    const autoRotateRef = useRef<NodeJS.Timeout | null>(null);
-  
-    const { model, manufacturer, images, specifications, features, pricing } = koolMoreVendingMachineData;
-  
-    // Auto-rotate through features
-    useEffect(() => {
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  
-      if (autoRotate && !prefersReducedMotion) {
-        autoRotateRef.current = setTimeout(() => {
-          const currentIndex = features.findIndex(f => f.id === activeFeature);
-          const nextIndex = (currentIndex + 1) % features.length;
-          const nextFeature = features[nextIndex];
-  
-          setActiveFeature(nextFeature.id);
-          if (nextFeature.imageIndex !== undefined) {
-            setActiveImageIndex(nextFeature.imageIndex);
-          }
-        }, ANIMATION.featureRotationDelay);
-  
-        return () => {
-          if (autoRotateRef.current) {
-            clearTimeout(autoRotateRef.current);
-          }
-        };
-      }
-    }, [activeFeature, features, autoRotate]);
-  
-    // Pause auto-rotation when user interacts
-    const handleFeatureSelect = useCallback((featureId: string) => {
-      setAutoRotate(false);
-      setActiveFeature(featureId);
-      setExpandedFeature(expandedFeature === featureId ? null : featureId);
-  
-      // Resume auto-rotation after 30 seconds of inactivity
-      if (autoRotateRef.current) {
-        clearTimeout(autoRotateRef.current);
-      }
-      setTimeout(() => setAutoRotate(true), 30000);
-    }, [expandedFeature]);
-  
-    const handleImageChange = useCallback((index: number) => {
-      setActiveImageIndex(index);
-      setAutoRotate(false);
-    }, []);
-  
-    const toggleAutoRotate = useCallback(() => {
-      setAutoRotate(prev => !prev);
-    }, []);
-  
 
   return (
     <section
       className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${className}`}
       aria-labelledby={renderHeading ? "transform-heading" : undefined}
     >
-
-        {/* Hidden structured data */}
-      <meta itemProp="name" content={`${manufacturer} ${model} Vending Machine`} />
-      <meta itemProp="brand" content={manufacturer} />
-      <meta itemProp="model" content={model} />
-      <meta itemProp="image" content={images[0].src} />
-
-
       {/* Section Header */}
       {renderHeading && (
         <motion.header
@@ -449,7 +381,7 @@ const WorkplaceTransformSection: React.FC<WorkplaceTransformSectionProps> = ({
         >
           <span className="inline-flex items-center px-4 py-2 bg-[#FD5A1E]/10 text-[#FD5A1E] text-sm font-medium rounded-full mb-4 sm:mb-6">
             <SparklesIcon size={16} className="mr-2" aria-hidden="true" />
-            Premium Vending Solution
+            Advanced Workplace Solutions
           </span>
           <h2
             id="transform-heading"
@@ -467,7 +399,7 @@ const WorkplaceTransformSection: React.FC<WorkplaceTransformSectionProps> = ({
 
       {/* Main Content Grid */}
       <motion.div
-        className="grid lg:grid-cols-2 gap-8 mx-4 lg:gap-12 mb-16 items-start"
+        className="grid lg:grid-cols-2 gap-8 lg:gap-12 mb-16 sm:mb-20"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: animationDelay + 0.2 }}
@@ -480,11 +412,11 @@ const WorkplaceTransformSection: React.FC<WorkplaceTransformSectionProps> = ({
             <Image
               src="/images/machines/amp-vending-machines-touchscreen.webp"
               alt="AMP Premium Vending Machine with 21.5 inch touchscreen interface"
-              width={540}
-              height={540}
+              width={500}
+              height={500}
               loading="lazy" // Explicit lazy loading
               quality={90}
-              className="object-cover transition-transform duration-500 rounded-xl"
+              className="object-cover transition-transform duration-500 rounded-xl py-4 hover:scale-105"
             />
 
             {/* Gradient overlay */}
@@ -492,11 +424,11 @@ const WorkplaceTransformSection: React.FC<WorkplaceTransformSectionProps> = ({
 
             {/* Technology badges */}
             <div className="absolute top-4 left-4 right-4 flex justify-between">
-              <span className="bg-[#FD5A1E] text-[#000000] px-3 py-1 rounded-full text-sm font-bold flex items-center">
-                <MonitorIcon size={14} className="mr-1" />
+              <span className="bg-[#FD5A1E] text-[#000000] px-3 py-1 rounded-full text-xs font-bold flex items-center">
+                <MonitorIcon size={12} className="mr-1" />
                 21.5&quot; HD
               </span>
-              <span className="bg-[#000000]/90 text-[#FD5A1E] px-3 py-1 rounded-full text-sm font-bold border border-[#FD5A1E]/30">
+              <span className="bg-[#000000]/90 text-[#FD5A1E] px-3 py-1 rounded-full text-xs font-bold border border-[#FD5A1E]/30">
                 Touchscreen
               </span>
             </div>
@@ -508,23 +440,23 @@ const WorkplaceTransformSection: React.FC<WorkplaceTransformSectionProps> = ({
                   {[CreditCardIcon, WifiIcon, ZapIcon].map((Icon, index) => (
                     <motion.div
                       key={index}
-                      className="w-10 h-10 bg-[#000000]/50 backdrop-blur-sm rounded-full flex items-center justify-center border border-[#FD5A1E]/30"
+                      className="w-8 h-8 bg-[#FD5A1E]/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-[#FD5A1E]/30"
                       initial={{ opacity: 0, scale: 0 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: index * 0.1 + 0.3 }}
                       whileHover={{ scale: 1.1 }}
                     >
-                      <Icon size={18} className="text-[#FD5A1E]" />
+                      <Icon size={14} className="text-[#FD5A1E]" />
                     </motion.div>
                   ))}
                 </div>
                 <motion.div
-                  className="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold flex items-center"
+                  className="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center"
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.5 }}
                 >
-                  <CheckCircleIcon size={18} className="mr-1" />
+                  <CheckCircleIcon size={12} className="mr-1" />
                   Available Now
                 </motion.div>
               </div>
