@@ -399,28 +399,28 @@ const WorkplaceTransformSection: React.FC<WorkplaceTransformSectionProps> = ({
 
       {/* Main Content Grid */}
       <motion.div
-        className="grid lg:grid-cols-2 gap-8 lg:gap-12 mb-16 sm:mb-20"
+        className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-12 mb-16 sm:mb-20"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: animationDelay + 0.2 }}
       >
         {/* Machine Showcase Card */}
-        <div className="space-y-6">
+        <div className="space-y-6 rounded-xl">
 
           {/* Machine Image */}
-          <div className="relative overflow-hidden">
+          <div className="relative overflow-hidden rounded-xl border border-[#333333] hover:border-[#FD5A1E] transition-all duration-300 flex justify-center bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d]">
             <Image
               src="/images/machines/amp-vending-machines-touchscreen.webp"
               alt="AMP Premium Vending Machine with 21.5 inch touchscreen interface"
-              width={500}
-              height={500}
+              width={400}
+              height={400}
               loading="lazy" // Explicit lazy loading
               quality={90}
-              className="object-cover transition-transform duration-500 rounded-xl py-4 hover:scale-105"
+              className="object-cover transition-transform duration-500 rounded-xl hover:scale-105"
             />
 
             {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/80 to-transparent opacity-60" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/80 to-transparent opacity-60 rounded-xl" />
 
             {/* Technology badges */}
             <div className="absolute top-4 left-4 right-4 flex justify-between">

@@ -13,9 +13,11 @@ export const WorkplaceTransformSection = lazy(() =>
   import('../../../components/landing/WorkplaceTransformSection')
 );
 
-export const VendingMachineShowcase = lazy(() => 
-  import('../../../components/landing/VendingMachineShowcase')
+// New optimized vending machine showcase with SEO, performance, and accessibility improvements
+export const VendingMachineShowcase = lazy(() =>
+  import('../../landing/VendingMachineShowcase')
 );
+
 
 export const ProductSection = lazy(() => 
   import('../../../components/landing/ProductSection')
