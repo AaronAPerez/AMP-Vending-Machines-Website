@@ -24,10 +24,19 @@ const VendingMachineShowcase = ({
     .filter((machine): machine is NonNullable<typeof machine> => machine !== null);
 
   return (
-    <section className={`relative ${className}`}>
+    <section
+      className={`relative ${className}`}
+      itemScope
+      itemType="https://schema.org/ItemList"
+      aria-labelledby="vending-machines-heading"
+    >
+      {/* Hidden structured data for SEO */}
+      <meta itemProp="numberOfItems" content={vendingMachines.length.toString()} />
+      <meta itemProp="itemListOrder" content="https://schema.org/ItemListOrderAscending" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
+
+        {/* Section Header - Enhanced with SEO keywords */}
         {renderHeading && (
           <motion.div
             className="text-center mb-12 sm:mb-16"
@@ -35,25 +44,29 @@ const VendingMachineShowcase = ({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <motion.div 
+            <motion.div
               className="inline-flex items-center px-4 py-2 bg-[#FD5A1E]/10 rounded-full mb-6"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#FD5A1E] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#FD5A1E] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
               </svg>
-              <span className="text-[#FD5A1E] font-medium text-sm">Our Machine Collection</span>
+              <span className="text-[#FD5A1E] font-medium text-sm">Commercial Vending Machine Collection</span>
             </motion.div>
 
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-[#F5F5F5] leading-tight">
-              Choose Your <span className="text-[#FD5A1E]">Perfect Machine</span>
+            <h2
+              id="vending-machines-heading"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-[#F5F5F5] leading-tight"
+              itemProp="name"
+            >
+              Choose Your <span className="text-[#FD5A1E]">Perfect Vending Machine</span>
             </h2>
 
-            <p className="text-lg sm:text-xl text-[#A5ACAF] max-w-3xl mx-auto leading-relaxed">
-              Professional vending machines with advanced technology, customizable options, 
-              and complete service packages tailored to your workplace needs.
+            <p className="text-lg sm:text-xl text-[#A5ACAF] max-w-3xl mx-auto leading-relaxed" itemProp="description">
+              Professional commercial vending machines with advanced touchscreen technology, contactless payment systems,
+              and complete installation & maintenance service packages for offices, schools, and businesses throughout Central California.
             </p>
           </motion.div>
         )}
@@ -68,22 +81,29 @@ const VendingMachineShowcase = ({
               ariaLabel="Featured vending machines collection"
             />
 
-            {/* Custom Request CTA Card */}
+            {/* Custom Request CTA Card - Enhanced for SEO */}
             <motion.div
               className="mb-16 sm:mb-20"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
+              itemScope
+              itemType="https://schema.org/Service"
             >
-              <Link href="/contact">
+              <Link href="/contact" itemProp="url">
                 <div className="group relative bg-gradient-to-br from-[#FD5A1E]/15 via-[#FD5A1E]/10 to-transparent border-2 border-[#FD5A1E]/40 rounded-2xl p-8 sm:p-10 overflow-hidden hover:border-[#FD5A1E]/60 transition-all duration-300 cursor-pointer hover:shadow-2xl hover:shadow-[#FD5A1E]/20">
                   {/* Background Pattern */}
-                  <div className="absolute inset-0 opacity-5">
+                  <div className="absolute inset-0 opacity-5" aria-hidden="true">
                     <div className="absolute inset-0" style={{
                       backgroundImage: 'radial-gradient(circle, #FD5A1E 1px, transparent 1px)',
                       backgroundSize: '20px 20px'
                     }} />
                   </div>
+
+                  {/* Hidden SEO metadata */}
+                  <meta itemProp="serviceType" content="Custom Commercial Vending Machine Procurement" />
+                  <meta itemProp="provider" content="AMP Vending Machines" />
+                  <meta itemProp="areaServed" content="Central California, Modesto, Stockton, Fresno, Turlock" />
 
                   {/* Content */}
                   <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6">
@@ -94,29 +114,31 @@ const VendingMachineShowcase = ({
                         whileHover={{ scale: 1.05 }}
                         transition={{ duration: 0.2 }}
                       >
-                        <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
-                        CUSTOM SOLUTIONS AVAILABLE
+                        CUSTOM VENDING SOLUTIONS AVAILABLE
                       </motion.div>
 
                       {/* Heading */}
-                      <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#F5F5F5] mb-3 group-hover:text-[#FD5A1E] transition-colors">
-                        Can&apos;t Find What You Need?
+                      <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#F5F5F5] mb-3 group-hover:text-[#FD5A1E] transition-colors" itemProp="name">
+                        Need a Custom Vending Machine?
                       </h3>
 
-                      {/* Description */}
-                      <p className="text-base sm:text-lg text-[#A5ACAF] mb-6 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                        We&apos;ll order a <span className="text-[#F5F5F5] font-semibold">brand new vending machine</span> customized to your exact specifications - any capacity, features, or special requirements.
+                      {/* Description - Enhanced with SEO keywords */}
+                      <p className="text-base sm:text-lg text-[#A5ACAF] mb-6 max-w-2xl mx-auto lg:mx-0 leading-relaxed" itemProp="description">
+                        We&apos;ll source and order a <span className="text-[#F5F5F5] font-semibold">brand new commercial vending machine</span> customized to your exact specifications -
+                        including capacity, touchscreen features, refrigeration options, payment systems, or any special business requirements for your Central California location.
                       </p>
 
-                      {/* Feature List */}
-                      <div className="grid sm:grid-cols-2 gap-3 mb-6 text-sm">
+                      {/* Feature List - Enhanced with SEO keywords */}
+                      <div className="grid sm:grid-cols-2 gap-3 mb-6 text-sm" itemProp="offers" itemScope itemType="https://schema.org/Offer">
+                        <meta itemProp="availability" content="https://schema.org/InStock" />
                         {[
-                          'Custom capacity & dimensions',
-                          'Latest technology & features',
-                          'Factory-direct from top manufacturers',
-                          'Expert consultation included'
+                          'Custom capacity & dimensions for any space',
+                          'Latest touchscreen & payment technology',
+                          'Factory-direct from premium manufacturers',
+                          'Free expert consultation & site assessment'
                         ].map((feature, index) => (
                           <motion.div
                             key={index}
@@ -125,7 +147,7 @@ const VendingMachineShowcase = ({
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.4, delay: 0.7 + index * 0.1 }}
                           >
-                            <svg className="w-5 h-5 text-[#FD5A1E] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <svg className="w-5 h-5 text-[#FD5A1E] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                             </svg>
                             <span>{feature}</span>
@@ -171,7 +193,7 @@ const VendingMachineShowcase = ({
           </div>
         )}
 
-        {/* Call to Action */}
+        {/* Call to Action - Enhanced for SEO */}
         <motion.div
           className="text-center"
           initial={{ opacity: 0, y: 20 }}
@@ -181,16 +203,21 @@ const VendingMachineShowcase = ({
           <Link
             href="/vending-machines"
             className="inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 bg-[#FD5A1E] text-[#000000] font-medium rounded-full shadow-lg hover:bg-[#F5F5F5] hover:text-[#000000] transition-colors hover:shadow-xl hover:scale-105 duration-300 focus:outline-none focus:ring-2 focus:ring-[#FD5A1E] focus:ring-offset-2 focus:ring-offset-black"
-            aria-label="View complete vending machine collection and specifications"
+            aria-label="View complete commercial vending machine collection with detailed specifications and pricing"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
             </svg>
-            View Complete Collection
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            View All Vending Machines & Specifications
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </Link>
+
+          {/* Additional SEO text */}
+          <p className="text-[#A5ACAF] text-sm mt-4 max-w-2xl mx-auto">
+            Explore our full range of refrigerated and non-refrigerated commercial vending machines for offices, schools, and businesses
+          </p>
         </motion.div>
       </div>
     </section>

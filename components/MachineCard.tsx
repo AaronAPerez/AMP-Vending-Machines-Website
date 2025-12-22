@@ -48,14 +48,14 @@ interface MachineCardProps {
     shortDescription?: string;
     description: string;
     category: 'refrigerated' | 'non-refrigerated';
-    bestFor?: string;
+    bestFor?: string | string[];
     highlights?: string[];
     features?: Array<{
       title: string;
       description?: string;
     }>;
     price?: string;
-    dimensions?: string;
+    dimensions?: string | Array<{ label: string; value: string }>;
   };
   variant?: 'grid' | 'showcase' | 'list';
   index?: number;
@@ -147,11 +147,11 @@ const MachineCard = ({
 
     switch (variant) {
       case 'showcase':
-        return `${baseClasses} h-[480px] sm:h-[540px] hover:-translate-y-2`;
+        return `${baseClasses} h-[580px] sm:h-[640px] hover:-translate-y-2`;
       case 'list':
         return `${baseClasses} h-[200px] flex flex-row hover:-translate-y-1`;
       default: // grid
-        return `${baseClasses} h-[420px] sm:h-[480px] hover:-translate-y-1`;
+        return `${baseClasses} h-[520px] sm:h-[580px] hover:-translate-y-1`;
     }
   };
 
@@ -171,6 +171,8 @@ const MachineCard = ({
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.1 }}
       className={`${getCardClasses()} ${className}`}
+      itemScope
+      itemType="https://schema.org/Product"
     >
       {/* Clickable Link Wrapper - covers entire card */}
       <Link
@@ -178,14 +180,21 @@ const MachineCard = ({
         onClick={handleCardClick}
         className="absolute inset-0 z-10 focus:outline-none"
         aria-label={`View details for ${machine.name} - ${machine.shortDescription || machine.description}`}
+        itemProp="url"
       >
         <span className="sr-only">
           View {machine.name} details and specifications
         </span>
       </Link>
 
+      {/* Hidden structured data for SEO */}
+      <meta itemProp="category" content={machine.category === 'refrigerated' ? 'Refrigerated Vending Machine' : 'Non-Refrigerated Vending Machine'} />
+      <meta itemProp="sku" content={machine.id} />
+      {typeof machine.bestFor === 'string' && <meta itemProp="audience" content={machine.bestFor.split(',')[0]} />}
+      {Array.isArray(machine.bestFor) && machine.bestFor.length > 0 && <meta itemProp="audience" content={machine.bestFor[0]} />}
+
       {/* Machine Image Section - Fixed Aspect Ratio */}
-      <div className="relative h-3/5 overflow-hidden inset-0 bg-gradient-to-r from-[#FD5A1E]/20 to-transparent backdrop-blur-sm">
+      <div className="relative h-[45%] overflow-hidden inset-0 backdrop-blur-sm">
         {/* Loading skeleton */}
         {imageLoading && (
           <div className="absolute inset-0 bg-[#333333] animate-pulse flex items-center justify-center">
@@ -197,7 +206,7 @@ const MachineCard = ({
         {!imageError ? (
           <Image
             src={machine.image}
-            alt={`${machine.name} - Professional ${machine.category} vending machine`}
+            alt={`${machine.name} - Professional ${machine.category} vending machine for offices and commercial spaces`}
             fill
             className={`object-contain transition-transform duration-700 group-hover:scale-105 ${imageLoading ? 'opacity-0' : 'opacity-100'
               }`}
@@ -205,6 +214,7 @@ const MachineCard = ({
             onLoad={handleImageLoad}
             onError={handleImageError}
             priority={index < 3} // Prioritize loading for first 3 images
+            itemProp="image"
             style={{
               objectFit: 'contain',
               objectPosition: 'center'
@@ -256,68 +266,110 @@ const MachineCard = ({
         </div>
       </div>
 
-      {/* Card Content Section - Improved spacing */}
-      <div className="p-4 sm:p-5 h-2/5 flex flex-col justify-between relative z-5">
+      {/* Card Content Section - Enhanced with more SEO information */}
+      <div className="p-3 sm:p-4 h-[55%] flex flex-col justify-between relative z-5">
         {/* Machine Information */}
-        <div className="space-y-2 pb-6">
+        <div className="space-y-4">
           <div>
-            <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#F5F5F5] mb-1 line-clamp-1 group-hover:text-[#FD5A1E] transition-colors">
+            <h3 className="text-base sm:text-lg lg:text-xl font-bold text-[#F5F5F5] mb-0.5 line-clamp-1 group-hover:text-[#FD5A1E] transition-colors" itemProp="name">
               {machine.name}
             </h3>
             {/* {machine.model && (
-              <p className="text-[#FD5A1E] font-semibold text-xs sm:text-sm">
+              <p className="text-[#FD5A1E] font-semibold text-[10px] sm:text-xs" itemProp="model">
                 Model: {machine.model}
               </p>
             )} */}
           </div>
 
-          {/* Short Description */}
-          <p className="text-[#A5ACAF] text-xs sm:text-sm leading-relaxed line-clamp-2">
+          {/* Short Description - SEO enhanced */}
+          <p className="text-[#A5ACAF] text-[11px] sm:text-xs leading-snug line-clamp-2" itemProp="description">
             {machine.shortDescription || machine.description}
           </p>
 
-          {/* Key Highlights */}
+          {/* Key Specifications for SEO */}
+          {machine.dimensions && (
+            <div className="flex flex-wrap gap-1.5 text-[10px] sm:text-xs">
+              {typeof machine.dimensions === 'string' ? (
+                <div className="flex items-center px-2 py-1 bg-[#111111] rounded border border-[#333333]">
+                  <span className="text-[#A5ACAF]">
+                    {machine.dimensions.split(',')[0] || machine.dimensions}
+                  </span>
+                </div>
+              ) : Array.isArray(machine.dimensions) && machine.dimensions.length > 0 && (
+                <>
+                  {machine.dimensions.slice(0, 1).map((dim: any, idx: number) => (
+                    <div key={idx} className="flex items-center px-2 py-1 bg-[#111111] rounded border border-[#333333]">
+                      <span className="text-[#A5ACAF]">
+                        {dim.label}: {dim.value}
+                      </span>
+                    </div>
+                  ))}
+                </>
+              )}
+              {/* Show capacity if available */}
+              {machine.features?.find((f: any) => f.title.toLowerCase().includes('capacity') || f.title.toLowerCase().includes('selection')) && (
+                <div className="flex items-center px-2 py-1 bg-[#111111] rounded border border-[#333333]">
+                  <span className="text-[#FD5A1E] font-medium">
+                    {machine.features.find((f: any) => f.title.toLowerCase().includes('capacity') || f.title.toLowerCase().includes('selection'))?.title.split(' ').slice(0, 3).join(' ')}
+                  </span>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Key Highlights - showing more for SEO */}
           {machine.highlights && machine.highlights.length > 0 && (
-            <div className="flex flex-wrap gap-1 sm:gap-2">
-              {machine.highlights.slice(0, 2).map((highlight, idx) => (
+            <div className="flex flex-wrap gap-1">
+              {machine.highlights.slice(0, 3).map((highlight, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center px-2 sm:px-3 py-1 bg-[#FD5A1E]/10 rounded-full border border-[#FD5A1E]/20"
+                  className="flex items-center px-2 py-0.5 bg-[#FD5A1E]/10 rounded-full border border-[#FD5A1E]/20"
                 >
-                  <CheckCircleIcon size={10} className="text-[#FD5A1E] mr-1 sm:mr-2 flex-shrink-0" aria-hidden="true" />
-                  <span className="text-[#F5F5F5] text-xs font-medium truncate">{highlight}</span>
+                  <CheckCircleIcon size={8} className="text-[#FD5A1E] mr-1 flex-shrink-0" aria-hidden="true" />
+                  <span className="text-[#F5F5F5] text-[10px] sm:text-xs font-medium truncate">{highlight}</span>
                 </div>
               ))}
             </div>
-
           )}
-          {/* Bottom Section */}
-          <div className="flex items-center justify-between pt-3 sm:p-4 border-t border-[#333333]">
-            <div className="space-y-1 flex-1 min-w-0">
-              <p className="text-[#A5ACAF] text-xs truncate">
-                Best for: {machine.bestFor?.split(',')[0] || 'Offices & Businesses'}
-              </p>
-              <div className="flex items-center space-x-2 sm:space-x-3 text-xs text-[#FD5A1E]">
-                <span className="flex items-center flex-shrink-0">
-                  <WifiIcon size={10} className="mr-1" aria-hidden="true" />
-                  Smart Tech
-                </span>
-                <span className="flex items-center flex-shrink-0">
-                  <ZapIcon size={10} className="mr-1" aria-hidden="true" />
-                  Maintenance-Free
-                </span>
-              </div>
-            </div>
 
-            {/* Call-to-Action Arrow */}
-            <div className="flex items-center text-[#FD5A1E] group-hover:text-[#F5F5F5] transition-colors flex-shrink-0 ml-2">
-              <span className="text-xs font-medium mr-1 sm:mr-2 hidden sm:inline">Learn More</span>
-              <ArrowRightIcon
-                size={14}
-                className="transition-transform group-hover:translate-x-1"
-                aria-hidden="true"
-              />
-            </div>
+          {/* Best For Section - Enhanced for SEO */}
+          <div>
+            <p className="text-[#A5ACAF] text-[10px] sm:text-xs leading-tight">
+              <span className="font-semibold text-[#F5F5F5]">Ideal For:</span>{' '}
+              {typeof machine.bestFor === 'string'
+                ? machine.bestFor.split(',').slice(0, 2).join(', ')
+                : Array.isArray(machine.bestFor)
+                  ? machine.bestFor.slice(0, 2).join(', ')
+                  : 'Offices & Commercial Spaces'}
+            </p>
+          </div>
+        </div>
+
+        {/* Bottom Section - Enhanced with more features */}
+        <div className="flex items-center justify-between pt-2 mt-1 border-t border-[#333333]">
+          <div className="flex items-center space-x-1.5 sm:space-x-2 text-[10px] sm:text-xs text-[#FD5A1E] flex-wrap gap-0.5">
+            <span className="flex items-center flex-shrink-0">
+              <WifiIcon size={9} className="mr-0.5" aria-hidden="true" />
+              Smart Tech
+            </span>
+            <span className="flex items-center flex-shrink-0">
+              <CreditCardIcon size={9} className="mr-0.5" aria-hidden="true" />
+              Card Pay
+            </span>
+            <span className="flex items-center flex-shrink-0">
+              <ZapIcon size={9} className="mr-0.5" aria-hidden="true" />
+              {machine.category === 'refrigerated' ? 'Efficient' : 'Low Maint'}
+            </span>
+          </div>
+
+          {/* Call-to-Action Arrow */}
+          <div className="flex items-center text-[#FD5A1E] group-hover:text-[#F5F5F5] transition-colors flex-shrink-0 ml-2">
+            <span className="text-[10px] sm:text-xs font-medium mr-1 hidden sm:inline">Details</span>
+            <ArrowRightIcon
+              size={12}
+              className="transition-transform group-hover:translate-x-1"
+              aria-hidden="true"
+            />
           </div>
         </div>
       </div>
