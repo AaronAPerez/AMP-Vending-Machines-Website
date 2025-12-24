@@ -63,8 +63,8 @@ export const BackgroundImages = () => {
                             <Image
                                 src={src}
                                 alt="hero product images"
-                                fill
-                                sizes="(max-width: 768px) 25vw"
+                                width={600}
+                                height={400}
                                 className="object-cover"
                                 priority // Load immediately for LCP
                                 quality={90}

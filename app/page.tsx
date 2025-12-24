@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Suspense } from 'react';
 import { PAGE_METADATA } from '@/lib/data/seoData';
 import OptimizedHomePage from '@/components/landing/OptimizedHomePage';

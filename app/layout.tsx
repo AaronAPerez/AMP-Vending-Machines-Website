@@ -7,18 +7,18 @@
  * - Business information (from lib/data/businessData.ts)
  */
 
+import { rootMetadata } from "@/lib/config/metadata";
+import { Inter } from 'next/font/google';
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Inter } from 'next/font/google';
 import ResizableNavbar from "@/components/layout/ResizableNavbar";
 import { WebVitalsReporter } from "@/components/analytics/WebVitalsReporter";
-import Footer from "@/components/layout/Footer";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { ToasterProvider } from "@/components/ui/ToasterProvider";
 import { StructuredData } from "@/components/seo/StructuredData";
-import { rootMetadata } from "@/lib/config/metadata";
 import FeedbackWidget from "@/components/feedback/FeedbackWidget";
+import Footer from "@/components/layout/Footer";
 
 
 // Optimized font loading for performance

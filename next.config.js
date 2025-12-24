@@ -41,9 +41,6 @@ const nextConfig = {
     optimizeCss: true,
   },
 
-  // Turbopack is now default in Next.js 16 - empty config silences migration warning
-  // turbopack: {},
-
   // Environment variables available to the client
   env: {
     CUSTOM_KEY: process.env.CUSTOM_KEY || "",
