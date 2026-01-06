@@ -29,96 +29,97 @@ const SERVICE_AREAS = [
 ];
 
 /**
- * Default export for sitemap generation
+ * Default export for sitemap generation with SEO optimizations
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ampvendingmachines.com';
+  // Remove trailing slash to prevent double slashes in URLs
+  const baseUrl = (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ampvendingmachines.com').replace(/\/$/, '');
   const currentDate = new Date().toISOString();
 
   const urls: MetadataRoute.Sitemap = [];
 
-  // 1. Homepage (highest priority)
+  // 1. Homepage (highest priority) - Updated frequently
   urls.push({
     url: baseUrl,
     lastModified: currentDate,
-    changeFrequency: 'daily',
+    changeFrequency: 'weekly',
     priority: 1.0,
   });
 
-  // 2. Main vending machines page
+  // 2. Main vending machines page - Key conversion page
   urls.push({
     url: `${baseUrl}/vending-machines`,
     lastModified: currentDate,
     changeFrequency: 'weekly',
-    priority: 0.9,
+    priority: 0.95,
   });
 
-  // 3. Individual machine pages
+  // 3. Individual machine pages - Product pages are high priority
   const machines = getAllVendingMachines();
   machines.forEach(machine => {
     urls.push({
       url: `${baseUrl}/vending-machines/${machine.id}`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
-      priority: 0.8,
+      priority: 0.85,
     });
   });
 
-  // 4. Service area pages for local SEO
+  // 4. Service area pages for local SEO - Critical for local rankings
   SERVICE_AREAS.forEach(area => {
     urls.push({
       url: `${baseUrl}/service-areas/${area.slug}`,
       lastModified: currentDate,
-      changeFrequency: 'weekly',
+      changeFrequency: 'monthly',
       priority: area.priority,
     });
   });
 
-  // 5. Stanislaus County specific page
+  // 5. Stanislaus County specific page - High priority local SEO page
   urls.push({
     url: `${baseUrl}/stanislaus-county`,
     lastModified: currentDate,
-    changeFrequency: 'weekly',
-    priority: 0.95,
+    changeFrequency: 'monthly',
+    priority: 0.9,
   });
 
-  // 6. Contact and feedback pages
+  // 6. Contact and feedback pages - Conversion pages
   urls.push(
     {
       url: `${baseUrl}/contact`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
-      priority: 0.85,
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/feedback`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
-      priority: 0.6,
+      priority: 0.7,
     }
   );
 
-  // 7. Accessibility statement
+  // 7. Accessibility statement - Static content
   urls.push({
     url: `${baseUrl}/accessibility`,
-    lastModified: currentDate,
+    lastModified: '2025-01-01',
     changeFrequency: 'yearly',
-    priority: 0.5,
+    priority: 0.3,
   });
 
-  // 8. Terms of Service and Privacy Policy
+  // 8. Terms of Service and Privacy Policy - Legal pages
   urls.push(
     {
       url: `${baseUrl}/terms-of-service`,
-      lastModified: currentDate,
+      lastModified: '2025-01-01',
       changeFrequency: 'yearly',
-      priority: 0.4,
+      priority: 0.3,
     },
     {
       url: `${baseUrl}/privacy-policy`,
-      lastModified: currentDate,
+      lastModified: '2025-01-01',
       changeFrequency: 'yearly',
-      priority: 0.4,
+      priority: 0.3,
     }
   );
 

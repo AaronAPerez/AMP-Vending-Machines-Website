@@ -16,7 +16,8 @@ import { MetadataRoute } from 'next';
  * Default export for robots.txt generation
  */
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ampvendingmachines.com';
+  // Remove trailing slash to prevent double slashes in URLs
+  const baseUrl = (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ampvendingmachines.com').replace(/\/$/, '');
   const isProduction = process.env.NODE_ENV === 'production';
 
   if (!isProduction) {

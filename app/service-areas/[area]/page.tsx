@@ -13,13 +13,6 @@ const SERVICE_AREAS = {
     businesses: '5,000+',
     landmarks: ['Gallo Center for the Arts', 'Modesto Junior College', 'Vintage Faire Mall']
   },
-  stockton: {
-    name: 'Stockton',
-    description: 'Expert vending machine installation and maintenance in Stockton, CA. Providing workplace vending solutions with 24/7 support.',
-    population: '320,000',
-    businesses: '7,500+',
-    landmarks: ['University of the Pacific', 'San Joaquin Delta College', 'Weberstown Mall']
-  },
   turlock: {
     name: 'Turlock',
     description: 'Commercial vending machines for Turlock businesses. Free consultation and professional installation with touchscreen technology.',
@@ -27,19 +20,61 @@ const SERVICE_AREAS = {
     businesses: '2,000+',
     landmarks: ['California State University Stanislaus', 'Downtown Turlock', 'Turlock Regional Sports Complex']
   },
-  fresno: {
-    name: 'Fresno',
-    description: 'Premium vending machine services in Fresno, CA. Serving Central California with modern touchscreen vending solutions.',
-    population: '545,000',
-    businesses: '12,000+',
-    landmarks: ['Fresno State University', 'River Park Shopping Center', 'Fashion Fair Mall']
+  ceres: {
+    name: 'Ceres',
+    description: 'Vending machine services in Ceres, CA. Providing local businesses with modern touchscreen vending solutions and professional maintenance.',
+    population: '49,000',
+    businesses: '1,200+',
+    landmarks: ['Ceres River Bluff Regional Park', 'Downtown Ceres', 'Central California Event Center']
   },
-  merced: {
-    name: 'Merced',
-    description: 'Office vending machines in Merced, CA. Complete installation, maintenance, and restocking services.',
-    population: '87,000',
-    businesses: '2,500+',
-    landmarks: ['UC Merced', 'Merced College', 'Downtown Merced']
+  riverbank: {
+    name: 'Riverbank',
+    description: 'Professional vending machine installation in Riverbank, CA. Serving local offices and businesses with reliable vending solutions.',
+    population: '25,000',
+    businesses: '600+',
+    landmarks: ['Riverbank Army Ammunition Plant', 'Jacob Myers Park', 'Downtown Riverbank']
+  },
+  oakdale: {
+    name: 'Oakdale',
+    description: 'Commercial vending machines for Oakdale, CA businesses. Expert installation and maintenance with modern payment technology.',
+    population: '23,000',
+    businesses: '650+',
+    landmarks: ['Oakdale Cowboy Museum', 'Woodward Reservoir', 'Downtown Oakdale']
+  },
+  patterson: {
+    name: 'Patterson',
+    description: 'Vending machine services in Patterson, CA. Complete workplace vending solutions with touchscreen technology and 24/7 support.',
+    population: '23,000',
+    businesses: '550+',
+    landmarks: ['Patterson Apricot Fiesta Grounds', 'Hammon Senior Center', 'Ward Park']
+  },
+  waterford: {
+    name: 'Waterford',
+    description: 'Office vending machines in Waterford, CA. Professional installation and restocking services for local businesses.',
+    population: '9,000',
+    businesses: '250+',
+    landmarks: ['Waterford Plaza', 'Reinway Park', 'Hickman Community Center']
+  },
+  hughson: {
+    name: 'Hughson',
+    description: 'Commercial vending solutions for Hughson, CA. Modern touchscreen machines with contactless payment options for local businesses.',
+    population: '7,500',
+    businesses: '200+',
+    landmarks: ['Hughson Community Center', 'Hughson Fruit and Nut Festival Grounds', 'Downtown Hughson']
+  },
+  stockton: {
+    name: 'Stockton',
+    description: 'Expert vending machine installation and maintenance in Stockton, CA. Providing workplace vending solutions with 24/7 support.',
+    population: '320,000',
+    businesses: '7,500+',
+    landmarks: ['University of the Pacific', 'San Joaquin Delta College', 'Weberstown Mall']
+  },
+  manteca: {
+    name: 'Manteca',
+    description: 'Commercial vending services in Manteca, CA. Reliable vending machine solutions for businesses of all sizes.',
+    population: '85,000',
+    businesses: '2,300+',
+    landmarks: ['Manteca Transit Center', 'Bass Pro Shops', 'Tidewater Bikeway']
   },
   tracy: {
     name: 'Tracy',
@@ -48,12 +83,19 @@ const SERVICE_AREAS = {
     businesses: '2,800+',
     landmarks: ['Tracy Transit Center', 'West Valley Mall', 'Tracy Community Center']
   },
-  manteca: {
-    name: 'Manteca',
-    description: 'Commercial vending services in Manteca, CA. Reliable vending machine solutions for businesses of all sizes.',
-    population: '85,000',
-    businesses: '2,300+',
-    landmarks: ['Manteca Transit Center', 'Bass Pro Shops', 'Tidewater Bikeway']
+  merced: {
+    name: 'Merced',
+    description: 'Office vending machines in Merced, CA. Complete installation, maintenance, and restocking services.',
+    population: '87,000',
+    businesses: '2,500+',
+    landmarks: ['UC Merced', 'Merced College', 'Downtown Merced']
+  },
+  fresno: {
+    name: 'Fresno',
+    description: 'Premium vending machine services in Fresno, CA. Serving Central California with modern touchscreen vending solutions.',
+    population: '545,000',
+    businesses: '12,000+',
+    landmarks: ['Fresno State University', 'River Park Shopping Center', 'Fashion Fair Mall']
   }
 };
 

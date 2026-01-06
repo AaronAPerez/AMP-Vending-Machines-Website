@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, ArrowRight } from 'lucide-react';
@@ -36,10 +38,10 @@ const CTASection = () => {
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Modesto's Premier <span className="text-[#FD5A1E]">Vending Machine Provider</span>
+            Modesto&apos;s Premier <span className="text-[#FD5A1E]">Vending Machine Provider</span>
           </h2>
           <p className="text-xl text-white/80 max-w-3xl mx-auto mb-8">
-            Join leading Modesto and Stanislaus County businesses enjoying ampvendingmachines.com's
+            Join leading Modesto and Stanislaus County businesses enjoying AMP Vending Machines
             state-of-the-art vending solutions with comprehensive maintenance and support.
           </p>
           
@@ -88,7 +90,7 @@ const CTASection = () => {
                 rightIcon={<ArrowRight size={20} />}
                 animate
               >
-                Get Free Quote - Modesto CA
+                Get Free Consultation
               </AccessibleButton>
             </motion.div>
           </div>
