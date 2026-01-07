@@ -45,6 +45,10 @@ export default function RootLayout({
         {/* Structured Data - SEO Schema Markup */}
         <StructuredData />
 
+        {/* Preload first hero background image for faster LCP */}
+        <link rel="preload" as="image" href="/images/products/drpepper.webp" />
+        <link rel="preload" as="image" href="/images/products/doritos-nacho.webp" />
+
         {/* Inline critical CSS for immediate render */}
         <style>{`
           body{background:#000;color:#fff;font-family:var(--font-inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}

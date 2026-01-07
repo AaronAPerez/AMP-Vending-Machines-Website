@@ -34,11 +34,14 @@ const nextConfig = {
         : false,
   },
 
+  // Note: swcMinify is now the default in Next.js 16 and has been removed as an option
+
   // Experimental features for optimization
   experimental: {
     // Optimize package imports for better tree shaking
     optimizePackageImports: ["lucide-react", "framer-motion"],
-    optimizeCss: true,
+    // Note: optimizeCss temporarily disabled for build testing
+    // optimizeCss: true,
   },
 
   // Environment variables available to the client
@@ -55,12 +58,13 @@ const nextConfig = {
   distDir: ".next",
 
   // Image optimization configuration
+  // Note: In Next.js 16, quality is set per-image via the Image component
+  // Default quality is 75 (down from 90 in older versions) for better performance
   images: {
-    formats: ["image/avif", "image/webp"],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60 * 60 * 24 * 365, // 1 year
-    qualities: [75, 85, 90], // list of allowed qualities
+    deviceSizes: [640, 750, 828, 1080, 1200],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256],
+    formats: ['image/webp'],
+    minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
@@ -112,11 +116,11 @@ const nextConfig = {
             // Consider tightening with nonces/hashes for stricter security.
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com",
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https: blob:",
               "font-src 'self' data:",
-              "connect-src 'self' https://www.google-analytics.com https://vercel-analytics.com https://vitals.vercel-insights.com",
+              "connect-src 'self' https://www.google-analytics.com",
               "frame-ancestors 'none'",
               "base-uri 'self'",
               "form-action 'self'",

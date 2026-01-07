@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
@@ -64,10 +66,10 @@ export const BackgroundImages = () => {
                                 src={src}
                                 alt="hero product images"
                                 fill
-                                sizes="(max-width: 768px) 25vw"
+                                sizes="(max-width: 768px) 25vw, 20vw"
                                 className="object-cover"
-                                priority // Load immediately for LCP
-                                quality={90}
+                                loading={index < 4 ? "eager" : "lazy"} // Only first 4 eager, rest lazy
+                                // quality uses default from next.config.js (75)
                             />
                             <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/50" />
                         </div>

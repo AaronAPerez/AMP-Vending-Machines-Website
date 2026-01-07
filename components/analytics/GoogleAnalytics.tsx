@@ -19,17 +19,17 @@ export function GoogleAnalytics() {
 
   return (
     <>
-      {/* Google Tag (gtag.js) - Async loading for performance */}
+      {/* Google Tag (gtag.js) - Lazy loading for better LCP performance */}
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         async
       />
-      
+
       {/* Initialize Google Analytics */}
       <Script
         id="google-analytics"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       >
         {`
           window.dataLayer = window.dataLayer || [];
