@@ -68,7 +68,8 @@ export const BackgroundImages = () => {
                                 fill
                                 sizes="(max-width: 768px) 25vw, 20vw"
                                 className="object-cover"
-                                loading={index < 4 ? "eager" : "lazy"} // Only first 4 eager, rest lazy
+                                loading={index < 4 ? "eager" : "lazy"}
+                                 // Only first 4 eager, rest lazy
                                 // quality uses default from next.config.js (75)
                             />
                             <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/50" />

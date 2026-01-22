@@ -119,8 +119,8 @@ export const SEO_CONSTANTS = {
   // Open Graph Image Defaults
   OG_IMAGE_WIDTH: 1200,
   OG_IMAGE_HEIGHT: 630,
-  DEFAULT_OG_IMAGE_FULL: 'https://www.ampvendingmachines.com/images/og/default-og-image.jpg',
-  LOGO_FULL_URL: 'https://www.ampvendingmachines.com/images/logo-full.png',
+  DEFAULT_OG_IMAGE_FULL: 'https://www.ampvendingmachines.com/images/og/amp-vending-logo-og.webp',
+  LOGO_FULL_URL: 'https://www.ampvendingmachines.com/images/logo-full.webp',
   
   // Business Hours
   BUSINESS_HOURS: {
@@ -185,7 +185,7 @@ export const PAGE_METADATA = {
       url: `${SEO_CONSTANTS.BASE_URL}/vending-machines`,
       siteName: SEO_CONSTANTS.SITE_NAME,
       images: [{
-        url: `${SEO_CONSTANTS.BASE_URL}/images/og/vending-machines.jpg`,
+        url: `${SEO_CONSTANTS.BASE_URL}/images/og/amp-vending-logo-og.webp`,
         width: SEO_CONSTANTS.OG_IMAGE_WIDTH,
         height: SEO_CONSTANTS.OG_IMAGE_HEIGHT,
         alt: 'AMP Premium Vending Machines Collection',

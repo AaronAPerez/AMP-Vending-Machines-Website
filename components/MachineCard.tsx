@@ -240,7 +240,7 @@ const MachineCard = ({
 
         {/* Technology Indicators */}
         {shouldShowTechIndicators() && (
-          <div className="absolute top-4 right-4 flex flex-wrap gap-1 max-w-[140px]">
+          <div className="absolute top-4 right-0 flex flex-wrap gap-1 max-w-[140px]">
             <TechIndicator
               icon={MonitorIcon}
               label="HD Touch"
@@ -325,7 +325,7 @@ const MachineCard = ({
                   key={idx}
                   className="flex items-center px-2 py-0.5 bg-[#FD5A1E]/10 rounded-full border border-[#FD5A1E]/20"
                 >
-                  <CheckCircleIcon size={8} className="text-[#FD5A1E] mr-1 flex-shrink-0" aria-hidden="true" />
+                  <CheckCircleIcon size={12} className="text-[#FD5A1E] mr-1 flex-shrink-0" aria-hidden="true" />
                   <span className="text-[#F5F5F5] text-[10px] sm:text-xs font-medium truncate">{highlight}</span>
                 </div>
               ))}
@@ -349,15 +349,15 @@ const MachineCard = ({
         <div className="flex items-center justify-between pt-2 mt-1 border-t border-[#333333]">
           <div className="flex items-center space-x-1.5 sm:space-x-2 text-[10px] sm:text-xs text-[#FD5A1E] flex-wrap gap-0.5">
             <span className="flex items-center flex-shrink-0">
-              <WifiIcon size={9} className="mr-0.5" aria-hidden="true" />
+              <WifiIcon size={12} className="mr-0.5" aria-hidden="true" />
               Smart Tech
             </span>
             <span className="flex items-center flex-shrink-0">
-              <CreditCardIcon size={9} className="mr-0.5" aria-hidden="true" />
+              <CreditCardIcon size={12} className="mr-0.5" aria-hidden="true" />
               Card Pay
             </span>
             <span className="flex items-center flex-shrink-0">
-              <ZapIcon size={9} className="mr-0.5" aria-hidden="true" />
+              <ZapIcon size={12} className="mr-0.5" aria-hidden="true" />
               {machine.category === 'refrigerated' ? 'Efficient' : 'Low Maint'}
             </span>
           </div>

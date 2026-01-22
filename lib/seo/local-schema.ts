@@ -153,13 +153,13 @@ export function generateEnhancedLocalBusinessSchema(): LocalBusiness {
     // Logo and images
     logo: {
       '@type': 'ImageObject' as const,
-      url: 'https://www.ampvendingmachines.com/images/logo.png',
+      url: 'https://www.ampvendingmachines.com/images/logo/AMP_logo.webp',
       width: '250',
       height: '60',
     },
     image: [
-      'https://www.ampvendingmachines.com/images/machines/touchscreen-combo.jpg',
-      'https://www.ampvendingmachines.com/images/machines/beverage-center.jpg',
+      'https://www.ampvendingmachines.com/images/machines/amp-premium-touchscreen-vending-machine.webp',
+      'https://www.ampvendingmachines.com/images/machines/refrigerated-vending-machine-blue-refresh.webp',
     ],
     
     // Same as (social profiles)
@@ -187,7 +187,7 @@ export function generateServiceAreaSchema(): Place {
     '@type': 'Place',
     '@id': 'https://www.ampvendingmachines.com/#servicearea',
     name: 'AMP Vending Machines Service Area - Modesto & Stanislaus County',
-    description: 'ampvendingmachines.com serves businesses throughout Modesto, Stanislaus County, and Central California',
+    description: 'ampvendingmachines.com serves businesses throughout Modesto, Stanislaus County, and San Joaquin County, California',
     geo: {
       '@type': 'GeoCircle',
       geoMidpoint: {

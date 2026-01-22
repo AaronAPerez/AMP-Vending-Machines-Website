@@ -1,13 +1,14 @@
 'use client';
 
 import React from 'react';
+// Import critical component directly (not lazy) to avoid hydration mismatch
+import { ResponsiveHero } from '@/components/hero/ResponsiveHero';
+
 import { Suspense } from 'react';
 import { ViewportLazy, Deferred } from '../ui/loading/LazyLoading';
 import { SectionLoadingFallback } from '@/components/ui/loading/LoadingFallbacks';
 import Section from '@/components/ui/shared/Section';
 
-// Import critical component directly (not lazy) to avoid hydration mismatch
-import { ResponsiveHero } from '@/components/hero/ResponsiveHero';
 
 // Import lazy components
 import {

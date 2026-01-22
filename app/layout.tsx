@@ -59,6 +59,13 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
         <link rel="dns-prefetch" href="//www.googletagmanager.com" />
 
+        {/* Open Graph (OG) Tags  */}
+        <meta property="og:image" content="https://www.ampvendingmachines.com/images/promos/amp-vending-promo-modesto.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:title" content="AMP Vending Machines – Free Vending for Modesto & Stanislaus County" />
+        <meta property="og:description" content="We provide high‑quality vending machines at no cost to your business." />
+
         <meta name="google-site-verification" content="rQUz_b0dTF5gHNCSHXdNfzEI6LDoPxg54ZppJQjiFFg" />
 
         {/* Mobile optimization */}
@@ -71,7 +78,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#000000" />
         <meta name="msapplication-TileColor" content="#000000" />
 
-             {/* Performance optimization hints */}
+        {/* Performance optimization hints */}
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
