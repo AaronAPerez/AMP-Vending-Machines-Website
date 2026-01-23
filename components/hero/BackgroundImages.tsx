@@ -51,34 +51,32 @@ export const BackgroundImages = () => {
             >
                 {productImages.map((src, index) => {
                     const offset = Math.min(scrollY * 0.1 * (index % 6 + 1) * 0.2, 100);
-                    const opacity = Math.max(0.3, 1 - (scrollY * 0.001));
+                    const opacity = Math.max(0.3, 1 - scrollY * 0.001);
 
                     return (
                         <div
                             key={index}
-                            className="relative rounded-lg overflow-hidden w-full h-38
-"
+                            className="relative rounded-lg overflow-hidden w-full h-40 sm:h-48"
                             style={{
                                 transform: `translateY(${offset}px)`,
-                                opacity
+                                opacity,
                             }}
                         >
                             <Image
                                 src={src}
                                 alt="hero product images"
-                                fill
-                                sizes="(max-width: 768px) 25vw, 20vw"
-                                className="object-cover"
+                                width={200}
+                                height={200}
+                                sizes="(max-width: 768px) 33vw, 25vw"
+                                className="object-cover w-full h-full"
                                 loading={index < 4 ? "eager" : "lazy"}
-                            // Only first 4 eager, rest lazy
-                            // quality uses default from next.config.js (75)
+                                quality={50}
                             />
-                            {/* Subtle dark overlay for readability */}
                             <div className="absolute inset-0 bg-black/40" />
                         </div>
                     );
                 })}
-            </div>      
+            </div>
         </>
     );
 };

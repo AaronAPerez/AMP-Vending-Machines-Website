@@ -12,7 +12,6 @@ import { Inter } from 'next/font/google';
 import "./globals.css";
 import ResizableNavbar from "@/components/layout/ResizableNavbar";
 import { WebVitalsReporter } from "@/components/analytics/WebVitalsReporter";
-import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { ToasterProvider } from "@/components/ui/ToasterProvider";
 import { StructuredData } from "@/components/seo/StructuredData";
 import FeedbackWidget from "@/components/feedback/FeedbackWidget";
@@ -47,6 +46,9 @@ export default function RootLayout({
         <link rel="preload" as="image" href="/images/products/drpepper.webp" />
         <link rel="preload" as="image" href="/images/products/doritos-nacho.webp" />
 
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+<link rel="preconnect" href="https://www.google-analytics.com" />
+
         {/* Inline critical CSS for immediate render */}
         <style>{`
           body{background:#000;color:#fff;font-family:var(--font-inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
@@ -54,8 +56,6 @@ export default function RootLayout({
           #hero-heading{font-display:swap;text-rendering:optimizeSpeed}
         `}</style>
 
-        <link rel="dns-prefetch" href="//www.google-analytics.com" />
-        <link rel="dns-prefetch" href="//www.googletagmanager.com" />
 
         {/* Open Graph (OG) Tags  */}
         <meta property="og:image" content="https://www.ampvendingmachines.com/images/promos/amp-vending-promo-modesto.jpg" />
@@ -100,8 +100,6 @@ export default function RootLayout({
 
 
       <body className={`${inter.variable} font-sans antialiased bg-black text-white min-h-screen`} suppressHydrationWarning>
-        {/* Analytics */}
-        <GoogleAnalytics />
 
         {/* Toast notifications */}
         <ToasterProvider />

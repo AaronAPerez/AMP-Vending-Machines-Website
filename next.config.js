@@ -19,19 +19,7 @@ const nextConfig = {
   // Compiler optimizations using SWC (default in Next.js 16)
   compiler: {
     // Remove console.log statements in production
-    removeConsole:
-      process.env.NODE_ENV === "production"
-        ? {
-            exclude: ["error", "warn"], // Keep errors and warnings
-          }
-        : false,
-    // Remove React properties in production
-    reactRemoveProperties:
-      process.env.NODE_ENV === "production"
-        ? {
-            properties: ["^data-testid$"],
-          }
-        : false,
+    removeConsole: true,
   },
 
   // Note: swcMinify is now the default in Next.js 16 and has been removed as an option
@@ -41,7 +29,7 @@ const nextConfig = {
     // Optimize package imports for better tree shaking
     optimizePackageImports: ["lucide-react", "framer-motion"],
     // Note: optimizeCss temporarily disabled for build testing
-    // optimizeCss: true,
+    optimizeCss: true,
   },
 
   // Environment variables available to the client
@@ -63,7 +51,7 @@ const nextConfig = {
   images: {
     deviceSizes: [640, 750, 828, 1080, 1200],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
-    formats: ['image/webp'],
+    formats: ["image/webp"],
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
