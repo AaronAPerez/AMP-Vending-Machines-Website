@@ -10,8 +10,6 @@
 import { rootMetadata } from "@/lib/config/metadata";
 import { Inter } from 'next/font/google';
 import "./globals.css";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import ResizableNavbar from "@/components/layout/ResizableNavbar";
 import { WebVitalsReporter } from "@/components/analytics/WebVitalsReporter";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
@@ -131,8 +129,6 @@ export default function RootLayout({
           suppressHydrationWarning
         >
           {children}
-          <SpeedInsights />
-          <Analytics />
           <WebVitalsReporter />
         </main>
 

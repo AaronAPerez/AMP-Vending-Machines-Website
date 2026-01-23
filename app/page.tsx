@@ -26,9 +26,6 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      {/* <Suspense fallback={<SectionLoadingFallback />}>
-        <OptimizedHomePage />
-      </Suspense> */}
       <OptimizedHomePage />
     </>
   );

@@ -167,7 +167,7 @@ export const PAGE_METADATA = {
     twitter: {
       card: 'summary_large_image',
       title: 'AMP Vending Machines | Modesto & Stanislaus County',
-      description: 'ampvendingmachines.com - Top vending machine provider in Modesto, Stanislaus County & Central California with touchscreen technology.',
+      description: 'ampvendingmachines.com - Premium vending machine provider in Modesto, Stanislaus County & Central California with touchscreen technology.',
       images: [SEO_CONSTANTS.DEFAULT_OG_IMAGE_FULL],
     },
   } satisfies Metadata,

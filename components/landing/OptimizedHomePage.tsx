@@ -3,7 +3,6 @@
 import React from 'react';
 // Import critical component directly (not lazy) to avoid hydration mismatch
 import { ResponsiveHero } from '@/components/hero/ResponsiveHero';
-
 import { Suspense } from 'react';
 import { ViewportLazy, Deferred } from '../ui/loading/LazyLoading';
 import { SectionLoadingFallback } from '@/components/ui/loading/LoadingFallbacks';
@@ -51,7 +50,6 @@ export default function OptimizedHomePage() {
       </Section>
 
       {/* VIEWPORT LAZY: Below-the-fold sections */}
-
       <ViewportLazy
         threshold={0.1}
         rootMargin="150px"

@@ -56,7 +56,8 @@ export const BackgroundImages = () => {
                     return (
                         <div
                             key={index}
-                            className="relative rounded-lg overflow-hidden w-full h-50"
+                            className="relative rounded-lg overflow-hidden w-full h-38
+"
                             style={{
                                 transform: `translateY(${offset}px)`,
                                 opacity
@@ -69,20 +70,15 @@ export const BackgroundImages = () => {
                                 sizes="(max-width: 768px) 25vw, 20vw"
                                 className="object-cover"
                                 loading={index < 4 ? "eager" : "lazy"}
-                                 // Only first 4 eager, rest lazy
-                                // quality uses default from next.config.js (75)
+                            // Only first 4 eager, rest lazy
+                            // quality uses default from next.config.js (75)
                             />
-                            <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/50" />
+                            {/* Subtle dark overlay for readability */}
+                            <div className="absolute inset-0 bg-black/40" />
                         </div>
                     );
                 })}
-            </div>
-            <div
-                className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/70 to-black z-10"
-                aria-hidden="true"
-            >
-            </div>
-
+            </div>      
         </>
     );
 };

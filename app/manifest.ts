@@ -41,15 +41,15 @@ export default function manifest(): MetadataRoute.Manifest {
     // Using existing logo as fallback until proper PWA icons are created
     icons: [
       {
-        src: '/images/logo/AMP_logo.png',
+        src: '/images/logo/AMP_logo.webp',
         sizes: '192x192',
-        type: 'image/png',
+        type: 'image/webp',
         purpose: 'any',
       },
       {
-        src: '/images/logo/AMP_logo.png',
+        src: '/images/logo/AMP_logo.webp',
         sizes: '512x512',
-        type: 'image/png',
+        type: 'image/webp',
         purpose: 'any',
       },
       {
