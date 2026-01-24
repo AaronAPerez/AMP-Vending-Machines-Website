@@ -49,7 +49,10 @@
     "test:types": "tsc --noEmit --skipLibCheck",
     "lint:strict": "next lint --max-warnings 0",
     "lint:check": "next lint --max-warnings 0",
-    "index:request": "tsx scripts/request-indexing.ts"
+    "index:request": "tsx scripts/request-indexing.ts",   "refactor:setup": "powershell -ExecutionPolicy Bypass -File ./scripts/create-refactored-structure.ps1",
+    "refactor:backup": "powershell -ExecutionPolicy Bypass -File ./scripts/backup-current-pages.ps1",
+    "refactor:validate": "powershell -ExecutionPolicy Bypass -File ./scripts/validate-refactoring.ps1",
+    "refactor:all": "npm run refactor:backup && npm run refactor:setup"
   },
   "dependencies": {
     "@floating-ui/react-dom": "^2.1.3",

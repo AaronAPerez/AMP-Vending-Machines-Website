@@ -105,7 +105,7 @@ export const ResponsiveHero = ({
 
           {secondaryCta && (
             <AccessibleButton
-              variant="cta"
+              variant="outline"
               size="lg"
               rightIcon={<ArrowRight />}
               href={secondaryCta.href}

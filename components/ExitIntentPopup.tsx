@@ -2,11 +2,21 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { X, Phone, ArrowRight, Sparkles, CheckCircle } from 'lucide-react';
+import { X, Phone, ArrowRight, Sparkles, CheckCircle, AlertCircle } from 'lucide-react';
 import Image from 'next/image';
 import { AccessibleButton } from '@/components/ui/AccessibleButton';
 import Card from '@/components/ui/core/Card';
 import { trackGoogleAdsConversion } from '@/lib/analytics/gtag';
+import { z } from 'zod';
+
+// Exit Intent Form Schema (matches contact form schema requirements)
+const exitIntentSchema = z.object({
+  firstName: z.string().min(1, 'First name is required').max(50, 'First name is too long'),
+  lastName: z.string().min(1, 'Last name is required').max(50, 'Last name is too long'),
+  email: z.string().email('Invalid email address'),
+  phone: z.string().optional(),
+  companyName: z.string().min(1, 'Company name is required').max(100, 'Company name is too long'),
+});
 
 interface ExitIntentPopupProps {
   delay?: number; // Minimum time on page before showing (ms)
@@ -71,25 +81,27 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
     setIsVisible(false);
   };
 
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
+  const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', phone: '', companyName: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleQuickSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrors({});
+    setSubmitError(null);
 
-    // Validate at least one field is filled
-    if (!formData.name && !formData.email && !formData.phone) {
-      return; // Don't submit if all fields are empty
-    }
-
-    setIsSubmitting(true);
-
+    // Validate form data with Zod schema
     try {
+      const validatedData = exitIntentSchema.parse(formData);
+      setIsSubmitting(true);
+
       const response = await fetch('/api/exit-intent', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...formData,
+          ...validatedData,
           pageUrl: typeof window !== 'undefined' ? window.location.href : undefined
         }),
       });
@@ -99,12 +111,30 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
       if (result.success) {
         // Track conversion
         trackGoogleAdsConversion();
-        // Close popup and show success
-        setIsVisible(false);
-        // You could show a toast notification here
+
+        // Show success state
+        setSubmitSuccess(true);
+
+        // Close popup after showing success message
+        setTimeout(() => {
+          setIsVisible(false);
+        }, 2000);
+      } else {
+        setSubmitError(result.message || 'Submission failed. Please try again.');
       }
     } catch (error) {
-      console.error('Exit intent submission failed:', error);
+      if (error instanceof z.ZodError) {
+        // Handle validation errors
+        const fieldErrors: Record<string, string> = {};
+        error.errors.forEach((err) => {
+          const field = err.path[0] as string;
+          fieldErrors[field] = err.message;
+        });
+        setErrors(fieldErrors);
+      } else {
+        console.error('Exit intent submission failed:', error);
+        setSubmitError('An error occurred. Please try again or call us at (209) 403-5450.');
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -148,7 +178,7 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
                     src="/images/logo/AMP_logo.webp"
                     alt="AMP Vending Machines"
                     width={150}
-                    height={60}
+                    height={80}
                     className="object-contain mx-auto"
                   />
                 </div>
@@ -159,7 +189,7 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
                     src="/images/machines/amp-refrigerated-vending-machine-tap-to-pay.webp"
                     alt="Premium Touchscreen Vending Machine"
                     fill
-                    className="object-contain drop-shadow-2xl"
+                    className="object-cover drop-shadow-2xl p-4"
                     sizes="(max-width: 768px) 0vw, 50vw"
                   />
                 </div>
@@ -216,9 +246,6 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
 
                 {/* Header */}
                 <div className="text-center mb-4">
-                  {/* <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#FD5A1E]/20 mb-3 animate-pulse">
-                    <Sparkles className="h-6 w-6 text-[#FD5A1E]" />
-                  </div> */}
                   <h2 className="text-xl md:text-2xl font-extrabold bg-gradient-to-r from-red-600 to-orange-600 text-white border-2 border-yellow-400 shadow-lg animate-pulse mb-2">
                   {/* <h2 className="text-xl md:text-2xl font-extrabold text-white mb-2"> */}
                     Wait! Don&apos;t Miss Out...
@@ -293,58 +320,167 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
 
                 {/* Quick Lead Capture Form */}
                 <form onSubmit={handleQuickSubmit} className="space-y-2.5">
-                  <div className="grid grid-cols-1 gap-2">
-                    <input
-                      type="text"
-                      placeholder="Your Name (Optional)"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-3 py-1.5 bg-[#1a1a1a] border border-[#333333] rounded-lg text-[#F5F5F5] text-sm focus:outline-none focus:border-[#FD5A1E] focus:ring-1 focus:ring-[#FD5A1E]"
-                    />
-                    <input
-                      type="email"
-                      placeholder="Your Email (Optional)"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-3 py-1.5 bg-[#1a1a1a] border border-[#333333] rounded-lg text-[#F5F5F5] text-sm focus:outline-none focus:border-[#FD5A1E] focus:ring-1 focus:ring-[#FD5A1E]"
-                    />
-                    <input
-                      type="tel"
-                      placeholder="Your Phone (Optional)"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-3 py-1.5 bg-[#1a1a1a] border border-[#333333] rounded-lg text-[#F5F5F5] text-sm focus:outline-none focus:border-[#FD5A1E] focus:ring-1 focus:ring-[#FD5A1E]"
-                    />
-                  </div>
+                  {/* Success Message */}
+                  {submitSuccess && (
+                    <div className="flex items-start gap-2 p-3 bg-green-500/10 border border-green-500/30 rounded-lg">
+                      <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                      <div className="text-sm text-green-500">
+                        <p className="font-semibold">Success!</p>
+                        <p className="text-xs">We&apos;ll contact you within 24 hours about your FREE vending machine.</p>
+                      </div>
+                    </div>
+                  )}
 
-                  {/* CTA Buttons - Touch-friendly with proper spacing */}
-                  <div className="space-y-2">
-                    <AccessibleButton
-                      type="submit"
-                      variant="cta"
-                      size="lg"
-                      loading={isSubmitting}
-                      loadingText="Submitting..."
-                      rightIcon={<ArrowRight className="h-5 w-5" />}
-                      fullWidth
-                      className="touch-manipulation"
-                      style={{ minHeight: '48px' }} // WCAG touch target
-                    >
-                      Get Your Free Machine
-                    </AccessibleButton>
-                    <AccessibleButton
-                      variant="outline"
-                      size="md"
-                      href="tel:+12094035450"
-                      leftIcon={<Phone className="h-4 w-4" />}
-                      onClick={handleClose}
-                      fullWidth
-                      className="touch-manipulation"
-                      style={{ minHeight: '44px' }} // WCAG touch target
-                    >
-                      Call (209) 403-5450
-                    </AccessibleButton>
-                  </div>
+                  {/* Error Message */}
+                  {submitError && (
+                    <div className="flex items-start gap-2 p-3 bg-red-500/10 border border-red-500/30 rounded-lg">
+                      <AlertCircle className="h-5 w-5 text-red-500 flex-shrink-0 mt-0.5" />
+                      <div className="text-sm text-red-500">
+                        <p className="font-semibold">Error</p>
+                        <p className="text-xs">{submitError}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Form Validation Error */}
+                  {errors.root && (
+                    <div className="flex items-start gap-2 p-3 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
+                      <AlertCircle className="h-5 w-5 text-yellow-500 flex-shrink-0 mt-0.5" />
+                      <p className="text-sm text-yellow-500">{errors.root}</p>
+                    </div>
+                  )}
+
+                  {!submitSuccess && (
+                    <>
+                      <div className="grid grid-cols-1 gap-2">
+                        <div className="grid grid-cols-2 gap-2">
+                          <div>
+                            <input
+                              type="text"
+                              placeholder="First Name *"
+                              value={formData.firstName}
+                              onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                              className={`w-full px-3 py-1.5 bg-[#1a1a1a] border rounded-lg text-[#F5F5F5] text-sm focus:outline-none focus:ring-1 ${
+                                errors.firstName
+                                  ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
+                                  : 'border-[#333333] focus:border-[#FD5A1E] focus:ring-[#FD5A1E]'
+                              }`}
+                              disabled={isSubmitting}
+                              required
+                            />
+                            {errors.firstName && (
+                              <p className="text-xs text-red-500 mt-1">{errors.firstName}</p>
+                            )}
+                          </div>
+
+                          <div>
+                            <input
+                              type="text"
+                              placeholder="Last Name *"
+                              value={formData.lastName}
+                              onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                              className={`w-full px-3 py-1.5 bg-[#1a1a1a] border rounded-lg text-[#F5F5F5] text-sm focus:outline-none focus:ring-1 ${
+                                errors.lastName
+                                  ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
+                                  : 'border-[#333333] focus:border-[#FD5A1E] focus:ring-[#FD5A1E]'
+                              }`}
+                              disabled={isSubmitting}
+                              required
+                            />
+                            {errors.lastName && (
+                              <p className="text-xs text-red-500 mt-1">{errors.lastName}</p>
+                            )}
+                          </div>
+                        </div>
+
+                        <div>
+                          <input
+                            type="email"
+                            placeholder="Email Address *"
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            className={`w-full px-3 py-1.5 bg-[#1a1a1a] border rounded-lg text-[#F5F5F5] text-sm focus:outline-none focus:ring-1 ${
+                              errors.email
+                                ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
+                                : 'border-[#333333] focus:border-[#FD5A1E] focus:ring-[#FD5A1E]'
+                            }`}
+                            disabled={isSubmitting}
+                            required
+                          />
+                          {errors.email && (
+                            <p className="text-xs text-red-500 mt-1">{errors.email}</p>
+                          )}
+                        </div>
+
+                        <div>
+                          <input
+                            type="tel"
+                            placeholder="Phone Number (Optional)"
+                            value={formData.phone}
+                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                            className={`w-full px-3 py-1.5 bg-[#1a1a1a] border rounded-lg text-[#F5F5F5] text-sm focus:outline-none focus:ring-1 ${
+                              errors.phone
+                                ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
+                                : 'border-[#333333] focus:border-[#FD5A1E] focus:ring-[#FD5A1E]'
+                            }`}
+                            disabled={isSubmitting}
+                          />
+                          {errors.phone && (
+                            <p className="text-xs text-red-500 mt-1">{errors.phone}</p>
+                          )}
+                        </div>
+
+                        <div>
+                          <input
+                            type="text"
+                            placeholder="Company Name *"
+                            value={formData.companyName}
+                            onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
+                            className={`w-full px-3 py-1.5 bg-[#1a1a1a] border rounded-lg text-[#F5F5F5] text-sm focus:outline-none focus:ring-1 ${
+                              errors.companyName
+                                ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
+                                : 'border-[#333333] focus:border-[#FD5A1E] focus:ring-[#FD5A1E]'
+                            }`}
+                            disabled={isSubmitting}
+                            required
+                          />
+                          {errors.companyName && (
+                            <p className="text-xs text-red-500 mt-1">{errors.companyName}</p>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* CTA Buttons - Touch-friendly with proper spacing */}
+                      <div className="space-y-2">
+                        <AccessibleButton
+                          type="submit"
+                          variant="cta"
+                          size="lg"
+                          loading={isSubmitting}
+                          loadingText="Submitting..."
+                          rightIcon={<ArrowRight className="h-5 w-5" />}
+                          fullWidth
+                          className="touch-manipulation"
+                          style={{ minHeight: '48px' }} // WCAG touch target
+                          disabled={isSubmitting}
+                        >
+                          Get Your Free Machine
+                        </AccessibleButton>
+                        <AccessibleButton
+                          variant="outline"
+                          size="md"
+                          href="tel:+12094035450"
+                          leftIcon={<Phone className="h-4 w-4" />}
+                          onClick={handleClose}
+                          fullWidth
+                          className="touch-manipulation"
+                          style={{ minHeight: '44px' }} // WCAG touch target
+                        >
+                          Call (209) 403-5450
+                        </AccessibleButton>
+                      </div>
+                    </>
+                  )}
                 </form>
 
                 {/* Trust Indicators */}

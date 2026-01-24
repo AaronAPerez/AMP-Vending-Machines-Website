@@ -7,39 +7,40 @@ import { z } from 'zod';
  * Captures high-intent leads from exit popup
  */
 
+// Exit Intent Form Schema (matches contact form schema)
 const exitIntentSchema = z.object({
-  name: z.string().min(1, 'Name is required').max(100, 'Name is too long').optional(),
-  email: z.string().email('Invalid email address').optional(),
-  phone: z.string().max(20, 'Phone number is too long').optional(),
-  company: z.string().max(100, 'Company name is too long').optional(),
+  firstName: z.string().min(1, 'First name is required').max(50, 'First name is too long'),
+  lastName: z.string().min(1, 'Last name is required').max(50, 'Last name is too long'),
+  email: z.string().email('Invalid email address'),
+  phone: z.string().optional(),
+  companyName: z.string().min(1, 'Company name is required').max(100, 'Company name is too long'),
   pageUrl: z.string().url('Invalid page URL').optional(),
-}).refine(data => data.name || data.email || data.phone, {
-  message: 'At least one of name, email, or phone is required'
 });
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     console.log('🎯 Exit intent submission received:', {
-      hasEmail: !!body.email,
-      hasPhone: !!body.phone,
+      name: body.firstName && body.lastName ? `${body.firstName} ${body.lastName}` : 'Unknown',
+      company: body.companyName,
+      email: body.email,
       timestamp: new Date().toISOString()
     });
 
     // Validate the form data
     const validatedData = exitIntentSchema.parse(body);
 
-    const exitIntentData = {
+    const contactData = {
       ...validatedData,
+      message: `Exit Intent Lead from ${validatedData.pageUrl || 'website'}`,
       submittedAt: new Date().toISOString(),
       source: 'exit_intent_popup',
       ipAddress: request.headers.get('x-forwarded-for') || 'unknown',
       userAgent: request.headers.get('user-agent') || 'unknown',
-      id: `exit_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
     };
 
-    // Send emails using professional templates
-    const { customerResult, businessResult } = await emailService.sendExitIntentFormEmails(exitIntentData);
+    // Send emails using contact form templates (same schema)
+    const { customerResult, businessResult } = await emailService.sendContactFormEmails(contactData);
 
     // Log results
     if (customerResult.success) {
@@ -55,12 +56,12 @@ export async function POST(request: NextRequest) {
     }
 
     // Log exit intent submission
-    await logExitIntentSubmission(exitIntentData, {
+    await logExitIntentSubmission(contactData, {
       customerEmailSuccess: customerResult.success,
       businessEmailSuccess: businessResult.success
     });
 
-    const submissionId = exitIntentData.id;
+    const submissionId = `exit_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
     // Always return success if we got the lead, even if emails failed
     if (businessResult.success) {
@@ -68,7 +69,6 @@ export async function POST(request: NextRequest) {
         success: true,
         message: 'Thank you for your interest! We\'ll contact you within 24 hours about your FREE vending machine.',
         submissionId,
-        leadId: exitIntentData.id,
         emailStatus: {
           customerConfirmation: customerResult.success ? 'sent' : 'skipped',
           businessNotification: 'sent'
@@ -81,7 +81,6 @@ export async function POST(request: NextRequest) {
         success: true,
         message: 'Thank you for your interest! We\'ll contact you within 24 hours about your FREE vending machine.',
         submissionId,
-        leadId: exitIntentData.id,
         emailStatus: {
           customerConfirmation: customerResult.success ? 'sent' : 'failed',
           businessNotification: 'failed'
@@ -96,7 +95,7 @@ export async function POST(request: NextRequest) {
     if (error instanceof z.ZodError) {
       return NextResponse.json({
         success: false,
-        message: 'Please provide at least your name, email, or phone number.',
+        message: 'Please fill in all required fields.',
         errors: error.errors.map(err => ({
           field: err.path.join('.'),
           message: err.message
@@ -122,8 +121,9 @@ async function logExitIntentSubmission(
 ): Promise<void> {
   try {
     console.log('📊 Exit intent submission logged:', {
-      id: data.id,
-      hasEmail: !!data.email,
+      name: `${data.firstName} ${data.lastName}`,
+      company: data.companyName,
+      email: data.email,
       hasPhone: !!data.phone,
       timestamp: data.submittedAt,
       emailStatus
