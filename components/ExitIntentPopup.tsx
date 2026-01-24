@@ -202,7 +202,7 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
               </div>
 
               {/* Right Column - Content */}
-              <div className="p-6 md:p-8 lg:p-8">
+              <div className="p-6">
                 {/* Mobile Logo */}
                 <div className="lg:hidden mb-4 flex justify-center">
                   <Image
@@ -229,7 +229,7 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
 
                 {/* Value Prop */}
                 <p className="text-sm text-[#F5F5F5] leading-relaxed text-center mb-4">
-                  Join <span className="font-bold text-[#FD5A1E]">hundreds of businesses</span> in Modesto & Stanislaus County
+                  Join <span className="font-bold text-[#FD5A1E]">the many businesses</span> in Modesto & Stanislaus County
                   providing premium vending at{' '}
                   <span className="font-bold text-[#FD5A1E]">zero cost</span>!
                 </p>
