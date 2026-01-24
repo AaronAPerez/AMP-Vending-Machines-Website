@@ -3,7 +3,8 @@
 import { getAllVendingMachines, normalizeMachineData } from '@/lib/data/vendingMachineData';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { MachineGrid } from '../MachineCard';
+import { MachineGrid } from '../vending-machines/listing/MachineGrid';
+
 
 
 
@@ -76,9 +77,9 @@ const VendingMachineShowcase = ({
           <>
             <MachineGrid
               machines={vendingMachines}
-              variant="showcase"
-              className="mb-12"
-              ariaLabel="Featured vending machines collection"
+              // variant="showcase"
+              // className="mb-12"
+              // ariaLabel="Featured vending machines collection"
             />
 
             {/* Custom Request CTA Card - Enhanced for SEO */}
