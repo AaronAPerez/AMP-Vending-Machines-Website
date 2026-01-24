@@ -65,7 +65,7 @@ export const BUSINESS_INFO: BusinessInfo = {
   phone: '(209) 403-5450',
   email: 'ampdesignandconsulting@gmail.com',
   website: 'https://www.ampvendingmachines.com',
-  logo: 'https://www.ampvendingmachines.com/images/logo/AMP_logo.png',
+  logo: 'https://www.ampvendingmachines.com/images/logo/AMP_logo.webp',
   socialMedia: {
     // Add when available
     // facebook: 'https://facebook.com/ampvending',
@@ -491,6 +491,96 @@ export const generateReviewRequestEmail = (data: any): string => {
 };
 
 /**
+ * Exit Intent Popup Confirmation Email
+ */
+export const generateExitIntentConfirmationEmail = (data: any): string => {
+  const content = `
+    <h1>🎉 Welcome to AMP Vending!</h1>
+
+    <p>Dear ${data.name || 'Valued Customer'},</p>
+
+    <p>Thank you for your interest in our <strong>FREE Premium Touchscreen Vending Machines</strong>! We're excited to help transform your workplace with state-of-the-art vending solutions.</p>
+
+    <div class="info-box">
+        <h2>✨ What You Get (100% FREE)</h2>
+        <p>✓ Premium 21.5" HD touchscreen vending machine</p>
+        <p>✓ Contactless payment support (Apple Pay, Google Pay, cards)</p>
+        <p>✓ Free installation and setup</p>
+        <p>✓ Weekly restocking service</p>
+        <p>✓ 50+ customizable products</p>
+        <p>✓ No upfront costs, no contracts</p>
+    </div>
+
+    <div class="info-box">
+        <h2>📋 Your Information</h2>
+        ${data.email ? `<p><strong>Email:</strong> ${data.email}</p>` : ''}
+        ${data.phone ? `<p><strong>Phone:</strong> ${data.phone}</p>` : ''}
+        ${data.company ? `<p><strong>Company:</strong> ${data.company}</p>` : ''}
+    </div>
+
+    <p>A member of our team will contact you within <strong>24 hours</strong> to:</p>
+    <ul style="color: #555; font-size: 16px; line-height: 1.8;">
+        <li>Discuss your specific vending needs</li>
+        <li>Schedule a FREE consultation</li>
+        <li>Answer any questions you may have</li>
+        <li>Start the installation process</li>
+    </ul>
+
+    <p>Have questions right now? Feel free to call us at <a href="tel:+12094035450">(209) 403-5450</a></p>
+
+    <p>Best regards,<br>
+    The AMP Vending Team</p>
+  `;
+
+  return generateEmailHTML(
+    content,
+    `Get Your FREE Vending Machine - AMP Vending`,
+    {
+      text: 'View Our Machines',
+      url: `${BUSINESS_INFO.website}/vending-machines`
+    }
+  );
+};
+
+/**
+ * Exit Intent Popup Notification Email (for business)
+ */
+export const generateExitIntentNotificationEmail = (data: any): string => {
+  const content = `
+    <h1>🎯 Exit Intent Lead Captured!</h1>
+
+    <div class="info-box" style="border-left-color: ${BRAND_COLORS.success};">
+        <h2>Lead Information</h2>
+        <p><strong>Name:</strong> ${data.name || 'Not provided'}</p>
+        ${data.email ? `<p><strong>Email:</strong> <a href="mailto:${data.email}">${data.email}</a></p>` : '<p><strong>Email:</strong> Not provided</p>'}
+        ${data.phone ? `<p><strong>Phone:</strong> <a href="tel:${data.phone.replace(/[^0-9]/g, '')}">${data.phone}</a></p>` : ''}
+        ${data.company ? `<p><strong>Company:</strong> ${data.company}</p>` : ''}
+    </div>
+
+    <div class="info-box">
+        <h2>Lead Details</h2>
+        <p><strong>Source:</strong> Exit Intent Popup</p>
+        <p><strong>Page:</strong> ${data.pageUrl || 'Not specified'}</p>
+        <p><strong>Submitted:</strong> ${new Date(data.submittedAt).toLocaleString()}</p>
+        <p><strong>IP Address:</strong> ${data.ipAddress || 'Unknown'}</p>
+        <p><strong>Lead ID:</strong> ${data.id}</p>
+    </div>
+
+    <p><strong>🚨 Priority Action:</strong> This is a high-intent lead! Please follow up within 24 hours.</p>
+
+    <p><strong>Next Steps:</strong></p>
+    <ul style="color: #555; font-size: 16px; line-height: 1.8;">
+        <li>Review lead information above</li>
+        <li>Call or email to schedule consultation</li>
+        <li>Prepare FREE vending machine proposal</li>
+        <li>Track follow-up in CRM</li>
+    </ul>
+  `;
+
+  return generateEmailHTML(content);
+};
+
+/**
  * Export all template generators
  */
 export const emailTemplates = {
@@ -498,7 +588,9 @@ export const emailTemplates = {
   feedbackConfirmation: generateFeedbackConfirmationEmail,
   contactNotification: generateContactNotificationEmail,
   feedbackNotification: generateFeedbackNotificationEmail,
-  reviewRequest: generateReviewRequestEmail
+  reviewRequest: generateReviewRequestEmail,
+  exitIntentConfirmation: generateExitIntentConfirmationEmail,
+  exitIntentNotification: generateExitIntentNotificationEmail
 };
 
 /**

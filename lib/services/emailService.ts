@@ -144,6 +144,58 @@ export class EmailService {
   }
 
   /**
+   * Send exit intent popup emails using existing professional templates
+   */
+  async sendExitIntentFormEmails(data: {
+    name?: string;
+    email?: string;
+    phone?: string;
+    company?: string;
+    pageUrl?: string;
+    submittedAt: string;
+    ipAddress: string;
+    id: string;
+  }): Promise<{ customerResult: EmailResponse; businessResult: EmailResponse }> {
+
+    // Use existing professional templates
+    const customerHtml = emailTemplates.exitIntentConfirmation(data);
+    const businessHtml = emailTemplates.exitIntentNotification(data);
+
+    const results = [];
+
+    // Only send customer email if we have their email
+    if (data.email) {
+      results.push(
+        this.sendEmail({
+          to: data.email,
+          subject: `🎉 Your FREE Vending Machine Awaits - AMP Vending`,
+          html: customerHtml,
+          from: process.env.FROM_EMAIL || 'AMP Vending <ampdesignandconsulting@gmail.com>',
+        })
+      );
+    } else {
+      results.push(Promise.resolve({ success: false, error: 'No customer email provided' }));
+    }
+
+    // Always send business notification
+    results.push(
+      this.sendEmail({
+        to: process.env.TO_EMAIL || 'ampdesignandconsulting@gmail.com',
+        subject: `🎯 EXIT INTENT LEAD: ${data.name || 'Anonymous'} ${data.company ? `from ${data.company}` : ''}`,
+        html: businessHtml,
+        from: process.env.FROM_EMAIL || 'AMP Vending <ampdesignandconsulting@gmail.com>',
+      })
+    );
+
+    const [customerResult, businessResult] = await Promise.allSettled(results);
+
+    return {
+      customerResult: customerResult.status === 'fulfilled' ? customerResult.value : { success: false, error: 'Customer email failed' },
+      businessResult: businessResult.status === 'fulfilled' ? businessResult.value : { success: false, error: 'Business email failed' }
+    };
+  }
+
+  /**
    * Verify email service connection
    */
   async verifyConnection(): Promise<boolean> {

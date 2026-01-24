@@ -94,6 +94,18 @@ export const trackQuoteRequest = (source: string) => {
   });
 };
 
+/**
+ * Track Google Ads conversion for lead form submissions
+ * Fires when a user successfully submits a contact/lead form
+ */
+export const trackGoogleAdsConversion = () => {
+  if (typeof window.gtag !== 'undefined') {
+    window.gtag('event', 'conversion', {
+      send_to: 'AW-17642612517/eYR_CLjHr-sbEKXO09xB',
+    });
+  }
+};
+
 // Extend Window interface for TypeScript
 declare global {
   interface Window {

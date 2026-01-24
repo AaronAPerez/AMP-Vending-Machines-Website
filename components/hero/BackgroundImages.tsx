@@ -64,15 +64,13 @@ export const BackgroundImages = () => {
                         >
                             <Image
                                 src={src}
-                                alt="hero product images"
-                                width={200}
-                                height={200}
-                                sizes="(max-width: 768px) 33vw, 25vw"
-                                className="object-cover w-full h-full"
-                                loading={index < 4 ? "eager" : "lazy"}
-                                quality={50}
+                                alt=""
+                                fill
+                                sizes="(max-width: 640px) 33vw, 25vw"
+                                className="object-cover"
+                                loading="lazy"
+                                quality={60}
                             />
-                            <div className="absolute inset-0 bg-black/40" />
                         </div>
                     );
                 })}

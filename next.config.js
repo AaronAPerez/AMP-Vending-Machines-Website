@@ -27,7 +27,7 @@ const nextConfig = {
   // Experimental features for optimization
   experimental: {
     // Optimize package imports for better tree shaking
-    optimizePackageImports: ["lucide-react", "framer-motion"],
+    optimizePackageImports: ["lucide-react"],
     // Note: optimizeCss temporarily disabled for build testing
     optimizeCss: true,
   },
@@ -104,11 +104,11 @@ const nextConfig = {
             // Consider tightening with nonces/hashes for stricter security.
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com",
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https: blob:",
               "font-src 'self' data:",
-              "connect-src 'self' https://www.google-analytics.com",
+              "connect-src 'self' https://www.google-analytics.com https://vitals.vercel-insights.com https://va.vercel-scripts.com",
               "frame-ancestors 'none'",
               "base-uri 'self'",
               "form-action 'self'",
