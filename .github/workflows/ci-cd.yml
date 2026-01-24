@@ -1,82 +1,48 @@
-# name: CI/CD Pipeline
+name: CI/CD Pipeline
 
-# on:
-#   push:
-#     branches: [main, develop]
-#   pull_request:
-#     branches: [main]
+on:
+  push:
+    branches: [main, develop, development]
+  pull_request:
+    branches: [main, develop]
 
-# jobs:
-#   test:
-#     runs-on: ubuntu-latest
-    
-#     strategy:
-#       matrix:
-#         node-version: [18, 20]
-    
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v4
-      
-#       - name: Setup Node.js ${{ matrix.node-version }}
-#         uses: actions/setup-node@v4
-#         with:
-#           node-version: ${{ matrix.node-version }}
-#           cache: 'npm'
-      
-#       - name: Clear npm cache
-#         run: npm cache clean --force
-      
-#       - name: Install dependencies
-#         run: |
-#           rm -rf node_modules package-lock.json
-#           npm install
-      
-#       - name: Type check
-#         run: npm run type-check
-      
-#       - name: Lint code
-#         run: npm run lint
-      
-#       - name: Run tests
-#         run: npm run test:coverage
-      
-#       - name: Build application
-#         run: npm run build
-#         env:
-#           NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL }}
-#           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-#           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+jobs:
+  test:
+    name: Test & Build
+    runs-on: ubuntu-latest
 
-#   deploy:
-#     needs: test
-#     runs-on: ubuntu-latest
-#     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v4
-      
-#       - name: Setup Node.js
-#         uses: actions/setup-node@v4
-#         with:
-#           node-version: '20'
-#           cache: 'npm'
-      
-#       - name: Install dependencies
-#         run: npm ci
-      
-#       - name: Build for production
-#         run: npm run build
-#         env:
-#           NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL }}
-#           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-#           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
-      
-#       - name: Deploy to Vercel
-#         uses: amondnet/vercel-action@v25
-#         with:
-#           vercel-token: ${{ secrets.VERCEL_TOKEN }}
-#           vercel-org-id: ${{ secrets.ORG_ID }}
-#           vercel-project-id: ${{ secrets.PROJECT_ID }}
-#           vercel-args: '--prod'
+    strategy:
+      matrix:
+        node-version: [18, 20]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run type-check
+
+      - name: Lint code
+        run: npx next lint .
+        continue-on-error: false
+
+      - name: Run tests
+        run: npm run test:ci:no-coverage
+
+      - name: Build application
+        run: npm run build
+        env:
+          NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL || 'https://www.ampvendingmachines.com' }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+
+  # Note: Deployment is handled automatically by Vercel
+  # No separate deploy job needed

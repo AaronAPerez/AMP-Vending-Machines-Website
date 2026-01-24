@@ -99,7 +99,7 @@ export function StructuredData() {
     "priceRange": "$",
     "paymentAccepted": ["Cash", "Credit Card", "Debit Card", "Mobile Payment"],
     "currenciesAccepted": "USD",
-    "keywords": "ampvendingmachines, vending machines Modesto, vending machines Stanislaus County, Modesto vending machines, commercial vending machines, office vending Modesto CA, touchscreen vending, Central California, workplace solutions",
+    "keywords": "ampvendingmachines, vending machines Modesto, vending machines Stanislaus County, Modesto vending machines, vending machines Stockton, vending machines San Joaquin County, Stockton vending machines, commercial vending machines, office vending Modesto CA, office vending Stockton CA, touchscreen vending, Central California, workplace solutions, snack vending machines, beverage vending machines, combo vending machines, healthy vending machines, cashless vending machines, card reader vending, smart vending machines, modern vending machines, vending machine service, vending machine rental, vending machine leasing, free vending machine placement, vending machine installation, break room services, employee break room, workplace amenities, office snacks, school vending machines, gym vending machines, warehouse vending, factory vending machines, Northern California vending, California vending machines, vending solutions, micro market, fresh food vending, cold drinks vending, full service vending, vending machine maintenance, 24/7 vending service, Turlock vending machines, Ceres vending machines, Riverbank vending machines, Oakdale vending machines, Manteca vending machines, Tracy vending machines, Lodi vending machines, Lathrop vending machines, Central Valley vending, San Joaquin Valley vending",
     "foundingDate": "2019",
     "numberOfEmployees": "5-10",
     "knowsAbout": [
@@ -135,7 +135,7 @@ export function StructuredData() {
     "@id": `${AMP_VENDING_BUSINESS_INFO.contact.website}/#website`,
     "url": AMP_VENDING_BUSINESS_INFO.contact.website,
     "name": "AMP Vending Machines",
-    "description": "ampvendingmachines.com - Premier vending machine provider in Modesto, Stanislaus County & Central California with professional touchscreen technology",
+    "description": "ampvendingmachines.com - Premier vending machine provider in Modesto, Stockton, Stanislaus County, San Joaquin County & Central California with professional touchscreen technology",
     "publisher": {
       "@id": `${AMP_VENDING_BUSINESS_INFO.contact.website}/#organization`
     },

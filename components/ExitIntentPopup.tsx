@@ -129,7 +129,7 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
           {/* Close Button - Touch-friendly size */}
           <button
             onClick={handleClose}
-            className="absolute top-3 right-3 md:top-4 md:right-4 z-10 p-3 rounded-lg bg-[#4d4d4d] hover:bg-[#FD5A1E] transition-colors touch-manipulation"
+            className="absolute top-2 right-2 md:top-3 md:right-3 z-10 p-3 rounded-lg bg-[#4d4d4d] hover:bg-[#FD5A1E] transition-colors touch-manipulation"
             aria-label="Close popup"
             style={{ minWidth: '44px', minHeight: '44px' }} // WCAG touch target
           >
@@ -141,20 +141,20 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
 
     
               {/* Left Column - Image & Stats */}
-              <div className="relative hidden lg:flex lg:flex-col bg-gradient-to-br from-[#FD5A1E]/15 via-[#FD5A1E]/10 to-transparent p-8">
+              <div className="relative hidden lg:flex lg:flex-col  bg-[#4d4d4d]/30 rounded-lg border border-[#FD5A1E]/20 p-8">
                 {/* Logo */}
-                <div className="mb-6">
+                <div className="mb-2">
                   <Image
                     src="/images/logo/AMP_logo.webp"
                     alt="AMP Vending Machines"
                     width={150}
-                    height={50}
+                    height={60}
                     className="object-contain mx-auto"
                   />
                 </div>
 
                 {/* Vending Machine Image */}
-                <div className="relative flex-1 min-h-[280px] mb-6">
+                <div className="relative flex-1 min-h-[200px]">
                   <Image
                     src="/images/machines/amp-refrigerated-vending-machine-tap-to-pay.webp"
                     alt="Premium Touchscreen Vending Machine"
@@ -166,7 +166,7 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
 
                 {/* Stats Grid - Moved from right column */}
                 <div className="grid grid-cols-3 gap-2">
-                  <div className="text-center p-2.5 bg-[#4d4d4d]/30 rounded-lg border border-[#FD5A1E]/20">
+                  <div className="text-center p-2 bg-[#4d4d4d]/30 rounded-lg border border-[#FD5A1E]/20">
                     <div className="text-xl font-bold text-[#FD5A1E] mb-1">
                       100%
                     </div>
@@ -174,7 +174,7 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
                       Free Setup
                     </div>
                   </div>
-                  <div className="text-center p-2.5 bg-[#4d4d4d]/30 rounded-lg border border-[#FD5A1E]/20">
+                  <div className="text-center p-2 bg-[#4d4d4d]/30 rounded-lg border border-[#FD5A1E]/20">
                     <div className="text-xl font-bold text-[#FD5A1E] mb-1">
                       24/7
                     </div>
@@ -182,7 +182,7 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
                       Service
                     </div>
                   </div>
-                  <div className="text-center p-2.5 bg-[#4d4d4d]/30 rounded-lg border border-[#FD5A1E]/20">
+                  <div className="text-center p-2 bg-[#4d4d4d]/30 rounded-lg border border-[#FD5A1E]/20">
                     <div className="text-xl font-bold text-[#FD5A1E] mb-1">
                       50+
                     </div>
@@ -202,7 +202,7 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
               </div>
 
               {/* Right Column - Content */}
-              <div className="p-6">
+              <div className="p-6 lg:p-8">
                 {/* Mobile Logo */}
                 <div className="lg:hidden mb-4 flex justify-center">
                   <Image
@@ -216,10 +216,11 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
 
                 {/* Header */}
                 <div className="text-center mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#FD5A1E]/20 mb-3 animate-pulse">
+                  {/* <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#FD5A1E]/20 mb-3 animate-pulse">
                     <Sparkles className="h-6 w-6 text-[#FD5A1E]" />
-                  </div>
-                  <h2 className="text-xl md:text-2xl font-extrabold text-white mb-2">
+                  </div> */}
+                  <h2 className="text-xl md:text-2xl font-extrabold bg-gradient-to-r from-red-600 to-orange-600 text-white border-2 border-yellow-400 shadow-lg animate-pulse mb-2">
+                  {/* <h2 className="text-xl md:text-2xl font-extrabold text-white mb-2"> */}
                     Wait! Don&apos;t Miss Out...
                   </h2>
                   <p className="text-sm md:text-base text-[#FD5A1E] font-semibold">
@@ -229,7 +230,7 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
 
                 {/* Value Prop */}
                 <p className="text-sm text-[#F5F5F5] leading-relaxed text-center mb-4">
-                  Join <span className="font-bold text-[#FD5A1E]">the many businesses</span> in Modesto & Stanislaus County
+                  Join <span className="font-bold text-[#FD5A1E]">the many businesses</span> in Modesto Stanislaus County, and Stockton San Joaquin County
                   providing premium vending at{' '}
                   <span className="font-bold text-[#FD5A1E]">zero cost</span>!
                 </p>
