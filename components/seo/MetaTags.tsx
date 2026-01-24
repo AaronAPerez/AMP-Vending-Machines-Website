@@ -101,7 +101,7 @@ const SEO_CONSTANTS = {
       streetAddress: '4120 Dale Rd ste j8 1005',
       addressLocality: 'Modesto',
       addressRegion: 'CA',
-      addressCounty: 'Stanislaus County',
+      addressCounty: 'Stanislaus County, San Joaquin County',
       postalCode: '95354',
       addressCountry: 'US',
     },
@@ -110,7 +110,7 @@ const SEO_CONSTANTS = {
     url: 'https://www.ampvendingmachines.com',
     logo: 'https://www.ampvendingmachines.com/images/logo/AMP_logo.png',
     priceRange: 'Professional vending solutions',
-    areaServed: 'Modesto, Stanislaus County, Central California',
+    areaServed: 'Modesto, Stockton, Stanislaus County, San Joaquin County, Central California',
   },
 } as const;
 
@@ -253,8 +253,8 @@ export default function MetaTags({
       <meta name="publisher" content={SEO_CONSTANTS.SITE_NAME} />
       <meta name="format-detection" content="telephone=yes" />
       <meta name="geo.region" content="US-CA" />
-      <meta name="geo.placename" content="Modesto, Stanislaus County, California" />
-      <meta name="geo.county" content="Stanislaus County" />
+      <meta name="geo.placename" content="Modesto, Stockton, Stanislaus County, San Joaquin County, California" />
+      <meta name="geo.county" content="Stanislaus County, San Joaquin County" />
       <meta name="geo.position" content="37.6390972;-120.9968782" />
       <meta name="ICBM" content="37.6390972, -120.9968782" />
 

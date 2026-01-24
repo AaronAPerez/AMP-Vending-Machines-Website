@@ -6,8 +6,8 @@ import { Metadata } from "next";
 export const SEO_CONSTANTS = {
   // Website Identity
   SITE_NAME: 'AMP Vending Machines',
-  SITE_TITLE: 'AMP Vending Machines | Modesto & Stanislaus County | Premium Commercial Vending',
-  SITE_DESCRIPTION: 'ampvendingmachines.com - Leading vending machine provider in Modesto, Stanislaus County & Central California. Professional touchscreen vending machines with 50+ products. Free installation. Call (209) 403-5450',
+  SITE_TITLE: 'AMP Vending Machines | Modesto, Stockton, Stanislaus & San Joaquin County | Premium Commercial Vending',
+  SITE_DESCRIPTION: 'ampvendingmachines.com - Leading vending machine provider in Modesto, Stockton, Stanislaus County, San Joaquin County & Central California. Professional touchscreen vending machines with 50+ products. Free installation. Call (209) 403-5450',
   
   // URLs and Domains
   BASE_URL: 'https://www.ampvendingmachines.com',
@@ -40,8 +40,8 @@ export const SEO_CONSTANTS = {
   },
   
   // Service Area
-  SERVICE_AREA: 'Modesto, Stanislaus County & Central California',
-  SERVICE_COUNTY: 'Stanislaus County',
+  SERVICE_AREA: 'Modesto, Stockton, Stanislaus County, San Joaquin County & Central California',
+  SERVICE_COUNTY: 'Stanislaus County, San Joaquin County',
   PRIMARY_CITIES: [
     'Modesto', 'Turlock', 'Ceres', 'Riverbank', 'Oakdale', 'Patterson', 'Waterford', 'Hughson',
     'Stockton', 'Manteca', 'Tracy', 'Merced', 'Fresno', 'Salinas', 'San Jose', 'Sacramento'
@@ -67,6 +67,13 @@ export const SEO_CONSTANTS = {
     'Stanislaus County vending machines',
     'vending machines near me Modesto',
     'Modesto CA vending machines',
+    'vending machines Stockton',
+    'vending machines Stockton CA',
+    'Stockton vending machines',
+    'vending machines San Joaquin County',
+    'San Joaquin County vending machines',
+    'vending machines near me Stockton',
+    'Stockton CA vending machines',
 
     // Central Valley Cities
     'vending machines Turlock',
@@ -151,8 +158,8 @@ export const PAGE_METADATA = {
       canonical: SEO_CONSTANTS.BASE_URL,
     },
     openGraph: {
-      title: 'AMP Vending Machines | Modesto & Stanislaus County Vending Solutions',
-      description: 'Leading vending machine provider in Modesto, Stanislaus County & Central California. Premium touchscreen vending machines with free installation.',
+      title: 'AMP Vending Machines | Modesto, Stockton, Stanislaus & San Joaquin County Vending Solutions',
+      description: 'Leading vending machine provider in Modesto, Stockton, Stanislaus County, San Joaquin County & Central California. Premium touchscreen vending machines with free installation.',
       url: SEO_CONSTANTS.BASE_URL,
       siteName: SEO_CONSTANTS.SITE_NAME,
       images: [{
@@ -166,16 +173,16 @@ export const PAGE_METADATA = {
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'AMP Vending Machines | Modesto & Stanislaus County',
-      description: 'ampvendingmachines.com - Premium vending machine provider in Modesto, Stanislaus County & Central California with touchscreen technology.',
+      title: 'AMP Vending Machines | Modesto, Stockton, Stanislaus & San Joaquin County',
+      description: 'ampvendingmachines.com - Premium vending machine provider in Modesto, Stockton, Stanislaus County, San Joaquin County & Central California with touchscreen technology.',
       images: [SEO_CONSTANTS.DEFAULT_OG_IMAGE_FULL],
     },
   } satisfies Metadata,
 
   VENDING_MACHINES: {
-    title: 'Vending Machines Modesto | Stanislaus County | Commercial & Office Solutions',
-    description: 'ampvendingmachines.com offers premium commercial vending machines in Modesto, Stanislaus County & Central California. Free installation, 21.5" touchscreen, 50+ products. Call (209) 403-5450',
-    keywords: 'vending machines Modesto, vending machines Stanislaus County, Modesto vending machines, ampvendingmachines, commercial vending machines, office vending machines Modesto CA, touchscreen vending, workplace vending solutions',
+    title: 'Vending Machines Modesto, Stockton | Stanislaus & San Joaquin County | Commercial & Office Solutions',
+    description: 'ampvendingmachines.com offers premium commercial vending machines in Modesto, Stockton, Stanislaus County, San Joaquin County & Central California. Free installation, 21.5" touchscreen, 50+ products. Call (209) 403-5450',
+    keywords: 'vending machines Modesto, vending machines Stockton, vending machines Stanislaus County, vending machines San Joaquin County, Modesto vending machines, Stockton vending machines, ampvendingmachines, commercial vending machines, office vending machines Modesto CA, office vending machines Stockton CA, touchscreen vending, workplace vending solutions',
     alternates: {
       canonical: `${SEO_CONSTANTS.BASE_URL}/vending-machines`,
     },
@@ -227,9 +234,9 @@ export const PAGE_METADATA = {
 // } satisfies Metadata,
 
   CONTACT: {
-    title: 'Contact AMP Vending Machines | Modesto & Stanislaus County | (209) 403-5450',
-    description: 'Contact ampvendingmachines.com for free vending machine consultation in Modesto, Stanislaus County & Central California. Professional installation & service. Call (209) 403-5450 today!',
-    keywords: 'contact AMP vending machines, vending machines Modesto, Modesto vending company, Stanislaus County vending, ampvendingmachines contact, vending machine consultation',
+    title: 'Contact AMP Vending Machines | Modesto, Stockton, Stanislaus & San Joaquin County | (209) 403-5450',
+    description: 'Contact ampvendingmachines.com for free vending machine consultation in Modesto, Stockton, Stanislaus County, San Joaquin County & Central California. Professional installation & service. Call (209) 403-5450 today!',
+    keywords: 'contact AMP vending machines, vending machines Modesto, vending machines Stockton, Modesto vending company, Stockton vending company, Stanislaus County vending, San Joaquin County vending, ampvendingmachines contact, vending machine consultation',
     alternates: {
       canonical: `${SEO_CONSTANTS.BASE_URL}/contact`,
     },
@@ -381,7 +388,7 @@ export const BASE_ORGANIZATION_SCHEMA = {
   url: SEO_CONSTANTS.BASE_URL,
   logo: SEO_CONSTANTS.LOGO_FULL_URL,
   image: SEO_CONSTANTS.DEFAULT_OG_IMAGE_FULL,
-  description: 'ampvendingmachines.com - Premier vending machine provider serving Modesto, Stanislaus County & Central California with professional touchscreen vending solutions.',
+  description: 'ampvendingmachines.com - Premier vending machine provider serving Modesto, Stockton, Stanislaus County, San Joaquin County & Central California with professional touchscreen vending solutions.',
   telephone: SEO_CONSTANTS.PHONE,
   email: SEO_CONSTANTS.EMAIL,
   priceRange: 'Free installation and maintenance',
@@ -400,8 +407,16 @@ export const BASE_ORGANIZATION_SCHEMA = {
       },
     },
     {
+      '@type': SCHEMA_TYPES.PLACE,
+      name: 'San Joaquin County, California',
+    },
+    {
       '@type': 'City',
       name: 'Modesto, CA',
+    },
+    {
+      '@type': 'City',
+      name: 'Stockton, CA',
     },
     {
       '@type': 'City',
@@ -410,6 +425,14 @@ export const BASE_ORGANIZATION_SCHEMA = {
     {
       '@type': 'City',
       name: 'Ceres, CA',
+    },
+    {
+      '@type': 'City',
+      name: 'Manteca, CA',
+    },
+    {
+      '@type': 'City',
+      name: 'Tracy, CA',
     },
   ],
   address: {
