@@ -98,7 +98,7 @@ const TechIndicator = ({ icon: Icon, label, available }: TechIndicatorProps) => 
  */
 const MachineCard = ({
   machine,
-  variant = 'grid',
+  variant = 'showcase',
   index = 0,
   className = '',
   onClick
@@ -139,7 +139,7 @@ const MachineCard = ({
   };
 
   // Generate machine URL slug
-  const machineUrl = `/vending-machines/${machine.id}`;
+  const machineUrl = `/vending-machines/${machine.name}`;
 
   // Determine card size and layout based on variant
   const getCardClasses = () => {

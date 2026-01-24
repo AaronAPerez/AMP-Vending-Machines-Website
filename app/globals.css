@@ -289,7 +289,7 @@ body {
   }
 
   /* Ensure Next.js Image fills don't cause overflow */
-  [class*="inset-"] {
+  /* [class*="inset-"] {
     max-width: 100%;
-  }
+  } */
 }
