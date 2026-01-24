@@ -38,9 +38,7 @@ export default function OptimizedHomePage() {
         <ResponsiveHero
           title={
             <>
-              <h1 className="text-4xl sm:text-5xl font-bold text-[#F5F5F5]">
-                Vending Machines in<br/><span className="text-[#FD5A1E]"> Modesto & Stanislaus County</span>
-              </h1>
+              Vending Machines in<br/><span className="text-[#FD5A1E]"> Modesto & Stanislaus County</span>
             </>
           }
           subtitle="AMP Vending - Premier commercial vending solutions for businesses in Modesto, Turlock, Ceres, and surrounding areas."

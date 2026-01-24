@@ -4,6 +4,7 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 import { AccessibleButton } from '@/components/ui/AccessibleButton';
 import BackgroundImages from './BackgroundImages';
+import { ArrowRight } from 'lucide-react';
 
 interface HeroProps {
   title: React.ReactNode;
@@ -40,47 +41,63 @@ export const ResponsiveHero = ({
       {/* Background product grid (loads after mount) */}
       <BackgroundImages />
 
-      {/* Main gradient overlay (single source of truth) */}
+      {/* Main gradient overlay - Enhanced for better text readability */}
       <div
-        className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/75 to-black z-20"
+        className="absolute inset-0 z-20"
+        style={{
+          background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.75) 50%, rgba(0,0,0,0.95) 100%)'
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Vignette effect for edges */}
+      <div
+        className="absolute inset-0 z-20"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.9) 100%)'
+        }}
         aria-hidden="true"
       />
 
       {/* Hero Content */}
       <div className="relative z-30 text-center px-4 sm:px-6 max-w-5xl -mt-8 md:-mt-4 mb-6">
         {/* LCP Element */}
-        <div
+        <h1
           id="hero-heading"
           className={cn(
-            'text-4xl md:text-5xl lg:text-6xl font-bold text-[#F5F5F5] mb-6 sm:mb-8 drop-shadow-xl',
+            'text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#F5F5F5] mb-6 sm:mb-8',
             'animate-in fade-in duration-700 fill-mode-forwards'
           )}
           style={{
             opacity: 1,
             transform: 'translateY(0)',
+            textShadow: '0 4px 12px rgba(0,0,0,0.8), 0 2px 4px rgba(0,0,0,0.6)',
           }}
         >
           {title}
-        </div>
+        </h1>
 
         <p
           className={cn(
-            'text-xl md:text-2xl text-[#F5F5F5] mb-8 md:mb-10 drop-shadow-lg max-w-3xl mx-auto',
+            'text-lg md:text-xl lg:text-2xl text-[#F5F5F5]/95 mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed',
             'animate-in slide-in-from-bottom-4 duration-700 delay-150 fill-mode-forwards'
           )}
+          style={{
+            textShadow: '0 2px 8px rgba(0,0,0,0.8)',
+          }}
         >
           {subtitle}
         </p>
 
         {/* CTA Buttons */}
-        <div className="flex flex-wrap justify-center gap-4 animate-in slide-in-from-bottom-4 duration-700 delay-300 fill-mode-forwards">
+        <div className="flex flex-wrap justify-center gap-4 md:gap-6 animate-in slide-in-from-bottom-4 duration-700 delay-300 fill-mode-forwards">
           {primaryCta && (
             <AccessibleButton
-              variant="cta"
+              variant="gradient"
               size="lg"
               href={primaryCta.href}
-              animate
               aria-label={primaryCta.text}
+              animate
             >
               {primaryCta.text}
             </AccessibleButton>
@@ -88,12 +105,12 @@ export const ResponsiveHero = ({
 
           {secondaryCta && (
             <AccessibleButton
-              variant="outline"
-              size="md"
-              className="rounded-full px-7 py-4"
+              variant="cta"
+              size="lg"
+              rightIcon={<ArrowRight />}
               href={secondaryCta.href}
-              animate
               aria-label={secondaryCta.text}
+              animate
             >
               {secondaryCta.text}
             </AccessibleButton>

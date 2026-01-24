@@ -522,16 +522,16 @@ const VendingMachinesPage = () => {
 
               {/* SEO-Enhanced Results Summary */}
               <div className="text-center mt-8 text-sm text-[#A5ACAF]">
-            Showing {machines.length} of {allMachines.length} commercial vending machines
-            {activeFilter !== 'all' && (
-              <span> in the <strong className="text-[#F5F5F5]">{activeFilter}</strong> category</span>
-            )}
-            <br />
-            <span className="text-xs">Professional installation and maintenance service included for all machines in Central California</span>
-          </div>
+                Showing {machines.length} of {allMachines.length} commercial vending machines
+                {activeFilter !== 'all' && (
+                  <span> in the <strong className="text-[#F5F5F5]">{activeFilter}</strong> category</span>
+                )}
+                <br />
+                <span className="text-xs">Professional installation and maintenance service included for all machines in Central California</span>
+              </div>
 
-          {/* Custom Request CTA Card */}
-          {/* <motion.div
+              {/* Custom Request CTA Card */}
+              {/* <motion.div
                 className="mt-12 bg-gradient-to-br from-[#FD5A1E]/10 to-[#FD5A1E]/5 border-2 border-[#FD5A1E]/30 rounded-2xl p-8 hover:border-[#FD5A1E]/50 transition-all"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -589,51 +589,51 @@ const VendingMachinesPage = () => {
 
       {/* Enhanced Value Proposition Section with SEO Content */}
       <section className="py-16 bg-[#4d4d4d]/20 border-t border-[#4d4d4d]">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="text-center mb-12">
-        <h2 className="text-2xl sm:text-3xl font-bold text-[#F5F5F5] mb-4">
-          Why Choose AMP Vending for Your Business?
-        </h2>
-        <p className="text-[#A5ACAF] max-w-3xl mx-auto">
-          Professional vending machine solutions for offices, schools, and businesses throughout Central California with comprehensive installation and maintenance services.
-        </p>
-      </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#F5F5F5] mb-4">
+              Why Choose AMP Vending for Your Business?
+            </h2>
+            <p className="text-[#A5ACAF] max-w-3xl mx-auto">
+              Professional vending machine solutions for offices, schools, and businesses throughout Central California with comprehensive installation and maintenance services.
+            </p>
+          </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 md:gap-6 lg:gap-8">
-        {[
-          {
-            icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
-            title: "Professional Installation Service",
-            description: "Expert setup and configuration by our certified technicians throughout Central California"
-          },
-          {
-            icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z",
-            title: "Complete Maintenance Package",
-            description: "Regular servicing, restocking, and 24/7 support included with every commercial vending machine"
-          },
-          {
-            icon: "M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25",
-            title: "Advanced Vending Technology",
-            description: "Touchscreen interfaces, mobile payments, and smart inventory management for modern workplaces"
-          }
-        ].map((feature, index) => (
-          <motion.div
-            key={feature.title}
-            className="text-center p-6 bg-[#000000]/40 rounded-xl border border-[#333333] hover:border-[#FD5A1E]/30 transition-all"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 * index }}
-          >
-            <div className="w-12 h-12 bg-[#FD5A1E]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg className="w-6 h-6 text-[#FD5A1E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={feature.icon} />
-              </svg>
-            </div>
-            <h3 className="text-lg font-bold text-[#F5F5F5] mb-2">{feature.title}</h3>
-            <p className="text-[#A5ACAF] text-sm">{feature.description}</p>
-          </motion.div>
-        ))}
-      </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 md:gap-6 lg:gap-8">
+            {[
+              {
+                icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
+                title: "Professional Installation Service",
+                description: "Expert setup and configuration by our certified technicians throughout Central California"
+              },
+              {
+                icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z",
+                title: "Complete Maintenance Package",
+                description: "Regular servicing, restocking, and 24/7 support included with every commercial vending machine"
+              },
+              {
+                icon: "M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25",
+                title: "Advanced Vending Technology",
+                description: "Touchscreen interfaces, mobile payments, and smart inventory management for modern workplaces"
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                className="text-center p-6 bg-[#000000]/40 rounded-xl border border-[#333333] hover:border-[#FD5A1E]/30 transition-all"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 * index }}
+              >
+                <div className="w-12 h-12 bg-[#FD5A1E]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-6 h-6 text-[#FD5A1E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={feature.icon} />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-bold text-[#F5F5F5] mb-2">{feature.title}</h3>
+                <p className="text-[#A5ACAF] text-sm">{feature.description}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

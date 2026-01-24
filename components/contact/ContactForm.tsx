@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 import Card from '../ui/core/Card';
 import Text from '../ui/Text';
-import { trackFormSubmission, trackPhoneCall } from '@/lib/analytics/gtag';
+import { trackFormSubmission, trackPhoneCall, trackGoogleAdsConversion } from '@/lib/analytics/gtag';
 import { AccessibleButton } from '@/components/ui/AccessibleButton';
 import { Send } from 'lucide-react';
 
@@ -126,7 +126,11 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
       if (result.success) {
         setSubmitStatus('success');
         toast.success('Thank you! Your message has been sent successfully. We\'ll get back to you within 24 hours.');
+
+        // Track conversion in both GA4 and Google Ads
         trackFormSubmission('Contact Form');
+        trackGoogleAdsConversion();
+
         // Reset form on success
         setFormData({
           firstName: '',

@@ -12,10 +12,12 @@ import { Inter } from 'next/font/google';
 import "./globals.css";
 import ResizableNavbar from "@/components/layout/ResizableNavbar";
 import { WebVitalsReporter } from "@/components/analytics/WebVitalsReporter";
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { ToasterProvider } from "@/components/ui/ToasterProvider";
 import { StructuredData } from "@/components/seo/StructuredData";
 import FeedbackWidget from "@/components/feedback/FeedbackWidget";
 import Footer from "@/components/layout/Footer";
+import { ExitIntentPopup } from "@/components/ExitIntentPopup";
 
 
 // Optimized font loading for performance
@@ -46,14 +48,24 @@ export default function RootLayout({
         <link rel="preload" as="image" href="/images/products/drpepper.webp" />
         <link rel="preload" as="image" href="/images/products/doritos-nacho.webp" />
 
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-<link rel="preconnect" href="https://www.google-analytics.com" />
-
         {/* Inline critical CSS for immediate render */}
         <style>{`
-          body{background:#000;color:#fff;font-family:var(--font-inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
           *{box-sizing:border-box;margin:0;padding:0}
-          #hero-heading{font-display:swap;text-rendering:optimizeSpeed}
+          body{background:#000;color:#fff;font-family:var(--font-inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;min-height:100vh}
+          #hero-heading{font-display:swap;text-rendering:optimizeSpeed;text-shadow:0 4px 12px rgba(0,0,0,0.8),0 2px 4px rgba(0,0,0,0.6)}
+          #hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#000}
+          #hero h1{font-size:2.25rem;line-height:1.2;font-weight:700;color:#F5F5F5;margin-bottom:1.5rem;text-align:center;padding:0 1rem}
+          @media(min-width:768px){#hero h1{font-size:3rem}}
+          @media(min-width:1024px){#hero h1{font-size:3.75rem}}
+          @media(min-width:1280px){#hero h1{font-size:4.5rem}}
+          #hero p{font-size:1.125rem;line-height:1.8;color:rgba(245,245,245,0.95);margin-bottom:2rem;text-align:center;padding:0 1rem;max-width:48rem;margin-left:auto;margin-right:auto;text-shadow:0 2px 8px rgba(0,0,0,0.8)}
+          @media(min-width:768px){#hero p{font-size:1.25rem}}
+          @media(min-width:1024px){#hero p{font-size:1.5rem}}
+          .hero-cta{display:inline-flex;align-items:center;justify-content:center;padding:1rem 1.75rem;font-size:1rem;font-weight:600;border-radius:9999px;transition:all 0.2s;text-decoration:none}
+          .hero-cta-primary{background:#FD5A1E;color:#fff;border:2px solid #FD5A1E}
+          .hero-cta-primary:hover{background:#E74A10;border-color:#E74A10}
+          .hero-cta-secondary{background:transparent;color:#F5F5F5;border:2px solid #A5ACAF}
+          .hero-cta-secondary:hover{background:#A5ACAF;color:#000}
         `}</style>
 
 
@@ -100,6 +112,8 @@ export default function RootLayout({
 
 
       <body className={`${inter.variable} font-sans antialiased bg-black text-white min-h-screen`} suppressHydrationWarning>
+        {/* Google Analytics & Google Ads Tracking */}
+        <GoogleAnalytics />
 
         {/* Toast notifications */}
         <ToasterProvider />
@@ -129,6 +143,8 @@ export default function RootLayout({
           {children}
           <WebVitalsReporter />
         </main>
+
+        <ExitIntentPopup delay={5000} />
 
         {/* Feedback widget */}
         <aside aria-label="Feedback widget">

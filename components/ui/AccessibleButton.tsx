@@ -95,8 +95,8 @@ export function AccessibleButton({
     'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black',
     // Disabled styles
     'disabled:cursor-not-allowed disabled:opacity-50',
-    // CTA/Gradient variants have rounded-full, others have rounded-lg
-    (variant === 'cta' || variant === 'gradient') ? 'rounded-full' : 'rounded-lg',
+    // All button variants use rounded-full for consistent pill-shaped appearance
+    'rounded-full',
     // Full width option
     fullWidth && 'w-full',
     // Animation on hover
@@ -199,7 +199,14 @@ export function AccessibleButton({
 
       {/* Left icon */}
       {!loading && leftIcon && (
-        <span aria-hidden="true">{leftIcon}</span>
+        <span
+          aria-hidden="true"
+          className={cn(
+            variant === 'cta' && 'relative z-10 transition-colors duration-300'
+          )}
+        >
+          {leftIcon}
+        </span>
       )}
 
       {/* Button/Link text with screen reader support */}
@@ -218,7 +225,14 @@ export function AccessibleButton({
 
       {/* Right icon */}
       {!loading && rightIcon && (
-        <span aria-hidden="true">{rightIcon}</span>
+        <span
+          aria-hidden="true"
+          className={cn(
+            variant === 'cta' && 'relative z-10 transition-colors duration-300'
+          )}
+        >
+          {rightIcon}
+        </span>
       )}
     </>
   );
