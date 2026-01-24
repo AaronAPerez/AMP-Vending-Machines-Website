@@ -94,22 +94,20 @@ const ResizableNavbar = () => {
               <Link href="/"
                 aria-label="Navigate to homepage"
                 aria-current={pathname === '/' ? 'page' : undefined}
-                className={`px-4 py-2 rounded-lg text-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
-                  pathname === '/'
+                className={`px-4 py-2 rounded-lg text-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${pathname === '/'
                     ? 'text-[#FD5A1E] bg-[#FD5A1E]/10'
                     : 'text-[#F5F5F5] hover:text-[#FD5A1E] hover:bg-[#4d4d4d]/20'
-                }`}>
+                  }`}>
                 Home
               </Link>
               <Link
                 href="/vending-machines"
                 aria-label="View our vending machines catalog"
                 aria-current={pathname === '/vending-machines' ? 'page' : undefined}
-                className={`px-4 py-2 rounded-lg text-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
-                  pathname === '/vending-machines'
+                className={`px-4 py-2 rounded-lg text-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${pathname === '/vending-machines'
                     ? 'text-[#FD5A1E] bg-[#FD5A1E]/10'
                     : 'text-[#F5F5F5] hover:text-[#FD5A1E] hover:bg-[#4d4d4d]/20'
-                }`}
+                  }`}
               >
                 Vending Machines
               </Link>
@@ -117,11 +115,10 @@ const ResizableNavbar = () => {
                 href="/feedback"
                 aria-label="give us your feedback"
                 aria-current={pathname === '/feedback' ? 'page' : undefined}
-                className={`px-4 py-2 rounded-lg text-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
-                  pathname === '/feedback'
+                className={`px-4 py-2 rounded-lg text-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${pathname === '/feedback'
                     ? 'text-[#FD5A1E] bg-[#FD5A1E]/10'
                     : 'text-[#F5F5F5] hover:text-[#FD5A1E] hover:bg-[#4d4d4d]/20'
-                }`}
+                  }`}
               >
                 Feedback
               </Link>
@@ -129,11 +126,10 @@ const ResizableNavbar = () => {
                 href="/contact"
                 aria-label="Contact us for a quote"
                 aria-current={pathname === '/contact' ? 'page' : undefined}
-                className={`px-4 py-2 rounded-lg text-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
-                  pathname === '/contact'
+                className={`px-4 py-2 rounded-lg text-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${pathname === '/contact'
                     ? 'text-[#FD5A1E] bg-[#FD5A1E]/10'
                     : 'text-[#F5F5F5] hover:text-[#FD5A1E] hover:bg-[#4d4d4d]/20'
-                }`}
+                  }`}
               >
                 Contact
               </Link>
@@ -179,72 +175,68 @@ const ResizableNavbar = () => {
           aria-label="Mobile navigation"
           aria-hidden={!isOpen}
         >
-              <div className="px-4 py-4 space-y-4">
-                {/* Mobile CTA Button */}
-                <div className="pb-2">
-                  <AccessibleButton
-                    href="/contact"
-                    variant="cta"
-                    size="md"
-                    fullWidth
-                    animate
-                  >
-                    Free Consultation
-                  </AccessibleButton>
-                </div>
+          <div className="px-4 py-4 space-y-4">
+            {/* Mobile CTA Button */}
+            <div className="pb-2">
+              <AccessibleButton
+                href="/contact"
+                variant="cta"
+                size="md"
+                fullWidth
+                animate
+              >
+                Free Consultation
+              </AccessibleButton>
+            </div>
 
-                {/* Mobile nav items */}
-                <div className="space-y-2">
-                  <Link
-                    href="/"
-                    aria-label="Navigate to homepage"
-                    aria-current={pathname === '/' ? 'page' : undefined}
-                    className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
-                      pathname === '/'
-                        ? 'text-[#FD5A1E] bg-[#FD5A1E]/10'
-                        : 'text-[#F5F5F5] hover:bg-[#4d4d4d]/20 hover:text-[#FD5A1E]'
-                    }`}
-                  >
-                    Home
-                  </Link>
-                  <Link
-                    href="/vending-machines"
-                    aria-label="View our vending machines catalog"
-                    aria-current={pathname === '/vending-machines' ? 'page' : undefined}
-                    className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
-                      pathname === '/vending-machines'
-                        ? 'text-[#FD5A1E] bg-[#FD5A1E]/10'
-                        : 'text-[#F5F5F5] hover:bg-[#4d4d4d]/20 hover:text-[#FD5A1E]'
-                    }`}
-                  >
-                    Vending Machines
-                  </Link>
-                  <Link
-                    href="/feedback"
-                    aria-label="give us your feedback"
-                    aria-current={pathname === '/feedback' ? 'page' : undefined}
-                    className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
-                      pathname === '/feedback'
-                        ? 'text-[#FD5A1E] bg-[#FD5A1E]/10'
-                        : 'text-[#F5F5F5] hover:bg-[#4d4d4d]/20 hover:text-[#FD5A1E]'
-                    }`}
-                  >
-                    Feedback
-                  </Link>
-                  <Link
-                    href="/contact"
-                    aria-label="Contact us for a quote"
-                    aria-current={pathname === '/contact' ? 'page' : undefined}
-                    className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
-                      pathname === '/contact'
-                        ? 'text-[#FD5A1E] bg-[#FD5A1E]/10'
-                        : 'text-[#F5F5F5] hover:bg-[#4d4d4d]/20 hover:text-[#FD5A1E]'
-                    }`}
-                  >
-                    Contact
-                  </Link>
-                </div>
-              </div>
+            {/* Mobile nav items */}
+            <div className="space-y-2">
+              <Link
+                href="/"
+                aria-label="Navigate to homepage"
+                aria-current={pathname === '/' ? 'page' : undefined}
+                className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${pathname === '/'
+                    ? 'text-[#FD5A1E] bg-[#FD5A1E]/10'
+                    : 'text-[#F5F5F5] hover:bg-[#4d4d4d]/20 hover:text-[#FD5A1E]'
+                  }`}
+              >
+                Home
+              </Link>
+              <Link
+                href="/vending-machines"
+                aria-label="View our vending machines catalog"
+                aria-current={pathname === '/vending-machines' ? 'page' : undefined}
+                className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${pathname === '/vending-machines'
+                    ? 'text-[#FD5A1E] bg-[#FD5A1E]/10'
+                    : 'text-[#F5F5F5] hover:bg-[#4d4d4d]/20 hover:text-[#FD5A1E]'
+                  }`}
+              >
+                Vending Machines
+              </Link>
+              <Link
+                href="/feedback"
+                aria-label="give us your feedback"
+                aria-current={pathname === '/feedback' ? 'page' : undefined}
+                className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${pathname === '/feedback'
+                    ? 'text-[#FD5A1E] bg-[#FD5A1E]/10'
+                    : 'text-[#F5F5F5] hover:bg-[#4d4d4d]/20 hover:text-[#FD5A1E]'
+                  }`}
+              >
+                Feedback
+              </Link>
+              <Link
+                href="/contact"
+                aria-label="Contact us for a quote"
+                aria-current={pathname === '/contact' ? 'page' : undefined}
+                className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${pathname === '/contact'
+                    ? 'text-[#FD5A1E] bg-[#FD5A1E]/10'
+                    : 'text-[#F5F5F5] hover:bg-[#4d4d4d]/20 hover:text-[#FD5A1E]'
+                  }`}
+              >
+                Contact
+              </Link>
+            </div>
+          </div>
         </nav>
       </header>
     </div>

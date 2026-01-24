@@ -30,6 +30,8 @@ const nextConfig = {
     optimizePackageImports: ["lucide-react"],
     // Note: optimizeCss temporarily disabled for build testing
     optimizeCss: true,
+    // Disable server source maps to fix source map parsing errors in dev
+    serverSourceMaps: false,
   },
 
   // Environment variables available to the client
@@ -49,6 +51,7 @@ const nextConfig = {
   // Note: In Next.js 16, quality is set per-image via the Image component
   // Default quality is 75 (down from 90 in older versions) for better performance
   images: {
+    qualities: [60,75],
     deviceSizes: [640, 750, 828, 1080, 1200],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
     formats: ["image/webp"],
@@ -202,6 +205,12 @@ const nextConfig = {
 
   // Build-specific optimizations
   productionBrowserSourceMaps: false, // Disable source maps in production for smaller bundles
+
+  // Turbopack configuration (Next.js 16 default bundler)
+  turbopack: {
+    // Empty config to silence webpack migration warning
+    // Source map warnings are handled by serverSourceMaps: false in experimental config
+  },
 
   // Configure which files should be treated as pages
   excludeDefaultMomentLocales: true,

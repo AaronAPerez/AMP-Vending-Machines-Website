@@ -44,9 +44,6 @@ export default function RootLayout({
         {/* Structured Data - SEO Schema Markup */}
         <StructuredData />
 
-        {/* Preload first hero background image for faster LCP */}
-        <link rel="preload" as="image" href="/images/products/drpepper.webp" />
-        <link rel="preload" as="image" href="/images/products/doritos-nacho.webp" />
 
         {/* Inline critical CSS for immediate render */}
         <style>{`
@@ -67,6 +64,9 @@ export default function RootLayout({
           .hero-cta-secondary{background:transparent;color:#F5F5F5;border:2px solid #A5ACAF}
           .hero-cta-secondary:hover{background:#A5ACAF;color:#000}
         `}</style>
+
+        <meta httpEquiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com https://googleads.g.doubleclick.net;" />
+
 
 
         {/* Open Graph (OG) Tags  */}
