@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Non-critical CSS Variables - Loaded after initial render */
+/* ============================================================================
+   CSS VARIABLES
+   ============================================================================ */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -25,11 +27,6 @@
     --input: 0 0% 89.8%;
     --ring: 0 0% 3.9%;
     --radius: 0.5rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
   }
 
   .dark {
@@ -52,14 +49,12 @@
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
     --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
   }
 }
 
+/* ============================================================================
+   ANIMATIONS
+   ============================================================================ */
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -80,7 +75,16 @@
   }
 }
 
-/* Tailwind utilities for animations */
+@keyframes focusPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 2px rgba(253, 90, 30, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(253, 90, 30, 0.4);
+  }
+}
+
+/* Animation utilities */
 .animate-in {
   animation-fill-mode: both;
 }
@@ -105,477 +109,21 @@
   animation-delay: 300ms;
 }
 
-.fill-mode-forwards {
-  animation-fill-mode: forwards;
-}
-
 /* Ensure critical text is immediately visible */
 #hero-heading {
   font-display: swap;
   text-rendering: optimizeSpeed;
 }
 
-/* Add these styles to your existing globals.css file */
-
-/**
- * Admin-specific styles for AMP Vending Admin Dashboard
- * 
- * These styles replace the styled-jsx implementation to avoid
- * client-only import issues in Next.js 15+
- */
-
-/* Admin-specific utility classes */
-.admin-sensitive {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.admin-focus:focus {
-  outline: 2px solid #FD5A1E;
-  outline-offset: 2px;
-}
-
-.admin-no-cache {
-  cache-control: no-cache, no-store, must-revalidate;
-  pragma: no-cache;
-  expires: 0;
-}
-
-/* Custom scrollbar styles for admin interface */
-.scrollbar-thin {
-  scrollbar-width: thin;
-}
-
-.scrollbar-thumb-\[--admin-scrollbar-thumb\] {
-  --admin-scrollbar-thumb: #4d4d4d;
-}
-
-.scrollbar-track-\[--admin-scrollbar-track\] {
-  --admin-scrollbar-track: #111111;
-}
-
-.hover\:scrollbar-thumb-\[--admin-scrollbar-hover\]:hover {
-  --admin-scrollbar-hover: #FD5A1E;
-}
-
-/* Webkit scrollbar styles for better browser support */
-.admin-scrollbar::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
-}
-
-.admin-scrollbar::-webkit-scrollbar-track {
-  background: #111111;
-  border-radius: 2px;
-}
-
-.admin-scrollbar::-webkit-scrollbar-thumb {
-  background: #4d4d4d;
-  border-radius: 2px;
-  transition: background-color 0.2s ease;
-}
-
-.admin-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #FD5A1E;
-}
-
-.admin-scrollbar::-webkit-scrollbar-corner {
-  background: #111111;
-}
-
-/* Admin dashboard specific animations */
-@keyframes admin-pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
-
-.admin-pulse {
-  animation: admin-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-/* Admin loading states */
-.admin-loading-skeleton {
-  background: linear-gradient(90deg, 
-    rgba(77, 77, 77, 0.1) 25%, 
-    rgba(77, 77, 77, 0.3) 50%, 
-    rgba(77, 77, 77, 0.1) 75%
-  );
-  background-size: 200% 100%;
-  animation: loading-shimmer 1.5s infinite;
-}
-
-@keyframes loading-shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-/* Admin card hover effects */
-.admin-card {
-  transition: all 0.2s ease;
-}
-
-.admin-card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(253, 90, 30, 0.1);
-}
-
-/* Admin button styles */
-.admin-btn-primary {
-  background-color: #FD5A1E;
-  color: #000000;
-  font-weight: 600;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  transition: all 0.2s ease;
-  border: none;
-  cursor: pointer;
-}
-
-.admin-btn-primary:hover {
-  background-color: rgba(253, 90, 30, 0.9);
-  transform: translateY(-1px);
-}
-
-.admin-btn-primary:focus {
-  outline: 2px solid #FD5A1E;
-  outline-offset: 2px;
-}
-
-
-.admin-btn-secondary {
-  background-color: #111111;
-  color: #F5F5F5;
-  font-weight: 500;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid #333333;
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-
-.admin-btn-secondary:hover {
-  background-color: #4d4d4d;
-  border-color: #FD5A1E;
-}
-
-/* Admin form styles */
-.admin-input {
-  background-color: #111111;
-  border: 1px solid #333333;
-  color: #F5F5F5;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  transition: border-color 0.2s ease;
-  width: 100%;
-}
-
-.admin-input:focus {
-  outline: none;
-  border-color: #FD5A1E;
-  box-shadow: 0 0 0 1px #FD5A1E;
-}
-
-.admin-input::placeholder {
-  color: #A5ACAF;
-}
-
-.admin-textarea {
-  background-color: #111111;
-  border: 1px solid #333333;
-  color: #F5F5F5;
-  padding: 0.75rem;
-  border-radius: 0.5rem;
-  transition: border-color 0.2s ease;
-  width: 100%;
-  resize: vertical;
-  min-height: 100px;
-}
-
-.admin-textarea:focus {
-  outline: none;
-  border-color: #FD5A1E;
-  box-shadow: 0 0 0 1px #FD5A1E;
-}
-
-/* Admin status indicators */
-.admin-status-online {
-  color: #10B981;
-}
-
-.admin-status-warning {
-  color: #F59E0B;
-}
-
-.admin-status-error {
-  color: #EF4444;
-}
-
-.admin-status-offline {
-  color: #6B7280;
-}
-
-/* Admin notification styles */
-.admin-notification {
-  padding: 1rem;
-  border-radius: 0.5rem;
-  margin-bottom: 1rem;
-  border-left: 4px solid;
-}
-
-.admin-notification-success {
-  background-color: rgba(16, 185, 129, 0.1);
-  border-left-color: #10B981;
-  color: #10B981;
-}
-
-.admin-notification-warning {
-  background-color: rgba(245, 158, 11, 0.1);
-  border-left-color: #F59E0B;
-  color: #F59E0B;
-}
-
-.admin-notification-error {
-  background-color: rgba(239, 68, 68, 0.1);
-  border-left-color: #EF4444;
-  color: #EF4444;
-}
-
-.admin-notification-info {
-  background-color: rgba(59, 130, 246, 0.1);
-  border-left-color: #3B82F6;
-  color: #3B82F6;
-}
-
-/* Admin grid layouts */
-.admin-grid-auto {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-}
-
-.admin-grid-2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-}
-
-.admin-grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-}
-
-.admin-grid-4 {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-}
-
-/* Responsive admin grid */
-@media (max-width: 768px) {
-  .admin-grid-2,
-  .admin-grid-3,
-  .admin-grid-4 {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .admin-grid-3,
-  .admin-grid-4 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Admin table styles */
-.admin-table {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: #111111;
-  border-radius: 0.5rem;
-  overflow: hidden;
-}
-
-.admin-table th {
-  background-color: #000000;
-  color: #F5F5F5;
-  font-weight: 600;
-  padding: 0.75rem;
-  text-align: left;
-  border-bottom: 1px solid #333333;
-}
-
-.admin-table td {
-  padding: 0.75rem;
-  border-bottom: 1px solid #333333;
-  color: #F5F5F5;
-}
-
-.admin-table tr:hover {
-  background-color: rgba(77, 77, 77, 0.1);
-}
-
-/* Admin modal styles */
-.admin-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 1rem;
-}
-
-.admin-modal-content {
-  background-color: #111111;
-  border: 1px solid #333333;
-  border-radius: 0.75rem;
-  max-width: 500px;
-  width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-}
-
-/* Admin tooltip styles */
-.admin-tooltip {
-  position: relative;
-  display: inline-block;
-}
-
-.admin-tooltip .admin-tooltip-text {
-  visibility: hidden;
-  background-color: #000000;
-  color: #F5F5F5;
-  text-align: center;
-  border-radius: 0.25rem;
-  padding: 0.5rem;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -60px;
-  opacity: 0;
-  transition: opacity 0.3s;
-  font-size: 0.875rem;
-  border: 1px solid #333333;
-}
-
-.admin-tooltip:hover .admin-tooltip-text {
-  visibility: visible;
-  opacity: 1;
-}
-
-/* Admin progress bar */
-.admin-progress-bar {
-  width: 100%;
-  height: 0.5rem;
-  background-color: #333333;
-  border-radius: 0.25rem;
-  overflow: hidden;
-}
-
-.admin-progress-fill {
-  height: 100%;
-  background-color: #FD5A1E;
-  transition: width 0.3s ease;
-}
-
-/* Admin badge styles */
-.admin-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.25rem 0.5rem;
-  border-radius: 9999px;
-  font-size: 0.75rem;
-  font-weight: 500;
-}
-
-.admin-badge-primary {
-  background-color: rgba(253, 90, 30, 0.1);
-  color: #FD5A1E;
-}
-
-.admin-badge-success {
-  background-color: rgba(16, 185, 129, 0.1);
-  color: #10B981;
-}
-
-.admin-badge-warning {
-  background-color: rgba(245, 158, 11, 0.1);
-  color: #F59E0B;
-}
-
-.admin-badge-error {
-  background-color: rgba(239, 68, 68, 0.1);
-  color: #EF4444;
-}
-
-.admin-badge-secondary {
-  background-color: rgba(77, 77, 77, 0.3);
-  color: #A5ACAF;
-}
-
-/* Admin accessibility improvements */
-.admin-sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.admin-focus-visible:focus-visible {
-  outline: 2px solid #FD5A1E;
-  outline-offset: 2px;
-}
-
-/* Admin dark mode enhancements */
-@media (prefers-color-scheme: dark) {
-  .admin-auto-dark {
-    background-color: #000000;
-    color: #F5F5F5;
-  }
-}
-
-/* Admin print styles */
-@media print {
-  .admin-no-print {
-    display: none !important;
-  }
-  
-  .admin-print-only {
-    display: block !important;
-  }
-}
-
-
-
+/* ============================================================================
+   ACCESSIBILITY & FOCUS STYLES
+   ============================================================================ */
 @layer base {
   /* Global focus styles for all interactive elements */
   *:focus-visible {
     @apply outline-none ring-2 ring-[#FD5A1E] ring-offset-2 ring-offset-black;
-    /* Ensures 3:1 contrast ratio for focus indicators */
   }
-  
+
   /* Enhanced focus for links */
   a:focus-visible {
     @apply outline-none ring-2 ring-[#FD5A1E] ring-offset-2 ring-offset-black;
@@ -584,14 +132,14 @@
     text-decoration-thickness: 2px;
     text-underline-offset: 4px;
   }
-  
+
   /* Enhanced focus for buttons */
   button:focus-visible {
     @apply outline-none ring-2 ring-[#FD5A1E] ring-offset-2 ring-offset-black;
     transform: scale(1.02);
     transition: transform 0.15s ease-in-out;
   }
-  
+
   /* Enhanced focus for form inputs */
   input:focus-visible,
   textarea:focus-visible,
@@ -601,31 +149,65 @@
   }
 }
 
-/* Color Contrast Improvements */
+/* ============================================================================
+   ACCESSIBILITY COMPONENTS
+   ============================================================================ */
 @layer components {
   /* Ensure text on dark backgrounds meets 4.5:1 ratio */
   .text-muted-accessible {
-    color: #C5CCCD; /* Improved from #A5ACAF for better contrast */
+    color: #C5CCCD;
   }
-  
+
   /* Enhanced link visibility */
   .link-accessible {
-    @apply text-[#F5F5F5] underline decoration-[#FD5A1E]/50 
+    @apply text-[#F5F5F5] underline decoration-[#FD5A1E]/50
            hover:decoration-[#FD5A1E] transition-all duration-200;
     text-underline-offset: 3px;
     text-decoration-thickness: 1px;
   }
-  
+
   /* Skip to content link - visible on focus */
   .skip-link {
-    @apply sr-only focus:not-sr-only focus:absolute focus:z-50 
-           focus:top-4 focus:left-4 focus:px-6 focus:py-3 
+    @apply sr-only focus:not-sr-only focus:absolute focus:z-50
+           focus:top-4 focus:left-4 focus:px-6 focus:py-3
            focus:bg-[#FD5A1E] focus:text-white focus:rounded-lg
            focus:shadow-lg focus:ring-2 focus:ring-white focus:ring-offset-2;
     font-weight: 600;
     font-size: 1rem;
   }
 }
+
+/* ============================================================================
+   RESPONSIVE & MOBILE OPTIMIZATIONS
+   ============================================================================ */
+
+/* Prevent horizontal scroll on mobile */
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Fix Next.js Image overflow issues */
+.relative > img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Touch Targets (Mobile) - Ensures clickable elements are large enough */
+@media (pointer: coarse) {
+  button,
+  a,
+  input[type="button"],
+  input[type="submit"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* ============================================================================
+   ACCESSIBILITY MEDIA QUERIES
+   ============================================================================ */
 
 /* Reduced Motion for Accessibility */
 @media (prefers-reduced-motion: reduce) {
@@ -644,7 +226,7 @@
   .text-A5ACAF {
     color: #FFFFFF !important;
   }
-  
+
   .border-4d4d4d,
   .border-333333 {
     border-color: #FFFFFF !important;
@@ -652,72 +234,62 @@
   }
 }
 
-/* Touch Targets (Mobile) */
-@media (pointer: coarse) {
-  button,
-  a,
-  input[type="button"],
-  input[type="submit"] {
-    min-height: 44px;
-    min-width: 44px;
-  }
-}
-/* Focus-Within for Container Elements */
+/* ============================================================================
+   UTILITY CLASSES
+   ============================================================================ */
 @layer utilities {
+  /* Focus-within for container elements */
   .focus-within-ring:focus-within {
     @apply ring-2 ring-[#FD5A1E] ring-offset-2 ring-offset-black;
   }
+
+  /* Keyboard navigation enhancement */
+  .keyboard-nav:focus-within {
+    box-shadow: 0 0 0 3px rgba(253, 90, 30, 0.5);
+  }
+
+  /* Improved screen reader only class */
+  .sr-only-improved {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .sr-only-improved:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
 }
 
 /* ============================================================================
-   KEYBOARD NAVIGATION ENHANCEMENTS
+   MOBILE LAYOUT FIX - Prevents overflow on vending machines page
    ============================================================================ */
-
-/* Visible keyboard navigation indicators */
-.keyboard-nav:focus-within {
-  box-shadow: 0 0 0 3px rgba(253, 90, 30, 0.5);
-}
-
-/* Tab order visualization (dev mode only) */
-@media (prefers-reduced-motion: no-preference) {
-  [tabindex]:focus {
-    animation: focusPulse 2s ease-in-out infinite;
+@media (max-width: 768px) {
+  /* Ensure grid layouts don't overflow */
+  .grid {
+    overflow: hidden;
   }
-}
 
-@keyframes focusPulse {
-  0%, 100% {
-    box-shadow: 0 0 0 2px rgba(253, 90, 30, 0.8);
+  /* Fix image container overflow */
+  .relative.aspect-\[4\/5\] {
+    max-width: 100%;
+    overflow: hidden;
   }
-  50% {
-    box-shadow: 0 0 0 4px rgba(253, 90, 30, 0.4);
+
+  /* Ensure Next.js Image fills don't cause overflow */
+  [class*="inset-"] {
+    max-width: 100%;
   }
-}
-
-/* ============================================================================
-   SCREEN READER OPTIMIZATIONS
-   ============================================================================ */
-
-/* Improved screen reader only class */
-.sr-only-improved {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-
-.sr-only-improved:focus {
-  position: static;
-  width: auto;
-  height: auto;
-  padding: 0.5rem 1rem;
-  margin: 0;
-  overflow: visible;
-  clip: auto;
-  white-space: normal;
 }
