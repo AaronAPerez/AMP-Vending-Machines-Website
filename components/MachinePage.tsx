@@ -34,7 +34,8 @@ export default function MachinePage({ id }: { id: string }) {
     const rel = all
       .filter(x => x.id !== id && x.category === m.category)
       .slice(0, 3)
-      .map(normalizeMachineData);
+      .map(normalizeMachineData)
+      .filter((x): x is NonNullable<ReturnType<typeof normalizeMachineData>> => x !== null);
 
     setRelated(rel);
     setLoading(false);

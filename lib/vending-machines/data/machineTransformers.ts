@@ -19,16 +19,16 @@ export const normalizeMachinesForDisplay = (
 /**
  * Extracts capacity from machine dimensions
  */
-export const extractCapacity = (machine: MachineData): string => {
-  const dimensions = machine.dimensions || '';
+export const extractCapacity = (machine: MachineData): { label: string; value: string } => {
+  const dimensions = typeof machine.dimensions === 'string' ? machine.dimensions : '';
   
-  if (dimensions.includes('40+')) return '40+ Selections';
-  if (dimensions.includes('50+')) return '50+ Selections';
-  if (dimensions.includes('60+')) return '60+ Selections';
-  if (dimensions.includes('800')) return '800 Cans';
-  if (dimensions.includes('600')) return '600+ Items';
+  if (dimensions.includes('40+')) return { label: '40+ Selections', value: '40+' };
+  if (dimensions.includes('50+')) return { label: '50+ Selections', value: '50+' };
+  if (dimensions.includes('60+')) return { label: '60+ Selections', value: '60+' };
+  if (dimensions.includes('800')) return { label: '800 Cans', value: '800' };
+  if (dimensions.includes('600')) return { label: '600+ Items', value: '600+' };
   
-  return '30-50 Selections';
+  return { label: '30-50 Selections', value: '30-50' };
 };
 
 /**
