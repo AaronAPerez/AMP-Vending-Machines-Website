@@ -5,10 +5,10 @@
 
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, X, Maximize2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface ImageGalleryProps {
   images: Array<{ src: string; alt: string }>;
@@ -20,7 +20,7 @@ interface ImageGalleryProps {
  */
 export const ImageGallery: React.FC<ImageGalleryProps> = ({ images, machineName }) => {
   const [selectedImage, setSelectedImage] = useState(0);
-  const [isFullscreen, setIsFullscreen] = useState(false);
+  // const [isFullscreen, setIsFullscreen] = useState(false);
 
   if (!images || images.length === 0) {
     return null;
@@ -35,30 +35,30 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({ images, machineName 
   };
 
   // Keyboard navigation
-  useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (!isFullscreen) return;
+  // useEffect(() => {
+  //   const handleKeyPress = (e: KeyboardEvent) => {
+  //     if (!isFullscreen) return;
 
-      if (e.key === 'ArrowRight') goToNext();
-      if (e.key === 'ArrowLeft') goToPrevious();
-      if (e.key === 'Escape') setIsFullscreen(false);
-    };
+  //     if (e.key === 'ArrowRight') goToNext();
+  //     if (e.key === 'ArrowLeft') goToPrevious();
+  //     if (e.key === 'Escape') setIsFullscreen(false);
+  //   };
 
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [isFullscreen, images.length]);
+  //   window.addEventListener('keydown', handleKeyPress);
+  //   return () => window.removeEventListener('keydown', handleKeyPress);
+  // }, [isFullscreen, images.length]);
 
   // Prevent body scroll when fullscreen
-  useEffect(() => {
-    if (isFullscreen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isFullscreen]);
+  // useEffect(() => {
+  //   if (isFullscreen) {
+  //     document.body.style.overflow = 'hidden';
+  //   } else {
+  //     document.body.style.overflow = '';
+  //   }
+  //   return () => {
+  //     document.body.style.overflow = '';
+  //   };
+  // }, [isFullscreen]);
 
   return (
     <>
@@ -110,7 +110,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({ images, machineName 
           )}
 
           {/* Fullscreen Button */}
-          <button
+          {/* <button
             onClick={(e) => {
               e.stopPropagation();
               setIsFullscreen(true);
@@ -121,7 +121,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({ images, machineName 
             style={{ pointerEvents: 'auto' }}
           >
             <Maximize2 size={18} />
-          </button>
+          </button> */}
 
           {/* Image Counter */}
           {images.length > 1 && (
@@ -142,11 +142,10 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({ images, machineName 
                   e.preventDefault();
                   setSelectedImage(index);
                 }}
-                className={`relative aspect-square rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${
-                  selectedImage === index
+                className={`relative aspect-square rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${selectedImage === index
                     ? 'border-[#FD5A1E] ring-2 ring-[#FD5A1E]/30 scale-105'
                     : 'border-[#333333] hover:border-[#FD5A1E]/50 hover:scale-105'
-                }`}
+                  }`}
                 aria-label={`View image ${index + 1}`}
                 style={{ pointerEvents: 'auto', zIndex: 40 }}
               >
@@ -164,7 +163,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({ images, machineName 
       </div>
 
       {/* Fullscreen Modal */}
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {isFullscreen && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -173,9 +172,9 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({ images, machineName 
             className="fixed inset-0 z-[999] bg-black/95 backdrop-blur-sm flex items-center justify-center p-4"
             onClick={() => setIsFullscreen(false)}
             style={{ pointerEvents: 'auto' }}
-          >
+          > */}
             {/* Close Button */}
-            <button
+            {/* <button
               onClick={(e) => {
                 e.stopPropagation();
                 setIsFullscreen(false);
@@ -186,10 +185,10 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({ images, machineName 
               style={{ pointerEvents: 'auto' }}
             >
               <X size={24} />
-            </button>
+            </button> */}
 
             {/* Navigation Arrows */}
-            {images.length > 1 && (
+            {/* {images.length > 1 && (
               <>
                 <button
                   onClick={(e) => {
@@ -216,10 +215,10 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({ images, machineName 
                   <ChevronRight size={28} />
                 </button>
               </>
-            )}
+            )} */}
 
             {/* Fullscreen Image */}
-            <motion.div
+            {/* <motion.div
               key={selectedImage}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -235,15 +234,15 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({ images, machineName 
                 sizes="100vw"
                 priority
               />
-            </motion.div>
+            </motion.div> */}
 
             {/* Image Counter */}
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white text-lg font-semibold">
+            {/* <div className="absolute bottom-8 left-1/2 -translate-x-1/2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white text-lg font-semibold">
               {selectedImage + 1} / {images.length}
             </div>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </>
   );
 };

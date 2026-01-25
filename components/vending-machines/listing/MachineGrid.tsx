@@ -1,5 +1,5 @@
 /**
- * @fileoverview Machine Grid Component
+ * @fileoverview Machine Grid Component - Simple grid layout for machine cards
  * @module components/vending-machines/listing/MachineGrid
  */
 
@@ -13,7 +13,8 @@ interface MachineGridProps {
 }
 
 /**
- * Grid layout for machine cards
+ * Simple grid layout wrapper for machine cards
+ * Delegates all card logic to MachineCard component
  */
 export const MachineGrid: React.FC<MachineGridProps> = ({ machines }) => {
   if (machines.length === 0) {
