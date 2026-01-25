@@ -41,20 +41,20 @@ export const ResponsiveHero = ({
       {/* Background product grid (loads after mount) */}
       <BackgroundImages />
 
-      {/* Main gradient overlay - Enhanced for better text readability */}
+      {/* Main gradient overlay - Lighter in outer areas for better visibility */}
       <div
         className="absolute inset-0 z-20"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.75) 50%, rgba(0,0,0,0.95) 100%)'
+          background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.85) 100%)'
         }}
         aria-hidden="true"
       />
 
-      {/* Vignette effect for edges */}
+      {/* Vignette effect - Lighter at top and middle */}
       <div
         className="absolute inset-0 z-20"
         style={{
-          background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.9) 100%)'
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.6) 70%, rgba(0,0,0,0.9) 100%)'
         }}
         aria-hidden="true"
       />
