@@ -12,7 +12,6 @@ import {
 import { Loading } from '@/components/ui/core/Loading';
 import CTASection from '@/components/landing/CTASection';
 import { MachineCard } from '@/components/vending-machines/listing/MachineCard';
-import Link from 'next/link';
 import Script from 'next/script';
 
 

@@ -171,6 +171,20 @@ export const MachineCard: React.FC<MachineCardProps> = ({
                   </button>
                 )}
               </div>
+
+              {/* Best For Section - Moved under image */}
+              {machine.bestFor && (
+                <div className="mt-4 px-4">
+                  <p className="text-[#A5ACAF] text-sm">
+                    <span className="font-semibold text-[#F5F5F5]">Ideal For:</span>{' '}
+                    {typeof machine.bestFor === 'string'
+                      ? machine.bestFor.split(',').slice(0, 2).join(', ')
+                      : Array.isArray(machine.bestFor)
+                        ? machine.bestFor.slice(0, 2).join(', ')
+                        : 'Offices & Commercial Spaces'}
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Details Section */}
@@ -179,12 +193,12 @@ export const MachineCard: React.FC<MachineCardProps> = ({
                 <h3 className="text-2xl sm:text-3xl font-bold text-[#F5F5F5] mb-3 group-hover:text-[#FD5A1E] transition-colors">
                   {machine.name}
                 </h3>
-                <p className="text-[#A5ACAF] mb-6 leading-relaxed">
+                <p className="text-[#A5ACAF] mb-4 leading-relaxed">
                   {machine.shortDescription || machine.description}
                 </p>
 
                 {/* Key Specifications */}
-                <div className="bg-[#4d4d4d]/20 rounded-xl p-4 mb-6">
+                <div className="bg-[#4d4d4d]/20 rounded-xl p-4 mb-4">
                   <h4 className="text-sm font-bold text-[#FD5A1E] mb-3 uppercase tracking-wide">
                     Key Specifications
                   </h4>
@@ -221,20 +235,6 @@ export const MachineCard: React.FC<MachineCardProps> = ({
                         <span>{highlight}</span>
                       </div>
                     ))}
-                  </div>
-                )}
-
-                {/* Best For Section */}
-                {machine.bestFor && (
-                  <div className="mt-4">
-                    <p className="text-[#A5ACAF] text-sm">
-                      <span className="font-semibold text-[#F5F5F5]">Ideal For:</span>{' '}
-                      {typeof machine.bestFor === 'string'
-                        ? machine.bestFor.split(',').slice(0, 2).join(', ')
-                        : Array.isArray(machine.bestFor)
-                          ? machine.bestFor.slice(0, 2).join(', ')
-                          : 'Offices & Commercial Spaces'}
-                    </p>
                   </div>
                 )}
               </div>
