@@ -112,6 +112,7 @@ const nextConfig = {
               "img-src 'self' data: https: blob:",
               "font-src 'self' data:",
               "connect-src 'self' https://www.google-analytics.com https://www.google.com https://vitals.vercel-insights.com https://va.vercel-scripts.com",
+              "frame-src https://www.googletagmanager.com",
               "frame-ancestors 'none'",
               "base-uri 'self'",
               "form-action 'self'",
