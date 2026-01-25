@@ -152,7 +152,7 @@ export const generateEmailHTML = (
         }
 
         .header img {
-            max-height: 80px;
+            max-height: 120px;
             width: auto;
             display: inline-block;
             vertical-align: middle;
@@ -245,7 +245,7 @@ export const generateEmailHTML = (
             }
 
             .header img {
-                max-height: 60px !important;
+                max-height: 90px !important;
             }
 
             .content {
@@ -271,7 +271,7 @@ export const generateEmailHTML = (
                 src="${BUSINESS_INFO.logo}"
                 alt="${BUSINESS_INFO.name} - Premium Vending Solutions"
                 title="${BUSINESS_INFO.name}"
-                style="max-height: 80px; width: auto; display: inline-block;"
+                style="max-height: 120px; width: auto; display: inline-block;"
                 role="img"
                 aria-label="${BUSINESS_INFO.name} logo"
             >

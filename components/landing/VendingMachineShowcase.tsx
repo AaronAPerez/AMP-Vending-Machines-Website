@@ -84,7 +84,7 @@ const VendingMachineShowcase = ({
 
             {/* Custom Request CTA Card - Enhanced for SEO */}
             <motion.div
-              className="mb-16 sm:mb-20"
+              className="mt-12 sm:mt-16 mb-16 sm:mb-20"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}

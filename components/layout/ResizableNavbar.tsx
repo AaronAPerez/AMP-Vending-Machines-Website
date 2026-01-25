@@ -80,9 +80,11 @@ const ResizableNavbar = () => {
                 <Image
                   src="/images/logo/AMP_logo.webp"
                   alt="AMP Vending Logo"
-                  width={100}
-                  height={100}
-                  className="transition-all duration-300 h-16 w-22 object-contain"
+                  width={120}
+                  height={73}
+                  className={`h-auto object-contain transition-all duration-300 ${
+                    isScrolled ? 'w-[80px] sm:w-[90px]' : 'w-[100px] sm:w-[120px]'
+                  }`}
                   priority
                 />
               </Link>
