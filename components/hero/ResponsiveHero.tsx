@@ -32,7 +32,7 @@ export const ResponsiveHero = ({
   return (
     <div
       className={cn(
-        'relative min-h-screen md:min-h-[120vh] flex items-center justify-center overflow-hidden',
+        'relative min-h-screen flex items-center justify-center overflow-hidden',
         'pt-0',
         className
       )}
@@ -105,8 +105,9 @@ export const ResponsiveHero = ({
 
           {secondaryCta && (
             <AccessibleButton
-              variant="outline"
+              variant="secondary"
               size="lg"
+              className='bg-black/80'
               rightIcon={<ArrowRight />}
               href={secondaryCta.href}
               aria-label={secondaryCta.text}

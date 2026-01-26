@@ -1,9 +1,7 @@
 'use client';
 
-import React from 'react';
 import { motion } from 'framer-motion';
 import ContactForm from '../contact/ContactForm';
-import { Mail } from 'lucide-react';
 import AMP_VENDING_BUSINESS_INFO from '@/lib/data/businessData';
 import Section from '../ui/shared/Section';
 

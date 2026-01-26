@@ -5,7 +5,6 @@
  * Provides helpful navigation options and maintains brand styling
  */
 
-import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -38,7 +37,7 @@ export default function NotFound() {
 
         {/* Navigation Options */}
         <div className="space-y-4">
-          <Link 
+          <Link
             href="/"
             className="inline-flex items-center px-8 py-4 bg-[#FD5A1E] text-[#F5F5F5] rounded-full hover:bg-[#F5F5F5] hover:text-[#000000] transition-colors font-medium"
           >
@@ -59,10 +58,6 @@ export default function NotFound() {
             <span className="text-[#4d4d4d]">•</span>
             <Link href="/contact" className="text-[#FD5A1E] hover:underline">
               Contact Us
-            </Link>
-            <span className="text-[#4d4d4d]">•</span>
-            <Link href="/about" className="text-[#FD5A1E] hover:underline">
-              About Us
             </Link>
           </div>
         </div>

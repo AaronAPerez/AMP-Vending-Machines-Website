@@ -20,7 +20,7 @@ import {
   HomeContactSection,
   CTASection,
   Analytics,
-  SpeedInsights
+  SpeedInsights,
 } from '../ui/loading/LazyComponents';
 
 
@@ -32,7 +32,6 @@ export default function OptimizedHomePage() {
   return (
 
     <main className="flex flex-col min-h-screen overflow-hidden bg-black/90">
-
       {/* CRITICAL: Hero Section - Load immediately for LCP */}
       <Section id="hero" className="relative min-h-screen bg-black/90">
         <ResponsiveHero
@@ -143,6 +142,7 @@ export default function OptimizedHomePage() {
           </Suspense>
         </Section>
       </ViewportLazy>
+
 
       {/* DEFERRED: Analytics - Load after critical content */}
       <Deferred delay={2000}>
