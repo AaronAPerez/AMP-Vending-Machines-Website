@@ -137,7 +137,7 @@ const MachineDetailPage = () => {
                   href="/contact"
                   className="inline-flex items-center justify-center w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-[#FD5A1E] text-[#000000] rounded-full font-semibold text-base sm:text-lg hover:bg-[#FD5A1E]/90 transition-all hover:shadow-lg hover:shadow-[#FD5A1E]/30"
                 >
-                  Request Quote
+                  Request Consultation
                   <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
