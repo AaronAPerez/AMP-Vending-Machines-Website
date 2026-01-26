@@ -20,6 +20,7 @@ import Footer from "@/components/layout/Footer";
 import { ExitIntentPopup } from "@/components/ExitIntentPopup";
 
 
+
 // Optimized font loading for performance
 const inter = Inter({
   subsets: ['latin'],
@@ -121,14 +122,14 @@ export default function RootLayout({
         {/* Skip navigation for accessibility */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-orange-600 focus:text-white focus:top-4 focus:left-4 focus:rounded-md focus:outline-none focus:ring-2 focus:ring-white"
+          className="sr-only focus:not-sr-only focus:absolute focus:z-[70] focus:p-4 focus:bg-orange-600 focus:text-white focus:top-4 focus:left-4 focus:rounded-md focus:outline-none focus:ring-2 focus:ring-white"
           tabIndex={0}
         >
           Skip to main content
         </a>
 
-        {/* Navigation */}
-        <div className="relative z-40">
+        {/* Navigation - z-50, below banner, pushes down when banner is visible */}
+        <div className="relative z-50">
           <ResizableNavbar />
         </div>
 

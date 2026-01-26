@@ -4,7 +4,7 @@
 
 import { useState } from 'react';
 import { useReportWebVitals } from 'next/web-vitals';
-import { sendToAnalytics, getMetricRating, type WebVitalsMetric } from '@/lib/performance/core-web-vitals';
+import { getMetricRating, type WebVitalsMetric } from '@/lib/performance/core-web-vitals';
 
 /**
  * Web Vitals Reporter Component

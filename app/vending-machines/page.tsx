@@ -12,6 +12,7 @@ import {
 import { Loading } from '@/components/ui/core/Loading';
 import CTASection from '@/components/landing/CTASection';
 import { MachineCard } from '@/components/vending-machines/listing/MachineCard';
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import Script from 'next/script';
 
 
@@ -79,8 +80,18 @@ const VendingMachinesPage = () => {
 
   if (isLoading) return <Loading />;
 
+  const breadcrumbItems = [
+    { label: 'Home', href: '/' },
+    { label: 'Vending Machines' }
+  ];
+
   return (
     <div className="min-h-screen bg-[#000000]">
+      {/* Breadcrumb Navigation */}
+      <div className="pt-16 md:pt-20">
+        <Breadcrumbs items={breadcrumbItems} />
+      </div>
+
       {/* Enhanced SEO Structured Data */}
       <Script
         id="vending-machines-collection-schema"
@@ -145,24 +156,8 @@ const VendingMachinesPage = () => {
         }}
       />
 
-      {/* Enhanced Breadcrumb Navigation */}
-      {/* <div className="bg-[#000000]/50 border-b border-[#4d4d4d] pt-16">
-        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center text-sm text-[#A5ACAF]">
-          <Link
-            href="/"
-            className="hover:text-[#FD5A1E] transition-colors focus:outline-none focus:text-[#FD5A1E]"
-            aria-label="Go to homepage"
-          >
-            Home
-          </Link>
-          <span className="mx-2" aria-hidden="true">/</span>
-          <span className="text-[#F5F5F5]" aria-current="page">Commercial Vending Machines</span>
-        </div>
-      </div> */}
-
       {/* SEO-Enhanced Hero Header Section */}
-      {/* <section className="pt-12 pb-8 bg-gradient-to-b from-[#000000] to-[#000000]/80"> */}
-         <section className="pt-24 bg-gradient-to-b from-[#000000] via-[#111111] to-[#000000]">
+      <section className="pt-12 sm:pt-16 pb-8 bg-gradient-to-b from-[#000000] via-[#111111] to-[#000000]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -193,28 +188,21 @@ const VendingMachinesPage = () => {
             </p>
 
             {/* Enhanced Machine Count Display with SEO Keywords */}
-            <div className="flex justify-center items-center space-x-4 text-sm text-[#A5ACAF] mb-8">
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 text-xs sm:text-sm text-[#A5ACAF] mb-8 px-4">
               <span>{allMachines.length} Commercial Machines</span>
-              <span className="w-1 h-1 bg-[#A5ACAF] rounded-full" aria-hidden="true"></span>
-              <span>Professional Installation</span>
-              <span className="w-1 h-1 bg-[#A5ACAF] rounded-full" aria-hidden="true"></span>
-              <span>Complete Maintenance Service</span>
+              <span className="w-1 h-1 bg-[#A5ACAF] rounded-full hidden sm:block" aria-hidden="true"></span>
+              <span className="hidden sm:inline">Professional Installation</span>
+              <span className="w-1 h-1 bg-[#A5ACAF] rounded-full hidden sm:block" aria-hidden="true"></span>
+              <span className="hidden md:inline">Complete Maintenance Service</span>
             </div>
           </motion.div>
           </div>
           </section>
 
-      {/* <section className="py-20 bg-gradient-to-b from-[#000000] via-[#111111] to-[#000000]">
+      {/* Filter Section */}
+      <section className="pt-6 sm:pt-8 bg-[#000000] relative z-20">
         <div className="container mx-auto px-4 max-w-7xl">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center text-[#F5F5F5] mb-6">
-            Premium Vending Machine Solutions
-          </h1>
-        </div>
-      </section> */}
-
-      <section className="pt-8 bg-[#000000] relative z-20">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="flex flex-wrap gap-4 justify-center mb-12 relative z-30">
+          <div className="flex flex-wrap gap-3 sm:gap-4 justify-center mb-8 sm:mb-12 relative z-30">
             {filterOptions.map((option) => (
               <button
                 key={option.id}
@@ -224,7 +212,7 @@ const VendingMachinesPage = () => {
                   console.log('Filter clicked:', option.id);
                   setActiveFilter(option.id);
                 }}
-                className={`px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#FD5A1E] cursor-pointer ${
+                className={`px-4 sm:px-6 md:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#FD5A1E] cursor-pointer ${
                   activeFilter === option.id
                     ? 'bg-[#FD5A1E] text-[#000000] shadow-lg shadow-[#FD5A1E]/30'
                     : 'bg-[#111111] text-[#F5F5F5] border border-[#333333] hover:border-[#FD5A1E]/50'
@@ -233,7 +221,8 @@ const VendingMachinesPage = () => {
                 aria-label={`Filter by ${option.label}, showing ${option.count} machines`}
                 style={{ pointerEvents: 'auto', position: 'relative', zIndex: 50 }}
               >
-                {option.label} ({option.count})
+                <span className="hidden sm:inline">{option.label} ({option.count})</span>
+                <span className="sm:hidden">{option.label.split('-')[0]} ({option.count})</span>
               </button>
             ))}
           </div>

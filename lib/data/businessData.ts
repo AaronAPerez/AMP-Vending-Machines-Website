@@ -123,23 +123,45 @@ export const AMP_VENDING_BUSINESS_INFO = {
     sunday: { open: "08:00", close: "20:00" },
   } as BusinessHours,
   
-  // Service Area for Local SEO
+  // Service Area for Local SEO - Complete Coverage
+  // NOTE: Full city list with coordinates managed in lib/data/comprehensiveServiceAreas.ts
   serviceArea: {
     primary: "Modesto, CA",
     secondary: [
-      "Stockton, CA",
-      "Lodi, CA",
-      "Ripon, CA",
-      "Merced, CA",
+      // Stanislaus County (All Incorporated Cities)
       "Turlock, CA",
       "Ceres, CA",
-      "Patterson, CA",
-      "Newman, CA",
-      "Oakdale, CA",
-      "Manteca, CA",
-      "Tracy, CA",
-      "Lathrop, CA",
       "Riverbank, CA",
+      "Oakdale, CA",
+      "Patterson, CA",
+      "Waterford, CA",
+      "Hughson, CA",
+      "Newman, CA",
+      // Stanislaus County (Major Unincorporated)
+      "Salida, CA",
+      "Denair, CA",
+      "Empire, CA",
+      "Keyes, CA",
+      "Del Rio, CA",
+      "Hickman, CA",
+
+      // San Joaquin County (All Incorporated Cities)
+      "Stockton, CA",
+      "Tracy, CA",
+      "Manteca, CA",
+      "Lodi, CA",
+      "Ripon, CA",
+      "Lathrop, CA",
+      "Escalon, CA",
+      // San Joaquin County (Major Unincorporated)
+      "Mountain House, CA",
+      "French Camp, CA",
+      "Country Club, CA",
+      "Woodbridge, CA",
+      "Lockeford, CA",
+
+      // Adjacent Counties
+      "Merced, CA",
     ],
     radius: 60, // miles from Modesto
   } as ServiceArea,

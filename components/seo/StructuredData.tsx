@@ -167,18 +167,21 @@ export function StructuredData() {
     <>
       {/* LocalBusiness Schema - Critical for Google Business Profile */}
       <script
+        key="organization-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
 
       {/* WebSite Schema */}
       <script
+        key="website-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
       />
 
       {/* BreadcrumbList Schema */}
       <script
+        key="breadcrumb-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />

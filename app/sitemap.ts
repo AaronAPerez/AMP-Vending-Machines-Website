@@ -7,25 +7,50 @@ import { getAllVendingMachines } from '@/lib/data/vendingMachineData';
 
 /**
  * Service areas for local SEO
- * Prioritizing Stanislaus County cities for top local rankings
+ * Complete coverage of ALL cities in Stanislaus County and San Joaquin County
+ * Optimized for local search rankings and comprehensive geographic targeting
+ *
+ * Coverage: 9 incorporated + 5 unincorporated Stanislaus County cities
+ *           7 incorporated + 5 unincorporated San Joaquin County cities
+ *           Total: 26 cities across 2 primary counties
  */
 const SERVICE_AREAS = [
-  // Stanislaus County (Highest Priority)
-  { slug: 'modesto', name: 'Modesto', priority: 0.9 },
-  { slug: 'turlock', name: 'Turlock', priority: 0.85 },
-  { slug: 'ceres', name: 'Ceres', priority: 0.85 },
-  { slug: 'riverbank', name: 'Riverbank', priority: 0.8 },
-  { slug: 'oakdale', name: 'Oakdale', priority: 0.8 },
-  { slug: 'patterson', name: 'Patterson', priority: 0.8 },
-  { slug: 'waterford', name: 'Waterford', priority: 0.75 },
-  { slug: 'hughson', name: 'Hughson', priority: 0.75 },
+  // STANISLAUS COUNTY - All Incorporated Cities (9)
+  { slug: 'modesto', name: 'Modesto', county: 'Stanislaus', priority: 1.0 },
+  { slug: 'turlock', name: 'Turlock', county: 'Stanislaus', priority: 0.9 },
+  { slug: 'ceres', name: 'Ceres', county: 'Stanislaus', priority: 0.9 },
+  { slug: 'riverbank', name: 'Riverbank', county: 'Stanislaus', priority: 0.85 },
+  { slug: 'oakdale', name: 'Oakdale', county: 'Stanislaus', priority: 0.85 },
+  { slug: 'patterson', name: 'Patterson', county: 'Stanislaus', priority: 0.85 },
+  { slug: 'waterford', name: 'Waterford', county: 'Stanislaus', priority: 0.8 },
+  { slug: 'hughson', name: 'Hughson', county: 'Stanislaus', priority: 0.8 },
+  { slug: 'newman', name: 'Newman', county: 'Stanislaus', priority: 0.8 },
 
-  // Nearby Major Cities
-  { slug: 'stockton', name: 'Stockton', priority: 0.8 },
-  { slug: 'manteca', name: 'Manteca', priority: 0.8 },
-  { slug: 'tracy', name: 'Tracy', priority: 0.8 },
-  { slug: 'merced', name: 'Merced', priority: 0.75 },
-  { slug: 'fresno', name: 'Fresno', priority: 0.75 },
+  // STANISLAUS COUNTY - Major Unincorporated Communities (5)
+  { slug: 'salida', name: 'Salida', county: 'Stanislaus', priority: 0.75 },
+  { slug: 'denair', name: 'Denair', county: 'Stanislaus', priority: 0.7 },
+  { slug: 'empire', name: 'Empire', county: 'Stanislaus', priority: 0.7 },
+  { slug: 'keyes', name: 'Keyes', county: 'Stanislaus', priority: 0.7 },
+  { slug: 'del-rio', name: 'Del Rio', county: 'Stanislaus', priority: 0.65 },
+
+  // SAN JOAQUIN COUNTY - All Incorporated Cities (7)
+  { slug: 'stockton', name: 'Stockton', county: 'San Joaquin', priority: 0.95 },
+  { slug: 'tracy', name: 'Tracy', county: 'San Joaquin', priority: 0.9 },
+  { slug: 'manteca', name: 'Manteca', county: 'San Joaquin', priority: 0.9 },
+  { slug: 'lodi', name: 'Lodi', county: 'San Joaquin', priority: 0.9 },
+  { slug: 'ripon', name: 'Ripon', county: 'San Joaquin', priority: 0.85 },
+  { slug: 'lathrop', name: 'Lathrop', county: 'San Joaquin', priority: 0.85 },
+  { slug: 'escalon', name: 'Escalon', county: 'San Joaquin', priority: 0.8 },
+
+  // SAN JOAQUIN COUNTY - Major Unincorporated Communities (5)
+  { slug: 'mountain-house', name: 'Mountain House', county: 'San Joaquin', priority: 0.75 },
+  { slug: 'french-camp', name: 'French Camp', county: 'San Joaquin', priority: 0.7 },
+  { slug: 'country-club', name: 'Country Club', county: 'San Joaquin', priority: 0.7 },
+  { slug: 'woodbridge', name: 'Woodbridge', county: 'San Joaquin', priority: 0.65 },
+  { slug: 'lockeford', name: 'Lockeford', county: 'San Joaquin', priority: 0.65 },
+
+  // ADJACENT COUNTIES - Major Cities
+  { slug: 'merced', name: 'Merced', county: 'Merced', priority: 0.8 },
 ];
 
 /**
@@ -75,13 +100,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
-  // 5. Stanislaus County specific page - High priority local SEO page
-  urls.push({
-    url: `${baseUrl}/stanislaus-county`,
-    lastModified: currentDate,
-    changeFrequency: 'monthly',
-    priority: 0.9,
-  });
+  // 5. County-specific pages - High priority local SEO pages
+  urls.push(
+    {
+      url: `${baseUrl}/stanislaus-county`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/san-joaquin-county`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    }
+  );
 
   // 6. Contact and feedback pages - Conversion pages
   urls.push(

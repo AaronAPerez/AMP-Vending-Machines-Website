@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { FormLoadingFallback } from '@/components/ui/loading/LoadingFallbacks';
 import { InteractionLazy } from '../ui/loading/LazyLoading';
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { lazy } from "react";
 
 // Critical components (load immediately)
@@ -59,7 +58,7 @@ export const Analytics = lazy(() =>
   }))
 );
 
-export const SpeedInsights = lazy(() => 
+export const SpeedInsights = lazy(() =>
   import('@vercel/speed-insights/next').then(module => ({
     default: module.SpeedInsights
   }))
