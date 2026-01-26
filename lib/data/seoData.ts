@@ -43,11 +43,27 @@ export const SEO_CONSTANTS = {
   SERVICE_AREA: 'Modesto, Stockton, Stanislaus County, San Joaquin County & Central California',
   SERVICE_COUNTY: 'Stanislaus County, San Joaquin County',
   PRIMARY_CITIES: [
-    'Modesto', 'Turlock', 'Ceres', 'Riverbank', 'Oakdale', 'Patterson', 'Waterford', 'Hughson',
-    'Stockton', 'Manteca', 'Tracy', 'Merced', 'Fresno', 'Salinas', 'San Jose', 'Sacramento'
+    // Stanislaus County (Top Priority)
+    'Modesto', 'Turlock', 'Ceres', 'Riverbank', 'Oakdale', 'Patterson', 'Waterford', 'Hughson', 'Newman', 'Salida',
+    // San Joaquin County (High Priority)
+    'Stockton', 'Tracy', 'Manteca', 'Lodi', 'Ripon', 'Lathrop', 'Escalon',
+    // Adjacent Counties
+    'Merced'
   ],
+  // Complete list of ALL cities in Stanislaus County for comprehensive SEO
   STANISLAUS_COUNTY_CITIES: [
-    'Modesto', 'Turlock', 'Ceres', 'Riverbank', 'Oakdale', 'Patterson', 'Waterford', 'Hughson', 'Newman'
+    // Incorporated cities
+    'Modesto', 'Turlock', 'Ceres', 'Riverbank', 'Oakdale', 'Patterson', 'Waterford', 'Hughson', 'Newman',
+    // Major unincorporated communities
+    'Salida', 'Denair', 'Empire', 'Keyes', 'Del Rio', 'Hickman'
+  ],
+
+  // Complete list of ALL cities in San Joaquin County for comprehensive SEO
+  SAN_JOAQUIN_COUNTY_CITIES: [
+    // Incorporated cities
+    'Stockton', 'Tracy', 'Manteca', 'Lodi', 'Ripon', 'Lathrop', 'Escalon',
+    // Major unincorporated communities
+    'Mountain House', 'French Camp', 'Country Club', 'Woodbridge', 'Lockeford'
   ],
   
   // Industry Keywords
@@ -75,18 +91,30 @@ export const SEO_CONSTANTS = {
     'vending machines near me Stockton',
     'Stockton CA vending machines',
 
-    // Central Valley Cities
-    'vending machines Turlock',
-    'vending machines Ceres',
-    'vending machines Riverbank',
-    'vending machines Oakdale',
-    'vending machines Stockton',
-    'vending machines Manteca',
-    'vending machines Tracy',
-    'vending machines Merced',
-    'vending machines Fresno',
+    // Stanislaus County Cities (Complete Coverage)
+    'vending machines Turlock CA',
+    'vending machines Ceres CA',
+    'vending machines Riverbank CA',
+    'vending machines Oakdale CA',
+    'vending machines Patterson CA',
+    'vending machines Waterford CA',
+    'vending machines Hughson CA',
+    'vending machines Newman CA',
+    'vending machines Salida CA',
+
+    // San Joaquin County Cities (Complete Coverage)
+    'vending machines Tracy CA',
+    'vending machines Manteca CA',
+    'vending machines Lodi CA',
+    'vending machines Ripon CA',
+    'vending machines Lathrop CA',
+    'vending machines Escalon CA',
+
+    // Regional Terms
     'Central California vending machines',
     'Central Valley vending machines',
+    'vending machine supplier Stanislaus County',
+    'vending machine supplier San Joaquin County',
 
     // Service Type Keywords
     'commercial vending machines',
