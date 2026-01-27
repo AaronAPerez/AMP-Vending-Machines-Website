@@ -74,12 +74,12 @@ const MachineDetailPage = () => {
   return (
     <div className="min-h-screen bg-[#000000]">
       {/* Breadcrumb Navigation */}
-      <div className="pt-10 md:pt-16">
+      <div className="pt-20 relative z-40">
         <Breadcrumbs items={breadcrumbItems} />
       </div>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-[#000000] to-[#111111] py-8 sm:py-12">
+      <section className="bg-gradient-to-b from-[#000000] to-[#111111] py-8 sm:py-12 relative z-10">
         <div className="container-custom">
           <div className="text-center mb-6 sm:mb-8 px-4">
             <motion.p

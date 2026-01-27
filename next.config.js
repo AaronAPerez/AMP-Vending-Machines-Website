@@ -51,7 +51,7 @@ const nextConfig = {
   // Note: In Next.js 16, quality is set per-image via the Image component
   // Default quality is 75 (down from 90 in older versions) for better performance
   images: {
-    qualities: [60,75],
+    qualities: [60, 75, 90],
     deviceSizes: [640, 750, 828, 1080, 1200],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
     formats: ["image/webp"],

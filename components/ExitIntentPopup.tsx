@@ -250,7 +250,7 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
                     Wait! Don&apos;t Miss Out...
                   </h2>
                   <p className="text-sm md:text-base text-[#FD5A1E] font-semibold">
-                    Get a FREE Vending Machine!
+                    Get a FREE Premium Vending Machine – See If You Qualify!
                   </p>
                 </div>
 
@@ -315,6 +315,13 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
                     <CheckCircle className="h-4 w-4 text-[#FD5A1E] flex-shrink-0 mt-0.5" />
                     <span className="text-[#F5F5F5] text-xs">Zero upfront costs</span>
                   </div>
+                </div>
+
+                {/* Qualifier Text */}
+                <div className="mb-3 p-2 bg-[#4d4d4d]/20 rounded-lg border border-[#FD5A1E]/20">
+                  <p className="text-[10px] md:text-xs text-[#A5ACAF] text-center leading-relaxed">
+                    *Available for locations with adequate employee count or customer traffic to ensure service profitability
+                  </p>
                 </div>
 
                 {/* Quick Lead Capture Form */}
