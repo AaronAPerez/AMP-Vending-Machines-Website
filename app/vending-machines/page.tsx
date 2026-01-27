@@ -88,7 +88,7 @@ const VendingMachinesPage = () => {
   return (
     <div className="min-h-screen bg-[#000000]">
       {/* Breadcrumb Navigation */}
-      <div className="pt-16 md:pt-20">
+      <div className="pt-20 relative z-40">
         <Breadcrumbs items={breadcrumbItems} />
       </div>
 
@@ -157,7 +157,7 @@ const VendingMachinesPage = () => {
       />
 
       {/* SEO-Enhanced Hero Header Section */}
-      <section className="pt-12 sm:pt-16 pb-8 bg-gradient-to-b from-[#000000] via-[#111111] to-[#000000]">
+      <section className="pt-12 sm:pt-16 pb-8 bg-gradient-to-b from-[#000000] via-[#111111] to-[#000000] relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -202,7 +202,7 @@ const VendingMachinesPage = () => {
       {/* Filter Section */}
       <section className="pt-6 sm:pt-8 bg-[#000000] relative z-20">
         <div className="container mx-auto px-4 max-w-7xl">
-          <div className="flex flex-wrap gap-3 sm:gap-4 justify-center mb-8 sm:mb-12 relative z-30">
+          <div className="flex flex-wrap gap-3 sm:gap-4 justify-center mb-8 sm:mb-12 relative z-20">
             {filterOptions.map((option) => (
               <button
                 key={option.id}
@@ -244,8 +244,7 @@ const VendingMachinesPage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="space-y-8 relative z-30"
-              style={{ pointerEvents: 'auto' }}
+              className="space-y-8 relative z-20"
             >
               {machines.map((machine, index) => (
                 <MachineCard key={machine.id} machine={machine} index={index} />
