@@ -5,6 +5,7 @@ export interface AdminUser {
   role: 'admin' | 'super_admin';
   name: string;
   avatar?: string;
+  avatarUrl?: string;
   permissions: AdminPermission[];
   lastLogin?: Date;
   createdAt: Date;

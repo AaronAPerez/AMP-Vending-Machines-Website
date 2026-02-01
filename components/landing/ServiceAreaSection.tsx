@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -108,7 +110,7 @@ const ServiceAreaSection = () => {
             </div>
             
             {/* Information Footer */}
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#000000] to-transparent p-4">
+            <div className="absolute -bottom-8 left-0 right-0 bg-gradient-to-t from-[#000000] via-black to-transparent p-4">
               <p className="text-[#F5F5F5] text-sm">
                 Based in Modesto, CA with service throughout Central California
               </p>
@@ -116,7 +118,7 @@ const ServiceAreaSection = () => {
           </div>
           
           {/* Map Legend */}
-          <div className="p-4 bg-[#0a0a0a] border-t border-[#333333] flex justify-between items-center text-xs text-[#A5ACAF]">
+          <div className="p-4 mt-4 bg-[#0a0a0a] border-t border-[#333333] flex justify-between items-center text-xs text-[#A5ACAF]">
             <div className="flex items-center">
               <span className="w-3 h-3 rounded-full bg-[#FD5A1E] inline-block mr-2"></span>
               <span>Headquarters</span>

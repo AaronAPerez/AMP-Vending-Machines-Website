@@ -18,16 +18,66 @@ const exitIntentSchema = z.object({
   companyName: z.string().min(1, 'Company name is required').max(100, 'Company name is too long'),
 });
 
-interface ExitIntentPopupProps {
-  delay?: number; // Minimum time on page before showing (ms)
+interface ExitIntentContent {
+  headline: string;
+  subheadline: string;
+  valueProposition?: string;
+  benefits: string[];
+  stats: { value: string; label: string }[];
+  specialOfferBadge?: string;
+  ctaButton: string;
+  ctaLink: string;
+  phoneButton: string;
+  phoneNumber: string;
 }
 
-export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
-  const [isVisible, setIsVisible] = useState(false);
+interface ExitIntentPopupProps {
+  delay?: number; // Minimum time on page before showing (ms)
+  isOpen?: boolean; // For preview mode
+  onClose?: () => void; // For preview mode
+  content?: ExitIntentContent; // For preview/override mode
+}
+
+export function ExitIntentPopup({ delay = 5000, isOpen, onClose, content: providedContent }: ExitIntentPopupProps) {
+  const [isVisible, setIsVisible] = useState(isOpen || false);
   const [hasShown, setHasShown] = useState(false);
   const [isEligible, setIsEligible] = useState(false);
+  const [dynamicContent, setDynamicContent] = useState<ExitIntentContent | null>(null);
+
+  // Fetch active exit intent content from API
+  useEffect(() => {
+    // Skip fetching if content is provided (preview mode)
+    if (providedContent) {
+      setDynamicContent(providedContent);
+      return;
+    }
+
+    // Fetch from API
+    const fetchContent = async () => {
+      try {
+        const response = await fetch('/api/marketing/exit-intent/active');
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success && data.data) {
+            setDynamicContent(data.data);
+          }
+        }
+      } catch (error) {
+        console.error('Failed to fetch exit intent content:', error);
+        // Will fall back to default content
+      }
+    };
+
+    fetchContent();
+  }, [providedContent]);
 
   useEffect(() => {
+    // Preview mode - use provided isOpen
+    if (isOpen !== undefined) {
+      setIsVisible(isOpen);
+      return;
+    }
+
     // Check if user has already seen the popup in this session
     const hasSeenPopup = sessionStorage.getItem('exitIntentShown');
     if (hasSeenPopup) {
@@ -41,7 +91,7 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
     }, delay);
 
     return () => clearTimeout(timer);
-  }, [delay]);
+  }, [delay, isOpen]);
 
   useEffect(() => {
     if (!isEligible || hasShown) return;
@@ -78,8 +128,38 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
   }, [isEligible, hasShown]);
 
   const handleClose = () => {
-    setIsVisible(false);
+    if (onClose) {
+      onClose(); // Preview mode
+    } else {
+      setIsVisible(false); // Normal mode
+    }
   };
+
+  // Default content (fallback)
+  const defaultContent: ExitIntentContent = {
+    headline: "Wait! Don't Miss Out...",
+    subheadline: "Get a FREE Vending Machine!",
+    valueProposition: "Join the many businesses in Modesto & Stanislaus County providing premium vending at zero cost!",
+    benefits: [
+      "100% FREE Installation & Setup",
+      "NO Upfront Costs or Contracts",
+      "24/7 Service & Support",
+      "Wide Product Selection"
+    ],
+    stats: [
+      { value: "100% Free", label: "Setup" },
+      { value: "24/7", label: "Service" },
+      { value: "50+", label: "Products" }
+    ],
+    specialOfferBadge: "LIMITED TIME OFFER",
+    ctaButton: "Get Your Free Machine",
+    ctaLink: "/contact",
+    phoneButton: "Call (209) 403-5450",
+    phoneNumber: "+12094035450"
+  };
+
+  // Use dynamic content, provided content, or default
+  const activeContent = providedContent || dynamicContent || defaultContent;
 
   const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', phone: '', companyName: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -143,7 +223,7 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 animate-fade-in">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 animate-fade-in">
 
       {/* Backdrop */}
       <div
@@ -153,12 +233,12 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
       ></div>
 
       {/* Popup - Responsive container */}
-      <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+      <div className="relative w-full max-w-[90vw] sm:max-w-2xl lg:max-w-4xl max-h-[90vh] overflow-y-auto">
         <Card className="relative bg-gradient-to-br from-black via-[#1a1a1a] to-black shadow-2xl border-2 border-[#FD5A1E] overflow-hidden">
           {/* Close Button - Touch-friendly size */}
           <button
             onClick={handleClose}
-            className="absolute top-2 right-2 md:top-3 md:right-3 z-10 p-3 rounded-lg bg-[#4d4d4d] hover:bg-[#FD5A1E] transition-colors touch-manipulation"
+            className="absolute top-2 right-2 md:top-3 md:right-3 z-[50] p-3 rounded-lg bg-[#4d4d4d] hover:bg-[#FD5A1E] transition-colors touch-manipulation"
             aria-label="Close popup"
             style={{ minWidth: '44px', minHeight: '44px' }} // WCAG touch target
           >
@@ -170,9 +250,9 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
 
     
               {/* Left Column - Image & Stats */}
-              <div className="relative hidden lg:flex lg:flex-col  bg-[#4d4d4d]/30 rounded-lg border border-[#FD5A1E]/20 p-8">
+              <div className="relative hidden lg:flex lg:flex-col bg-[#4d4d4d]/30 rounded-lg border border-[#FD5A1E]/20 p-6">
                 {/* Logo */}
-                <div className="mb-2">
+                {/* <div className="mb-2"> */}
                   <Image
                     src="/images/logo/AMP_logo.webp"
                     alt="AMP Vending Machines"
@@ -180,7 +260,7 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
                     height={80}
                     className="object-contain mx-auto"
                   />
-                </div>
+                {/* </div> */}
 
                 {/* Vending Machine Image */}
                 <div className="relative flex-1 min-h-[200px]">
@@ -195,39 +275,27 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
 
                 {/* Stats Grid - Moved from right column */}
                 <div className="grid grid-cols-3 gap-2">
-                  <div className="text-center p-2 bg-[#4d4d4d]/30 rounded-lg border border-[#FD5A1E]/20">
-                    <div className="text-xl font-bold text-[#FD5A1E] mb-1">
-                      100%
+                  {activeContent.stats.slice(0, 3).map((stat, index) => (
+                    <div key={index} className="text-center p-2 bg-[#4d4d4d]/30 rounded-lg border border-[#FD5A1E]/20">
+                      <div className="text-md md:text-lg font-bold text-[#FD5A1E] mb-1">
+                        {stat.value}
+                      </div>
+                      <div className="text-xs text-[#A5ACAF]">
+                        {stat.label}
+                      </div>
                     </div>
-                    <div className="text-xs text-[#A5ACAF]">
-                      Free Setup
-                    </div>
-                  </div>
-                  <div className="text-center p-2 bg-[#4d4d4d]/30 rounded-lg border border-[#FD5A1E]/20">
-                    <div className="text-xl font-bold text-[#FD5A1E] mb-1">
-                      24/7
-                    </div>
-                    <div className="text-xs text-[#A5ACAF]">
-                      Service
-                    </div>
-                  </div>
-                  <div className="text-center p-2 bg-[#4d4d4d]/30 rounded-lg border border-[#FD5A1E]/20">
-                    <div className="text-xl font-bold text-[#FD5A1E] mb-1">
-                      50+
-                    </div>
-                    <div className="text-xs text-[#A5ACAF]">
-                      Products
-                    </div>
-                  </div>
+                  ))}
                 </div>
 
                 {/* Special Offer Badge - Also moved here for balance */}
-                <div className="flex items-center justify-center gap-2 px-3 py-2 mt-4 rounded-lg bg-gradient-to-r from-[#FD5A1E]/20 to-orange-600/20 border-2 border-[#FD5A1E]">
-                  <Sparkles className="h-4 w-4 text-[#FD5A1E] animate-pulse flex-shrink-0" />
-                  <span className="font-bold text-[#FD5A1E] text-xs text-center">
-                    FREE Premium Touchscreen Machines!
-                  </span>
-                </div>
+                {activeContent.specialOfferBadge && (
+                  <div className="flex items-center justify-center gap-2 px-3 py-2 mt-4 rounded-lg bg-gradient-to-r from-[#FD5A1E]/20 to-orange-600/20 border-2 border-[#FD5A1E]">
+                    <Sparkles className="h-4 w-4 text-[#FD5A1E] animate-pulse flex-shrink-0" />
+                    <span className="font-bold text-[#FD5A1E] text-xs text-center">
+                      {activeContent.specialOfferBadge}
+                    </span>
+                  </div>
+                )}
               </div>
 
               {/* Right Column - Content */}
@@ -246,75 +314,52 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
                 {/* Header */}
                 <div className="text-center mb-4">
                   <h2 className="text-xl md:text-2xl font-extrabold bg-gradient-to-r from-red-600 to-orange-600 text-white border-2 border-yellow-400 shadow-lg animate-pulse mb-2">
-                  {/* <h2 className="text-xl md:text-2xl font-extrabold text-white mb-2"> */}
-                    Wait! Don&apos;t Miss Out...
+                    {activeContent.headline}
                   </h2>
                   <p className="text-sm md:text-base text-[#FD5A1E] font-semibold">
-                    Get a FREE Premium Vending Machine – See If You Qualify!
+                    {activeContent.subheadline}
                   </p>
                 </div>
 
                 {/* Value Prop */}
-                <p className="text-sm text-[#F5F5F5] leading-relaxed text-center mb-4">
-                  Join <span className="font-bold text-[#FD5A1E]">the many businesses</span> in Modesto Stanislaus County, and Stockton San Joaquin County
-                  providing premium vending at{' '}
-                  <span className="font-bold text-[#FD5A1E]">zero cost</span>!
-                </p>
+                {activeContent.valueProposition && (
+                  <p className="text-sm text-[#F5F5F5] leading-relaxed text-center mb-4">
+                    {activeContent.valueProposition}
+                  </p>
+                )}
 
                 {/* Stats Grid - Mobile Only (hidden on desktop, shown on left column) */}
                 <div className="grid grid-cols-3 gap-3 mb-6 lg:hidden">
-                  <div className="text-center p-3 bg-[#4d4d4d]/30 rounded-lg border border-[#FD5A1E]/20">
-                    <div className="text-xl md:text-2xl font-bold text-[#FD5A1E] mb-1">
-                      100%
+                  {activeContent.stats.slice(0, 3).map((stat, index) => (
+                    <div key={index} className="text-center p-3 bg-[#4d4d4d]/30 rounded-lg border border-[#FD5A1E]/20">
+                      <div className="text-xl md:text-2xl font-bold text-[#FD5A1E] mb-1">
+                        {stat.value}
+                      </div>
+                      <div className="text-xs text-[#A5ACAF]">
+                        {stat.label}
+                      </div>
                     </div>
-                    <div className="text-xs text-[#A5ACAF]">
-                      Free Setup
-                    </div>
-                  </div>
-                  <div className="text-center p-3 bg-[#4d4d4d]/30 rounded-lg border border-[#FD5A1E]/20">
-                    <div className="text-xl md:text-2xl font-bold text-[#FD5A1E] mb-1">
-                      24/7
-                    </div>
-                    <div className="text-xs text-[#A5ACAF]">
-                      Service
-                    </div>
-                  </div>
-                  <div className="text-center p-3 bg-[#4d4d4d]/30 rounded-lg border border-[#FD5A1E]/20">
-                    <div className="text-xl md:text-2xl font-bold text-[#FD5A1E] mb-1">
-                      50+
-                    </div>
-                    <div className="text-xs text-[#A5ACAF]">
-                      Products
-                    </div>
-                  </div>
+                  ))}
                 </div>
 
                 {/* Special Offer Badge - Mobile Only */}
-                <div className="flex items-center justify-center gap-2 px-4 py-2.5 mb-6 rounded-lg bg-gradient-to-r from-[#FD5A1E]/20 to-orange-600/20 border-2 border-[#FD5A1E] lg:hidden">
-                  <Sparkles className="h-4 w-4 text-[#FD5A1E] animate-pulse flex-shrink-0" />
-                  <span className="font-bold text-[#FD5A1E] text-xs md:text-sm text-center">
-                    FREE Premium Touchscreen Machines!
-                  </span>
-                </div>
+                {activeContent.specialOfferBadge && (
+                  <div className="flex items-center justify-center gap-2 px-4 py-2.5 mb-6 rounded-lg bg-gradient-to-r from-[#FD5A1E]/20 to-orange-600/20 border-2 border-[#FD5A1E] lg:hidden">
+                    <Sparkles className="h-4 w-4 text-[#FD5A1E] animate-pulse flex-shrink-0" />
+                    <span className="font-bold text-[#FD5A1E] text-xs md:text-sm text-center">
+                      {activeContent.specialOfferBadge}
+                    </span>
+                  </div>
+                )}
 
                 {/* Benefits List */}
                 <div className="space-y-1.5 mb-4">
-                  <div className="flex items-start gap-2">
-                    <CheckCircle className="h-4 w-4 text-[#FD5A1E] flex-shrink-0 mt-0.5" />
-                    <span className="text-[#F5F5F5] text-xs">21.5&quot; HD touchscreen</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <CheckCircle className="h-4 w-4 text-[#FD5A1E] flex-shrink-0 mt-0.5" />
-                    <span className="text-[#F5F5F5] text-xs">Contactless payments</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <CheckCircle className="h-4 w-4 text-[#FD5A1E] flex-shrink-0 mt-0.5" />
-                    <span className="text-[#F5F5F5] text-xs">Weekly restocking</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <CheckCircle className="h-4 w-4 text-[#FD5A1E] flex-shrink-0 mt-0.5" />
-                    <span className="text-[#F5F5F5] text-xs">Zero upfront costs</span>
-                  </div>
+                  {activeContent.benefits.map((benefit, index) => (
+                    <div key={index} className="flex items-start gap-2">
+                      <CheckCircle className="h-4 w-4 text-[#FD5A1E] flex-shrink-0 mt-0.5" />
+                      <span className="text-[#F5F5F5] text-xs">{benefit}</span>
+                    </div>
+                  ))}
                 </div>
 
                 {/* Qualifier Text */}
@@ -470,19 +515,19 @@ export function ExitIntentPopup({ delay = 5000 }: ExitIntentPopupProps) {
                           style={{ minHeight: '48px' }} // WCAG touch target
                           disabled={isSubmitting}
                         >
-                          Get Your Free Machine
+                          {activeContent.ctaButton}
                         </AccessibleButton>
                         <AccessibleButton
                           variant="outline"
                           size="md"
-                          href="tel:+12094035450"
+                          href={`tel:${activeContent.phoneNumber}`}
                           leftIcon={<Phone className="h-4 w-4" />}
                           onClick={handleClose}
                           fullWidth
                           className="touch-manipulation"
                           style={{ minHeight: '44px' }} // WCAG touch target
                         >
-                          Call (209) 403-5450
+                          {activeContent.phoneButton}
                         </AccessibleButton>
                       </div>
                     </>

@@ -3,12 +3,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 
-import {
-  getAllVendingMachines,
-  getVendingMachinesByCategory,
-  normalizeMachineData,
-  type MachineData
-} from '@/lib/data/vendingMachineData';
+import { normalizeMachineData, type MachineData } from '@/lib/data/vendingMachineData';
+import { HybridDataService } from '@/lib/services/hybridDataService';
 import { Loading } from '@/components/ui/core/Loading';
 import CTASection from '@/components/landing/CTASection';
 import { MachineCard } from '@/components/vending-machines/listing/MachineCard';
@@ -34,16 +30,21 @@ const VendingMachinesPage = () => {
   const [isFiltering, setIsFiltering] = useState(false);
 
   useEffect(() => {
-    try {
-      const allMachineData = getAllVendingMachines();
-      setAllMachines(allMachineData);
-      const normalized = allMachineData.map(normalizeMachineData).filter(Boolean);
-      setMachines(normalized as any[]);
-    } catch (err) {
-      console.error('Error:', err);
-    } finally {
-      setIsLoading(false);
-    }
+    const fetchMachines = async () => {
+      try {
+        // Use HybridDataService - tries database first, falls back to static data
+        const allMachineData = await HybridDataService.getVendingMachines();
+        setAllMachines(allMachineData);
+        const normalized = allMachineData.map(normalizeMachineData).filter(Boolean);
+        setMachines(normalized as any[]);
+      } catch (err) {
+        console.error('Error fetching machines:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchMachines();
   }, []);
 
   useEffect(() => {
@@ -58,7 +59,8 @@ const VendingMachinesPage = () => {
         if (activeFilter === 'all') {
           filtered = allMachines;
         } else {
-          filtered = getVendingMachinesByCategory(activeFilter);
+          // Filter from the fetched machines based on category
+          filtered = allMachines.filter(m => m.category === activeFilter);
         }
         const normalized = filtered.map(normalizeMachineData).filter(Boolean);
         setMachines(normalized as any[]);
@@ -88,7 +90,7 @@ const VendingMachinesPage = () => {
   return (
     <div className="min-h-screen bg-[#000000]">
       {/* Breadcrumb Navigation */}
-      <div className="pt-20 relative z-40">
+      <div className="pt-12 md:pt-16 relative z-40">
         <Breadcrumbs items={breadcrumbItems} />
       </div>
 

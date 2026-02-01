@@ -1,7 +1,7 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-import Head from 'next/head';
+import Script from 'next/script';
+import { useEffect, useState } from 'react';
 
 /**
  * Individual breadcrumb item interface
@@ -60,7 +60,12 @@ export default function BreadcrumbSchema({
   autoGenerate = true,
   baseUrl = 'https://www.ampvendingmachines.com',
 }: BreadcrumbSchemaProps) {
-  const pathname = usePathname();
+  const [clientPathname, setClientPathname] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Only get pathname on client side
+    setClientPathname(window.location.pathname);
+  }, []);
 
   /**
    * Auto-generate breadcrumb items from the current pathname
@@ -71,21 +76,21 @@ export default function BreadcrumbSchema({
       { name: 'Home', href: '/' },
     ];
 
-    // Skip if we're on the home page
-    if (pathname === '/') {
+    // Skip if we don't have pathname yet or we're on the home page
+    if (!clientPathname || clientPathname === '/') {
       return breadcrumbs;
     }
 
     // Split pathname and filter out empty segments
-    const pathSegments = pathname.split('/').filter(Boolean);
+    const pathSegments = clientPathname.split('/').filter(Boolean);
     let currentPath = '';
 
     pathSegments.forEach((segment) => {
       currentPath += `/${segment}`;
-      
+
       // Get display name from mappings or format the segment
       const displayName = BREADCRUMB_MAPPINGS[segment] || formatSegmentName(segment);
-      
+
       breadcrumbs.push({
         name: displayName,
         href: currentPath,
@@ -140,20 +145,20 @@ export default function BreadcrumbSchema({
 
   const jsonLdData = generateBreadcrumbJsonLd();
 
-  // Don't render anything if there's no valid breadcrumb data
-  if (!jsonLdData) {
+  // Don't render anything during SSR or if there's no valid breadcrumb data
+  if (!clientPathname || !jsonLdData) {
     return null;
   }
 
   return (
-    <Head>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLdData),
-        }}
-      />
-    </Head>
+    <Script
+      id={`breadcrumb-schema-${clientPathname}`}
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(jsonLdData),
+      }}
+      strategy="afterInteractive"
+    />
   );
 }
 
@@ -254,18 +259,22 @@ export const FeedbackBreadcrumbs = () => (
  * Hook for getting breadcrumb data (useful for rendering visual breadcrumbs)
  */
 export const useBreadcrumbs = (customItems?: BreadcrumbItem[]) => {
-  const pathname = usePathname();
-  
+  const [clientPathname, setClientPathname] = useState<string>('/');
+
+  useEffect(() => {
+    setClientPathname(window.location.pathname);
+  }, []);
+
   const generateBreadcrumbs = (): BreadcrumbItem[] => {
     const breadcrumbs: BreadcrumbItem[] = [
       { name: 'Home', href: '/' },
     ];
 
-    if (pathname === '/') {
+    if (clientPathname === '/') {
       return breadcrumbs;
     }
 
-    const pathSegments = pathname.split('/').filter(Boolean);
+    const pathSegments = clientPathname.split('/').filter(Boolean);
     let currentPath = '';
 
     pathSegments.forEach((segment) => {
@@ -274,7 +283,7 @@ export const useBreadcrumbs = (customItems?: BreadcrumbItem[]) => {
         .split('-')
         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
         .join(' ');
-      
+
       breadcrumbs.push({
         name: displayName,
         href: currentPath,

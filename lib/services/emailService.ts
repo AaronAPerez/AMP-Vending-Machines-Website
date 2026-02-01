@@ -1,13 +1,14 @@
 import { emailTemplates } from '@/lib/email/emailBranding';
+import { templateService } from '@/lib/services/templateService';
 
 /**
  * Email Service for AMP Vending
- * 
+ *
  * Build Process Documentation:
- * 1. Uses existing professional email templates from emailBranding.ts
- * 2. Integrates with Resend API for reliable delivery
- * 3. Maintains your established branding and styling
- * 4. Removes duplicate template code
+ * 1. First tries to use dynamic templates from database (editable via admin dashboard)
+ * 2. Falls back to professional email templates from emailBranding.ts if database unavailable
+ * 3. Integrates with Resend API for reliable delivery
+ * 4. Maintains your established branding and styling
  */
 
 interface EmailConfig {
@@ -61,7 +62,7 @@ export class EmailService {
   }
 
   /**
-   * Send contact form emails using existing professional templates
+   * Send contact form emails using dynamic templates from database (with fallback)
    */
   async sendContactFormEmails(data: {
     firstName: string;
@@ -73,19 +74,43 @@ export class EmailService {
     submittedAt: string;
     source: string;
   }): Promise<{ customerResult: EmailResponse; businessResult: EmailResponse }> {
-    
-    // Use your existing professional templates
-    const customerHtml = emailTemplates.contactConfirmation(data);
+
+    // Try to fetch dynamic template from database
+    let customerSubject = `Thank you for contacting AMP Vending, ${data.firstName}!`;
+    let customerHtml = emailTemplates.contactConfirmation(data);
+
+    try {
+      const dynamicTemplate = await templateService.getRenderedTemplate('contact-confirmation', {
+        FirstName: data.firstName,
+        LastName: data.lastName,
+        Company: data.companyName,
+        Email: data.email,
+        Phone: data.phone || 'Not provided',
+        Message: data.message || 'No message provided'
+      });
+
+      if (dynamicTemplate) {
+        console.log('✅ Using dynamic contact confirmation template from database');
+        customerSubject = dynamicTemplate.subject;
+        customerHtml = dynamicTemplate.body;
+      } else {
+        console.log('⚠️ Dynamic template not found, using hardcoded fallback');
+      }
+    } catch (error) {
+      console.warn('⚠️ Failed to fetch dynamic template, using hardcoded fallback:', error);
+    }
+
+    // Business notification always uses hardcoded template (for now)
     const businessHtml = emailTemplates.contactNotification(data);
 
     const [customerResult, businessResult] = await Promise.allSettled([
       this.sendEmail({
         to: data.email,
-        subject: `Thank you for contacting AMP Vending, ${data.firstName}!`,
+        subject: customerSubject,
         html: customerHtml,
         from: process.env.FROM_EMAIL || 'AMP Vending <ampdesignandconsulting@gmail.com>',
       }),
-      
+
       this.sendEmail({
         to: process.env.TO_EMAIL || 'ampdesignandconsulting@gmail.com',
         subject: `🔔 New Contact: ${data.firstName} ${data.lastName} from ${data.companyName}`,

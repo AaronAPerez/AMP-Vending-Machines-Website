@@ -1,15 +1,37 @@
 'use client';
 
-import { BuildingIcon, ChartBarIcon, CogIcon, HomeIcon } from 'lucide-react';
+import {
+  HomeIcon,
+  PackageIcon,
+  ShoppingBagIcon,
+  MailIcon,
+  SendIcon,
+  BuildingIcon,
+  SearchIcon,
+  ImageIcon,
+  SettingsIcon,
+  Shuffle,
+  ZapIcon,
+  FileTextIcon,
+  EyeIcon
+} from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-
 const navigation = [
   { name: 'Dashboard', href: '/admin', icon: HomeIcon },
-  { name: 'Business Profile', href: '/admin/business-profile', icon: BuildingIcon },
-  { name: 'Analytics', href: '/admin/analytics', icon: ChartBarIcon },
-  { name: 'Settings', href: '/admin/settings', icon: CogIcon },
+  { name: 'Machines', href: '/admin/machines', icon: PackageIcon },
+  { name: 'Products', href: '/admin/products', icon: ShoppingBagIcon },
+  { name: 'Contacts', href: '/admin/contacts', icon: MailIcon },
+  { name: 'Email History', href: '/admin/emails', icon: SendIcon },
+  { name: 'Exit Intent', href: '/admin/marketing/exit-intent', icon: ZapIcon },
+  { name: 'Email Templates', href: '/admin/marketing/email-templates', icon: FileTextIcon },
+  { name: 'Preview Email', href: '/admin/preview-contact-email', icon: EyeIcon },
+  { name: 'Business Info', href: '/admin/business', icon: BuildingIcon },
+  { name: 'SEO Settings', href: '/admin/seo', icon: SearchIcon },
+  { name: 'Photo Manager', href: '/admin/photo-manager', icon: ImageIcon },
+  { name: 'Components Showcase', href: '/admin/components-showcase', icon: Shuffle },
+  { name: 'Settings', href: '/admin/settings', icon: SettingsIcon },
 ];
 
 export default function AdminSidebar() {
@@ -18,7 +40,7 @@ export default function AdminSidebar() {
   return (
     <div className="w-64 bg-[#111111] border-r border-[#333333] flex flex-col">
       {/* Logo */}
-      <div className="p-6 border-b border-[#333333]">
+      <div className="py-3 px-4 border-b border-[#333333]">
         <div className="flex items-center space-x-3">
           <div className="w-8 h-8 bg-[#FD5A1E] rounded-lg flex items-center justify-center">
             <span className="text-[#000000] font-bold text-sm">A</span>

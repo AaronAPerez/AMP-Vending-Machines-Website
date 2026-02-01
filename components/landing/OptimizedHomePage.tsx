@@ -32,8 +32,9 @@ export default function OptimizedHomePage() {
   return (
 
     <main className="flex flex-col min-h-screen overflow-hidden bg-black/90">
-      {/* CRITICAL: Hero Section - Load immediately for LCP */}
+          {/* CRITICAL: Hero Section - Load immediately for LCP */}
       <Section id="hero" className="relative min-h-screen bg-black/90">
+        <Suspense fallback={<HeroLoadingFallback />}>
         <ResponsiveHero
           title={
             <>
@@ -44,6 +45,17 @@ export default function OptimizedHomePage() {
           primaryCta={{ text: "View Our Machines", href: "/vending-machines" }}
           secondaryCta={{ text: "Get Started", href: "/contact" }}
         />
+        {/* <ResponsiveHero
+          title={
+            <>
+              Vending Machines in<br/><span className="text-[#FD5A1E]"> Modesto, Stockton & Central Valley</span>
+            </>
+          }
+          subtitle="AMP Vending - Premier commercial vending solutions for businesses in Modesto, Stockton, Stanislaus County, San Joaquin County, and surrounding areas."
+          primaryCta={{ text: "View Our Machines", href: "/vending-machines" }}
+          secondaryCta={{ text: "Get Started", href: "/contact" }}
+        /> */}
+        </Suspense>
       </Section>
 
       {/* VIEWPORT LAZY: Below-the-fold sections */}
