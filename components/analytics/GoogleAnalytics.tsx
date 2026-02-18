@@ -1,13 +1,14 @@
 'use client';
 
-import Script from 'next/script';
+import { GoogleTagManager, GoogleAnalytics as GA4 } from '@next/third-parties/google';
 
 /**
  * Google Analytics 4 (GA4) & Google Ads Implementation
  *
- * Tracks page views, events, user interactions, and ad conversions
- * Must be placed in the root layout for site-wide tracking
- *
+ * Uses @next/third-parties for optimized loading:
+ * - Deferred script loading
+ * - Better Core Web Vitals impact
+ * - Reduced unused JavaScript
  */
 export function GoogleAnalytics() {
   const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
@@ -20,34 +21,11 @@ export function GoogleAnalytics() {
 
   return (
     <>
-      {/* Google Tag (gtag.js) - Lazy loading for better LCP performance */}
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${googleAdsId}`}
-        strategy="lazyOnload"
-        async
-      />
+      {/* Google Tag Manager - optimized loading via @next/third-parties */}
+      <GoogleTagManager gtmId={googleAdsId} />
 
-      {/* Initialize Google Analytics & Google Ads */}
-      <Script
-        id="google-analytics"
-        strategy="lazyOnload"
-      >
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          // Google Ads Configuration
-          gtag('config', '${googleAdsId}');
-
-          // Google Analytics Configuration
-          gtag('config', '${measurementId}', {
-            page_path: window.location.pathname,
-            send_page_view: true
-          });
-        `}
-      </Script>
+      {/* Google Analytics 4 - optimized loading */}
+      <GA4 gaId={measurementId} />
     </>
   );
 }
-
