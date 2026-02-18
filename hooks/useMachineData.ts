@@ -6,13 +6,8 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { 
-  fetchAllMachines, 
-  fetchMachineById 
-} from '@/lib/vending-machines/data/machineQueries';
-import { 
-  normalizeMachinesForDisplay 
-} from '@/lib/vending-machines/data/machineTransformers';
+import { normalizeMachinesForDisplay } from '@/lib/vending-machines/data/machineTransformers';
+import { HybridDataService } from '@/lib/services/hybridDataService';
 import type { MachineData } from '@/lib/data/vendingMachineData';
 
 interface UseMachineDataReturn {
@@ -33,17 +28,18 @@ export const useMachineData = (): UseMachineDataReturn => {
   const [error, setError] = useState<string | null>(null);
   const isMounted = useRef(true);
 
-  const loadMachines = () => {
+  const loadMachines = async () => {
     setIsLoading(true);
     setError(null);
 
     try {
-      const allMachines = fetchAllMachines();
+      // Use HybridDataService - tries database first, falls back to static data
+      const allMachines = await HybridDataService.getVendingMachines();
       if (!isMounted.current) return;
-      
+
       setRawMachines(allMachines);
       const normalized = normalizeMachinesForDisplay(allMachines);
-      
+
       if (!isMounted.current) return;
       setMachines(normalized);
     } catch (err) {
@@ -92,27 +88,32 @@ export const useSingleMachine = (machineId: string): UseSingleMachineReturn => {
       return;
     }
 
-    setIsLoading(true);
-    setError(null);
+    const loadMachine = async () => {
+      setIsLoading(true);
+      setError(null);
 
-    try {
-      const machineData = fetchMachineById(machineId);
-      if (!isMounted.current) return;
+      try {
+        // Use HybridDataService - tries database first, falls back to static data
+        const machineData = await HybridDataService.getVendingMachineBySlug(machineId);
+        if (!isMounted.current) return;
 
-      if (!machineData) {
-        setError(`Machine ${machineId} not found`);
-      } else {
-        setMachine(machineData);
+        if (!machineData) {
+          setError(`Machine ${machineId} not found`);
+        } else {
+          setMachine(machineData);
+        }
+      } catch (err) {
+        console.error('[useSingleMachine] Error:', err);
+        if (!isMounted.current) return;
+        setError('Failed to load machine');
+      } finally {
+        if (isMounted.current) {
+          setIsLoading(false);
+        }
       }
-    } catch (err) {
-      console.error('[useSingleMachine] Error:', err);
-      if (!isMounted.current) return;
-      setError('Failed to load machine');
-    } finally {
-      if (isMounted.current) {
-        setIsLoading(false);
-      }
-    }
+    };
+
+    loadMachine();
 
     return () => {
       isMounted.current = false;

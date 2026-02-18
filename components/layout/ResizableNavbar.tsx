@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
 import { AccessibleButton } from '@/components/ui/AccessibleButton';
 import { X, Menu } from 'lucide-react';
 
@@ -21,8 +20,17 @@ interface NavItem {
 const ResizableNavbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const pathname = usePathname();
+  const [pathname, setPathname] = useState<string>('');
+  const [isMounted, setIsMounted] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+
+  // Get pathname on client side only
+  useEffect(() => {
+    setIsMounted(true);
+    if (typeof window !== 'undefined') {
+      setPathname(window.location.pathname);
+    }
+  }, []);
 
   // Close mobile menu when clicking outside
   useEffect(() => {

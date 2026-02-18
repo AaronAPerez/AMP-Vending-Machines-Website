@@ -1,3 +1,5 @@
+'use client';
+
 import { useViewportLazyLoad } from "@/lib/performance/lazy-loading";
 import React, { Suspense } from "react";
 

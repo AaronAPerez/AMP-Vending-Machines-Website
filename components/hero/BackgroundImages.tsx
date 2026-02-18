@@ -68,7 +68,7 @@ export const BackgroundImages = () => {
                                 fill
                                 sizes="(max-width: 640px) 33vw, 25vw"
                                 className="object-cover"
-                                loading="lazy"
+                                priority 
                                 quality={60}
                             />
                         </div>

@@ -5,6 +5,9 @@ import Text from '@/components/ui/Text';
 import Link from 'next/link';
 import CTASection from '@/components/landing/CTASection';
 
+// Force dynamic rendering to avoid build-time errors with client components
+export const dynamic = 'force-dynamic';
+
 const SERVICE_AREAS = {
   modesto: {
     name: 'Modesto',

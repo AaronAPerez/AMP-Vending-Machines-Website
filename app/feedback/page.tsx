@@ -4,6 +4,9 @@ import { FeedbackBreadcrumbs } from "@/components/seo/BreadcrumbSchema";
 import FeedbackForm from "@/components/feedback/FeedbackForm";
 import { PhoneButton } from "@/components/ui/PhoneButton";
 
+// Force dynamic rendering to avoid SSR issues with client components
+export const dynamic = 'force-dynamic';
+
 // Define metadata for SEO
 export const metadata: Metadata = {
   title: 'Share Your Feedback | AMP Vending',
@@ -55,7 +58,7 @@ export default function FeedbackPage() {
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <FeedbackBreadcrumbs />
+          {/* <FeedbackBreadcrumbs /> */}
           <span className="inline-block px-3 py-1 bg-[#FD5A1E] text-[#F5F5F5] text-sm font-medium rounded-full mb-4">
             Customer Feedback
           </span>

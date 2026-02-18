@@ -15,7 +15,7 @@ export default function NotFound() {
         {/* Logo */}
         <div className="mb-8">
           <Image
-            src="/images/logo/AMP_logo.png"
+            src="/images/logo/AMP_logo.webp"
             alt="AMP Vending Logo"
             width={200}
             height={100}
