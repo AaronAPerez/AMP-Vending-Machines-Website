@@ -2,7 +2,7 @@ import { lazy } from "react";
 
 // Critical components (load immediately)
 export const ResponsiveHero = lazy(() => 
-  import('../../../components/hero/ResponsiveHero').then(module => ({
+  import('../../landing/hero/ResponsiveHero').then(module => ({
     default: module.ResponsiveHero
   }))
 );

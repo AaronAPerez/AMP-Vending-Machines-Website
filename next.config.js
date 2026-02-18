@@ -1,9 +1,9 @@
 /**
- * Next.js Configuration - Optimized for Next.js 16.0.10
+ * Next.js Configuration - Optimized for Next.js 15.x
  *
  * Production-Ready Configuration:
  * 1. Compiler optimizations for bundle size reduction
- * 2. Advanced security headers (CSP, HSTS, COOP)
+ * 2. Advanced security headers (CSP, HSTS, COOP, Permissions-Policy)
  * 3. Image optimization with AVIF/WebP support
  * 4. Aggressive caching strategy for static assets
  * 5. Performance optimizations for Core Web Vitals
@@ -16,23 +16,32 @@ const nextConfig = {
   // Enable React strict mode for better development experience
   reactStrictMode: true,
 
-  // Compiler optimizations using SWC (default in Next.js 16)
+  // Compiler optimizations using SWC (default bundler)
   compiler: {
     // Remove console.log statements in production
-    removeConsole: true,
+    removeConsole: process.env.NODE_ENV === "production",
   },
-
-  // Note: swcMinify is now the default in Next.js 16 and has been removed as an option
 
   // Experimental features for optimization
   experimental: {
     // Optimize package imports for better tree shaking
-    optimizePackageImports: ["lucide-react"],
-    // Note: optimizeCss temporarily disabled for build testing
+    optimizePackageImports: [
+      "lucide-react",
+      "@heroicons/react",
+      "date-fns",
+      "lodash",
+      "framer-motion",
+    ],
+    // CSS optimization (requires critters package)
     optimizeCss: true,
     // Disable server source maps to fix source map parsing errors in dev
     serverSourceMaps: false,
+    // Better Core Web Vitals attribution for debugging
+    webVitalsAttribution: ["CLS", "LCP", "FCP", "FID", "TTFB", "INP"],
   },
+
+  // Packages to exclude from server component bundling (prevents SSR issues)
+  serverExternalPackages: ["sharp", "bcrypt", "argon2"],
 
   // Environment variables available to the client
   env: {
@@ -48,14 +57,13 @@ const nextConfig = {
   distDir: ".next",
 
   // Image optimization configuration
-  // Note: In Next.js 16, quality is set per-image via the Image component
-  // Default quality is 75 (down from 90 in older versions) for better performance
+  // Quality is set per-image via the Image component, default is 75
   images: {
     qualities: [60, 75, 90],
-    deviceSizes: [640, 750, 828, 1080, 1200],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
-    formats: ["image/webp"],
-    minimumCacheTTL: 60,
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 31536000, // 1 year cache for optimized images
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
@@ -85,12 +93,12 @@ const nextConfig = {
             value: "DENY",
           },
           {
-            key: "X-XSS-Protection",
-            value: "1; mode=block",
-          },
-          {
             key: "Referrer-Policy",
             value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=(self), interest-cohort=()",
           },
           {
             key: "Strict-Transport-Security",
@@ -207,14 +215,17 @@ const nextConfig = {
   // Build-specific optimizations
   productionBrowserSourceMaps: false, // Disable source maps in production for smaller bundles
 
-  // Turbopack configuration (Next.js 16 default bundler)
+  // Turbopack configuration (used in dev mode with --turbopack flag)
   turbopack: {
-    // Empty config to silence webpack migration warning
-    // Source map warnings are handled by serverSourceMaps: false in experimental config
+    // Configuration handled by experimental.serverSourceMaps
   },
 
-  // Configure which files should be treated as pages
-  excludeDefaultMomentLocales: true,
+  // Logging configuration for better debugging
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
 };
 
 module.exports = nextConfig;

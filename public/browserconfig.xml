@@ -2,8 +2,8 @@
 <browserconfig>
     <msapplication>
         <tile>
-            <square150x150logo src="/images/logo/AMP_logo.png"/>
-            <TileColor>#000000</TileColor>
+            <square150x150logo src="/images/logo/AMP_logo.webp"/>
+            <TileColor>#1a1a1a</TileColor>
         </tile>
     </msapplication>
 </browserconfig>

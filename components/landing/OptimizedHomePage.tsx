@@ -2,7 +2,7 @@
 
 import React from 'react';
 // Import critical component directly (not lazy) to avoid hydration mismatch
-import { ResponsiveHero } from '@/components/hero/ResponsiveHero';
+import { ResponsiveHero } from '@/components/landing/hero/ResponsiveHero';
 import { Suspense } from 'react';
 import { ViewportLazy, Deferred } from '../ui/loading/LazyLoading';
 import { SectionLoadingFallback } from '@/components/ui/loading/LoadingFallbacks';
