@@ -1,14 +1,18 @@
 # Browsers that we support
-# This reduces JavaScript polyfills for modern browsers
+# Targeting modern browsers to eliminate JavaScript polyfills
+# Removes polyfills for: Array.prototype.at, Object.hasOwn, Array.flat/flatMap,
+# String.prototype.trimStart/trimEnd, Object.fromEntries
 
 [production]
->0.2%
+# Modern browsers only - no polyfills needed
+Chrome >= 105
+Firefox >= 104
+Safari >= 15.4
+Edge >= 105
+iOS >= 15.4
+ChromeAndroid >= 105
 not dead
 not op_mini all
-Chrome >= 92
-Firefox >= 90
-Safari >= 14
-Edge >= 92
 
 [development]
 last 1 chrome version
