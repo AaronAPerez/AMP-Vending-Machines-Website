@@ -293,12 +293,7 @@ const vendingMachineData: Record<string, MachineData> = {
       {
         id: 2,
         src: "/images/machines/vending-machine-card-reader-detail-01.webp",
-        alt: "Close-up view of bill insert slot and touchscreen display on premium snack vending machine with cash payment system"
-      },
-      {
-        id: 3,
-        src: "/images/machines/vending-machine-products-display-01.webp",
-        alt: "Interior product display showing beverage selections in premium touchscreen vending machine for workplace break rooms"
+        alt: "Close-up view of bill insert slot above touchscreen display on premium beverage vending machine with cash payment system"
       },
     ],
 
@@ -516,18 +511,8 @@ const vendingMachineData: Record<string, MachineData> = {
       },
       {
         id: 4,
-        src: "/images/machines/vending-machine-open-push-door-close-up-01.webp",
-        alt: "Close-up of product retrieval door on commercial snack vending machine with secure push-open mechanism"
-      },
-      {
-        id: 5,
         src: "/images/machines/vending-machine-cash-insert-slot-01.webp",
         alt: "Cash payment slot with bill validator on touchscreen vending machine accepting all denominations for office snacks"
-      },
-      {
-        id: 6,
-        src: "/images/machines/vending-machine-side-view-01.webp",
-        alt: "Side profile view of commercial snack vending machine showing slim design footprint"
       },
     ],
     dimensions: [
