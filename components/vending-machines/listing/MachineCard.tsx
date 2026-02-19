@@ -49,6 +49,8 @@ export const MachineCard: React.FC<MachineCardProps> = ({
   const [showGallery, setShowGallery] = useState(false);
   const [imageError, setImageError] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
+  // Track selected image index for this machine's images only
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const cardRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef, { once: true, margin: "-50px" });
 
@@ -57,9 +59,13 @@ export const MachineCard: React.FC<MachineCardProps> = ({
                    machine.dimensions?.toString().includes('50+') ? '50+ Selections' :
                    machine.dimensions?.toString().includes('800') ? '800 Cans' : '30-50 Selections';
 
-  // Get primary image
-  const primaryImage = machine.images?.[0]?.src || machine.image || '/images/placeholder.svg';
-  const primaryImageAlt = machine.images?.[0]?.alt || machine.name;
+  // Get this machine's images (limit to 5 for thumbnail display)
+  const machineImages = machine.images?.slice(0, 5) || [];
+
+  // Get currently selected image for this machine
+  const currentImage = machineImages[selectedImageIndex] || machineImages[0];
+  const primaryImage = currentImage?.src || machine.image || '/images/placeholder.svg';
+  const primaryImageAlt = currentImage?.alt || machine.name;
 
   // Handle image load/error
   const handleImageLoad = () => setImageLoading(false);
@@ -154,7 +160,7 @@ export const MachineCard: React.FC<MachineCardProps> = ({
                   {machine.category === 'refrigerated' ? '❄️ Refrigerated' : '📦 Non-Refrigerated'}
                 </span>
 
-                {/* View Photos Button - Only show if multiple images */}
+                {/* View All Photos Button - Only show if machine has more images */}
                 {machine.images && machine.images.length > 1 && (
                   <button
                     onClick={(e) => {
@@ -165,12 +171,44 @@ export const MachineCard: React.FC<MachineCardProps> = ({
                     className="absolute bottom-4 right-4 px-4 py-2 bg-black/80 backdrop-blur-sm text-white rounded-full text-sm font-semibold opacity-0 group-hover/image:opacity-100 transition-all hover:bg-[#FD5A1E] focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-[#FD5A1E] z-50"
                     style={{ pointerEvents: 'auto' }}
                     type="button"
-                    aria-label={`View ${machine.images.length} photos of ${machine.name}`}
+                    aria-label={`View all ${machine.images.length} photos of ${machine.name}`}
                   >
-                    📷 {machine.images.length} Photos
+                    📷 View All {machine.images.length} Photos
                   </button>
                 )}
               </div>
+
+              {/* Thumbnail Strip - Shows only this machine's images */}
+              {machineImages.length > 1 && (
+                <div className="mt-4 flex gap-2 overflow-x-auto pb-2">
+                  {machineImages.map((img, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setSelectedImageIndex(idx);
+                      }}
+                      className={`relative flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-lg overflow-hidden transition-all ${
+                        selectedImageIndex === idx
+                          ? 'ring-2 ring-[#FD5A1E] opacity-100 scale-105'
+                          : 'opacity-60 hover:opacity-100 border border-[#333333]'
+                      }`}
+                      aria-label={`View image ${idx + 1} of ${machine.name}`}
+                      style={{ pointerEvents: 'auto' }}
+                    >
+                      <Image
+                        src={img.src}
+                        alt={img.alt}
+                        fill
+                        className="object-cover"
+                        sizes="64px"
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
 
               {/* Best For Section - Moved under image */}
               {machine.bestFor && (

@@ -3,6 +3,8 @@
 import { getAllVendingMachines, normalizeMachineData } from '@/lib/data/vendingMachineData';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
+import { useState, useCallback, useMemo } from 'react';
 import { MachineGrid } from '../vending-machines/listing/MachineGrid';
 
 
@@ -11,18 +13,54 @@ import { MachineGrid } from '../vending-machines/listing/MachineGrid';
 /**
  * VendingMachineShowcase Component
  * Displays premium vending machines using the reusable MachineCard component
+ * Features an interactive image gallery showcasing machine details
  */
-const VendingMachineShowcase = ({ 
-  renderHeading = true, 
-  className = '' 
+const VendingMachineShowcase = ({
+  renderHeading = true,
+  className = ''
 }: {
   renderHeading?: boolean;
   className?: string;
 }) => {
+  // Track active image in the gallery preview
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+
   // Get machine data and normalize for the card component with error handling
   const vendingMachines = getAllVendingMachines()
     .map(normalizeMachineData)
     .filter((machine): machine is NonNullable<typeof machine> => machine !== null);
+
+  // Collect all images from machine data for the showcase gallery
+  // Uses useMemo to prevent recalculation on every render
+  const showcaseImages = useMemo(() => {
+    const allImages: Array<{ src: string; alt: string; machineName: string; machineId: string }> = [];
+
+    vendingMachines.forEach(machine => {
+      if (machine.images && Array.isArray(machine.images)) {
+        // Take up to 3 images per machine for variety
+        machine.images.slice(0, 3).forEach((img: { src: string; alt: string }) => {
+          allImages.push({
+            src: img.src,
+            alt: img.alt,
+            machineName: machine.name,
+            machineId: machine.id
+          });
+        });
+      }
+    });
+
+    // Return a selection of images (limit to 8 for performance)
+    return allImages.slice(0, 8);
+  }, [vendingMachines]);
+
+  // Navigate to next/previous image in gallery
+  const nextImage = useCallback(() => {
+    setActiveImageIndex((prev) => (prev + 1) % showcaseImages.length);
+  }, [showcaseImages.length]);
+
+  const prevImage = useCallback(() => {
+    setActiveImageIndex((prev) => (prev - 1 + showcaseImages.length) % showcaseImages.length);
+  }, [showcaseImages.length]);
 
   return (
     <section
