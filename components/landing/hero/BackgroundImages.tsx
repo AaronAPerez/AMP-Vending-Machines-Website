@@ -64,12 +64,12 @@ export const BackgroundImages = () => {
                         >
                             <Image
                                 src={src}
-                                alt="Hero Background"
+                                alt=""
                                 fill
                                 sizes="(max-width: 640px) 33vw, 25vw"
                                 className="object-cover"
-                                priority 
-                                quality={60}
+                                loading="lazy"
+                                quality={40}
                             />
                         </div>
                     );
