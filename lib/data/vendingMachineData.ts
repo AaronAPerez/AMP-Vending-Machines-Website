@@ -290,16 +290,11 @@ const vendingMachineData: Record<string, MachineData> = {
         src: "/images/machines/refrigerated-vending-machine-blue-refresh.webp",
         alt: "Vendo 821 V21 Blue Refresh high-capacity vending machine front view with LED lighting"
       },
-      // {
-      //   id: 2,
-      //   src: "/images/machines/vending-machine-card-reader-detail-01.webp",
-      //        alt: "Close-up view of bill insert slot and touchscreen display on premium snack vending machine with cash payment system",
-      // },
-      // {
-      //   id: 3,
-      //   src: "/images/machines/vending-machine-products-display-01.webp",
-      //   alt: "Interior product display showing 50+ snack selections in premium touchscreen vending machine for workplace break rooms",
-      // },
+      {
+        id: 2,
+        src: "/images/machines/vending-machine-card-reader-detail-01.webp",
+        alt: "Close-up view of bill insert slot above touchscreen display on premium beverage vending machine with cash payment system"
+      },
     ],
 
     // Comprehensive technical specifications
@@ -502,28 +497,23 @@ const vendingMachineData: Record<string, MachineData> = {
       {
         id: 1,
         src: "/images/machines/amp-premium-touchscreen-vending-machine.webp",
-        alt: "Premium commercial snack vending machine with 21.5 inch touchscreen for offices and businesses in Central California",
+        alt: "Premium commercial snack vending machine with 21.5 inch touchscreen for offices and businesses in Central California"
       },
-      //  {
-      //   id: 2,
-      //   src: "/images/machines/refrigerated-vending-machine-front-angle-view-01.webp",
-      //   alt: "Angled front view of refrigerated touchscreen vending machine displaying payment options and product visibility",
-      // },
-      // {
-      //   id: 3,
-      //    src: "/images/machines/amp-vending-machines-touchscreen.webp",
-      //   alt: "Side angle view of commercial refrigerated vending machine showing compact design for office spaces",
-      // },
-      // {
-      //   id: 4,
-      //   src: "/images/machines/vending-machine-open-push-door-close-up-01.webp",
-      //   alt: "Close-up of product retrieval door on commercial snack vending machine with secure push-open mechanism",
-      // },
-      //      {
-      //   id: 5,
-      //   src: "/images/machines/vending-machine-cash-insert-slot-01.webp",
-      //   alt: "Cash payment slot with bill validator on touchscreen vending machine accepting all denominations for office snacks",
-      // },
+      {
+        id: 2,
+        src: "/images/machines/refrigerated-vending-machine-front-angle-view-01.webp",
+        alt: "Angled front view of refrigerated touchscreen vending machine displaying payment options and product visibility"
+      },
+      {
+        id: 3,
+        src: "/images/machines/amp-vending-machines-touchscreen.webp",
+        alt: "Side angle view of commercial refrigerated vending machine showing compact design for office spaces"
+      },
+      {
+        id: 4,
+        src: "/images/machines/vending-machine-cash-insert-slot-01.webp",
+        alt: "Cash payment slot with bill validator on touchscreen vending machine accepting all denominations for office snacks"
+      },
     ],
     dimensions: [
       { label: "Width", value: "50 inches (127 cm)" },
@@ -708,33 +698,48 @@ const vendingMachineData: Record<string, MachineData> = {
       {
         id: 1,
         src: "/images/machines/amp-refrigerated-vending-machine.webp",
-        alt: "Commercial refrigerated touchscreen vending machine for offices and businesses in Modesto California",
+        alt: "Commercial refrigerated touchscreen vending machine for offices and businesses in Modesto California"
       },
-      // {
-      //   id: 2,
-      //   src: "/images/machines/refrigerated-vending-machine-front-view-01.webp",
-      //   alt: "Front view of commercial refrigerated vending machine with full glass display showing beverage selection for office break rooms",
-      // },
-      // {
-      //   id: 3,
-      //   src: "/images/machines/refrigerated-combo-vending-machine-payment-angle-view-01.webp",
-      //   alt: "Angled view of refrigerated combo vending machine showing card reader and payment system interface"
-      // },
-      // {
-      //   id: 4,
-      //   src: "/images/machines/refrigerated-combo-vending-machine-keypad-display-01.webp",
-      //     alt: "Detailed view of card reader and contactless payment system on commercial snack vending machine for offices"
-      // },
-      // {
-      //   id: 5,
-      //   src: "/images/machines/refrigerated-vending-machine-full-angle-view-01.webp",
-      //     alt: "Coin insert mechanism on combo vending machine accepting quarters, dimes, and nickels for payments"
-      // },
-      // {
-      //   id: 6,
-      //   src: "/images/machines/vending-machine-angle-view-cooling-system-01.webp",
-      //        alt: "Interior beverage selection display in commercial refrigerated vending machine showing drink variety and capacity",
-      // },
+      {
+        id: 2,
+        src: "/images/machines/vending-machine-beverage-selection-01.webp",
+        alt: "Interior beverage selection display showing variety of cold drinks in high-capacity commercial vending machine"
+      },
+      {
+        id: 3,
+        src: "/images/machines/refrigerated-vending-machine-front-view-01.webp",
+        alt: "Front view of commercial refrigerated vending machine with full glass display showing beverage selection for office break rooms"
+      },
+      {
+        id: 4,
+        src: "/images/machines/vending-machine-payment-system-interface-01.webp",
+        alt: "Payment system interface with card reader and selection keypad on commercial beverage vending machine"
+      },
+      {
+        id: 5,
+        src: "/images/machines/refrigerated-combo-vending-machine-payment-angle-view-01.webp",
+        alt: "Angled view of refrigerated combo vending machine showing card reader and payment system interface"
+      },
+      {
+        id: 6,
+        src: "/images/machines/refrigerated-combo-vending-machine-keypad-display-01.webp",
+        alt: "Detailed view of card reader and contactless payment system on commercial snack vending machine for offices"
+      },
+      {
+        id: 7,
+        src: "/images/machines/refrigerated-vending-machine-full-angle-view-01.webp",
+        alt: "Full angle view of commercial refrigerated vending machine showing premium design and product capacity"
+      },
+      {
+        id: 8,
+        src: "/images/machines/vending-machine-angle-view-cooling-system-01.webp",
+        alt: "Interior beverage selection display in commercial refrigerated vending machine showing drink variety and capacity"
+      },
+      {
+        id: 9,
+        src: "/images/machines/refrigerated-card-reader.webp",
+        alt: "Close-up of contactless card reader and NFC payment terminal on refrigerated vending machine"
+      },
     ],
     dimensions: [
       { label: "Width", value: "40.4 inches (103 cm)" },

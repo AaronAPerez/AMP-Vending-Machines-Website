@@ -1,23 +1,22 @@
 /**
- * @fileoverview Unified Machine Card Component with Gallery, Analytics, and SEO
+ * @fileoverview Unified Machine Card Component with Inline Carousel, Analytics, and SEO
  * @module components/vending-machines/listing/MachineCard
  *
  * Features:
- * - Image gallery preview modal
+ * - Inline image carousel with prev/next navigation
  * - Analytics tracking (Google Analytics)
  * - Image loading states and error handling
  * - Schema.org structured data for SEO
- * - Proper accessibility (ARIA labels, keyboard navigation)
+ * - Proper accessibility (ARIA labels, keyboard navigation, touch targets)
  * - Responsive design with variants
  */
 
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
-import { ImageGallery } from '@/components/vending-machines/detail';
 
 interface MachineCardProps {
   machine: {
@@ -46,9 +45,10 @@ export const MachineCard: React.FC<MachineCardProps> = ({
   index,
   onClick
 }) => {
-  const [showGallery, setShowGallery] = useState(false);
   const [imageError, setImageError] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
+  // Track selected image index for this machine's carousel
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const cardRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef, { once: true, margin: "-50px" });
 
@@ -57,9 +57,27 @@ export const MachineCard: React.FC<MachineCardProps> = ({
                    machine.dimensions?.toString().includes('50+') ? '50+ Selections' :
                    machine.dimensions?.toString().includes('800') ? '800 Cans' : '30-50 Selections';
 
-  // Get primary image
-  const primaryImage = machine.images?.[0]?.src || machine.image || '/images/placeholder.svg';
-  const primaryImageAlt = machine.images?.[0]?.alt || machine.name;
+  // Get this machine's images (limit to 5 for thumbnail display)
+  const machineImages = machine.images?.slice(0, 5) || [];
+  const totalImages = machineImages.length;
+
+  // Carousel navigation handlers with useCallback for performance
+  const goToPrevious = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setSelectedImageIndex((prev) => (prev - 1 + totalImages) % totalImages);
+  }, [totalImages]);
+
+  const goToNext = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setSelectedImageIndex((prev) => (prev + 1) % totalImages);
+  }, [totalImages]);
+
+  // Get currently selected image for this machine
+  const currentImage = machineImages[selectedImageIndex] || machineImages[0];
+  const primaryImage = currentImage?.src || machine.image || '/images/placeholder.svg';
+  const primaryImageAlt = currentImage?.alt || machine.name;
 
   // Handle image load/error
   const handleImageLoad = () => setImageLoading(false);
@@ -154,23 +172,90 @@ export const MachineCard: React.FC<MachineCardProps> = ({
                   {machine.category === 'refrigerated' ? '❄️ Refrigerated' : '📦 Non-Refrigerated'}
                 </span>
 
-                {/* View Photos Button - Only show if multiple images */}
-                {machine.images && machine.images.length > 1 && (
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setShowGallery(true);
-                    }}
-                    className="absolute bottom-4 right-4 px-4 py-2 bg-black/80 backdrop-blur-sm text-white rounded-full text-sm font-semibold opacity-0 group-hover/image:opacity-100 transition-all hover:bg-[#FD5A1E] focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-[#FD5A1E] z-50"
-                    style={{ pointerEvents: 'auto' }}
-                    type="button"
-                    aria-label={`View ${machine.images.length} photos of ${machine.name}`}
-                  >
-                    📷 {machine.images.length} Photos
-                  </button>
+                {/* Carousel Navigation Arrows - Only show if multiple images */}
+                {totalImages > 1 && (
+                  <>
+                    {/* Previous Arrow - Left side with 44x44px touch target for accessibility */}
+                    <button
+                      onClick={goToPrevious}
+                      className="absolute left-2 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 bg-black/70 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-[#FD5A1E] active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-[#FD5A1E] focus:ring-offset-2 focus:ring-offset-black z-40"
+                      style={{ pointerEvents: 'auto' }}
+                      type="button"
+                      aria-label={`Previous image of ${machine.name} (${selectedImageIndex + 1} of ${totalImages})`}
+                    >
+                      <svg
+                        className="w-6 h-6 sm:w-7 sm:h-7"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+
+                    {/* Next Arrow - Right side with 44x44px touch target for accessibility */}
+                    <button
+                      onClick={goToNext}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 bg-black/70 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-[#FD5A1E] active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-[#FD5A1E] focus:ring-offset-2 focus:ring-offset-black z-40"
+                      style={{ pointerEvents: 'auto' }}
+                      type="button"
+                      aria-label={`Next image of ${machine.name} (${selectedImageIndex + 1} of ${totalImages})`}
+                    >
+                      <svg
+                        className="w-6 h-6 sm:w-7 sm:h-7"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+
+                    {/* Image Counter Badge */}
+                    <div
+                      className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-black/70 backdrop-blur-sm rounded-full text-white text-xs font-medium"
+                      aria-live="polite"
+                      aria-atomic="true"
+                    >
+                      {selectedImageIndex + 1} / {totalImages}
+                    </div>
+                  </>
                 )}
               </div>
+
+              {/* Thumbnail Strip - Shows only this machine's images */}
+              {machineImages.length > 1 && (
+                <div className="mt-4 flex gap-2 overflow-x-auto pb-2">
+                  {machineImages.map((img, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setSelectedImageIndex(idx);
+                      }}
+                      className={`relative flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-lg overflow-hidden transition-all ${
+                        selectedImageIndex === idx
+                          ? 'ring-2 ring-[#FD5A1E] opacity-100 scale-105'
+                          : 'opacity-60 hover:opacity-100 border border-[#333333]'
+                      }`}
+                      aria-label={`View image ${idx + 1} of ${machine.name}`}
+                      style={{ pointerEvents: 'auto' }}
+                    >
+                      <Image
+                        src={img.src}
+                        alt={img.alt}
+                        fill
+                        className="object-cover"
+                        sizes="64px"
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
 
               {/* Best For Section - Moved under image */}
               {machine.bestFor && (
@@ -252,25 +337,6 @@ export const MachineCard: React.FC<MachineCardProps> = ({
           </div>
         </Link>
       </motion.article>
-
-      {/* Image Gallery Modal */}
-      {showGallery && machine.images && machine.images.length > 1 && (
-        <div className="fixed inset-0 z-[1000]" onClick={() => setShowGallery(false)}>
-          <div onClick={(e) => e.stopPropagation()}>
-            <ImageGallery images={machine.images} machineName={machine.name} />
-          </div>
-          <button
-            onClick={() => setShowGallery(false)}
-            className="absolute top-4 right-4 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-[#FD5A1E] transition-all focus:outline-none focus:ring-2 focus:ring-[#FD5A1E] z-[1001]"
-            aria-label="Close gallery"
-            type="button"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-      )}
     </>
   );
 };

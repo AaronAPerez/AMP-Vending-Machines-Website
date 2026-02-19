@@ -63,12 +63,12 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({ images, machineName 
   return (
     <>
       <div className="space-y-4 relative z-30" style={{ pointerEvents: 'auto' }}>
-        {/* Main Image */}
+        {/* Main Image - constrained height for modal display */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
-          className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#000000] border border-[#333333] group"
+          className="relative aspect-[4/3] max-h-[60vh] rounded-2xl overflow-hidden bg-[#000000] border border-[#333333] group"
         >
           <Image
             src={images[selectedImage].src}
