@@ -221,12 +221,16 @@ export const rootMetadata: Metadata = {
     expires: new Date(Date.now() + 3600000).toUTCString(),
   },
 
-  // Icons and manifest
+  // Icons and manifest - optimized for Google Search Results
   icons: {
     icon: [
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      // SVG favicon - preferred by Google for search results (scalable, crisp at any size)
+      { url: "/icon.svg", type: "image/svg+xml" },
+      // PNG fallbacks for browsers that don't support SVG favicons
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      // ICO fallback for legacy browsers
+      { url: "/favicon.ico", sizes: "48x48" },
     ],
     apple: [
       { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },

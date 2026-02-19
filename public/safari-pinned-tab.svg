@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!--
+    AMP Vending Safari Pinned Tab Icon
+    Single color silhouette for Safari browser
+    Color specified via mask-icon color attribute in HTML
+  -->
+
+  <!-- Phone body outline -->
+  <rect x="96" y="32" width="320" height="448" rx="48" ry="48"
+        fill="none" stroke="#000000" stroke-width="28"/>
+
+  <!-- Letter A silhouette -->
+  <path d="M256 120 L176 340 L208 340 L224 300 L288 300 L304 340 L336 340 L256 120 Z M236 268 L256 200 L276 268 L236 268 Z"
+        fill="#000000"/>
+
+  <!-- Home button -->
+  <rect x="224" y="416" width="64" height="8" rx="4" ry="4"
+        fill="#000000"/>
+</svg>
