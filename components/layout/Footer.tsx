@@ -31,7 +31,7 @@ import { trackPhoneCall } from '@/lib/analytics/gtag';
 const Footer = () => {
   return (
     <footer
-      className="bg-[#111111] border-t border-[#333333] py-12 sm:py-16"
+      className="bg-[#111111] border-t border-[#333333] py-12 sm:pt-16"
       role="contentinfo"
       aria-label="Site footer with company information and links"
     >
@@ -178,6 +178,24 @@ const Footer = () => {
               </a>
             </nav>
           </div>
+        </div>
+
+        {/* AP Designs Credit */}
+        <div className="mt-8 px-4 flex items-center justify-center gap-2 text-sm text-[#A5ACAF] dark:text-gray-400">
+          <span>Website by</span>
+          <a
+            href="https://www.aaronaperez.dev/?utm_source=footer"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 font-medium hover:text-[#FD5A1E] transition-colors focus:outline-none focus:text-[#FD5A1E]"
+          >
+            <img
+              src="/icons/AP-Designs-Icon-48x48.svg"
+              alt="AP Designs Logo"
+              className="w-5 h-5inline-flex items-baseline justify-center"
+            />
+            AP Designs
+          </a>
         </div>
       </div>
     </footer>

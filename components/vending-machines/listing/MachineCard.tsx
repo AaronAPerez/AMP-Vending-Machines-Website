@@ -164,7 +164,7 @@ export const MachineCard: React.FC<MachineCardProps> = ({
                 )}
 
                 {/* Category Badge */}
-                <span className={`absolute top-4 left-4 px-4 py-2 rounded-full text-xs font-bold ${
+                <span className={`absolute top-2 left-2 px-4 py-2 rounded-full text-xs font-bold ${
                   machine.category === 'refrigerated'
                     ? 'bg-black/80 text-blue-400 border border-blue-500/30'
                     : 'bg-black/80 text-orange-400 border border-orange-500/30'
@@ -215,7 +215,7 @@ export const MachineCard: React.FC<MachineCardProps> = ({
 
                     {/* Image Counter Badge */}
                     <div
-                      className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-black/70 backdrop-blur-sm rounded-full text-white text-xs font-medium"
+                      className="absolute bottom-2 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-black/70 backdrop-blur-sm rounded-full text-white text-xs font-medium"
                       aria-live="polite"
                       aria-atomic="true"
                     >

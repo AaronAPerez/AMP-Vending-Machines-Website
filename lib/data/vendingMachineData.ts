@@ -735,11 +735,6 @@ const vendingMachineData: Record<string, MachineData> = {
         src: "/images/machines/vending-machine-angle-view-cooling-system-01.webp",
         alt: "Interior beverage selection display in commercial refrigerated vending machine showing drink variety and capacity"
       },
-      {
-        id: 9,
-        src: "/images/machines/refrigerated-card-reader.webp",
-        alt: "Close-up of contactless card reader and NFC payment terminal on refrigerated vending machine"
-      },
     ],
     dimensions: [
       { label: "Width", value: "40.4 inches (103 cm)" },
