@@ -7,7 +7,7 @@
   "background_color": "#000000",
   "theme_color": "#000000",
   "orientation": "portrait-primary",
-  "categories": ["business", "food"],
+  "categories": ["business", "food", "shopping"],
   "icons": [
     {
       "src": "/favicon-16x16.png",

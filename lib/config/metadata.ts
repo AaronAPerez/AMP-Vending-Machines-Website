@@ -244,6 +244,6 @@ export const rootMetadata: Metadata = {
     ],
   },
 
-  // Web app manifest
+  // Web app manifest.webmanifest for PWA capabilities and enhanced mobile search presence
   manifest: "/manifest.webmanifest",
 };
