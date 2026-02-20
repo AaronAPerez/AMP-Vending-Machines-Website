@@ -18,7 +18,7 @@ const FAQSection = () => {
     {
       id: 1,
       question: "What makes AMP Vending Machines different in Modesto?",
-      answer: "ampvendingmachines.com provides Modesto and Stanislaus County businesses with 21.5\" HD touchscreen vending machines, contactless payment technology, and smart inventory monitoring. We offer comprehensive service including free installation, maintenance, and restocking throughout Central California.",
+      answer: "AMP Vending provides Modesto and Stanislaus County businesses with 21.5\" HD touchscreen vending machines, contactless payment technology, and smart inventory monitoring. We offer comprehensive service including free installation, maintenance, and restocking throughout Central California.",
       icon: <Zap size={20} />,
       category: "technology"
     },

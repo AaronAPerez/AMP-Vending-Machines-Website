@@ -372,3 +372,22 @@ body {
     max-width: 100%;
   }
 }
+
+
+
+/* AP Designs Footer Branding */
+.ap-credit {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #A5ACAF;
+}
+
+.ap-credit a {
+  color: #FD5A1E;
+  text-decoration: none;
+}
+
+.ap-credit a:hover {
+  text-decoration: underline;
+}
