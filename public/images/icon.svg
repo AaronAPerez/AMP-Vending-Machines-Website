@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!--
+    AMP Vending Favicon - Phone icon with "A"
+    Matches AMP Vending logo colors exactly
+    Colors: Orange #FD5A1E (brand), Gray #5A6472 (outline)
+  -->
+
+  <!-- Phone body outline - gray matching logo -->
+  <rect x="96" y="32" width="320" height="448" rx="48" ry="48"
+        fill="none" stroke="#5A6472" stroke-width="28"/>
+
+  <!-- Phone screen area - light background -->
+  <rect x="106" y="36" width="300" height="430" rx="48" ry="48"
+        fill="#000000"/>
+
+  <!-- Letter A in orange - brand color -->
+  <path d="M256 120 L176 340 L208 340 L224 300 L288 300 L304 340 L336 340 L256 120 Z M236 268 L256 200 L276 268 L236 268 Z"
+        fill="#FD5A1E"/>
+
+  <!-- Home button / bottom indicator - gray -->
+  <rect x="224" y="416" width="64" height="8" rx="4" ry="4"
+        fill="#5A6472"/>
+  <rect x="96" y="350" width="320" height="8" rx="4" ry="4"
+        fill="#5A6472"/>
+  <rect x="96" y="106" width="320" height="8" rx="4" ry="4"
+        fill="#5A6472"/>
+</svg>
