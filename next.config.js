@@ -31,6 +31,9 @@ const nextConfig = {
       "date-fns",
       "lodash",
       "framer-motion",
+      "zod",
+      "react-hook-form",
+      "@hookform/resolvers",
     ],
     // CSS optimization (requires critters package)
     optimizeCss: true,
@@ -59,9 +62,9 @@ const nextConfig = {
   // Image optimization configuration
   // Quality is set per-image via the Image component, default is 75
   images: {
-    qualities: [60, 75, 90],
+    qualities: [20, 40, 60, 75, 90],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256],
+    imageSizes: [16, 32, 48, 64, 96, 100, 128, 160, 256],
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 31536000, // 1 year cache for optimized images
     dangerouslyAllowSVG: true,

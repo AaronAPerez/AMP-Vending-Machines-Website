@@ -157,7 +157,7 @@ export const rootMetadata: Metadata = {
   creator: "@ampvending",
   title: `Premium Commercial Vending Machines | ${AMP_VENDING_BUSINESS_INFO.name}`,
   description:
-    "Professional vending machines with touchscreen technology for enhanced workplace satisfaction in Central California.",
+    "Professional vending machines with touchscreen technology for enhanced workplace satisfaction in the Central Valley, Northern California.",
   images: {
     url: `${AMP_VENDING_BUSINESS_INFO.contact.website}/images/promos/amp-vending-promo-modesto.webp`,
     alt: "AMP Design and Consulting vending machine promotion in Modesto and Stanislaus County",

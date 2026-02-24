@@ -69,7 +69,7 @@ export const BackgroundImages = () => {
                                 sizes="(max-width: 640px) 33vw, 25vw"
                                 className="object-cover"
                                 loading="lazy"
-                                quality={40}
+                                quality={60}
                             />
                         </div>
                     );
