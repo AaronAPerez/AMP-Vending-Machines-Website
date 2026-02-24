@@ -68,7 +68,7 @@ export const BackgroundImages = () => {
                                 fill
                                 sizes="(max-width: 640px) 33vw, 25vw"
                                 className="object-cover"
-                                loading="lazy"
+                                priority={index < 6} // Prioritize the first 6 images for loading
                                 quality={60}
                             />
                         </div>

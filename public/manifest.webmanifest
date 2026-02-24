@@ -10,14 +10,14 @@
   "categories": ["business", "food", "shopping"],
   "icons": [
     {
-      "src": "/favicon-16x16.png",
+      "src": "/favicon-16x16.svg",
       "sizes": "16x16",
-      "type": "image/png"
+      "type": "image/svg+xml"
     },
     {
-      "src": "/favicon-32x32.png",
+      "src": "/favicon-32x32.svg",
       "sizes": "32x32",
-      "type": "image/png"
+      "type": "image/svg+xml"
     },
     {
       "src": "/icon.svg",
