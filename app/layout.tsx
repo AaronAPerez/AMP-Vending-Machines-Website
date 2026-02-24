@@ -15,11 +15,8 @@ import { WebVitalsReporter } from "@/components/analytics/WebVitalsReporter";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { ToasterProvider } from "@/components/ui/ToasterProvider";
 import { StructuredData } from "@/components/seo/StructuredData";
-import FeedbackWidget from "@/components/feedback/FeedbackWidget";
 import Footer from "@/components/layout/Footer";
-import { ExitIntentPopup } from "@/components/ExitIntentPopup";
-
-
+import { DeferredComponents } from "@/components/layout/DeferredComponents";
 
 // Optimized font loading for performance
 const inter = Inter({
@@ -42,9 +39,14 @@ export default function RootLayout({
   return (
     <html lang="en-US" suppressHydrationWarning>
       <head>
+        {/* Preconnect to critical third-party origins for faster loading */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+
         {/* Structured Data - SEO Schema Markup */}
         <StructuredData />
-
 
         {/* Inline critical CSS for immediate render */}
         <style>{`
@@ -67,8 +69,6 @@ export default function RootLayout({
         `}</style>
 
         <meta httpEquiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com https://googleads.g.doubleclick.net;" />
-
-
 
         {/* Open Graph (OG) Tags  */}
         <meta property="og:image" content="https://www.ampvendingmachines.com/images/promos/amp-vending-promo-modesto.jpg" />
@@ -94,7 +94,6 @@ export default function RootLayout({
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
         {/* Security headers */}
-        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
         <meta name="referrer" content="origin-when-cross-origin" />
 
         {/* Additional SEO enhancements */}
@@ -110,10 +109,8 @@ export default function RootLayout({
         <link rel="alternate" hrefLang="x-default" href="https://www.ampvendingmachines.com" />
       </head>
 
-
-
       <body className={`${inter.variable} font-sans antialiased bg-black text-white min-h-screen`} suppressHydrationWarning>
-        {/* Google Analytics & Google Ads Tracking */}
+        {/* Google Analytics & Google Ads Tracking - deferred until interaction */}
         <GoogleAnalytics />
 
         {/* Toast notifications */}
@@ -145,12 +142,8 @@ export default function RootLayout({
           <WebVitalsReporter />
         </main>
 
-        <ExitIntentPopup delay={5000} />
-
-        {/* Feedback widget */}
-        <aside aria-label="Feedback widget">
-          <FeedbackWidget />
-        </aside>
+        {/* Deferred non-critical components (ExitIntentPopup, FeedbackWidget) */}
+        <DeferredComponents exitIntentDelay={5000} />
 
         {/* Footer */}
         <footer role="contentinfo" aria-label="Site footer">

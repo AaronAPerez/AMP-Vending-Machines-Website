@@ -50,8 +50,8 @@ const Footer = () => {
                 <Image
                   src="/images/logo/AMP_logo.webp"
                   alt="AMP Vending Logo"
-                  width={80}  // Fixed consistent width
-                  height={48} // Fixed consistent height
+                  width={90}  // Fixed consistent width
+                  height={60} // Fixed consistent height
                   className="h-auto w-auto" // Constrain height, auto width
                   priority
                 />
@@ -192,7 +192,11 @@ const Footer = () => {
             <img
               src="/icons/AP-Designs-Icon-48x48.svg"
               alt="AP Designs Logo"
-              className="w-5 h-5inline-flex items-baseline justify-center"
+              width={20}
+              height={20}
+              className="w-5 h-5 inline-flex"
+              loading="lazy"
+              decoding="async"
             />
             AP Designs
           </a>
