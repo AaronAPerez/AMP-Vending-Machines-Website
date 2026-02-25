@@ -64,11 +64,11 @@ export const BackgroundImages = () => {
                         >
                             <Image
                                 src={src}
-                                alt=""
+                                alt="Product Image"
                                 fill
                                 sizes="(max-width: 640px) 33vw, 25vw"
                                 className="object-cover"
-                                priority={index < 6} // Prioritize the first 6 images for loading
+                                priority // Prioritize the first 6 images for loading
                                 quality={60}
                             />
                         </div>
