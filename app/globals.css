@@ -346,8 +346,9 @@ body {
   background: #e54e17;
 }
 
-/* Firefox */
-* {
+/* Firefox scrollbar - scoped to html/body to avoid animation conflicts with transition-all */
+html,
+body {
   scrollbar-width: thin;
   scrollbar-color: #4d4d4d #1a1a1a;
 }

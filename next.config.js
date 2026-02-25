@@ -16,6 +16,15 @@ const nextConfig = {
   // Enable React strict mode for better development experience
   reactStrictMode: true,
 
+  // Transpile specific packages to use modern JavaScript
+  // This re-compiles node_modules with modern syntax per browserslist
+  transpilePackages: [
+    "framer-motion",
+    "lodash",
+    "lucide-react",
+    "@heroicons/react",
+  ],
+
   // Compiler optimizations using SWC (default bundler)
   compiler: {
     // Remove console.log statements in production

@@ -8,12 +8,6 @@ import dynamic from 'next/dynamic';
  * to reduce initial JavaScript bundle size
  */
 
-// Dynamically import FeedbackWidget (not needed for initial render)
-const FeedbackWidget = dynamic(
-  () => import("@/components/feedback/FeedbackWidget"),
-  { ssr: false }
-);
-
 // Dynamically import ExitIntentPopup (only shows on exit intent)
 const ExitIntentPopup = dynamic(
   () => import("@/components/ExitIntentPopup").then(mod => ({ default: mod.ExitIntentPopup })),
@@ -28,9 +22,6 @@ export function DeferredComponents({ exitIntentDelay = 5000 }: DeferredComponent
   return (
     <>
       <ExitIntentPopup delay={exitIntentDelay} />
-      <aside aria-label="Feedback widget">
-        <FeedbackWidget />
-      </aside>
     </>
   );
 }

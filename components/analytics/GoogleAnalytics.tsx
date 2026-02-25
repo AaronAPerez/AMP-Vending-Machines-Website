@@ -7,8 +7,10 @@ import { useEffect, useState } from 'react';
  * Google Analytics 4 (GA4) & Google Ads Implementation
  *
  * Performance Optimized:
- * - Defers loading until user interaction or 3s delay
- * - Reduces impact on LCP and FCP
+ * - Defers loading until user interaction (scroll/click/touch)
+ * - Uses requestIdleCallback for smart loading during browser idle time
+ * - Falls back to 5s timeout if no interaction or idle callback support
+ * - Reduces impact on LCP, FCP, and main thread blocking
  * - Uses @next/third-parties for optimized script loading
  */
 export function GoogleAnalytics() {
@@ -31,17 +33,36 @@ export function GoogleAnalytics() {
       window.removeEventListener('touchstart', handleInteraction);
     };
 
-    // Also load after 3 seconds if no interaction
-    const timer = setTimeout(() => {
+    // Load during browser idle time, with 5s fallback timeout
+    // requestIdleCallback loads when browser is not busy, improving LCP
+    let idleCallbackId: number | undefined;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+
+    const loadAnalytics = () => {
       setShouldLoad(true);
-    }, 3000);
+      if (idleCallbackId && 'cancelIdleCallback' in window) {
+        window.cancelIdleCallback(idleCallbackId);
+      }
+      if (timer) clearTimeout(timer);
+    };
+
+    if ('requestIdleCallback' in window) {
+      // Use requestIdleCallback for smarter loading during browser idle
+      idleCallbackId = window.requestIdleCallback(loadAnalytics, { timeout: 5000 });
+    } else {
+      // Fallback for browsers without requestIdleCallback (Safari)
+      timer = setTimeout(loadAnalytics, 5000);
+    }
 
     window.addEventListener('scroll', handleInteraction, { passive: true, once: true });
     window.addEventListener('click', handleInteraction, { once: true });
     window.addEventListener('touchstart', handleInteraction, { passive: true, once: true });
 
     return () => {
-      clearTimeout(timer);
+      if (timer) clearTimeout(timer);
+      if (idleCallbackId && 'cancelIdleCallback' in window) {
+        window.cancelIdleCallback(idleCallbackId);
+      }
       window.removeEventListener('scroll', handleInteraction);
       window.removeEventListener('click', handleInteraction);
       window.removeEventListener('touchstart', handleInteraction);
