@@ -108,6 +108,9 @@ export default function RootLayout({
         {/* Alternate language versions (add when implementing i18n) */}
         <link rel="alternate" hrefLang="en-US" href="https://www.ampvendingmachines.com" />
         <link rel="alternate" hrefLang="x-default" href="https://www.ampvendingmachines.com" />
+
+        {/* Bing Verification */}
+        <meta name="msvalidate.01" content="C0E2AE6FB973A8364053560636CE6EA8" />
       </head>
 
       <body className={`${inter.variable} font-sans antialiased bg-black text-white min-h-screen`} suppressHydrationWarning>
