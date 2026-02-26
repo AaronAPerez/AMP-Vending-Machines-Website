@@ -53,7 +53,7 @@ const Footer = () => {
                   width={90}  // Fixed consistent width
                   height={60} // Fixed consistent height
                   className="h-auto w-auto" // Constrain height, auto width
-                  priority
+                  loading="lazy"
                 />
               </Link>
             </div>

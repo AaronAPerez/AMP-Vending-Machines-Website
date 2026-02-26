@@ -17,6 +17,7 @@ import { ToasterProvider } from "@/components/ui/ToasterProvider";
 import { StructuredData } from "@/components/seo/StructuredData";
 import Footer from "@/components/layout/Footer";
 import { DeferredComponents } from "@/components/layout/DeferredComponents";
+import { StickyContactButton } from "@/components/marketing/StickyContactButton";
 
 // Optimized font loading for performance
 const inter = Inter({
@@ -66,7 +67,7 @@ export default function RootLayout({
         <meta httpEquiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com https://googleads.g.doubleclick.net;" />
 
         {/* Open Graph (OG) Tags  */}
-        <meta property="og:image" content="https://www.ampvendingmachines.com/images/promos/amp-vending-promo-modesto.jpg" />
+        <meta property="og:image" content="https://www.ampvendingmachines.com/images/promos/amp-vending-promo-modesto.webp" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:title" content="AMP Vending Machines – Free Vending for Modesto, Stockton, Stanislaus & San Joaquin County" />
@@ -87,6 +88,11 @@ export default function RootLayout({
         {/* Performance optimization hints */}
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+
+        {/* Resource hints for faster loading */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
         {/* Security headers */}
         <meta name="referrer" content="origin-when-cross-origin" />
@@ -142,6 +148,9 @@ export default function RootLayout({
 
         {/* Deferred non-critical components (ExitIntentPopup, FeedbackWidget) */}
         <DeferredComponents exitIntentDelay={5000} />
+
+        {/* Sticky Contact Button - Always visible CTA for easy contact */}
+        <StickyContactButton />
 
         {/* Footer */}
         <footer role="contentinfo" aria-label="Site footer">
