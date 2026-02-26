@@ -1,4 +1,10 @@
 {
+  "crons": [
+    {
+      "path": "/api/cron/contact-form-monitor",
+      "schedule": "0 */6 * * *"
+    }
+  ],
   "redirects": [
     { 
       "source": "/",

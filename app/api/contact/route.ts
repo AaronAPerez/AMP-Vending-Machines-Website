@@ -1,4 +1,5 @@
 import { emailService } from '@/lib/services/emailService';
+import { databaseService } from '@/lib/services/databaseService';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 
@@ -27,7 +28,7 @@ export async function POST(request: NextRequest) {
 
     // Validate the form data
     const validatedData = contactFormSchema.parse(body);
-    
+
     const customerData = {
       ...validatedData,
       submittedAt: new Date().toISOString(),
@@ -35,6 +36,14 @@ export async function POST(request: NextRequest) {
       ipAddress: request.headers.get('x-forwarded-for') || 'unknown',
       userAgent: request.headers.get('user-agent') || 'unknown'
     };
+
+    // Save submission to Supabase database for admin dashboard viewing
+    const dbSaveResult = await databaseService.saveContactSubmission(validatedData);
+    if (!dbSaveResult) {
+      console.warn('⚠️ Failed to save contact submission to database, but continuing with email send');
+    } else {
+      console.log('✅ Contact submission saved to database');
+    }
 
     // Send emails using your professional templates
     const { customerResult, businessResult } = await emailService.sendContactFormEmails(customerData);
@@ -148,24 +157,80 @@ async function logContactSubmission(
 }
 
 /**
- * Health check endpoint
+ * Health check endpoint - Verifies all contact form dependencies
+ *
+ * Use this endpoint with uptime monitoring services (UptimeRobot, Better Uptime, etc.)
+ * to get notified when any service goes down.
+ *
+ * @returns JSON with status of all services (email, database)
  */
 export async function GET() {
+  const healthCheck = {
+    status: 'healthy' as 'healthy' | 'degraded' | 'unhealthy',
+    timestamp: new Date().toISOString(),
+    services: {
+      email: { status: 'unknown' as string, message: '' },
+      database: { status: 'unknown' as string, message: '' }
+    }
+  };
+
+  let hasFailure = false;
+  let hasDegradation = false;
+
+  // Check Email Service (Resend)
   try {
     const emailServiceReady = await emailService.verifyConnection();
-    
-    return NextResponse.json({
-      status: 'healthy',
-      timestamp: new Date().toISOString(),
-      services: {
-        emailService: emailServiceReady ? 'ready' : 'not_configured'
-      }
-    });
+    if (emailServiceReady) {
+      healthCheck.services.email = { status: 'ready', message: 'Resend API connected' };
+    } else {
+      healthCheck.services.email = { status: 'not_configured', message: 'RESEND_API_KEY not set' };
+      hasDegradation = true;
+    }
   } catch (error) {
-    return NextResponse.json({
+    healthCheck.services.email = {
       status: 'error',
-      timestamp: new Date().toISOString(),
-      error: error instanceof Error ? error.message : 'Unknown error'
-    }, { status: 500 });
+      message: error instanceof Error ? error.message : 'Email service check failed'
+    };
+    hasFailure = true;
   }
+
+  // Check Database (Supabase)
+  try {
+    const { supabaseServer } = await import('@/lib/supabase');
+    if (!supabaseServer) {
+      healthCheck.services.database = { status: 'not_configured', message: 'Supabase credentials not set' };
+      hasDegradation = true;
+    } else {
+      // Test actual database connectivity with a simple query
+      const { error } = await supabaseServer
+        .from('contact_submissions')
+        .select('id')
+        .limit(1);
+
+      if (error) {
+        healthCheck.services.database = { status: 'error', message: error.message };
+        hasFailure = true;
+      } else {
+        healthCheck.services.database = { status: 'ready', message: 'Supabase connected' };
+      }
+    }
+  } catch (error) {
+    healthCheck.services.database = {
+      status: 'error',
+      message: error instanceof Error ? error.message : 'Database check failed'
+    };
+    hasFailure = true;
+  }
+
+  // Determine overall status
+  if (hasFailure) {
+    healthCheck.status = 'unhealthy';
+  } else if (hasDegradation) {
+    healthCheck.status = 'degraded';
+  }
+
+  // Return appropriate HTTP status code for monitoring services
+  const httpStatus = hasFailure ? 500 : hasDegradation ? 200 : 200;
+
+  return NextResponse.json(healthCheck, { status: httpStatus });
 }
