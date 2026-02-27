@@ -65,7 +65,7 @@ export const BUSINESS_INFO: BusinessInfo = {
   phone: '(209) 403-5450',
   email: 'ampdesignandconsulting@gmail.com',
   website: 'https://www.ampvendingmachines.com',
-  logo: 'https://www.ampvendingmachines.com/images/logo/AMP_logo.webp',
+  logo: 'https://www.ampvendingmachines.com/images/logo/AMP_logo.png',
   socialMedia: {
     // Add when available
     // facebook: 'https://facebook.com/ampvending',
