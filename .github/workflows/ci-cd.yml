@@ -32,8 +32,7 @@ jobs:
         run: npm run type-check
 
       - name: Lint code
-        run: npx next lint 
-
+        run: npm run lint
 
       - name: Run tests
         run: npm run test:ci:no-coverage
