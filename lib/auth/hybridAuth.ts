@@ -52,6 +52,7 @@ export class HybridAuthService {
 
   /**
    * Authenticate with Google OAuth ID token
+   * Supports automatic linking for existing admin users by email
    */
   static async authenticateWithGoogle(
     idToken: string
@@ -64,8 +65,8 @@ export class HybridAuthService {
         throw new Error('Supabase not configured');
       }
 
-      // Check if admin user exists with this Google OAuth ID
-      const { data: adminUser, error } = await supabaseServer
+      // First, try to find user by Google OAuth ID
+      let { data: adminUser, error } = await supabaseServer
         .from('admin_users')
         .select('*')
         .eq('oauth_provider', 'google')
@@ -73,9 +74,39 @@ export class HybridAuthService {
         .eq('is_active', true)
         .single();
 
+      // If not found by oauth_id, try to find by email for auto-linking
       if (error || !adminUser) {
-        console.warn(`OAuth user not found or not authorized: ${googleUser.email}`);
-        return null;
+        const { data: userByEmail, error: emailError } = await supabaseServer
+          .from('admin_users')
+          .select('*')
+          .eq('email', googleUser.email.toLowerCase())
+          .eq('is_active', true)
+          .single();
+
+        if (emailError || !userByEmail) {
+          console.warn(`OAuth user not found or not authorized: ${googleUser.email}`);
+          return null;
+        }
+
+        // Auto-link the Google account to existing admin user
+        console.log(`🔗 Auto-linking Google account for: ${googleUser.email}`);
+        const { error: linkError } = await supabaseServer
+          .from('admin_users')
+          .update({
+            oauth_provider: 'google',
+            oauth_id: googleUser.id,
+            avatar_url: googleUser.picture,
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', userByEmail.id);
+
+        if (linkError) {
+          console.error('Failed to auto-link Google account:', linkError);
+          return null;
+        }
+
+        console.log(`✅ Successfully linked Google account for: ${googleUser.email}`);
+        adminUser = { ...userByEmail, oauth_provider: 'google', oauth_id: googleUser.id };
       }
 
       // Update last login

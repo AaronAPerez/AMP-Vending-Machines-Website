@@ -188,29 +188,6 @@ const nextConfig = {
     ];
   },
 
-  // Redirects configuration
-  async redirects() {
-    return [
-      // Add any permanent redirects here
-      // {
-      //   source: '/old-path',
-      //   destination: '/new-path',
-      //   permanent: true,
-      // },
-    ];
-  },
-
-  // Rewrites configuration for API proxying
-  async rewrites() {
-    return [
-      // Add any rewrites here
-      // {
-      //   source: '/api/external/:path*',
-      //   destination: 'https://external-api.com/:path*',
-      // },
-    ];
-  },
-
   // Configure build behavior
   async generateBuildId() {
     // Use git commit hash as build ID for better caching
@@ -226,11 +203,6 @@ const nextConfig = {
 
   // Build-specific optimizations
   productionBrowserSourceMaps: false, // Disable source maps in production for smaller bundles
-
-  // Turbopack configuration (used in dev mode with --turbopack flag)
-  turbopack: {
-    // Configuration handled by experimental.serverSourceMaps
-  },
 
   // Logging configuration for better debugging
   logging: {
