@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin } from '@/lib/middleware/adminAuth';
+import { requireAdmin, AuthError } from '@/lib/middleware/adminAuth';
 import { createMachineSchema, machineFiltersSchema } from '@/lib/schemas/admin/machineSchema';
 import { supabaseServer } from '@/lib/supabase';
 import { z } from 'zod';
@@ -73,6 +73,14 @@ export async function GET(request: NextRequest) {
     });
   } catch (error) {
     console.error('GET /api/admin/machines error:', error);
+
+    // Handle authentication errors with proper status codes
+    if (error instanceof AuthError) {
+      return NextResponse.json(
+        { success: false, error: error.message, code: error.code },
+        { status: error.status }
+      );
+    }
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
@@ -179,6 +187,14 @@ export async function POST(request: NextRequest) {
     );
   } catch (error) {
     console.error('POST /api/admin/machines error:', error);
+
+    // Handle authentication errors with proper status codes
+    if (error instanceof AuthError) {
+      return NextResponse.json(
+        { success: false, error: error.message, code: error.code },
+        { status: error.status }
+      );
+    }
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(

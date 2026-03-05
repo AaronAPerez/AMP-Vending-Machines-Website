@@ -1,6 +1,6 @@
 // app/api/admin/emails/logs/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin } from '@/lib/middleware/adminAuth';
+import { requireAdmin, AuthError } from '@/lib/middleware/adminAuth';
 import { supabaseServer } from '@/lib/supabase';
 
 export const runtime = 'nodejs';
@@ -70,6 +70,15 @@ export async function GET(request: NextRequest) {
     });
   } catch (error: any) {
     console.error('GET /api/admin/emails/logs error:', error);
+
+    // Handle authentication errors with proper status codes
+    if (error instanceof AuthError) {
+      return NextResponse.json(
+        { success: false, error: error.message, code: error.code },
+        { status: error.status }
+      );
+    }
+
     return NextResponse.json(
       { success: false, error: error.message || 'Failed to fetch email logs' },
       { status: 500 }

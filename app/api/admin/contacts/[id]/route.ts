@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin } from '@/lib/middleware/adminAuth';
+import { requireAdmin, AuthError } from '@/lib/middleware/adminAuth';
 import { updateContactSchema } from '@/lib/schemas/admin/contactSchema';
 import { supabaseServer } from '@/lib/supabase';
 import { z } from 'zod';

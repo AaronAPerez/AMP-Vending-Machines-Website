@@ -171,13 +171,14 @@ return jwt.sign(
    */
   static async setAuthCookie(token: string, rememberMe: boolean = false): Promise<void> {
     const cookieStore = await cookies();
-    
+
+    // Using path: '/' to make cookie accessible to both /admin and /api/admin routes
     cookieStore.set(this.COOKIE_NAME, token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      sameSite: 'lax',
       maxAge: rememberMe ? 7 * 24 * 60 * 60 : 60 * 60, // 7 days or 1 hour
-      path: '/admin',
+      path: '/',
     });
   }
 

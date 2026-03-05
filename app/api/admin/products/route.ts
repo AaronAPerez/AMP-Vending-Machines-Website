@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin } from '@/lib/middleware/adminAuth';
+import { requireAdmin, AuthError } from '@/lib/middleware/adminAuth';
 import { createProductSchema, productFiltersSchema } from '@/lib/schemas/admin/productSchema';
 import { supabaseServer } from '@/lib/supabase';
 import { z } from 'zod';
@@ -74,6 +74,14 @@ export async function GET(request: NextRequest) {
     });
   } catch (error) {
     console.error('GET /api/admin/products error:', error);
+
+    // Handle authentication errors with proper status codes
+    if (error instanceof AuthError) {
+      return NextResponse.json(
+        { success: false, error: error.message, code: error.code },
+        { status: error.status }
+      );
+    }
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
@@ -151,6 +159,14 @@ export async function POST(request: NextRequest) {
     );
   } catch (error) {
     console.error('POST /api/admin/products error:', error);
+
+    // Handle authentication errors with proper status codes
+    if (error instanceof AuthError) {
+      return NextResponse.json(
+        { success: false, error: error.message, code: error.code },
+        { status: error.status }
+      );
+    }
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
