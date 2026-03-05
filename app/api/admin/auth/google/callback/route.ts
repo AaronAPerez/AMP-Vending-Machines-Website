@@ -54,21 +54,22 @@ export async function GET(request: NextRequest) {
     const cookieStore = await cookies();
 
     // Access token cookie
+    // Using path: '/' to make cookie accessible to both /admin and /api/admin routes
     cookieStore.set('amp-admin-token', session.token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      sameSite: 'lax',
       maxAge: 60 * 60, // 1 hour
-      path: '/admin'
+      path: '/'
     });
 
     // Refresh token cookie
     cookieStore.set('amp-admin-refresh', session.refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      sameSite: 'lax',
       maxAge: 7 * 24 * 60 * 60, // 7 days
-      path: '/admin'
+      path: '/'
     });
 
     // User info cookie (for UI display)
@@ -80,9 +81,9 @@ export async function GET(request: NextRequest) {
     }), {
       httpOnly: false, // Allow client-side access
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      sameSite: 'lax',
       maxAge: 60 * 60, // 1 hour
-      path: '/admin'
+      path: '/'
     });
 
     console.log(`✅ Admin logged in via Google: ${session.user.email}`);

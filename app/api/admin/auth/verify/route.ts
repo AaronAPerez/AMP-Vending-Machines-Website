@@ -22,10 +22,11 @@ export async function GET(request: NextRequest) {
     }
 
     // Return user info from token
+    // Note: HybridAuthService generates tokens with 'userId' field, not 'id'
     return NextResponse.json({
       success: true,
       user: {
-        id: decoded.id,
+        id: decoded.userId || decoded.id, // Support both formats for compatibility
         email: decoded.email,
         name: decoded.name,
         role: decoded.role

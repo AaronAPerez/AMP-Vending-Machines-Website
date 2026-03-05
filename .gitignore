@@ -101,7 +101,25 @@ test-results/
 screenshots/
 videos/
 
-# Google Service Account
+# Google Service Account & OAuth Secrets
 *service-account*.json
+client_secret*.json
+*.apps.googleusercontent.com.json
 .env.local
 .env
+
+# Claude Code
+.claude/
+
+# Temporary/generated files
+nul
+*.report.html
+lighthouse-report.pdf
+
+# Admin/setup scripts with sensitive data (emails, user management)
+scripts/link-google-oauth.js
+scripts/check-admin-users.js
+scripts/setup-google-oauth-users.js
+scripts/reset-admin-password.js
+scripts/check-oauth-status.js
+scripts/create-admin-user.ts
