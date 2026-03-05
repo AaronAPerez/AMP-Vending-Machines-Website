@@ -10,14 +10,11 @@
 import { rootMetadata } from "@/lib/config/metadata";
 import { Inter } from 'next/font/google';
 import "./globals.css";
-import ResizableNavbar from "@/components/layout/ResizableNavbar";
 import { WebVitalsReporter } from "@/components/analytics/WebVitalsReporter";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { ToasterProvider } from "@/components/ui/ToasterProvider";
 import { StructuredData } from "@/components/seo/StructuredData";
-import Footer from "@/components/layout/Footer";
-import { DeferredComponents } from "@/components/layout/DeferredComponents";
-import { StickyContactButton } from "@/components/marketing/StickyContactButton";
+import { PublicLayoutWrapper } from "@/components/layout/PublicLayoutWrapper";
 
 // Optimized font loading for performance
 const inter = Inter({
@@ -120,42 +117,11 @@ export default function RootLayout({
         {/* Toast notifications */}
         <ToasterProvider />
 
-        {/* Skip navigation for accessibility */}
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:z-[70] focus:p-4 focus:bg-orange-600 focus:text-white focus:top-4 focus:left-4 focus:rounded-md focus:outline-none focus:ring-2 focus:ring-white"
-          tabIndex={0}
-        >
-          Skip to main content
-        </a>
-
-        {/* Navigation - z-50, below banner, pushes down when banner is visible */}
-        <div className="relative z-50">
-          <ResizableNavbar />
-        </div>
-
-        {/* Main content */}
-        <main
-          id="main-content"
-          className="relative z-10 bg-gradient-to-b from-black via-black to-gray-900 min-h-screen mt-8 md:mt-4"
-          role="main"
-          aria-label="Main content"
-          suppressHydrationWarning
-        >
+        {/* Public Layout Wrapper - conditionally renders navbar/footer for non-admin pages */}
+        <PublicLayoutWrapper>
           {children}
           <WebVitalsReporter />
-        </main>
-
-        {/* Deferred non-critical components (ExitIntentPopup, FeedbackWidget) */}
-        <DeferredComponents exitIntentDelay={5000} />
-
-        {/* Sticky Contact Button - Always visible CTA for easy contact */}
-        <StickyContactButton />
-
-        {/* Footer */}
-        <footer role="contentinfo" aria-label="Site footer">
-          <Footer />
-        </footer>
+        </PublicLayoutWrapper>
       </body>
     </html>
   );
