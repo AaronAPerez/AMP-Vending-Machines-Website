@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin } from '@/lib/middleware/adminAuth';
+import { requireAdmin, AuthError } from '@/lib/middleware/adminAuth';
 import { updateProductSchema } from '@/lib/schemas/admin/productSchema';
 import { supabaseServer } from '@/lib/supabase';
 import { z } from 'zod';
@@ -34,6 +34,14 @@ export async function GET(
     return NextResponse.json({ success: true, data: product });
   } catch (error) {
     console.error('GET /api/admin/products/[id] error:', error);
+
+    if (error instanceof AuthError) {
+      return NextResponse.json(
+        { success: false, error: error.message, code: error.code },
+        { status: error.status }
+      );
+    }
+
     return NextResponse.json(
       { success: false, error: 'Failed to fetch product' },
       { status: 500 }
@@ -122,6 +130,13 @@ export async function PATCH(
   } catch (error) {
     console.error('PATCH /api/admin/products/[id] error:', error);
 
+    if (error instanceof AuthError) {
+      return NextResponse.json(
+        { success: false, error: error.message, code: error.code },
+        { status: error.status }
+      );
+    }
+
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { success: false, error: 'Invalid request data', details: error.errors },
@@ -181,6 +196,14 @@ export async function DELETE(
     });
   } catch (error) {
     console.error('DELETE /api/admin/products/[id] error:', error);
+
+    if (error instanceof AuthError) {
+      return NextResponse.json(
+        { success: false, error: error.message, code: error.code },
+        { status: error.status }
+      );
+    }
+
     return NextResponse.json(
       { success: false, error: 'Failed to delete product' },
       { status: 500 }

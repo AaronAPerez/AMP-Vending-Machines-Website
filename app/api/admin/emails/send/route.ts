@@ -1,6 +1,6 @@
 // app/api/admin/emails/send/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin } from '@/lib/middleware/adminAuth';
+import { requireAdmin, AuthError } from '@/lib/middleware/adminAuth';
 import { emailService } from '@/lib/email/emailService';
 import { supabaseServer } from '@/lib/supabase';
 
@@ -94,6 +94,14 @@ export async function POST(request: NextRequest) {
     });
   } catch (error: any) {
     console.error('POST /api/admin/emails/send error:', error);
+
+    if (error instanceof AuthError) {
+      return NextResponse.json(
+        { success: false, error: error.message, code: error.code },
+        { status: error.status }
+      );
+    }
+
     return NextResponse.json(
       { success: false, error: error.message || 'Failed to send email' },
       { status: 500 }

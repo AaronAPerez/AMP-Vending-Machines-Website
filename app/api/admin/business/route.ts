@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin } from '@/lib/middleware/adminAuth';
+import { requireAdmin, AuthError } from '@/lib/middleware/adminAuth';
 import { updateBusinessInfoSchema } from '@/lib/schemas/admin/businessSchema';
 import { supabaseServer } from '@/lib/supabase';
 import { z } from 'zod';
@@ -29,6 +29,14 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ success: true, data: businessInfo });
   } catch (error) {
     console.error('GET /api/admin/business error:', error);
+
+    if (error instanceof AuthError) {
+      return NextResponse.json(
+        { success: false, error: error.message, code: error.code },
+        { status: error.status }
+      );
+    }
+
     return NextResponse.json(
       { success: false, error: 'Failed to fetch business information' },
       { status: 500 }
@@ -111,6 +119,13 @@ export async function PATCH(request: NextRequest) {
     });
   } catch (error) {
     console.error('PATCH /api/admin/business error:', error);
+
+    if (error instanceof AuthError) {
+      return NextResponse.json(
+        { success: false, error: error.message, code: error.code },
+        { status: error.status }
+      );
+    }
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
