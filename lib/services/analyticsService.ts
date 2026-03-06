@@ -1,4 +1,5 @@
 // lib/services/analyticsService.ts - Fixed TypeScript errors
+import { GA_MEASUREMENT_ID } from '@/lib/analytics/gtag';
 
 interface AnalyticsGlobals {
   gtag?: (command: string, targetId: string, config?: Record<string, unknown>) => void;
@@ -23,8 +24,9 @@ export class AnalyticsService {
   trackPageView(path: string) {
     try {
       const analyticsWindow = this.getAnalyticsWindow();
-      if (analyticsWindow.gtag) {
-        analyticsWindow.gtag('config', 'GA_MEASUREMENT_ID', {
+      // Use the actual GA Measurement ID from environment variable
+      if (analyticsWindow.gtag && GA_MEASUREMENT_ID) {
+        analyticsWindow.gtag('config', GA_MEASUREMENT_ID, {
           page_path: path,
         });
       }
