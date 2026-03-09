@@ -14,7 +14,7 @@ jobs:
         with:
           node-version: '18'
       - run: npm ci
-      - run: npm run request-indexing
+      - run: npm run index:request
         env:
           NEXT_PUBLIC_BASE_URL: https://www.ampvendingmachines.com
           GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
