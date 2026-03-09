@@ -3,19 +3,20 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
+// Product images with descriptive alt text for SEO and accessibility
 const productImages = [
-    '/images/products/drpepper.webp',
-    '/images/products/doritos-nacho.webp',
-    '/images/products/redbull.webp',
-    '/images/products/snickers.webp',
-    '/images/products/cheetos.webp',
-    '/images/products/skittles.webp',
-    '/images/products/kitkat.webp',
-    '/images/products/monster.webp',
-    '/images/products/poptarts.webp',
-    '/images/products/starburst.webp',
-    '/images/products/mms.webp',
-    '/images/products/orangecrush.webp',
+    { src: '/images/products/drpepper.webp', alt: 'Dr Pepper soda can' },
+    { src: '/images/products/doritos-nacho.webp', alt: 'Doritos Nacho Cheese chips bag' },
+    { src: '/images/products/redbull.webp', alt: 'Red Bull energy drink can' },
+    { src: '/images/products/snickers.webp', alt: 'Snickers chocolate bar' },
+    { src: '/images/products/cheetos.webp', alt: 'Cheetos crunchy snack bag' },
+    { src: '/images/products/skittles.webp', alt: 'Skittles candy pack' },
+    { src: '/images/products/kitkat.webp', alt: 'Kit Kat chocolate wafer bar' },
+    { src: '/images/products/monster.webp', alt: 'Monster Energy drink can' },
+    { src: '/images/products/poptarts.webp', alt: 'Pop-Tarts toaster pastries box' },
+    { src: '/images/products/starburst.webp', alt: 'Starburst fruit chews candy' },
+    { src: '/images/products/mms.webp', alt: 'M&Ms chocolate candies pack' },
+    { src: '/images/products/orangecrush.webp', alt: 'Orange Crush soda bottle' },
 ];
 
 export const BackgroundImages = () => {
@@ -49,7 +50,7 @@ export const BackgroundImages = () => {
                 className="absolute inset-0 grid grid-cols-3 sm:grid-cols-4 gap-2 p-2 z-10"
                 aria-hidden="true"
             >
-                {productImages.map((src, index) => {
+                {productImages.map((product, index) => {
                     const offset = Math.min(scrollY * 0.1 * (index % 6 + 1) * 0.2, 100);
                     const opacity = Math.max(0.3, 1 - scrollY * 0.001);
 
@@ -63,8 +64,8 @@ export const BackgroundImages = () => {
                             }}
                         >
                             <Image
-                                src={src}
-                                alt="Product Image"
+                                src={product.src}
+                                alt={product.alt}
                                 fill
                                 sizes="(max-width: 640px) 33vw, 25vw"
                                 className="object-cover"
