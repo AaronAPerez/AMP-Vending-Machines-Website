@@ -9,7 +9,7 @@ export default function HomePage() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "AMP Vending Machines",
-    "image": "https://www.ampvendingmachines.com/images/promos/amp-vending-promo-modesto.jpg",
+    "image": "https://www.ampvendingmachines.com/images/promos/amp-vending-promo-modesto.webp",
     "url": "https://www.ampvendingmachines.com",
     "address": {
       "@type": "PostalAddress",

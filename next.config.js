@@ -84,6 +84,46 @@ const nextConfig = {
         protocol: "https",
         hostname: "**.ampvendingmachines.com",
       },
+      // Wikimedia Commons - reliable source for product images
+      {
+        protocol: "https",
+        hostname: "upload.wikimedia.org",
+      },
+      // Common CDN providers used by brands
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.shopify.com",
+      },
+      // Popular brand CDNs
+      {
+        protocol: "https",
+        hostname: "www.coca-cola.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.pepsico.com",
+      },
+      {
+        protocol: "https",
+        hostname: "*.amazonaws.com",
+      },
+      {
+        protocol: "https",
+        hostname: "*.cloudinary.com",
+      },
+      // Product image aggregators
+      {
+        protocol: "https",
+        hostname: "images.openfoodfacts.org",
+      },
+      {
+        protocol: "https",
+        hostname: "world.openfoodfacts.org",
+      },
     ],
     // Optimize for Core Web Vitals
     unoptimized: false,

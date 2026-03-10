@@ -1,250 +1,74 @@
 'use client';
 
 import ResponsiveGrid from '@/components/layout/ResponsiveGrid';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import Section from '../ui/shared/Section';
+import BackgroundOverlayCard from '../products/BackgroundOverlayCard';
+import { productCatalog, productCategories, getFilteredProducts } from '../products/productCatalog';
+
+// ═══════════════════════════════════════════════════════════════════════════
+// CONSTANTS
+// ═══════════════════════════════════════════════════════════════════════════
+
+const PRODUCTS_PER_ROW = 5;
+const INITIAL_ROWS = 2;
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PRODUCT SECTION COMPONENT
+// ═══════════════════════════════════════════════════════════════════════════
 
 /**
- * Background Overlay Card Component
- */
-const BackgroundOverlayCard = ({ product }: { product: Product }) => {
-  const [imgError, setImgError] = useState(false);
-  const imageSrc = imgError || !product.image ? '/images/placeholder.webp' : product.image;
-
-  return (
-    <div className="relative group h-60 sm:h-72 overflow-hidden rounded-xl shadow-xl">
-      {/* Background Image */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a]">
-        <Image
-          src={imageSrc}
-          alt={product.name}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-110"
-          onError={() => setImgError(true)}
-        />
-      </div>
-
-      {/* Gradient Overlay */}
-      <div
-        className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-300"
-        aria-hidden="true"
-      />
-
-      {/* Tags */}
-      <div className="absolute top-2 left-2 right-2 flex justify-between">
-        {product.popular && (
-          <div className="px-2 py-1 bg-[#FD5A1E] text-white text-xs rounded-full backdrop-blur-sm">
-            Popular
-          </div>
-        )}
-        {product.healthy && (
-          <div className="ml-auto px-2 py-1 bg-green-500 text-white text-xs rounded-full backdrop-blur-sm">
-            Healthy
-          </div>
-        )}
-      </div>
-
-      {/* Content */}
-      <div className="absolute inset-0 flex flex-col justify-end p-3 sm:p-4 text-white">
-        <h3 className="text-base sm:text-lg font-bold mb-0.5 sm:mb-1">{product.name}</h3>
-        {product.details && (
-          <p className="text-xs text-gray-300 italic mb-1 sm:mb-2 line-clamp-2">{product.details}</p>
-        )}
-        <div className="relative mt-1 sm:mt-2">
-          <div className="h-px w-full bg-gradient-to-r from-transparent via-gray-500 to-transparent mb-2" aria-hidden="true" />
-          <div className="flex justify-between items-center">
-            <p className="text-xs sm:text-sm text-gray-300 capitalize">{product.category}</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Hover Glow */}
-      <div
-        className="absolute -inset-0.5 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"
-        aria-hidden="true"
-      >
-        <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#FD5A1E]/20 to-transparent blur-md" />
-      </div>
-    </div>
-  );
-};
-
-export interface Product {
-  id: string;
-  name: string;
-  category: 'chips' | 'candy' | 'protein' | 'pastries' | 'nuts' | 'snacks' | 'beverages' | 'energy' | 'healthy';
-  image?: string;
-  popular?: boolean;
-  healthy?: boolean;
-  details?: string;
-}
-
-/**
- * ProductSection component
+ * ProductSection - Displays filterable product catalog with expandable grid
+ *
+ * Performance optimizations:
+ * - useMemo for filtered products (prevents recalculation on unrelated state changes)
+ * - useCallback for event handlers (stable references for child components)
+ * - React.memo on BackgroundOverlayCard (prevents re-renders when product data unchanged)
+ * - Data separated to productCatelog.ts (not recreated on each render)
  */
 const ProductSection = () => {
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [isExpanded, setIsExpanded] = useState(false);
-  const [, setAnimateCards] = useState(false);
 
-  const PRODUCTS_PER_ROW = 5;
-  const INITIAL_ROWS = 2;
+  // Memoize filtered products - only recalculates when category changes
+  const filteredProducts = useMemo(
+    () => getFilteredProducts(activeCategory),
+    [activeCategory]
+  );
 
-  useEffect(() => {
-    setAnimateCards(false);
-    setTimeout(() => setAnimateCards(true), 100);
-  }, [activeCategory]);
+  // Memoize display products - recalculates when filtered products or expanded state changes
+  const displayProducts = useMemo(
+    () => isExpanded ? filteredProducts : filteredProducts.slice(0, PRODUCTS_PER_ROW * INITIAL_ROWS),
+    [filteredProducts, isExpanded]
+  );
 
-  /**
-   * Full product catalog (62 items)
-   */
-  const productCatalog: Product[] = [
-    // Chips
-    { id: 'lays-classic', name: 'Lays Classic', category: 'chips', image: '/images/products/lays.webp', popular: true },
-    { id: 'doritos-nacho', name: 'Doritos Nacho Cheese', category: 'chips', image: '/images/products/doritos-nacho.webp', popular: true },
-    { id: 'cheetos', name: 'Cheetos', category: 'chips', image: '/images/products/cheetos.webp' },
-    { id: 'lays-sourcream', name: 'Lays Sour Cream & Onion', category: 'chips', image: '/images/products/layssourcream.webp' },
-    { id: 'doritos-cool-ranch', name: 'Doritos Cool Ranch', category: 'chips', image: '/images/products/doritos-cool-ranch.webp' },
-    { id: 'lays-bbq', name: 'Lays BBQ', category: 'chips', image: '/images/products/lays-bbq.webp' },
-    // { id: 'funyuns', name: 'Funyuns Onion Rings', category: 'chips', image: '/images/products/placeholder.webp' },
-    // { id: 'cheetos-flaminhot', name: 'Cheetos Flamin Hot', category: 'chips', image: '/images/products/placeholder.webp', popular: true },
-    // { id: 'fritos', name: 'Fritos Original', category: 'chips', image: '/images/products/placeholder.webp' },
+  // Memoize whether there are more products to show
+  const hasMoreProducts = useMemo(
+    () => filteredProducts.length > PRODUCTS_PER_ROW * INITIAL_ROWS,
+    [filteredProducts]
+  );
 
-    // Candy
-    { id: 'snickers', name: 'Snickers', category: 'candy', image: '/images/products/snickers.webp', popular: true },
-    { id: 'kitkat', name: 'Kit Kat', category: 'candy', image: '/images/products/kitkat.webp' },
-    { id: '3musketeers', name: '3 Musketeers', category: 'candy', image: '/images/products/3musketeers.webp' },
-    { id: 'mms', name: 'M&Ms', category: 'candy', image: '/images/products/mms.webp', popular: true },
-    { id: 'skittles', name: 'Skittles', category: 'candy', image: '/images/products/skittles.webp' },
-    { id: 'starburst', name: 'Starburst', category: 'candy', image: '/images/products/starburst.webp' },
-    { id: 'twix', name: 'Twix', category: 'candy', image: '/images/products/twix.webp' },
-    { id: 'milkyway', name: 'Milky Way', category: 'candy' },
-    { id: 'hershey', name: 'Hershey Bar', category: 'candy' },
-    { id: 'butterfinger', name: 'Butterfinger', category: 'candy' },
-   
+  // Memoized expand/collapse handler
+  const toggleExpand = useCallback(() => {
+    setIsExpanded(prev => {
+      if (prev) {
+        // Scrolling back to button when collapsing
+        setTimeout(() => {
+          const expandButton = document.getElementById('expand-button');
+          if (expandButton) {
+            expandButton.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 100);
+      }
+      return !prev;
+    });
+  }, []);
 
-    // Protein Bars
-    // { id: 'kind-bar', name: 'KIND Bar', category: 'protein', image: '/images/products/kind-bar.webp', healthy: true },
-    // { id: 'clif-bar', name: 'Clif Bar', category: 'protein', image: '/images/products/clif-bar.webp', healthy: true, details: '9g protein per bar' },
-    // { id: 'rxbar', name: 'RXBAR', category: 'protein', image: '/images/products/rxbar.webp', healthy: true },
-    // { id: 'quest-bar', name: 'Quest Bar', category: 'protein', image: '/images/products/quest-bar.webp', healthy: true, details: '20g protein, low sugar' },
-    // { id: 'pure-protein', name: 'Pure Protein Bar', category: 'protein', image: '/images/products/pure-protein.webp', healthy: true, details: '21g protein per bar' },
-
-    // Pastries
-    { id: 'poptarts', name: 'Pop Tarts', category: 'pastries', image: '/images/products/poptarts.webp', popular: true },
-    { id: 'oreos', name: 'Oreo Cookies', category: 'pastries', image: '/images/products/oreos.webp', popular: true },
-    // { id: 'hostess-cupcakes', name: 'Hostess Cupcakes', category: 'pastries', image: '/images/products/hostess-cupcakes.webp' },
-    // { id: 'mini-donuts', name: 'Mini Donut Packs', category: 'pastries', image: '/images/products/mini-donuts.webp' },
-    // { id: 'choc-chip-cookies', name: 'Chocolate Chip Cookies', category: 'pastries', image: '/images/products/choc-chip-cookies.webp'},
-    //       { id: 'honeybun', name: 'Honey Bun', category: 'pastries', image: '/images/products/honeybun.webp' },
-
-    // Nuts & Crackers
-    { id: 'ritz', name: 'Ritz Crackers w/ Peanut Butter', category: 'nuts', image: '/images/products/ritz.webp' },
-    { id: 'planters', name: 'Planters Peanuts', category: 'nuts', image: '/images/products/peanuts.webp' },
-    { id: 'blue-diamond', name: 'Blue Diamond Almonds', category: 'nuts', healthy: true, details: '100 calories per pack' },
-    { id: 'trail-mix', name: 'Trail Mix', category: 'nuts', healthy: true },
-    { id: 'cashews', name: 'Roasted Cashews', category: 'nuts', healthy: true },
-    // { id: 'ritz', name: 'Ritz Crackers w/ Peanut Butter', category: 'nuts', image: '/images/products/ritz.webp' },
-    // { id: 'planters', name: 'Planters Peanuts', category: 'nuts', image: '/images/products/planters.webp' },
-    // { id: 'blue-diamond', name: 'Blue Diamond Almonds', category: 'nuts', image: '/images/products/blue-diamond.webp', healthy: true, details: '100 calories per pack' },
-    // { id: 'trail-mix', name: 'Trail Mix', category: 'nuts', image: '/images/products/trail-mix.webp', healthy: true },
-    // { id: 'cashews', name: 'Roasted Cashews', category: 'nuts', image: '/images/products/cashews.webp', healthy: true },
-
-    // Other Snacks
-    // { id: 'beef-jerky', name: 'Beef Jerky', category: 'snacks', image: '/images/products/placeholder.webp' },
-    // { id: 'slim-jim', name: 'Slim Jim', category: 'snacks', image: '/images/products/placeholder.webp' },
-    // { id: 'rice-krispies', name: 'Rice Krispies Treat', category: 'snacks', image: '/images/products/rice-krispies.webp' },
-    // { id: 'fruit-snacks', name: 'Fruit Snacks', category: 'snacks', image: '/images/products/placeholder.webp' },
-    // { id: 'beef-jerky', name: 'Beef Jerky', category: 'snacks', image: '/images/products/beef-jerky.webp' },
-    // { id: 'slim-jim', name: 'Slim Jim', category: 'snacks', image: '/images/products/slim-jim.webp' },
-    // { id: 'rice-krispies', name: 'Rice Krispies Treat', category: 'snacks', image: '/images/products/rice-krispies.webp' },
-    // { id: 'fruit-snacks', name: 'Fruit Snacks', category: 'snacks', image: '/images/products/fruit-snacks.webp' },
-
-    // Beverages
-    { id: 'coke', name: 'Coca-Cola', category: 'beverages', popular: true },
-    { id: 'coke-zero', name: 'Coca-Cola Zero', category: 'beverages', image: '/images/products/coke-zero.webp', popular: true },
-    { id: 'diet-coke', name: 'Diet Coke', category: 'beverages', image: '/images/products/diet-coke.webp', healthy: true },
-    { id: 'drpepper', name: 'Dr Pepper', category: 'beverages', image: '/images/products/drpepper.webp' },
-    { id: 'mountaindew', name: 'Mountain Dew', category: 'beverages', image: '/images/products/mountaindew.webp', popular: true },
-    { id: 'orangecrush', name: 'Orange Crush', category: 'beverages', image: '/images/products/orangecrush.webp', popular: true },
-    // { id: 'gatorade', name: 'Gatorade', category: 'beverages', image: '/images/products/gatorade.webp' },
-    // { id: 'just-water', name: 'Just Water', category: 'beverages', image: '/images/products/just-water.webp', healthy: true },
-    // { id: 'sprite', name: 'Sprite', category: 'beverages', image: '/images/products/sprite.webp' },
-    // { id: 'pepsi', name: 'Pepsi', category: 'beverages', image: '/images/products/pepsi.webp' },
-    // { id: 'diet-pepsi', name: 'Diet Pepsi', category: 'beverages', image: '/images/products/diet-pepsi.webp', healthy: true },
-    // { id: 'fanta', name: 'Fanta Orange', category: 'beverages', image: '/images/products/fanta.webp' },
-    // { id: 'coke', name: 'Coca-Cola', category: 'beverages', image: '/images/products/coke.webp', popular: true },
-    // { id: 'coke-zero', name: 'Coca-Cola Zero', category: 'beverages', image: '/images/products/coke-zero.webp', popular: true },
-    // { id: 'diet-coke', name: 'Diet Coke', category: 'beverages', image: '/images/products/diet-coke.webp', healthy: true },
-    // { id: 'drpepper', name: 'Dr Pepper', category: 'beverages', image: '/images/products/drpepper.webp' },
-    // { id: 'mountaindew', name: 'Mountain Dew', category: 'beverages', image: '/images/products/mountaindew.webp', popular: true },
-    // { id: 'orangecrush', name: 'Orange Crush', category: 'beverages', image: '/images/products/orangecrush.webp', popular: true },
-    // { id: 'gatorade', name: 'Gatorade', category: 'beverages', image: '/images/products/gatorade.webp' },
-    // { id: 'just-water', name: 'Just Water', category: 'beverages', image: '/images/products/just-water.webp', healthy: true },
-    // { id: 'sprite', name: 'Sprite', category: 'beverages', image: '/images/products/sprite.webp' },
-    // { id: 'pepsi', name: 'Pepsi', category: 'beverages', image: '/images/products/pepsi.webp' },
-    // { id: 'diet-pepsi', name: 'Diet Pepsi', category: 'beverages', image: '/images/products/diet-pepsi.webp', healthy: true },
-    // { id: 'fanta', name: 'Fanta Orange', category: 'beverages', image: '/images/products/fanta.webp' },
-
-    // Energy Drinks
-    { id: 'redbull-sf', name: 'Sugar Free Red Bull', category: 'energy', healthy: true, details: '8.4 oz sugar free' },
-    { id: 'redbull', name: 'Red Bull', category: 'energy', image: '/images/products/redbull.webp', details: '12 fl oz' },
-    { id: 'monster', name: 'Monster Energy', category: 'energy', image: '/images/products/monster.webp', popular: true },
-    { id: 'monster-zero', name: 'Monster Zero Ultra', category: 'energy', healthy: true },
-    { id: 'bang', name: 'Bang Energy Drink', category: 'energy' },
-    { id: 'rockstar', name: 'Rockstar Energy', category: 'energy' },
-    // { id: 'redbull-sf', name: 'Sugar Free Red Bull', category: 'energy', image: '/images/products/redbull-sf.webp', healthy: true, details: '8.4 oz sugar free' },
-    // { id: 'redbull', name: 'Red Bull', category: 'energy', image: '/images/products/redbull.webp', details: '12 fl oz' },
-    // { id: 'monster', name: 'Monster Energy', category: 'energy', image: '/images/products/monster.webp', popular: true },
-    // { id: 'monster-zero', name: 'Monster Zero Ultra', category: 'energy', image: '/images/products/monster-zero.webp', healthy: true },
-    // { id: 'bang', name: 'Bang Energy Drink', category: 'energy', image: '/images/products/bang.webp' },
-    // { id: 'rockstar', name: 'Rockstar Energy', category: 'energy', image: '/images/products/rockstar.webp' },
-
-    // Healthy Options
-    { id: 'baked-lays', name: 'Baked Lays', category: 'healthy', healthy: true },
-    { id: 'veggie-chips', name: 'Veggie Chips', category: 'healthy', healthy: true },
-    { id: 'skinny-pop', name: 'Skinny Pop Popcorn', category: 'healthy', healthy: true },
-    { id: 'dried-fruit', name: 'Dried Fruit Mix', category: 'healthy', healthy: true }
-  ];
-
-  const productCategories = [
-    { id: 'all', label: 'All Products', count: productCatalog.length },
-    { id: 'popular', label: 'Popular', count: productCatalog.filter(p => p.popular).length },
-    { id: 'healthy', label: 'Healthy Options', count: productCatalog.filter(p => p.healthy).length },
-    { id: 'chips', label: 'Chips', count: productCatalog.filter(p => p.category === 'chips').length },
-    { id: 'candy', label: 'Candy & Chocolate', count: productCatalog.filter(p => p.category === 'candy').length },
-    { id: 'protein', label: 'Protein Bars', count: productCatalog.filter(p => p.category === 'protein').length },
-    { id: 'pastries', label: 'Pastries & Cookies', count: productCatalog.filter(p => p.category === 'pastries').length },
-    { id: 'nuts', label: 'Nuts & Crackers', count: productCatalog.filter(p => p.category === 'nuts').length },
-    { id: 'snacks', label: 'Other Snacks', count: productCatalog.filter(p => p.category === 'snacks').length },
-    { id: 'beverages', label: 'Beverages', count: productCatalog.filter(p => p.category === 'beverages').length },
-    { id: 'energy', label: 'Energy Drinks', count: productCatalog.filter(p => p.category === 'energy').length }
-  ];
-
-  const getFilteredProducts = () => {
-    if (activeCategory === 'all') return productCatalog;
-    if (activeCategory === 'popular') return productCatalog.filter(p => p.popular);
-    if (activeCategory === 'healthy') return productCatalog.filter(p => p.healthy);
-    return productCatalog.filter(p => p.category === activeCategory);
-  };
-
-  const filteredProducts = getFilteredProducts();
-  const displayProducts = isExpanded ? filteredProducts : filteredProducts.slice(0, PRODUCTS_PER_ROW * INITIAL_ROWS);
-  const hasMoreProducts = filteredProducts.length > PRODUCTS_PER_ROW * INITIAL_ROWS;
-
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
-    if (isExpanded) {
-      setTimeout(() => {
-        const expandButton = document.getElementById('expand-button');
-        if (expandButton) {
-          expandButton.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      }, 100);
-    }
-  };
+  // Memoized category change handler
+  const handleCategoryChange = useCallback((categoryId: string) => {
+    setActiveCategory(categoryId);
+    setIsExpanded(false);
+  }, []);
 
   return (
     <Section id="products" background="gradient" spacing="lg">
@@ -268,10 +92,7 @@ const ProductSection = () => {
           {productCategories.map((category) => (
             <button
               key={category.id}
-              onClick={() => {
-                setActiveCategory(category.id);
-                setIsExpanded(false);
-              }}
+              onClick={() => handleCategoryChange(category.id)}
               className={`shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all backdrop-blur-sm whitespace-nowrap ${
                 activeCategory === category.id
                   ? 'bg-[#FD5A1E] text-[#000000] font-medium rounded-full shadow-lg hover:bg-[#F5F5F5] hover:text-[#000000] transition-colors'
@@ -330,6 +151,99 @@ const ProductSection = () => {
           </button>
         </div>
       )}
+
+      {/* Custom Product Request CTA */}
+      <div className="mt-12 relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#FD5A1E]/5 via-[#FD5A1E]/10 to-[#FD5A1E]/5 rounded-2xl" aria-hidden="true" />
+        <div className="relative border border-[#FD5A1E]/20 rounded-2xl p-6 sm:p-8 backdrop-blur-sm">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            {/* Icon and Text */}
+            <div className="flex items-start gap-4 flex-1">
+              <div className="shrink-0 w-12 h-12 rounded-full bg-[#FD5A1E]/20 flex items-center justify-center">
+                <svg
+                  className="w-6 h-6 text-[#FD5A1E]"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                  />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-[#F5F5F5] mb-2">
+                  Don&apos;t See Your Favorite Product?
+                </h3>
+                <p className="text-[#A5ACAF] text-sm sm:text-base max-w-xl">
+                  We customize our vending machines to match your workplace preferences.
+                  Request specific brands, dietary options, or regional favorites — we&apos;ll stock what your team wants.
+                </p>
+              </div>
+            </div>
+
+            {/* CTA Button */}
+            <a
+              href="/contact"
+              className="shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-[#FD5A1E] text-white font-semibold rounded-full hover:bg-[#e54d15] transition-all shadow-lg hover:shadow-[#FD5A1E]/25 group"
+            >
+              <span>Request Products</span>
+              <svg
+                className="w-5 h-5 transition-transform group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </a>
+          </div>
+
+          {/* Additional Info Tags */}
+          <div className="mt-6 pt-6 border-t border-[#333333] flex flex-wrap gap-3 justify-center md:justify-start">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#1a1a1a] rounded-full text-xs text-[#A5ACAF]">
+              <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Gluten-Free Options
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#1a1a1a] rounded-full text-xs text-[#A5ACAF]">
+              <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Vegan Selections
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#1a1a1a] rounded-full text-xs text-[#A5ACAF]">
+              <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Sugar-Free Drinks
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#1a1a1a] rounded-full text-xs text-[#A5ACAF]">
+              <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Organic Snacks
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#1a1a1a] rounded-full text-xs text-[#A5ACAF]">
+              <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Local Favorites
+            </span>
+          </div>
+        </div>
+      </div>
     </Section>
   );
 };
