@@ -88,7 +88,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({ images, machineName 
                   goToPrevious();
                 }}
                 className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-[#FD5A1E] transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-[#FD5A1E] z-40 cursor-pointer"
-                aria-label="Previous image"
+                aria-label={`Previous image of ${machineName} (${selectedImage + 1} of ${images.length})`}
                 type="button"
                 style={{ pointerEvents: 'auto' }}
               >
@@ -100,7 +100,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({ images, machineName 
                   goToNext();
                 }}
                 className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-[#FD5A1E] transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-[#FD5A1E] z-40 cursor-pointer"
-                aria-label="Next image"
+                aria-label={`Next image of ${machineName} (${selectedImage + 1} of ${images.length})`}
                 type="button"
                 style={{ pointerEvents: 'auto' }}
               >
@@ -146,7 +146,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({ images, machineName 
                     ? 'border-[#FD5A1E] ring-2 ring-[#FD5A1E]/30 scale-105'
                     : 'border-[#333333] hover:border-[#FD5A1E]/50 hover:scale-105'
                   }`}
-                aria-label={`View image ${index + 1}`}
+                aria-label={`View image ${index + 1} of ${machineName}`}
                 style={{ pointerEvents: 'auto', zIndex: 40 }}
               >
                 <Image

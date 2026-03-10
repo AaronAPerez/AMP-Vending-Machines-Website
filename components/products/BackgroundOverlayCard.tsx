@@ -1,13 +1,33 @@
-import { useState } from 'react'
-import Image from 'next/image';
-import { Product } from './productCatelog';
+'use client';
 
+import { memo, useState } from 'react';
+import Image from 'next/image';
+import { Product } from './productCatalog';
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PROPS INTERFACE
+// ═══════════════════════════════════════════════════════════════════════════
+
+interface BackgroundOverlayCardProps {
+  product: Product;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// BACKGROUND OVERLAY CARD COMPONENT
+// ═══════════════════════════════════════════════════════════════════════════
 
 /**
- * Background Overlay Card Component
- * Supports external URLs with local fallback images
+ * BackgroundOverlayCard - Memoized product card with image fallback support
+ *
+ * Features:
+ * - React.memo prevents unnecessary re-renders when parent state changes
+ * - Image fallback chain: primary → fallback → placeholder
+ * - Hover effects with smooth transitions
+ * - Popular/Healthy badges display
+ *
+ * @param product - Product data to display
  */
-const BackgroundOverlayCard = ({ product }: { product: Product }) => {
+const BackgroundOverlayCard = memo(function BackgroundOverlayCard({ product }: BackgroundOverlayCardProps) {
   const [imgError, setImgError] = useState(false);
   const [useFallback, setUseFallback] = useState(false);
 
@@ -88,7 +108,6 @@ const BackgroundOverlayCard = ({ product }: { product: Product }) => {
       </div>
     </div>
   );
-};
+});
 
-
-export default BackgroundOverlayCard
+export default BackgroundOverlayCard;

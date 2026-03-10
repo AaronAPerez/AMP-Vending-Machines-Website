@@ -1,63 +1,74 @@
 'use client';
 
 import ResponsiveGrid from '@/components/layout/ResponsiveGrid';
-import { useEffect, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import Section from '../ui/shared/Section';
 import BackgroundOverlayCard from '../products/BackgroundOverlayCard';
-import { productCatalog, productCategories } from '../products/productCatelog';
+import { productCatalog, productCategories, getFilteredProducts } from '../products/productCatalog';
 
+// ═══════════════════════════════════════════════════════════════════════════
+// CONSTANTS
+// ═══════════════════════════════════════════════════════════════════════════
 
+const PRODUCTS_PER_ROW = 5;
+const INITIAL_ROWS = 2;
 
-// export interface Product {
-//   id: string;
-//   name: string;
-//   category: 'chips' | 'candy' | 'protein' | 'pastries' | 'nuts' | 'snacks' | 'beverages' | 'energy' | 'healthy';
-//   image?: string; // Primary image (can be external URL or local path)
-//   fallbackImage?: string; // Fallback local image if primary fails
-//   popular?: boolean;
-//   healthy?: boolean;
-//   details?: string;
-// }
+// ═══════════════════════════════════════════════════════════════════════════
+// PRODUCT SECTION COMPONENT
+// ═══════════════════════════════════════════════════════════════════════════
 
 /**
- * ProductSection component
+ * ProductSection - Displays filterable product catalog with expandable grid
+ *
+ * Performance optimizations:
+ * - useMemo for filtered products (prevents recalculation on unrelated state changes)
+ * - useCallback for event handlers (stable references for child components)
+ * - React.memo on BackgroundOverlayCard (prevents re-renders when product data unchanged)
+ * - Data separated to productCatelog.ts (not recreated on each render)
  */
 const ProductSection = () => {
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [isExpanded, setIsExpanded] = useState(false);
-  const [, setAnimateCards] = useState(false);
 
-  const PRODUCTS_PER_ROW = 5;
-  const INITIAL_ROWS = 2;
+  // Memoize filtered products - only recalculates when category changes
+  const filteredProducts = useMemo(
+    () => getFilteredProducts(activeCategory),
+    [activeCategory]
+  );
 
-  useEffect(() => {
-    setAnimateCards(false);
-    setTimeout(() => setAnimateCards(true), 100);
-  }, [activeCategory]);
+  // Memoize display products - recalculates when filtered products or expanded state changes
+  const displayProducts = useMemo(
+    () => isExpanded ? filteredProducts : filteredProducts.slice(0, PRODUCTS_PER_ROW * INITIAL_ROWS),
+    [filteredProducts, isExpanded]
+  );
 
+  // Memoize whether there are more products to show
+  const hasMoreProducts = useMemo(
+    () => filteredProducts.length > PRODUCTS_PER_ROW * INITIAL_ROWS,
+    [filteredProducts]
+  );
 
-  const getFilteredProducts = () => {
-    if (activeCategory === 'all') return productCatalog;
-    if (activeCategory === 'popular') return productCatalog.filter(p => p.popular);
-    if (activeCategory === 'healthy') return productCatalog.filter(p => p.healthy);
-    return productCatalog.filter(p => p.category === activeCategory);
-  };
+  // Memoized expand/collapse handler
+  const toggleExpand = useCallback(() => {
+    setIsExpanded(prev => {
+      if (prev) {
+        // Scrolling back to button when collapsing
+        setTimeout(() => {
+          const expandButton = document.getElementById('expand-button');
+          if (expandButton) {
+            expandButton.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 100);
+      }
+      return !prev;
+    });
+  }, []);
 
-  const filteredProducts = getFilteredProducts();
-  const displayProducts = isExpanded ? filteredProducts : filteredProducts.slice(0, PRODUCTS_PER_ROW * INITIAL_ROWS);
-  const hasMoreProducts = filteredProducts.length > PRODUCTS_PER_ROW * INITIAL_ROWS;
-
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
-    if (isExpanded) {
-      setTimeout(() => {
-        const expandButton = document.getElementById('expand-button');
-        if (expandButton) {
-          expandButton.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      }, 100);
-    }
-  };
+  // Memoized category change handler
+  const handleCategoryChange = useCallback((categoryId: string) => {
+    setActiveCategory(categoryId);
+    setIsExpanded(false);
+  }, []);
 
   return (
     <Section id="products" background="gradient" spacing="lg">
@@ -81,10 +92,7 @@ const ProductSection = () => {
           {productCategories.map((category) => (
             <button
               key={category.id}
-              onClick={() => {
-                setActiveCategory(category.id);
-                setIsExpanded(false);
-              }}
+              onClick={() => handleCategoryChange(category.id)}
               className={`shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all backdrop-blur-sm whitespace-nowrap ${
                 activeCategory === category.id
                   ? 'bg-[#FD5A1E] text-[#000000] font-medium rounded-full shadow-lg hover:bg-[#F5F5F5] hover:text-[#000000] transition-colors'
