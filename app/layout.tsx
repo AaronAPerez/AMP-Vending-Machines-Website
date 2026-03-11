@@ -12,6 +12,8 @@ import { Inter } from 'next/font/google';
 import "./globals.css";
 import { WebVitalsReporter } from "@/components/analytics/WebVitalsReporter";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
+import { MicrosoftClarity } from "@/components/analytics/MicrosoftClarity";
+import { UTMProvider } from "@/components/analytics/UTMProvider";
 import { ToasterProvider } from "@/components/ui/ToasterProvider";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { PublicLayoutWrapper } from "@/components/layout/PublicLayoutWrapper";
@@ -61,7 +63,7 @@ export default function RootLayout({
           .hero-cta-secondary:hover{background:#A5ACAF;color:#000}
         `}</style>
 
-        <meta httpEquiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com https://googleads.g.doubleclick.net;" />
+        <meta httpEquiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com https://googleads.g.doubleclick.net https://www.clarity.ms;" />
 
         {/* Open Graph (OG) Tags  */}
         <meta property="og:image" content="https://www.ampvendingmachines.com/images/promos/amp-vending-promo-modesto.webp" />
@@ -90,6 +92,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://www.clarity.ms" />
 
         {/* Security headers */}
         <meta name="referrer" content="origin-when-cross-origin" />
@@ -111,8 +114,10 @@ export default function RootLayout({
       </head>
 
       <body className={`${inter.variable} font-sans antialiased bg-black text-white min-h-screen`} suppressHydrationWarning>
-        {/* Google Analytics & Google Ads Tracking - deferred until interaction */}
+        {/* Analytics & Tracking - deferred until interaction for performance */}
         <GoogleAnalytics />
+        <MicrosoftClarity />
+        <UTMProvider />
 
         {/* Toast notifications */}
         <ToasterProvider />

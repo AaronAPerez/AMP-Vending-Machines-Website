@@ -7,6 +7,8 @@ import Image from 'next/image';
 import { AccessibleButton } from '@/components/ui/AccessibleButton';
 import Card from '@/components/ui/core/Card';
 import { trackGoogleAdsConversion } from '@/lib/analytics/gtag';
+import { getUTMForSubmission, getAttributionSummary } from '@/lib/analytics/utm';
+import { clarityUpgrade, claritySetTag } from '@/components/analytics/MicrosoftClarity';
 import { z } from 'zod';
 
 // Exit Intent Form Schema (matches contact form schema requirements)
@@ -177,20 +179,36 @@ export function ExitIntentPopup({ delay = 5000, isOpen, onClose, content: provid
       const validatedData = exitIntentSchema.parse(formData);
       setIsSubmitting(true);
 
+      // Get UTM attribution data for tracking lead source
+      const utmData = getUTMForSubmission();
+
       const response = await fetch('/api/exit-intent', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...validatedData,
-          pageUrl: typeof window !== 'undefined' ? window.location.href : undefined
+          pageUrl: typeof window !== 'undefined' ? window.location.href : undefined,
+          // Include UTM attribution data
+          attribution: utmData.attribution,
+          utmSource: utmData.lastTouch?.utm_source || null,
+          utmMedium: utmData.lastTouch?.utm_medium || null,
+          utmCampaign: utmData.lastTouch?.utm_campaign || null,
+          utmTerm: utmData.lastTouch?.utm_term || null,
+          utmContent: utmData.lastTouch?.utm_content || null,
+          landingPage: utmData.lastTouch?.landing_page || null,
+          referrer: utmData.lastTouch?.referrer || null,
         }),
       });
 
       const result = await response.json();
 
       if (result.success) {
-        // Track conversion
+        // Track conversion in GA4, Google Ads, and Clarity
         trackGoogleAdsConversion();
+
+        // Upgrade Clarity session to ensure this conversion is recorded
+        clarityUpgrade('exit_intent_submission');
+        claritySetTag('lead_source', getAttributionSummary());
 
         // Show success state
         setSubmitSuccess(true);
