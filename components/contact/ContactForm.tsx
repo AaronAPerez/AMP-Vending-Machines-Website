@@ -5,6 +5,8 @@ import { toast } from 'sonner';
 import Card from '../ui/core/Card';
 import Text from '../ui/Text';
 import { trackFormSubmission, trackPhoneCall, trackGoogleAdsConversion } from '@/lib/analytics/gtag';
+import { getUTMForSubmission, getAttributionSummary } from '@/lib/analytics/utm';
+import { clarityUpgrade, claritySetTag } from '@/components/analytics/MicrosoftClarity';
 import { AccessibleButton } from '@/components/ui/AccessibleButton';
 import { Send } from 'lucide-react';
 
@@ -106,12 +108,26 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
     const loadingToast = toast.loading('Sending your message...');
 
     try {
+      // Get UTM attribution data for tracking lead source
+      const utmData = getUTMForSubmission();
+
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          // Include UTM attribution data for lead source tracking
+          attribution: utmData.attribution,
+          utmSource: utmData.lastTouch?.utm_source || null,
+          utmMedium: utmData.lastTouch?.utm_medium || null,
+          utmCampaign: utmData.lastTouch?.utm_campaign || null,
+          utmTerm: utmData.lastTouch?.utm_term || null,
+          utmContent: utmData.lastTouch?.utm_content || null,
+          landingPage: utmData.lastTouch?.landing_page || null,
+          referrer: utmData.lastTouch?.referrer || null,
+        }),
         signal: AbortSignal.timeout(10000), // 10 second timeout
       });
 
@@ -127,9 +143,13 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
         setSubmitStatus('success');
         toast.success('Thank you! Your message has been sent successfully. We\'ll get back to you within 24 hours.');
 
-        // Track conversion in both GA4 and Google Ads
+        // Track conversion in GA4, Google Ads, and Clarity
         trackFormSubmission('Contact Form');
         trackGoogleAdsConversion();
+
+        // Upgrade Clarity session to ensure this conversion is recorded
+        clarityUpgrade('contact_form_submission');
+        claritySetTag('lead_source', getAttributionSummary());
 
         // Reset form on success
         setFormData({

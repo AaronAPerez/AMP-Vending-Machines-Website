@@ -15,6 +15,15 @@ const contactFormSchema = z.object({
   phone: z.string().optional(),
   companyName: z.string().min(1, 'Company name is required').max(100, 'Company name is too long'),
   message: z.string().optional().default(''),
+  // UTM Attribution fields for tracking lead sources
+  attribution: z.string().optional().default('direct'),
+  utmSource: z.string().nullable().optional(),
+  utmMedium: z.string().nullable().optional(),
+  utmCampaign: z.string().nullable().optional(),
+  utmTerm: z.string().nullable().optional(),
+  utmContent: z.string().nullable().optional(),
+  landingPage: z.string().nullable().optional(),
+  referrer: z.string().nullable().optional(),
 });
 
 export async function POST(request: NextRequest) {
@@ -34,8 +43,20 @@ export async function POST(request: NextRequest) {
       submittedAt: new Date().toISOString(),
       source: 'website_contact_form',
       ipAddress: request.headers.get('x-forwarded-for') || 'unknown',
-      userAgent: request.headers.get('user-agent') || 'unknown'
+      userAgent: request.headers.get('user-agent') || 'unknown',
     };
+
+    // Log UTM attribution data for marketing analytics
+    if (validatedData.utmSource || validatedData.attribution !== 'direct') {
+      console.log('📊 Lead Attribution:', {
+        attribution: validatedData.attribution,
+        utm_source: validatedData.utmSource,
+        utm_medium: validatedData.utmMedium,
+        utm_campaign: validatedData.utmCampaign,
+        landing_page: validatedData.landingPage,
+        referrer: validatedData.referrer,
+      });
+    }
 
     // Save submission to Supabase database for admin dashboard viewing
     const dbSaveResult = await databaseService.saveContactSubmission(validatedData);
@@ -133,6 +154,7 @@ export async function POST(request: NextRequest) {
 
 /**
  * Log contact submission for analytics
+ * Includes UTM attribution data for marketing ROI tracking
  */
 async function logContactSubmission(
   data: any,
@@ -143,7 +165,16 @@ async function logContactSubmission(
       company: data.companyName,
       email: data.email,
       timestamp: data.submittedAt,
-      emailStatus
+      emailStatus,
+      // UTM Attribution data for tracking marketing effectiveness
+      attribution: {
+        source: data.attribution || 'direct',
+        utm_source: data.utmSource || null,
+        utm_medium: data.utmMedium || null,
+        utm_campaign: data.utmCampaign || null,
+        landing_page: data.landingPage || null,
+        referrer: data.referrer || null,
+      }
     });
 
     // In production, send to your analytics service

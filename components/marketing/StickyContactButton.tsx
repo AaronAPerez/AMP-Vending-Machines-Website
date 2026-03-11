@@ -10,6 +10,8 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 import { trackGoogleAdsConversion } from '@/lib/analytics/gtag';
+import { getUTMForSubmission, getAttributionSummary } from '@/lib/analytics/utm';
+import { clarityUpgrade, claritySetTag } from '@/components/analytics/MicrosoftClarity';
 import { X } from 'lucide-react';
 
 export const StickyContactButton: React.FC = () => {
@@ -82,10 +84,24 @@ export const StickyContactButton: React.FC = () => {
     const loadingToast = toast.loading('Sending your message...');
 
     try {
+      // Get UTM attribution data for tracking lead source
+      const utmData = getUTMForSubmission();
+
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          // Include UTM attribution data
+          attribution: utmData.attribution,
+          utmSource: utmData.lastTouch?.utm_source || null,
+          utmMedium: utmData.lastTouch?.utm_medium || null,
+          utmCampaign: utmData.lastTouch?.utm_campaign || null,
+          utmTerm: utmData.lastTouch?.utm_term || null,
+          utmContent: utmData.lastTouch?.utm_content || null,
+          landingPage: utmData.lastTouch?.landing_page || null,
+          referrer: utmData.lastTouch?.referrer || null,
+        }),
       });
 
       const result = await response.json();
@@ -95,6 +111,10 @@ export const StickyContactButton: React.FC = () => {
       if (result.success) {
         toast.success('Thank you! Your message has been sent successfully.');
         trackGoogleAdsConversion();
+
+        // Upgrade Clarity session to ensure this conversion is recorded
+        clarityUpgrade('sticky_button_submission');
+        claritySetTag('lead_source', getAttributionSummary());
 
         // Reset form
         setFormData({
