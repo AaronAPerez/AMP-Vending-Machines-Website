@@ -279,7 +279,7 @@ export const StickyContactButton: React.FC = () => {
                   {/* Header */}
                   <h3 className="text-2xl font-bold text-white mb-2">Quick Message</h3>
                   <p className="text-[#A5ACAF] text-sm mb-6">
-                    Send us a message and we'll respond within 24 hours
+                    Send us a message and we&apos;ll respond within 24 hours
                   </p>
 
                   {/* Form */}
