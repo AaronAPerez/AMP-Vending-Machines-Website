@@ -13,35 +13,35 @@ const FAQSection = () => {
 
 
 
-  // FAQ data structure with categories - updated content
+  // FAQ data structure with categories - SEO optimized for high-volume keywords
   const faqItems = [
     {
       id: 1,
-      question: "What makes AMP Vending Machines different in Modesto?",
-      answer: "AMP Vending provides Modesto and Stanislaus County businesses with 21.5\" HD touchscreen vending machines, contactless payment technology, and smart inventory monitoring. We offer comprehensive service including free installation, maintenance, and restocking throughout Central California.",
+      question: "How do I get a free vending machine for my business?",
+      answer: "Getting a free vending machine is simple! AMP Vending provides free snack and drink vending machine placement for offices, warehouses, and workplaces in Modesto, Stockton, and Central Valley California. We handle everything - free installation, free maintenance, and free restocking. Contact us to qualify for free vending machine placement.",
       icon: <Zap size={20} />,
-      category: "technology"
+      category: "free placement"
     },
     {
       id: 2,
-      question: "What types of products are available?",
-      answer: "We offer a wide selection of premium snacks, beverages, and healthy options. Our team customizes the product mix based on your workplace preferences and employee feedback.",
+      question: "What types of vending machines do you offer?",
+      answer: "We offer snack vending machines, drink vending machines, beverage vending machines, combo vending machines, and healthy vending machines. AMP vending machines feature 21.5\" HD touchscreen displays, cashless payment with tap-to-pay technology, and refrigerated options for cold drinks and fresh food.",
       icon: <Search size={20} />,
-      category: "products"
+      category: "machine types"
     },
     {
       id: 3,
-      question: "How often are machines restocked and maintained?",
-      answer: "We monitor inventory levels remotely and typically restock weekly, though high-traffic locations may receive more frequent service. All maintenance is included in our service package.",
-      icon: <HelpCircle size={20} />,
-      category: "service"
+      question: "Do your vending machines accept credit cards and Apple Pay?",
+      answer: "Yes! All our vending machines are cashless vending machines that accept credit cards, debit cards, Apple Pay, Google Pay, and tap-to-pay contactless payments. We also accept traditional cash and coins for maximum convenience.",
+      icon: <CreditCard size={20} />,
+      category: "cashless payment"
     },
     {
       id: 4,
-      question: "What payment methods are accepted?",
-      answer: "Our machines accept multiple payment options including credit/debit cards, mobile payments (Apple Pay, Google Pay), as well as traditional cash and coins for maximum convenience.",
-      icon: <CreditCard size={20} />,
-      category: "payment"
+      question: "What locations qualify for free vending machine placement?",
+      answer: "We provide free vending machine placement for offices, warehouses, factories, schools, gyms, hotels, hospitals, and break rooms with 50+ employees or regular foot traffic. Our full-service vending includes free installation, maintenance, and restocking in Modesto, Stockton, Stanislaus County, San Joaquin County and throughout Central Valley California.",
+      icon: <HelpCircle size={20} />,
+      category: "locations"
     }
   ];
 
@@ -70,14 +70,14 @@ const FAQSection = () => {
     >
       <div className="text-center mb-12">
         <div className="inline-flex items-center px-4 py-2 bg-[#FD5A1E]/10 rounded-full mb-6">
-          <span className="text-[#FD5A1E] font-medium text-sm">Quick Answers</span>
+          <span className="text-[#FD5A1E] font-medium text-sm">Free Vending Machine Placement</span>
         </div>
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-[#F5F5F5]">
-          Vending Machine <span className="text-[#FD5A1E]">FAQs</span>  
+          Vending Machine <span className="text-[#FD5A1E]">FAQs</span>
         </h2>
 
         <p className="text-lg text-[#A5ACAF] max-w-3xl mx-auto">
-          Everything you need to know about AMP Vending Machines in Modesto, Stanislaus County to Stockton San Joaquin County.
+          Learn how to get a free vending machine for your business. Snack, drink & cashless vending machines for offices and workplaces in Central Valley California.
         </p>
       </div>
 
@@ -125,11 +125,11 @@ const FAQSection = () => {
         transition={{ duration: 0.6, delay: 0.6 }}
       >
         <h3 className="text-xl font-bold text-[#F5F5F5] mb-4">
-          Have More Questions About AMP Vending Machines?
+          Ready to Get a Free Vending Machine?
         </h3>
         <p className="text-[#A5ACAF] max-w-2xl mx-auto mb-6">
-          Our Modesto-based team is ready to answer any questions about AMP Vending Machines,
-          technology features, service packages, and installation process for Stanislaus County businesses.
+          Contact us about free vending machine placement for your office, warehouse, or workplace.
+          We serve Modesto, Stockton, and all of Central Valley California with snack, drink & combo vending machines.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link

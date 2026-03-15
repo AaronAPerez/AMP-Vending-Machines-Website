@@ -1,105 +1,42 @@
 /**
  * Metadata Configuration - Centralized SEO Settings
  *
- * This file provides all metadata configuration for the application,
- * using centralized business data for consistency and maintainability.
+ * This file provides Next.js metadata configuration for the application.
+ * All SEO constants are imported from seoData.ts (single source of truth).
  */
 
 import type { Metadata } from "next";
-import { AMP_VENDING_BUSINESS_INFO } from "@/lib/data/businessData";
+import { SEO_CONSTANTS } from "@/lib/data/seoData";
 
 /**
  * Root Layout Metadata Configuration
+ * Imports SEO data from seoData.ts to avoid duplication
  */
 export const rootMetadata: Metadata = {
-  // Basic SEO metadata
+  // Title configuration - uses SEO_CONSTANTS
   title: {
-    default:
-      "AMP Vending Machines | Modesto & Stanislaus County | ampvendingmachines.com",
-    template: "%s | AMP Vending Machines - Modesto & Stanislaus County",
+    default: SEO_CONSTANTS.SITE_TITLE,
+    template: `%s | ${SEO_CONSTANTS.SITE_NAME} - Central Valley, CA`,
   },
 
-  // Optimized description for Google search results (under 160 characters)
-  description: `Premium vending machines in Modesto & Stanislaus County CA. Touchscreen technology, free installation. Call ${AMP_VENDING_BUSINESS_INFO.contact.phone}`,
+  // Description from single source of truth
+  description: SEO_CONSTANTS.SITE_DESCRIPTION,
 
-  // Enhanced keywords targeting local and commercial searches
-  keywords: [
-    // Brand Keywords (Exact Match)
-    "ampvendingmachines",
-    "ampvendingmachines.com",
-    "amp vending machines",
-    "amp vending",
-   
-    // Location + Service (Top Priority)
-    "vending machines Modesto",
-    "vending machines Modesto CA",
-    "vending machines Stockton",
-    "vending machines Stockton CA",
-    "vending machines San Joaquin County",
-    "Modesto vending machines",
-    "vending machines Stanislaus County",
-    "Stanislaus County vending machines",
-    "vending machines Modesto California",
-    "Modesto CA vending machines",
-    "vending machines near me Modesto",
-    "vending machines near me Stanislaus County",
-    "vending machines near me San Joaquin County",
-    "vending machines near me",
-
-    // Stanislaus County Cities
-    "vending machines Turlock CA",
-    "vending machines Ceres CA",
-    "vending machines Riverbank CA",
-    "vending machines Oakdale CA",
-    "vending machines Patterson CA",
-
-    // Commercial Keywords
-    "commercial vending machines Modesto",
-    "office vending machines Modesto CA",
-    "workplace vending machines Stanislaus County",
-    "business vending machines Modesto",
-    "company vending machines Central California",
-
-    // Features
-    "touchscreen vending machines Modesto",
-    "contactless vending machines",
-    "smart vending machines Modesto",
-    "modern vending machines",
-    "refrigerated vending machines Modesto",
-
-    // Services
-    "vending machine supplier Modesto",
-    "vending machine supplier",
-    "vending machine supplier near me",
-    "vending machine provider Stanislaus County",
-    "vending machine installation Modesto",
-    "free vending machines Modesto CA",
-    "vending machine rental Modesto",
-    "vending machine service Stanislaus County",
-
-    // Regional
-    "Central California vending machines",
-    "Central Valley vending machines",
-    "Northern California vending",
-
-    // General
-    "AMP Vending Machines Modesto",
-    "professional vending installation",
-    "maintenance-free vending machines",
-  ].join(", "),
+  // Keywords from PRIMARY_KEYWORDS array in seoData.ts
+  keywords: SEO_CONSTANTS.PRIMARY_KEYWORDS.join(", "),
 
   // Author and publisher information
   authors: [
     {
-      name: AMP_VENDING_BUSINESS_INFO.name,
-      url: AMP_VENDING_BUSINESS_INFO.contact.website,
+      name: SEO_CONSTANTS.BUSINESS_NAME,
+      url: SEO_CONSTANTS.BASE_URL,
     },
   ],
-  creator: AMP_VENDING_BUSINESS_INFO.name,
-  publisher: AMP_VENDING_BUSINESS_INFO.name,
+  creator: SEO_CONSTANTS.BUSINESS_NAME,
+  publisher: SEO_CONSTANTS.BUSINESS_NAME,
 
   // Application metadata
-  applicationName: AMP_VENDING_BUSINESS_INFO.name,
+  applicationName: SEO_CONSTANTS.SITE_NAME,
   generator: "Next.js",
 
   // Enhanced robots directive for maximum indexing
@@ -117,9 +54,9 @@ export const rootMetadata: Metadata = {
 
   // Language and locale settings
   alternates: {
-    canonical: AMP_VENDING_BUSINESS_INFO.contact.website,
+    canonical: SEO_CONSTANTS.BASE_URL,
     languages: {
-      "en-US": AMP_VENDING_BUSINESS_INFO.contact.website,
+      "en-US": SEO_CONSTANTS.BASE_URL,
     },
   },
 
@@ -127,55 +64,52 @@ export const rootMetadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: AMP_VENDING_BUSINESS_INFO.contact.website,
-    siteName: "AMP Vending Machines",
-    title:
-      "AMP Vending Machines | Modesto & Stanislaus County | Stockton & San Joaquin County | Central Valley | Northern California",
-    description:
-      "AMP Vending Machines - Premier vending machine provider in Modesto, Stanislaus County & Central California. Professional touchscreen vending with free installation.",
+    url: SEO_CONSTANTS.BASE_URL,
+    siteName: SEO_CONSTANTS.SITE_NAME,
+    title: SEO_CONSTANTS.SITE_TITLE,
+    description: SEO_CONSTANTS.SITE_DESCRIPTION,
     images: [
       {
-        url: `${AMP_VENDING_BUSINESS_INFO.contact.website}/images/promos/amp-vending-promo-modesto.webp`,
+        url: `${SEO_CONSTANTS.BASE_URL}/images/promos/amp-vending-promo-modesto.webp`,
         width: 1200,
         height: 630,
-        alt: "AMP Design and Consulting vending machine promotion in Modesto and Stanislaus County",
+        alt: "Free vending machine placement for businesses in Modesto and Central California",
         type: "image/webp",
       },
       {
-        url: `${AMP_VENDING_BUSINESS_INFO.contact.website}/images/og/amp-vending-logo-og.webp`,
+        url: `${SEO_CONSTANTS.BASE_URL}/images/og/amp-vending-logo-og.webp`,
         width: 1200,
         height: 630,
-        alt: "AMP Vending premium workplace vending machines with touchscreen technology",
+        alt: "AMP Vending - snack and drink vending machines with cashless payment",
         type: "image/webp",
       },
       {
-        url: `${AMP_VENDING_BUSINESS_INFO.contact.website}/images/machines/amp-premium-touchscreen-vending-machine.webp`,
+        url: `${SEO_CONSTANTS.BASE_URL}/images/machines/amp-premium-touchscreen-vending-machine.webp`,
         width: 800,
         height: 600,
-        alt: "Premium touchscreen vending machine by AMP Vending",
+        alt: "Premium touchscreen vending machine with tap-to-pay technology",
         type: "image/webp",
       },
     ],
   },
 
   // Enhanced Twitter Card metadata
- twitter: {
-  card: "summary_large_image",
-  site: "@ampvending",
-  creator: "@ampvending",
-  title: `Premium Commercial Vending Machines | ${AMP_VENDING_BUSINESS_INFO.name}`,
-  description:
-    "Professional vending machines with touchscreen technology for enhanced workplace satisfaction in the Central Valley, Northern California.",
-  images: {
-    url: `${AMP_VENDING_BUSINESS_INFO.contact.website}/images/promos/amp-vending-promo-modesto.webp`,
-    alt: "AMP Design and Consulting vending machine promotion in Modesto and Stanislaus County",
+  twitter: {
+    card: "summary_large_image",
+    site: "@ampvending",
+    creator: "@ampvending",
+    title: SEO_CONSTANTS.SITE_TITLE,
+    description: SEO_CONSTANTS.SITE_DESCRIPTION,
+    images: {
+      url: `${SEO_CONSTANTS.BASE_URL}/images/promos/amp-vending-promo-modesto.webp`,
+      alt: "Free vending machine placement for offices and workplaces in Central California",
+    },
   },
-},
 
   // App links for mobile optimization
   appLinks: {
     web: {
-      url: AMP_VENDING_BUSINESS_INFO.contact.website,
+      url: SEO_CONSTANTS.BASE_URL,
       should_fallback: true,
     },
   },
@@ -185,32 +119,32 @@ export const rootMetadata: Metadata = {
     // Referrer policy for security and analytics
     referrer: "same-origin",
 
-    // Geographic targeting
-    "geo.region": "US-CA",
-    "geo.placename": "Modesto, Stanislaus County, California",
-    "geo.position": `${AMP_VENDING_BUSINESS_INFO.address.coordinates.latitude};${AMP_VENDING_BUSINESS_INFO.address.coordinates.longitude}`,
-    ICBM: `${AMP_VENDING_BUSINESS_INFO.address.coordinates.latitude}, ${AMP_VENDING_BUSINESS_INFO.address.coordinates.longitude}`,
+    // Geographic targeting - uses SEO_CONSTANTS.ADDRESS
+    "geo.region": `US-${SEO_CONSTANTS.ADDRESS.STATE}`,
+    "geo.placename": `${SEO_CONSTANTS.ADDRESS.CITY}, ${SEO_CONSTANTS.ADDRESS.COUNTY}, ${SEO_CONSTANTS.ADDRESS.STATE_FULL}`,
+    "geo.position": `${SEO_CONSTANTS.ADDRESS.COORDINATES.LAT};${SEO_CONSTANTS.ADDRESS.COORDINATES.LNG}`,
+    ICBM: `${SEO_CONSTANTS.ADDRESS.COORDINATES.LAT}, ${SEO_CONSTANTS.ADDRESS.COORDINATES.LNG}`,
 
     // Business information
-    coverage: "Modesto, Stanislaus County, Central California",
+    coverage: SEO_CONSTANTS.SERVICE_AREA,
     distribution: "global",
     rating: "general",
     "revisit-after": "7 days",
 
     // Contact information
-    contact: AMP_VENDING_BUSINESS_INFO.contact.email,
-    "reply-to": AMP_VENDING_BUSINESS_INFO.contact.email,
+    contact: SEO_CONSTANTS.EMAIL,
+    "reply-to": SEO_CONSTANTS.EMAIL,
 
     // Copyright and ownership
-    copyright: `© ${new Date().getFullYear()} ${AMP_VENDING_BUSINESS_INFO.name}. All rights reserved.`,
-    owner: AMP_VENDING_BUSINESS_INFO.name,
+    copyright: `© ${new Date().getFullYear()} ${SEO_CONSTANTS.BUSINESS_LEGAL_NAME}. All rights reserved.`,
+    owner: SEO_CONSTANTS.BUSINESS_NAME,
 
     // Mobile optimization
     "format-detection": "telephone=yes",
     "mobile-web-app-capable": "yes",
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "black-translucent",
-    "apple-mobile-web-app-title": AMP_VENDING_BUSINESS_INFO.name,
+    "apple-mobile-web-app-title": SEO_CONSTANTS.SITE_NAME,
 
     // Theme colors for browser integration
     "theme-color": "#000000",
@@ -232,7 +166,7 @@ export const rootMetadata: Metadata = {
   // Icons and manifest - optimized for Google Search Results
   icons: {
     icon: [
-      // SVG favicon - preferred by Google for search results (scalable, crisp at any size)
+      // SVG favicon - preferred by Google for search results
       { url: "/icon.svg", type: "image/svg+xml" },
       // PNG fallbacks for browsers that don't support SVG favicons
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
@@ -252,6 +186,6 @@ export const rootMetadata: Metadata = {
     ],
   },
 
-  // Web app manifest.webmanifest for PWA capabilities and enhanced mobile search presence
+  // Web app manifest for PWA capabilities
   manifest: "/manifest.webmanifest",
 };

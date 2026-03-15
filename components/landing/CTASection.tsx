@@ -37,41 +37,41 @@ const CTASection = () => {
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Modesto&apos;s Premier <span className="text-[#FD5A1E]">Vending Machine Provider</span>
+            Get a Free <span className="text-[#FD5A1E]">Vending Machine</span> for Your Business
           </h2>
           <p className="text-xl text-white/80 max-w-3xl mx-auto mb-8">
-            Join leading Modesto and Stanislaus County businesses enjoying AMP Vending Machines
-            state-of-the-art vending solutions with comprehensive maintenance and support.
+            Free snack & drink vending machine placement for offices, warehouses, and workplaces.
+            No cost installation with cashless payment technology. Serving Modesto, Stockton & Central CA.
           </p>
-          
-          {/* Key Benefits */}
+
+          {/* Key Benefits - SEO Optimized */}
           <div className="flex flex-wrap justify-center gap-8 mb-12">
-            <motion.div 
+            <motion.div
               className="flex items-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
             >
               <CheckCircle size={24} className="text-white mr-2" />
-              <span className="text-white">Professional Installation</span>
+              <span className="text-white">Free Installation</span>
             </motion.div>
-            <motion.div 
+            <motion.div
               className="flex items-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <CheckCircle size={24} className="text-white mr-2" />
-              <span className="text-white">Full-Service Support</span>
+              <span className="text-white">Cashless Payment</span>
             </motion.div>
-            <motion.div 
+            <motion.div
               className="flex items-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
               <CheckCircle size={24} className="text-white mr-2" />
-              <span className="text-white">Latest Technology</span>
+              <span className="text-white">No Cost Maintenance</span>
             </motion.div>
           </div>
           
@@ -89,7 +89,7 @@ const CTASection = () => {
                 rightIcon={<ArrowRight size={20} />}
                 animate
               >
-                Get Free Consultation
+                Get a Free Vending Machine
               </AccessibleButton>
             </motion.div>
           </div>

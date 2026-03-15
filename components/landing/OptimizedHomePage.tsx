@@ -38,12 +38,12 @@ export default function OptimizedHomePage() {
         <ResponsiveHero
           title={
             <>
-              Vending Machines in<br/><span className="text-[#FD5A1E]"> Modesto, Stockton & Central Valley</span>
+              Free Vending Machine<br/><span className="text-[#FD5A1E]">For Your Business</span>
             </>
           }
-          subtitle="AMP Vending - Premier commercial vending solutions for businesses in Modesto, Stockton, Stanislaus County, San Joaquin County, and surrounding areas."
+          subtitle="Get a free snack & drink vending machine for your office, warehouse, or workplace. No cost installation with cashless payment technology. Serving Modesto, Stockton & Central California."
           primaryCta={{ text: "View Our Machines", href: "/vending-machines" }}
-          secondaryCta={{ text: "Get Started", href: "/contact" }}
+          secondaryCta={{ text: "Get a Free Machine", href: "/contact" }}
         />
         </Suspense>
       </Section>
@@ -156,16 +156,16 @@ export default function OptimizedHomePage() {
 }
 
 
-// Hero loading fallback for critical path
+// Hero loading fallback for critical path - SEO optimized content
 const HeroLoadingFallback = React.memo(() => (
   <div className="min-h-screen bg-black flex items-center justify-center">
     <div className="text-center px-4">
       <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#F5F5F5] mb-6 animate-pulse">
-        Vending Machines in Modesto, Stockton
-        <br />& <span className="text-[#FD5A1E]">Central Valley</span>
+        Free Vending Machine
+        <br /><span className="text-[#FD5A1E]">For Your Business</span>
       </h1>
       <p className="text-xl md:text-2xl text-[#F5F5F5] mb-8 max-w-3xl mx-auto opacity-75">
-        AMP Vending Machines - Loading your commercial vending solutions for Stanislaus & San Joaquin County...
+        Snack & drink vending machines with cashless payment. Free placement for offices & workplaces in Central CA...
       </p>
     </div>
   </div>

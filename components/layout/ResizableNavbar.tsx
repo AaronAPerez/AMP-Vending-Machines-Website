@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { AccessibleButton } from '@/components/ui/AccessibleButton';
 import { X, Menu } from 'lucide-react';
 
@@ -16,21 +17,15 @@ interface NavItem {
  *
  * A modern, accessible navbar that adapts on scroll with CSS transitions
  * Performance optimized: Removed framer-motion to reduce main-thread blocking
+ * Uses usePathname() hook for proper active page highlighting during client-side navigation
  */
 const ResizableNavbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [pathname, setPathname] = useState<string>('');
-  const [isMounted, setIsMounted] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  // Get pathname on client side only
-  useEffect(() => {
-    setIsMounted(true);
-    if (typeof window !== 'undefined') {
-      setPathname(window.location.pathname);
-    }
-  }, []);
+  // Use Next.js usePathname hook for reactive pathname updates during navigation
+  const pathname = usePathname();
 
   // Close mobile menu when clicking outside
   useEffect(() => {

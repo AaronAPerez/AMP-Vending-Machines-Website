@@ -6,8 +6,8 @@ import { Metadata } from "next";
 export const SEO_CONSTANTS = {
   // Website Identity
   SITE_NAME: 'AMP Vending Machines',
-  SITE_TITLE: 'AMP Vending Machines | Modesto, Stockton, Stanislaus & San Joaquin County | Premium Commercial Vending',
-  SITE_DESCRIPTION: 'ampvendingmachines.com - Leading vending machine provider in Modesto, Stockton, Stanislaus County, San Joaquin County & Central California. Professional touchscreen vending machines with 50+ products. Free installation. Call (209) 403-5450',
+  SITE_TITLE: 'AMP Vending Machines | Modesto, Stockton, Stanislaus & San Joaquin County | Free Vending Machine Placement | Snack & Drink Machines | ',
+  SITE_DESCRIPTION: 'Get a free vending machine for your business. Snack, drink & combo vending machines with cashless payment, touchscreen technology. No cost installation in Modesto, Stockton, & Central Valley, CA. Call (209) 403-5450',
   
   // URLs and Domains
   BASE_URL: 'https://www.ampvendingmachines.com',
@@ -40,7 +40,7 @@ export const SEO_CONSTANTS = {
   },
   
   // Service Area
-  SERVICE_AREA: 'Modesto, Stockton, Stanislaus County, San Joaquin County & Central California',
+  SERVICE_AREA: 'Modesto, Stockton, Stanislaus County, San Joaquin County & Central Valley, CA',
   SERVICE_COUNTY: 'Stanislaus County, San Joaquin County',
   PRIMARY_CITIES: [
     // Stanislaus County (Top Priority)
@@ -66,7 +66,7 @@ export const SEO_CONSTANTS = {
     'Mountain House', 'French Camp', 'Country Club', 'Woodbridge', 'Lockeford'
   ],
   
-  // Industry Keywords
+  // Industry Keywords - Optimized for High Search Volume (2026)
   PRIMARY_KEYWORDS: [
     // Brand Keywords
     'ampvendingmachines',
@@ -74,6 +74,41 @@ export const SEO_CONSTANTS = {
     'amp vending machines',
     'amp vending',
     'ampvending',
+
+    // HIGH VOLUME: "Near Me" Keywords (Most Searched)
+    'vending machine near me',
+    'vending machines near me',
+    'vending machine company near me',
+    'vending services near me',
+    'vending machine service near me',
+    'snack machine near me',
+    'drink machine near me',
+
+    // HIGH VOLUME: Free Vending / Business Placement (High Intent)
+    'free vending machine placement',
+    'free vending machine for my business',
+    'get a free vending machine',
+    'no cost vending machine',
+    'free vending machine installation',
+    'free vending services',
+    'vending machine for my business',
+    'how to get a vending machine for my business',
+    'vending machine placement',
+    'put vending machine in my business',
+
+    // HIGH VOLUME: Business Location Types (High Intent)
+    'vending machine for office',
+    'vending machines for workplaces',
+    'vending machine for warehouse',
+    'vending machine for school',
+    'vending machine for hotel',
+    'vending machine for gym',
+    'vending machine for factory',
+    'vending machine for hospital',
+    'break room vending machine',
+    'employee vending solutions',
+    'corporate vending services',
+    'industrial vending machines',
 
     // Location + Service Keywords (Highest Priority)
     'vending machines Modesto',
@@ -111,10 +146,21 @@ export const SEO_CONSTANTS = {
     'vending machines Escalon CA',
 
     // Regional Terms
-    'Central California vending machines',
+    'Central Valley, CA vending machines',
     'Central Valley vending machines',
+    'Northern California vending machines',
     'vending machine supplier Stanislaus County',
     'vending machine supplier San Joaquin County',
+
+    // HIGH VOLUME: Machine Types (Product Keywords)
+    'snack vending machine',
+    'drink vending machine',
+    'beverage vending machine',
+    'combo vending machine',
+    'combination vending machine',
+    'healthy vending machine',
+    'cold drink vending machine',
+    'food vending machine',
 
     // Service Type Keywords
     'commercial vending machines',
@@ -124,12 +170,17 @@ export const SEO_CONSTANTS = {
     'company vending machines',
     'employee vending machines',
 
-    // Feature Keywords
+    // HIGH VOLUME: Payment/Technology Features
+    'cashless vending machines',
+    'credit card vending machines',
+    'tap to pay vending machine',
+    'card reader vending machine',
+    'apple pay vending machine',
+    'contactless payment vending machine',
     'touchscreen vending machines',
     'modern vending machines',
     'smart vending machines',
     'contactless vending machines',
-    'cashless vending machines',
     'refrigerated vending machines',
 
     // Service Keywords
@@ -138,17 +189,23 @@ export const SEO_CONSTANTS = {
     'vending machine vendor',
     'vending machine installation',
     'vending machine rental',
+    'vending machine leasing',
     'vending machine service',
     'vending machine maintenance',
+    'vending machine restocking',
     'free vending machines',
+    'full service vending',
+    'vending machine management',
 
     // Industry Terms
     'premium vending machines',
     'professional vending',
     'maintenance-free vending',
-    'full service vending',
     'custom vending solutions',
     'vending machines for businesses',
+    'vending solutions',
+    'automated retail',
+    'unattended retail',
   ],
 
   // Open Graph Image Defaults
@@ -186,44 +243,44 @@ export const PAGE_METADATA = {
       canonical: SEO_CONSTANTS.BASE_URL,
     },
     openGraph: {
-      title: 'AMP Vending Machines | Modesto, Stockton, Stanislaus & San Joaquin County Vending Solutions',
-      description: 'Leading vending machine provider in Modesto, Stockton, Stanislaus County, San Joaquin County & Central California. Premium touchscreen vending machines with free installation.',
+      title: 'AMP Vending Machines | Modesto, Stockton, Stanislaus & San Joaquin County Vending Solutions | Free Vending Machine Placement | Snack & Drink Machines for Your Business | Central Valley, CA',
+      description: 'Get a free vending machine for your office, warehouse, or workplace. Snack, drink & combo machines with cashless payment. No cost installation in Modesto, Stockton & Central Valley, California.',
       url: SEO_CONSTANTS.BASE_URL,
       siteName: SEO_CONSTANTS.SITE_NAME,
       images: [{
         url: SEO_CONSTANTS.DEFAULT_OG_IMAGE_FULL,
         width: SEO_CONSTANTS.OG_IMAGE_WIDTH,
         height: SEO_CONSTANTS.OG_IMAGE_HEIGHT,
-        alt: 'AMP Vending premium workplace vending machines',
+        alt: 'Free vending machine placement - snack and drink machines for businesses',
       }],
       locale: 'en_US',
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'AMP Vending Machines | Modesto, Stockton, Stanislaus & San Joaquin County',
-      description: 'ampvendingmachines.com - Premium vending machine provider in Modesto, Stockton, Stanislaus County, San Joaquin County & Central California with touchscreen technology.',
+      title: 'AMP Vending Machines | Modesto, Stockton, Stanislaus & San Joaquin County Vending Solutions | Free Vending Machine Placement | Snack & Drink Machines for Your Business | Central Valley, CA',
+      description: 'Get a free vending machine for your office, warehouse, or workplace. Snack, drink & combo machines with cashless payment. No cost installation in Modesto, Stockton & Central Valley, California.',
       images: [SEO_CONSTANTS.DEFAULT_OG_IMAGE_FULL],
     },
   } satisfies Metadata,
 
   VENDING_MACHINES: {
-    title: 'Vending Machines Modesto, Stockton | Stanislaus & San Joaquin County | Commercial & Office Solutions',
-    description: 'ampvendingmachines.com offers premium commercial vending machines in Modesto, Stockton, Stanislaus County, San Joaquin County & Central California. Free installation, 21.5" touchscreen, 50+ products. Call (209) 403-5450',
-    keywords: 'vending machines Modesto, vending machines Stockton, vending machines Stanislaus County, vending machines San Joaquin County, Modesto vending machines, Stockton vending machines, ampvendingmachines, commercial vending machines, office vending machines Modesto CA, office vending machines Stockton CA, touchscreen vending, workplace vending solutions',
+    title: 'Snack & Drink Vending Machines | Free Placement for Offices & Businesses |  Modesto, Stockton | Stanislaus & San Joaquin County | Central Valley, CA',
+    description: 'Browse our snack, drink & combo vending machines. Free vending machine placement for offices, warehouses & workplaces in Modesto, Stockton & Central CA. Cashless payment, touchscreen. Call (209) 403-5450',
+    keywords: 'snack vending machine, drink vending machine, combo vending machine, beverage vending machine, free vending machine placement, vending machine for office, vending machine for warehouse, cashless vending machines, credit card vending machine, vending machines Modesto, vending machines Stockton, Stanislaus County, San Joaquin County & Central Valley, California.  commercial vending machines, office vending machines, workplace vending solutions, break room vending machine',
     alternates: {
       canonical: `${SEO_CONSTANTS.BASE_URL}/vending-machines`,
     },
     openGraph: {
-      title: 'Premium Vending Machines | AMP Vending',
-      description: 'Professional vending Machines with touchscreen technology and 50+ customizable product options.',
+      title: 'Free Snack & Drink Vending Machines for Your Business | AMP Vending',
+      description: 'Snack, drink & combo vending machines with cashless payment. Free placement for offices, warehouses & workplaces. No cost installation & maintenance.',
       url: `${SEO_CONSTANTS.BASE_URL}/vending-machines`,
       siteName: SEO_CONSTANTS.SITE_NAME,
       images: [{
         url: `${SEO_CONSTANTS.BASE_URL}/images/og/amp-vending-logo-og.webp`,
         width: SEO_CONSTANTS.OG_IMAGE_WIDTH,
         height: SEO_CONSTANTS.OG_IMAGE_HEIGHT,
-        alt: 'AMP Premium Vending Machines Collection',
+        alt: 'Snack and drink vending machines - free placement for businesses',
       }],
       locale: 'en_US',
       type: 'website',
@@ -233,15 +290,15 @@ export const PAGE_METADATA = {
 
   
 // ABOUT: {
-//   title: 'About AMP Vending | Professional Vending Machines in Central California',
-//   description: 'Learn about AMP Vending\'s commitment to providing premium workplace vending Machines. Serving Central California with professional installation, maintenance, and 24/7 support.',
-//   keywords: 'about AMP Vending, vending machine company, Central California vending, professional vending services, workplace Machines, Modesto vending, Andrew Perez founder',
+//   title: 'About AMP Vending | Professional Vending Machines in Central Valley, CA',
+//   description: 'Learn about AMP Vending\'s commitment to providing premium workplace vending Machines. Serving Central Valley, CA with professional installation, maintenance, and 24/7 support.',
+//   keywords: 'about AMP Vending, vending machine company, Central Valley, CA vending, professional vending services, workplace Machines, Modesto vending, Andrew Perez founder',
 //   alternates: {
 //     canonical: `${SEO_CONSTANTS.BASE_URL}/about`,
 //   },
 //   openGraph: {
 //     title: 'About AMP Vending - Your Trusted Vending Partner',
-//     description: 'Professional vending Machines with a commitment to excellence. Serving workplaces across Central California with premium machines and comprehensive service.',
+//     description: 'Professional vending Machines with a commitment to excellence. Serving workplaces across Central Valley, CA with premium machines and comprehensive service.',
 //     url: `${SEO_CONSTANTS.BASE_URL}/about`,
 //     siteName: SEO_CONSTANTS.SITE_NAME,
 //     images: [{
@@ -256,28 +313,28 @@ export const PAGE_METADATA = {
 //   twitter: {
 //     card: 'summary_large_image',
 //     title: 'About AMP Vending - Professional Vending Machines',
-//     description: 'Learn about our commitment to excellence in workplace vending Machines across Central California.',
+//     description: 'Learn about our commitment to excellence in workplace vending Machines across Central Valley, CA.',
 //     images: [`${SEO_CONSTANTS.BASE_URL}/images/about/amp-vending-about.jpg`],
 //   },
 // } satisfies Metadata,
 
   CONTACT: {
-    title: 'Contact AMP Vending Machines | Modesto, Stockton, Stanislaus & San Joaquin County | (209) 403-5450',
-    description: 'Contact ampvendingmachines.com for free vending machine consultation in Modesto, Stockton, Stanislaus County, San Joaquin County & Central California. Professional installation & service. Call (209) 403-5450 today!',
-    keywords: 'contact AMP vending machines, vending machines Modesto, vending machines Stockton, Modesto vending company, Stockton vending company, Stanislaus County vending, San Joaquin County vending, ampvendingmachines contact, vending machine consultation',
+    title: 'Get a Free Vending Machine for Your Business | Contact AMP Vending | Modesto, Stockton, Stanislaus & San Joaquin County | (209) 403-5450',
+    description: 'Request a free vending machine placement for your office, warehouse, or workplace. No cost installation. Snack & drink machines with cashless payment. Serving Modesto, Stockton & Central Valley, CA. Call (209) 403-5450',
+    keywords: 'get a free vending machine, free vending machine placement, vending machine for my business, vending machine consultation, contact vending company, vending machines near me, vending machine supplier, office vending machine, workplace vending machine, Modesto vending, Stockton vending',
     alternates: {
       canonical: `${SEO_CONSTANTS.BASE_URL}/contact`,
     },
     openGraph: {
-      title: 'Contact AMP Vending - Professional Consultation',
-      description: 'Get in touch for professional vending machine consultation and premium workplace Machines.',
+      title: 'Get a Free Vending Machine for Your Business | AMP Vending',
+      description: 'Request free vending machine placement for your office, warehouse, or workplace. No cost installation & maintenance. Serving Central Valley,  California.',
       url: `${SEO_CONSTANTS.BASE_URL}/contact`,
       siteName: SEO_CONSTANTS.SITE_NAME,
       images: [{
         url: `${SEO_CONSTANTS.BASE_URL}/images/og/contact.jpg`,
         width: SEO_CONSTANTS.OG_IMAGE_WIDTH,
         height: SEO_CONSTANTS.OG_IMAGE_HEIGHT,
-        alt: 'Contact AMP Vending for workplace Machines',
+        alt: 'Get a free vending machine for your business',
       }],
       locale: 'en_US',
       type: 'website',
@@ -416,7 +473,7 @@ export const BASE_ORGANIZATION_SCHEMA = {
   url: SEO_CONSTANTS.BASE_URL,
   logo: SEO_CONSTANTS.LOGO_FULL_URL,
   image: SEO_CONSTANTS.DEFAULT_OG_IMAGE_FULL,
-  description: 'ampvendingmachines.com - Premier vending machine provider serving Modesto, Stockton, Stanislaus County, San Joaquin County & Central California with professional touchscreen vending solutions.',
+  description: 'ampvendingmachines.com - Premier vending machine provider serving Modesto, Stockton, Stanislaus County, San Joaquin County & Central Valley, CA with professional touchscreen vending solutions.',
   telephone: SEO_CONSTANTS.PHONE,
   email: SEO_CONSTANTS.EMAIL,
   priceRange: 'Free installation and maintenance',
@@ -528,7 +585,7 @@ export function generateAboutPageStructuredData() {
     '@context': 'https://schema.org',
     '@type': 'AboutPage',
     name: 'About AMP Vending',
-    description: 'Learn about AMP Vending\'s commitment to providing premium workplace vending Machines in Central California.',
+    description: 'Learn about AMP Vending\'s commitment to providing premium workplace vending Machines in Central Valley, CA.',
     url: `${SEO_CONSTANTS.BASE_URL}/about`,
     mainEntityOfPage: {
       '@type': 'WebPage',
@@ -539,8 +596,8 @@ export function generateAboutPageStructuredData() {
       '@id': `${SEO_CONSTANTS.BASE_URL}/#organization`,
       name: SEO_CONSTANTS.BUSINESS_NAME,
       legalName: SEO_CONSTANTS.BUSINESS_LEGAL_NAME,
-      description: 'Professional vending machine Machines for workplaces across Central California',
-      foundingDate: '2019',
+      description: 'Professional vending machine Machines for workplaces across Central Valley, CA',
+      foundingDate: '2025',
       founders: [
         {
           '@type': 'Person',
