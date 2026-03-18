@@ -201,6 +201,30 @@ export const StickyContactButton: React.FC = () => {
                     <div className="font-bold">Message</div>
                   </div>
                 </button>
+
+                {/* Feedback Button */}
+                <a
+                  href="/feedback"
+                  className="flex items-center gap-3 bg-white text-black px-6 py-4 rounded-full shadow-2xl hover:shadow-xl hover:scale-105 transition-all group"
+                  onClick={() => {
+                    setShowOptions(false);
+                    if (typeof window !== 'undefined' && 'gtag' in window) {
+                      const gtag = window.gtag as (command: string, eventName: string, params: Record<string, unknown>) => void;
+                      gtag('event', 'feedback_click', {
+                        event_category: 'Engagement',
+                        event_label: 'Sticky Button Feedback',
+                      });
+                    }
+                  }}
+                >
+                  <svg className="w-6 h-6 text-[#FD5A1E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                  </svg>
+                  <div className="text-left">
+                    <div className="text-xs font-medium text-gray-600">Give</div>
+                    <div className="font-bold">Feedback</div>
+                  </div>
+                </a>
               </motion.div>
             )}
           </AnimatePresence>

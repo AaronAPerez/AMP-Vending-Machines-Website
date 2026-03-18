@@ -18,8 +18,8 @@ export async function GET() {
         success: true,
         data: {
           headline: "Wait! Don't Miss Out...",
-          subheadline: "Get a FREE Vending Machine!",
-          value_proposition: "Join the many businesses in Modesto & Stanislaus County providing premium vending at zero cost!",
+          subheadline: "FREE Vending for Qualifying Businesses!",
+          value_proposition: "Join the many qualifying businesses in Modesto & Stanislaus County providing premium vending at zero cost!",
           benefits: [
             "100% FREE Installation & Setup",
             "NO Upfront Costs or Contracts",
@@ -32,7 +32,7 @@ export async function GET() {
             { value: "50+", label: "Products" }
           ],
           special_offer_badge: "LIMITED TIME OFFER",
-          primary_cta_text: "Get Your Free Machine",
+          primary_cta_text: "See If You Qualify",
           primary_cta_link: "/contact",
           phone_button_text: "Call (209) 403-5450",
           phone_number: "+12094035450"
@@ -52,8 +52,8 @@ export async function GET() {
         success: true,
         data: {
           headline: "Wait! Don't Miss Out...",
-          subheadline: "Get a FREE Vending Machine!",
-          value_proposition: "Join the many businesses in Modesto & Stanislaus County providing premium vending at zero cost!",
+          subheadline: "FREE Vending for Qualifying Businesses!",
+          value_proposition: "Join the many qualifying businesses in Modesto & Stanislaus County providing premium vending at zero cost!",
           benefits: [
             "100% FREE Installation & Setup",
             "NO Upfront Costs or Contracts",
@@ -66,7 +66,7 @@ export async function GET() {
             { value: "50+", label: "Products" }
           ],
           special_offer_badge: "LIMITED TIME OFFER",
-          primary_cta_text: "Get Your Free Machine",
+          primary_cta_text: "See If You Qualify",
           primary_cta_link: "/contact",
           phone_button_text: "Call (209) 403-5450",
           phone_number: "+12094035450"
@@ -104,8 +104,8 @@ export async function GET() {
       success: true,
       data: {
         headline: "Wait! Don't Miss Out...",
-        subheadline: "Get a FREE Vending Machine!",
-        value_proposition: "Join the many businesses in Modesto & Stanislaus County providing premium vending at zero cost!",
+        subheadline: "FREE Vending for Qualifying Businesses!",
+        value_proposition: "Join the many qualifying businesses in Modesto & Stanislaus County providing premium vending at zero cost!",
         benefits: [
           "100% FREE Installation & Setup",
           "NO Upfront Costs or Contracts",
@@ -118,7 +118,7 @@ export async function GET() {
           { value: "50+", label: "Products" }
         ],
         special_offer_badge: "LIMITED TIME OFFER",
-        primary_cta_text: "Get Your Free Machine",
+        primary_cta_text: "See If You Qualify",
         primary_cta_link: "/contact",
         phone_button_text: "Call (209) 403-5450",
         phone_number: "+12094035450"
