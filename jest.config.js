@@ -68,9 +68,9 @@ const customJestConfig = {
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
   },
   
-  // Files to not transform
+  // Files to not transform (except ESM packages that need transpiling)
   transformIgnorePatterns: [
-    '/node_modules/',
+    '/node_modules/(?!(@microsoft/clarity)/)',
     '^.+\\.module\\.(css|sass|scss)$',
   ],
   
