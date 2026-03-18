@@ -2,6 +2,29 @@ import '@testing-library/jest-dom';
 import Image from 'next/image';
 
 /**
+ * Microsoft Clarity Mock
+ * Mock the Clarity analytics SDK to avoid ESM import issues in tests
+ * Includes all methods used by MicrosoftClarity.tsx
+ */
+jest.mock('@microsoft/clarity', () => ({
+  __esModule: true,
+  default: {
+    init: jest.fn(),
+    setTag: jest.fn(),
+    identify: jest.fn(),
+    upgrade: jest.fn(),
+    consent: jest.fn(),
+    event: jest.fn(),
+  },
+  init: jest.fn(),
+  setTag: jest.fn(),
+  identify: jest.fn(),
+  upgrade: jest.fn(),
+  consent: jest.fn(),
+  event: jest.fn(),
+}));
+
+/**
  * Next.js App Router Mocking
  * Mock Next.js navigation hooks for consistent testing
  */

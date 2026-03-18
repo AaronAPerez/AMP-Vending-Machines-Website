@@ -32,6 +32,25 @@ jest.mock('@/lib/analytics/gtag', () => ({
   trackGoogleAdsConversion: jest.fn(),
 }));
 
+// Mock UTM tracking
+jest.mock('@/lib/analytics/utm', () => ({
+  getUTMForSubmission: jest.fn(() => ({
+    attribution: null,
+    lastTouch: null,
+  })),
+  getAttributionSummary: jest.fn(() => 'direct'),
+}));
+
+// Mock Microsoft Clarity functions
+jest.mock('@/components/analytics/MicrosoftClarity', () => ({
+  MicrosoftClarity: () => null,
+  clarityUpgrade: jest.fn(),
+  claritySetTag: jest.fn(),
+  clarityIdentify: jest.fn(),
+  clarityConsent: jest.fn(),
+  clarityEvent: jest.fn(),
+}));
+
 // Mock toast notifications
 jest.mock('sonner', () => ({
   toast: {
