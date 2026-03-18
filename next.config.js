@@ -167,11 +167,13 @@ const nextConfig = {
             // Consider tightening with nonces/hashes for stricter security.
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://va.vercel-scripts.com",
+              // Script sources: Next.js runtime, Google Analytics/Ads, Vercel, Microsoft Clarity
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://va.vercel-scripts.com https://www.clarity.ms",
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https: blob:",
               "font-src 'self' data:",
-              "connect-src 'self' https://www.google-analytics.com https://www.google.com https://vitals.vercel-insights.com https://va.vercel-scripts.com",
+              // Connect sources: Analytics endpoints, Clarity telemetry
+              "connect-src 'self' https://www.google-analytics.com https://www.google.com https://vitals.vercel-insights.com https://va.vercel-scripts.com https://www.clarity.ms https://*.clarity.ms",
               "frame-src https://www.googletagmanager.com",
               "frame-ancestors 'none'",
               "base-uri 'self'",
