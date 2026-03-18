@@ -63,7 +63,7 @@ export default function RootLayout({
           .hero-cta-secondary:hover{background:#A5ACAF;color:#000}
         `}</style>
 
-        <meta httpEquiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com https://googleads.g.doubleclick.net https://www.clarity.ms;" />
+        <meta httpEquiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com https://googleads.g.doubleclick.net https://www.clarity.ms https://scripts.clarity.ms;" />
 
         {/* Open Graph (OG) Tags  */}
         <meta property="og:image" content="https://www.ampvendingmachines.com/images/promos/amp-vending-promo-modesto.webp" />
@@ -92,7 +92,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-        <link rel="dns-prefetch" href="https://www.clarity.ms" />
+        <link rel="dns-prefetch" href="https://www.clarity.ms https://scripts.clarity.ms;" />
 
         {/* Security headers */}
         <meta name="referrer" content="origin-when-cross-origin" />
