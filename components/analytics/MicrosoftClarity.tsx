@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Clarity from '@microsoft/clarity';
 
 /**
  * Microsoft Clarity Analytics Component
@@ -25,9 +26,11 @@ import { useEffect, useState } from 'react';
  * 4. Add NEXT_PUBLIC_CLARITY_PROJECT_ID to your .env.local
  *
  * @see https://clarity.microsoft.com
+ * @see https://www.npmjs.com/package/@microsoft/clarity
  */
 export function MicrosoftClarity() {
   const [shouldLoad, setShouldLoad] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
   const clarityProjectId = process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID;
 
   useEffect(() => {
@@ -84,47 +87,20 @@ export function MicrosoftClarity() {
     };
   }, [clarityProjectId]);
 
-  // Initialize Clarity when ready
+  // Initialize Clarity using npm package when ready
   useEffect(() => {
-    if (!shouldLoad || !clarityProjectId || typeof window === 'undefined') {
+    if (!shouldLoad || !clarityProjectId || typeof window === 'undefined' || isInitialized) {
       return;
     }
 
-    // Avoid duplicate initialization
-    if ((window as ClarityWindow).clarity) {
-      return;
-    }
+    // Initialize Clarity using the npm package
+    Clarity.init(clarityProjectId);
+    setIsInitialized(true);
 
-    // Microsoft Clarity initialization script
-    // This is the official Clarity tracking code
-    (function (c: Window, l: Document, a: string, r: string, i: string) {
-      const clarityWindow = c as ClarityWindow;
-      clarityWindow[a] = clarityWindow[a] || function (...args: unknown[]) {
-        (clarityWindow[a].q = clarityWindow[a].q || []).push(args);
-      };
-
-      const t = l.createElement(r) as HTMLScriptElement;
-      t.async = true;
-      t.src = 'https://www.clarity.ms/tag/' + i;
-
-      const y = l.getElementsByTagName(r)[0];
-      y?.parentNode?.insertBefore(t, y);
-    })(window, document, 'clarity', 'script', clarityProjectId);
-
-  }, [shouldLoad, clarityProjectId]);
+  }, [shouldLoad, clarityProjectId, isInitialized]);
 
   // This component doesn't render anything visible
   return null;
-}
-
-// Type definition for the Clarity global object
-interface ClarityFunction {
-  (...args: unknown[]): void;
-  q?: unknown[][];
-}
-
-interface ClarityWindow extends Window {
-  clarity?: ClarityFunction;
 }
 
 /**
@@ -139,13 +115,11 @@ interface ClarityWindow extends Window {
  * // Identify a user (for logged-in users)
  * clarityIdentify('user123', 'custom_session_id');
  */
-export function claritySetTag(key: string, value: string): void {
+export function claritySetTag(key: string, value: string | string[]): void {
   if (typeof window === 'undefined') return;
 
-  const clarityWindow = window as ClarityWindow;
-  if (clarityWindow.clarity) {
-    clarityWindow.clarity('set', key, value);
-  }
+  // Use the npm package's setTag method
+  Clarity.setTag(key, value);
 }
 
 /**
@@ -154,18 +128,19 @@ export function claritySetTag(key: string, value: string): void {
  *
  * @param userId - Unique identifier for the user
  * @param sessionId - Optional custom session ID
+ * @param pageId - Optional custom page ID
+ * @param friendlyName - Optional friendly name for the user
  */
-export function clarityIdentify(userId: string, sessionId?: string): void {
+export function clarityIdentify(
+  userId: string,
+  sessionId?: string,
+  pageId?: string,
+  friendlyName?: string
+): void {
   if (typeof window === 'undefined') return;
 
-  const clarityWindow = window as ClarityWindow;
-  if (clarityWindow.clarity) {
-    if (sessionId) {
-      clarityWindow.clarity('identify', userId, sessionId);
-    } else {
-      clarityWindow.clarity('identify', userId);
-    }
-  }
+  // Use the npm package's identify method
+  Clarity.identify(userId, sessionId, pageId, friendlyName);
 }
 
 /**
@@ -177,15 +152,29 @@ export function clarityIdentify(userId: string, sessionId?: string): void {
 export function clarityUpgrade(reason: string): void {
   if (typeof window === 'undefined') return;
 
-  const clarityWindow = window as ClarityWindow;
-  if (clarityWindow.clarity) {
-    clarityWindow.clarity('upgrade', reason);
-  }
+  // Use the npm package's upgrade method
+  Clarity.upgrade(reason);
 }
 
-// Extend Window interface for TypeScript
-declare global {
-  interface Window {
-    clarity?: ClarityFunction;
-  }
+/**
+ * Set consent for Clarity tracking.
+ * Call this when user gives/revokes consent.
+ *
+ * @param consent - Whether user has given consent
+ */
+export function clarityConsent(consent: boolean = true): void {
+  if (typeof window === 'undefined') return;
+
+  Clarity.consent(consent);
+}
+
+/**
+ * Track a custom event in Clarity.
+ *
+ * @param eventName - Name of the event to track
+ */
+export function clarityEvent(eventName: string): void {
+  if (typeof window === 'undefined') return;
+
+  Clarity.event(eventName);
 }

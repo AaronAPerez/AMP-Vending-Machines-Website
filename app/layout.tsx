@@ -111,6 +111,7 @@ export default function RootLayout({
 
         {/* Bing Verification */}
         <meta name="msvalidate.01" content="C0E2AE6FB973A8364053560636CE6EA8" />
+        
       </head>
 
       <body className={`${inter.variable} font-sans antialiased bg-black text-white min-h-screen`} suppressHydrationWarning>
