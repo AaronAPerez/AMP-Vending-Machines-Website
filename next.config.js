@@ -168,7 +168,7 @@ const nextConfig = {
             value: [
               "default-src 'self'",
               // Script sources: Next.js runtime, Google Analytics/Ads, Vercel, Microsoft Clarity
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://va.vercel-scripts.com https://www.clarity.ms",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://va.vercel-scripts.com https://www.clarity.ms https://*.clarity.ms",
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https: blob:",
               "font-src 'self' data:",
