@@ -37,11 +37,11 @@ const CTASection = () => {
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Get a Free <span className="text-[#FD5A1E]">Vending Machine</span> for Your Business
+            Free <span className="text-[#FD5A1E]">Vending Machine</span> for Qualified Businesses
           </h2>
           <p className="text-xl text-white/80 max-w-3xl mx-auto mb-8">
-            Free snack & drink vending machine placement for offices, warehouses, and workplaces.
-            No cost installation with cashless payment technology. Serving Modesto, Stockton & Central CA.
+            Free snack & drink vending machine placement for qualifying offices, warehouses, and workplaces.
+            No cost installation with cashless payment technology. Serving Modesto, Stockton & Central Valley, CA.
           </p>
 
           {/* Key Benefits - SEO Optimized */}
@@ -89,7 +89,7 @@ const CTASection = () => {
                 rightIcon={<ArrowRight size={20} />}
                 animate
               >
-                Get a Free Vending Machine
+                See If You Qualify
               </AccessibleButton>
             </motion.div>
           </div>

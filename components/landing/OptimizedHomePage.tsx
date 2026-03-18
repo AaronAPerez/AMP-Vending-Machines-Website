@@ -38,12 +38,12 @@ export default function OptimizedHomePage() {
         <ResponsiveHero
           title={
             <>
-              Free Vending Machine<br/><span className="text-[#FD5A1E]">For Your Business</span>
+              Vending Machines in<br/><span className="text-[#FD5A1E]">Modesto, Stockton & Central Valley</span>
             </>
           }
-          subtitle="Get a free snack & drink vending machine for your office, warehouse, or workplace. No cost installation with cashless payment technology. Serving Modesto, Stockton & Central California."
+          subtitle="AMP Vending provides vending machine solutions for offices, warehouses, and workplaces. Serving Modesto, Stockton, Stanislaus County & San Joaquin County."
           primaryCta={{ text: "View Our Machines", href: "/vending-machines" }}
-          secondaryCta={{ text: "Get a Free Machine", href: "/contact" }}
+          secondaryCta={{ text: "Get Started", href: "/contact" }}
         />
         </Suspense>
       </Section>
@@ -161,11 +161,11 @@ const HeroLoadingFallback = React.memo(() => (
   <div className="min-h-screen bg-black flex items-center justify-center">
     <div className="text-center px-4">
       <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#F5F5F5] mb-6 animate-pulse">
-        Free Vending Machine
-        <br /><span className="text-[#FD5A1E]">For Your Business</span>
+        Free Vending Machines
+        <br /><span className="text-[#FD5A1E]">For Qualifying Workplaces</span>
       </h1>
       <p className="text-xl md:text-2xl text-[#F5F5F5] mb-8 max-w-3xl mx-auto opacity-75">
-        Snack & drink vending machines with cashless payment. Free placement for offices & workplaces in Central CA...
+        Snack & drink vending machines with cashless payment. Free placement for qualifying offices & workplaces in Central CA...
       </p>
     </div>
   </div>

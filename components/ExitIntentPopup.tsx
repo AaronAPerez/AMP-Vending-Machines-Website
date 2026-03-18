@@ -140,8 +140,8 @@ export function ExitIntentPopup({ delay = 5000, isOpen, onClose, content: provid
   // Default content (fallback)
   const defaultContent: ExitIntentContent = {
     headline: "Wait! Don't Miss Out...",
-    subheadline: "Get a FREE Vending Machine!",
-    valueProposition: "Join the many businesses in Modesto & Stanislaus County providing premium vending at zero cost!",
+    subheadline: "FREE Vending for Qualifying Businesses!",
+    valueProposition: "Join the many qualifying businesses in Modesto & Stanislaus County providing premium vending at zero cost!",
     benefits: [
       "100% FREE Installation & Setup",
       "NO Upfront Costs or Contracts",

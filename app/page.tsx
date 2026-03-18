@@ -11,7 +11,7 @@ export default function HomePage() {
     "@type": "LocalBusiness",
     "name": "AMP Vending Machines",
     "alternateName": "AMP Vending - Free Vending Machine Placement",
-    "description": "Free vending machine placement for offices, warehouses, and workplaces. Snack, drink & combo vending machines with cashless payment. No cost installation in Modesto, Stockton & Central California.",
+    "description": "Free vending machine placement for offices, warehouses, and workplaces. Snack, drink & combo vending machines with cashless payment. No cost installation in Modesto, Stockton & Central Valley, CA.",
     "image": "https://www.ampvendingmachines.com/images/promos/amp-vending-promo-modesto.webp",
     "url": "https://www.ampvendingmachines.com",
     "telephone": "+12094035450",
@@ -31,7 +31,7 @@ export default function HomePage() {
     },
     "areaServed": [
       "Modesto", "Stockton", "Turlock", "Ceres", "Riverbank", "Tracy", "Manteca", "Lodi",
-      "Stanislaus County", "San Joaquin County", "Central California"
+      "Stanislaus County", "San Joaquin County", "Central Valley, CA"
     ],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
