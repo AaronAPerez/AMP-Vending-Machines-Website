@@ -56,6 +56,7 @@ const ResizableNavbar = () => {
 
   const navItems: NavItem[] = [
     { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
     { name: 'Vending Machines', path: '/vending-machines' },
     { name: 'Feedback', path: '/feedback' },
     { name: 'Contact', path: '/contact' },
@@ -105,6 +106,17 @@ const ResizableNavbar = () => {
                     : 'text-[#F5F5F5] hover:text-[#FD5A1E] hover:bg-[#4d4d4d]/20'
                   }`}>
                 Home
+              </Link>
+              <Link
+                href="/services"
+                aria-label="View our vending machine services"
+                aria-current={pathname === '/services' ? 'page' : undefined}
+                className={`px-4 py-2 rounded-lg text-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${pathname === '/services'
+                    ? 'text-[#FD5A1E] bg-[#FD5A1E]/10'
+                    : 'text-[#F5F5F5] hover:text-[#FD5A1E] hover:bg-[#4d4d4d]/20'
+                  }`}
+              >
+                Services
               </Link>
               <Link
                 href="/vending-machines"
@@ -207,6 +219,17 @@ const ResizableNavbar = () => {
                   }`}
               >
                 Home
+              </Link>
+              <Link
+                href="/services"
+                aria-label="View our vending machine services"
+                aria-current={pathname === '/services' ? 'page' : undefined}
+                className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${pathname === '/services'
+                    ? 'text-[#FD5A1E] bg-[#FD5A1E]/10'
+                    : 'text-[#F5F5F5] hover:bg-[#4d4d4d]/20 hover:text-[#FD5A1E]'
+                  }`}
+              >
+                Services
               </Link>
               <Link
                 href="/vending-machines"
