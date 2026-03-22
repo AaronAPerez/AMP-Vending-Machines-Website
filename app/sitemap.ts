@@ -71,7 +71,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 1.0,
   });
 
-  // 2. Main vending machines page - Key conversion page
+  // 2. Services page - Key Google Ads landing page for conversions
+  urls.push({
+    url: `${baseUrl}/services`,
+    lastModified: currentDate,
+    changeFrequency: 'weekly',
+    priority: 0.95,
+  });
+
+  // 3. Main vending machines page - Key conversion page
   urls.push({
     url: `${baseUrl}/vending-machines`,
     lastModified: currentDate,
@@ -79,7 +87,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.95,
   });
 
-  // 3. Individual machine pages - Product pages are high priority
+  // 4. Individual machine pages - Product pages are high priority
   const machines = getAllVendingMachines();
   machines.forEach(machine => {
     urls.push({
@@ -90,7 +98,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
-  // 4. Service area pages for local SEO - Critical for local rankings
+  // 5. Service area pages for local SEO - Critical for local rankings
   SERVICE_AREAS.forEach(area => {
     urls.push({
       url: `${baseUrl}/service-areas/${area.slug}`,
@@ -100,7 +108,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
-  // 5. County-specific pages - High priority local SEO pages
+  // 6. County-specific pages - High priority local SEO pages
   urls.push(
     {
       url: `${baseUrl}/stanislaus-county`,
@@ -116,7 +124,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   );
 
-  // 6. Contact and feedback pages - Conversion pages
+  // 7. Contact and feedback pages - Conversion pages
   urls.push(
     {
       url: `${baseUrl}/contact`,
@@ -132,7 +140,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   );
 
-  // 7. Accessibility statement - Static content
+  // 8. Accessibility statement - Static content
   urls.push({
     url: `${baseUrl}/accessibility`,
     lastModified: '2025-01-01',
@@ -140,7 +148,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.3,
   });
 
-  // 8. Terms of Service and Privacy Policy - Legal pages
+  // 9. Terms of Service and Privacy Policy - Legal pages
   urls.push(
     {
       url: `${baseUrl}/terms-of-service`,
