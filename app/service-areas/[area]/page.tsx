@@ -1,265 +1,314 @@
+/**
+ * Dynamic Service Area Page
+ *
+ * Individual city/area landing page for local SEO.
+ * Uses comprehensive service areas data for accurate city information.
+ *
+ * Build Process:
+ * 1. Static generation for all known service areas
+ * 2. SEO optimized metadata per city
+ * 3. Structured data for local business schema
+ */
+
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Container from '@/components/ui/core/Container';
-import Text from '@/components/ui/Text';
-import Link from 'next/link';
-import CTASection from '@/components/landing/CTASection';
+import ServiceAreaPageClient from './ServiceAreaPageClient';
+import {
+  ALL_SERVICE_CITIES,
+  type ServiceCity,
+} from '@/lib/data/comprehensiveServiceAreas';
+import AMP_VENDING_BUSINESS_INFO from '@/lib/data/businessData';
 
-// Force dynamic rendering to avoid build-time errors with client components
-export const dynamic = 'force-dynamic';
+/**
+ * Extended city data with additional SEO information
+ */
+interface CityDetails extends ServiceCity {
+  description: string;
+  businesses: string;
+  landmarks: string[];
+}
 
-const SERVICE_AREAS = {
+/**
+ * City-specific details for SEO and content
+ */
+const CITY_DETAILS: Record<string, Omit<CityDetails, keyof ServiceCity>> = {
   modesto: {
-    name: 'Modesto',
-    description: 'Professional commercial vending machine services in Modesto, CA. Serving offices, schools, and businesses with state-of-the-art touchscreen vending solutions.',
-    population: '218,000',
+    description: 'Professional commercial vending machine services in Modesto, CA. Our headquarters location ensures fast response times and premium service for offices, schools, and businesses.',
     businesses: '5,000+',
-    landmarks: ['Gallo Center for the Arts', 'Modesto Junior College', 'Vintage Faire Mall']
-  },
-  turlock: {
-    name: 'Turlock',
-    description: 'Commercial vending machines for Turlock businesses. Free consultation and professional installation with touchscreen technology.',
-    population: '73,000',
-    businesses: '2,000+',
-    landmarks: ['California State University Stanislaus', 'Downtown Turlock', 'Turlock Regional Sports Complex']
-  },
-  ceres: {
-    name: 'Ceres',
-    description: 'Vending machine services in Ceres, CA. Providing local businesses with modern touchscreen vending solutions and professional maintenance.',
-    population: '49,000',
-    businesses: '1,200+',
-    landmarks: ['Ceres River Bluff Regional Park', 'Downtown Ceres', 'Central California Event Center']
-  },
-  riverbank: {
-    name: 'Riverbank',
-    description: 'Professional vending machine installation in Riverbank, CA. Serving local offices and businesses with reliable vending solutions.',
-    population: '25,000',
-    businesses: '600+',
-    landmarks: ['Riverbank Army Ammunition Plant', 'Jacob Myers Park', 'Downtown Riverbank']
-  },
-  oakdale: {
-    name: 'Oakdale',
-    description: 'Commercial vending machines for Oakdale, CA businesses. Expert installation and maintenance with modern payment technology.',
-    population: '23,000',
-    businesses: '650+',
-    landmarks: ['Oakdale Cowboy Museum', 'Woodward Reservoir', 'Downtown Oakdale']
-  },
-  patterson: {
-    name: 'Patterson',
-    description: 'Vending machine services in Patterson, CA. Complete workplace vending solutions with touchscreen technology and 24/7 support.',
-    population: '23,000',
-    businesses: '550+',
-    landmarks: ['Patterson Apricot Fiesta Grounds', 'Hammon Senior Center', 'Ward Park']
-  },
-  waterford: {
-    name: 'Waterford',
-    description: 'Office vending machines in Waterford, CA. Professional installation and restocking services for local businesses.',
-    population: '9,000',
-    businesses: '250+',
-    landmarks: ['Waterford Plaza', 'Reinway Park', 'Hickman Community Center']
-  },
-  hughson: {
-    name: 'Hughson',
-    description: 'Commercial vending solutions for Hughson, CA. Modern touchscreen machines with contactless payment options for local businesses.',
-    population: '7,500',
-    businesses: '200+',
-    landmarks: ['Hughson Community Center', 'Hughson Fruit and Nut Festival Grounds', 'Downtown Hughson']
+    landmarks: ['Gallo Center for the Arts', 'Modesto Junior College', 'Vintage Faire Mall', 'Downtown Modesto'],
   },
   stockton: {
-    name: 'Stockton',
-    description: 'Expert vending machine installation and maintenance in Stockton, CA. Providing workplace vending solutions with 24/7 support.',
-    population: '320,000',
+    description: 'Expert vending machine installation and maintenance in Stockton, CA. Providing workplace vending solutions with 24/7 support for the largest city in San Joaquin County.',
     businesses: '7,500+',
-    landmarks: ['University of the Pacific', 'San Joaquin Delta College', 'Weberstown Mall']
+    landmarks: ['University of the Pacific', 'San Joaquin Delta College', 'Weberstown Mall', 'Stockton Arena'],
   },
-  manteca: {
-    name: 'Manteca',
-    description: 'Commercial vending services in Manteca, CA. Reliable vending machine solutions for businesses of all sizes.',
-    population: '85,000',
-    businesses: '2,300+',
-    landmarks: ['Manteca Transit Center', 'Bass Pro Shops', 'Tidewater Bikeway']
+  turlock: {
+    description: 'Commercial vending machines for Turlock businesses. Free consultation and professional installation with touchscreen technology and modern payment options.',
+    businesses: '2,000+',
+    landmarks: ['California State University Stanislaus', 'Downtown Turlock', 'Turlock Regional Sports Complex'],
   },
   tracy: {
-    name: 'Tracy',
-    description: 'Workplace vending solutions in Tracy, CA. Modern touchscreen machines with contactless payment options.',
-    population: '95,000',
+    description: 'Workplace vending solutions in Tracy, CA. Modern touchscreen machines with contactless payment options for offices, warehouses, and businesses.',
     businesses: '2,800+',
-    landmarks: ['Tracy Transit Center', 'West Valley Mall', 'Tracy Community Center']
+    landmarks: ['Tracy Transit Center', 'West Valley Mall', 'Tracy Community Center', 'Tracy Historical Museum'],
+  },
+  manteca: {
+    description: 'Commercial vending services in Manteca, CA. Reliable vending machine solutions for businesses of all sizes with free installation and maintenance.',
+    businesses: '2,300+',
+    landmarks: ['Manteca Transit Center', 'Bass Pro Shops', 'Tidewater Bikeway', 'Big League Dreams'],
+  },
+  lodi: {
+    description: 'Office vending machines in Lodi, CA. Complete installation, maintenance, and restocking services for local businesses in wine country.',
+    businesses: '2,000+',
+    landmarks: ['Lodi Wine & Visitor Center', 'Downtown Lodi', 'Lodi Lake Park', 'World of Wonders Science Museum'],
+  },
+  ceres: {
+    description: 'Vending machine services in Ceres, CA. Providing local businesses with modern touchscreen vending solutions and professional maintenance.',
+    businesses: '1,200+',
+    landmarks: ['Ceres River Bluff Regional Park', 'Downtown Ceres', 'Whitmore Park'],
+  },
+  riverbank: {
+    description: 'Professional vending machine installation in Riverbank, CA. Serving local offices and businesses with reliable vending solutions.',
+    businesses: '600+',
+    landmarks: ['Jacob Myers Park', 'Downtown Riverbank', 'Riverbank Community Center'],
+  },
+  oakdale: {
+    description: 'Commercial vending machines for Oakdale, CA businesses. Expert installation and maintenance with modern payment technology.',
+    businesses: '650+',
+    landmarks: ['Oakdale Cowboy Museum', 'Woodward Reservoir', 'Downtown Oakdale'],
+  },
+  patterson: {
+    description: 'Vending machine services in Patterson, CA. Complete workplace vending solutions with touchscreen technology and 24/7 support.',
+    businesses: '550+',
+    landmarks: ['Patterson Apricot Fiesta Grounds', 'Hammon Senior Center', 'Ward Park'],
+  },
+  ripon: {
+    description: 'Commercial vending solutions for Ripon, CA. Modern machines with cashless payment for offices and local businesses.',
+    businesses: '450+',
+    landmarks: ['Ripon Almond Blossom Festival Grounds', 'Downtown Ripon', 'Mistlin Sports Park'],
+  },
+  lathrop: {
+    description: 'Workplace vending machines in Lathrop, CA. Professional service for warehouses, distribution centers, and offices.',
+    businesses: '800+',
+    landmarks: ['Lathrop Marketplace', 'Dell\'Osso Family Farm', 'Lathrop Community Center'],
+  },
+  escalon: {
+    description: 'Office vending machines in Escalon, CA. Full-service vending solutions with modern machines and regular maintenance.',
+    businesses: '250+',
+    landmarks: ['Downtown Escalon', 'Escalon Community Park', 'Escalon Charter Academy'],
+  },
+  waterford: {
+    description: 'Office vending machines in Waterford, CA. Professional installation and restocking services for local businesses.',
+    businesses: '250+',
+    landmarks: ['Waterford Plaza', 'Reinway Park', 'Hickman Community Center'],
+  },
+  hughson: {
+    description: 'Commercial vending solutions for Hughson, CA. Modern touchscreen machines with contactless payment options for local businesses.',
+    businesses: '200+',
+    landmarks: ['Hughson Community Center', 'Downtown Hughson', 'Hughson High School'],
+  },
+  newman: {
+    description: 'Vending machine services in Newman, CA. Reliable machines with modern features for offices and businesses.',
+    businesses: '300+',
+    landmarks: ['Newman Community Center', 'Downtown Newman', 'Miller Park'],
   },
   merced: {
-    name: 'Merced',
-    description: 'Office vending machines in Merced, CA. Complete installation, maintenance, and restocking services.',
-    population: '87,000',
+    description: 'Office vending machines in Merced, CA. Complete installation, maintenance, and restocking services extending our coverage.',
     businesses: '2,500+',
-    landmarks: ['UC Merced', 'Merced College', 'Downtown Merced']
+    landmarks: ['UC Merced', 'Merced College', 'Downtown Merced', 'Applegate Park Zoo'],
   },
-  fresno: {
-    name: 'Fresno',
-    description: 'Premium vending machine services in Fresno, CA. Serving Central California with modern touchscreen vending solutions.',
-    population: '545,000',
-    businesses: '12,000+',
-    landmarks: ['Fresno State University', 'River Park Shopping Center', 'Fashion Fair Mall']
-  }
+  salida: {
+    description: 'Commercial vending services in Salida, CA. Convenient workplace vending solutions near Highway 99.',
+    businesses: '400+',
+    landmarks: ['Salida Shopping District', 'Laird Park', 'Highway 99 Business Corridor'],
+  },
+  'mountain-house': {
+    description: 'Vending machine services in Mountain House, CA. Modern machines for this growing community.',
+    businesses: '200+',
+    landmarks: ['Mountain House Community Center', 'Central Park', 'Bethany Reservoir'],
+  },
 };
 
-type ServiceAreaKey = keyof typeof SERVICE_AREAS;
+/**
+ * Get complete city data by merging base data with details
+ */
+function getCityData(slug: string): CityDetails | null {
+  const baseCity = ALL_SERVICE_CITIES.find((c) => c.slug === slug);
+  if (!baseCity) return null;
 
+  const details = CITY_DETAILS[slug] || {
+    description: `Professional vending machine services in ${baseCity.name}, CA. Serving local businesses with modern touchscreen vending solutions and full maintenance service.`,
+    businesses: '100+',
+    landmarks: [`Downtown ${baseCity.name}`, `${baseCity.name} Community Center`],
+  };
+
+  return {
+    ...baseCity,
+    ...details,
+  };
+}
+
+/**
+ * Generate static params for all service areas
+ */
 export async function generateStaticParams() {
-  return Object.keys(SERVICE_AREAS).map((area) => ({
-    area,
+  return ALL_SERVICE_CITIES.map((city) => ({
+    area: city.slug,
   }));
 }
 
-export async function generateMetadata({ params }: { params: { area: string } }): Promise<Metadata> {
-  const areaData = SERVICE_AREAS[params.area as ServiceAreaKey];
-  
-  if (!areaData) {
+/**
+ * Generate metadata for each service area
+ */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ area: string }>;
+}): Promise<Metadata> {
+  const { area } = await params;
+  const cityData = getCityData(area);
+
+  if (!cityData) {
     return {
       title: 'Service Area Not Found | AMP Vending',
     };
   }
-  
+
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ampvendingmachines.com';
+
   return {
-    title: `Vending Machines in ${areaData.name}, CA | AMP Vending`,
-    description: areaData.description,
+    title: `Vending Machines ${cityData.name}, CA | Free Installation | AMP Vending`,
+    description: cityData.description,
+    keywords: [
+      `vending machines ${cityData.name}`,
+      `${cityData.name} vending service`,
+      `free vending machine ${cityData.name}`,
+      `commercial vending ${cityData.county} County`,
+      `office vending ${cityData.name} CA`,
+    ],
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/service-areas/${params.area}`,
+      canonical: `${baseUrl}/service-areas/${area}`,
     },
     openGraph: {
-      title: `Commercial Vending Machines in ${areaData.name}`,
-      description: areaData.description,
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/service-areas/${params.area}`,
+      title: `Commercial Vending Machines in ${cityData.name}, CA`,
+      description: cityData.description,
+      url: `${baseUrl}/service-areas/${area}`,
       siteName: 'AMP Vending',
       type: 'website',
+      locale: 'en_US',
+    },
+    twitter: {
+      card: 'summary',
+      title: `Vending Machines ${cityData.name}, CA`,
+      description: cityData.description,
     },
   };
 }
 
-export default function ServiceAreaPage({ params }: { params: { area: string } }) {
-  const areaData = SERVICE_AREAS[params.area as ServiceAreaKey];
-  
-  if (!areaData) {
+/**
+ * Generate structured data for the service area
+ */
+function generateStructuredData(cityData: CityDetails) {
+  const business = AMP_VENDING_BUSINESS_INFO;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Commercial Vending Machine Services",
+    "name": `Vending Machine Services in ${cityData.name}, CA`,
+    "description": cityData.description,
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": business.name,
+      "telephone": business.contact.phone,
+      "email": business.contact.email,
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": business.address.streetAddress,
+        "addressLocality": business.address.city,
+        "addressRegion": business.address.state,
+        "postalCode": business.address.zipCode,
+        "addressCountry": "US",
+      },
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": cityData.name,
+      "containedInPlace": [
+        {
+          "@type": "AdministrativeArea",
+          "name": `${cityData.county} County`
+        },
+        {
+          "@type": "State",
+          "name": "California"
+        }
+      ],
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": cityData.coordinates.lat,
+        "longitude": cityData.coordinates.lng,
+      },
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Vending Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Free Vending Machine Installation"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Regular Maintenance & Restocking"
+          }
+        }
+      ]
+    },
+    "priceRange": "Free",
+  };
+}
+
+/**
+ * Service Area Page Component
+ */
+export default async function ServiceAreaPage({
+  params,
+}: {
+  params: Promise<{ area: string }>;
+}) {
+  const { area } = await params;
+  const cityData = getCityData(area);
+
+  if (!cityData) {
     notFound();
   }
-  
+
+  // Get nearby cities for cross-linking
+  const nearbyCities = ALL_SERVICE_CITIES
+    .filter((c) => c.county === cityData.county && c.slug !== cityData.slug)
+    .slice(0, 6);
+
   return (
-    <div className="bg-[#000000] min-h-screen">
-      {/* Breadcrumb */}
-      <nav className="bg-[#000000]/50 border-b border-[#4d4d4d]" aria-label="Breadcrumb">
-        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center text-sm text-[#A5ACAF]">
-          <Link href="/" className="hover:text-[#FD5A1E] transition-colors">Home</Link>
-          <span className="mx-2">/</span>
-          <Link href="/service-areas" className="hover:text-[#FD5A1E] transition-colors">Service Areas</Link>
-          <span className="mx-2">/</span>
-          <span className="text-[#F5F5F5]">{areaData.name}</span>
-        </div>
-      </nav>
-      
-      <div className="py-16">
-        <Container size="lg">
-          {/* Header */}
-          <header className="text-center mb-12">
-            <Text variant="h1" className="text-[#F5F5F5] mb-4">
-              Vending Machines in {areaData.name}, California
-            </Text>
-            <Text variant="body" color="muted" className="max-w-3xl mx-auto">
-              {areaData.description}
-            </Text>
-          </header>
-          
-          {/* Statistics */}
-          <div className="grid md:grid-cols-3 gap-6 mb-16">
-            <div className="bg-[#111111] p-6 rounded-xl border border-[#333333] text-center">
-              <Text variant="h2" className="text-[#FD5A1E] mb-2">{areaData.population}</Text>
-              <Text variant="body" color="muted">Population</Text>
-            </div>
-            <div className="bg-[#111111] p-6 rounded-xl border border-[#333333] text-center">
-              <Text variant="h2" className="text-[#FD5A1E] mb-2">{areaData.businesses}</Text>
-              <Text variant="body" color="muted">Local Businesses</Text>
-            </div>
-            <div className="bg-[#111111] p-6 rounded-xl border border-[#333333] text-center">
-              <Text variant="h2" className="text-[#FD5A1E] mb-2">24/7</Text>
-              <Text variant="body" color="muted">Support</Text>
-            </div>
-          </div>
-          
-          {/* Services */}
-          <section className="mb-16">
-            <Text variant="h2" className="text-[#F5F5F5] mb-8 text-center">
-              Our Services in {areaData.name}
-            </Text>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-[#111111] p-6 rounded-xl border border-[#333333]">
-                <Text variant="h3" className="text-[#FD5A1E] mb-3">Free Installation</Text>
-                <Text variant="body" color="muted">
-                  Professional installation of touchscreen vending machines at your {areaData.name} location with no upfront costs.
-                </Text>
-              </div>
-              <div className="bg-[#111111] p-6 rounded-xl border border-[#333333]">
-                <Text variant="h3" className="text-[#FD5A1E] mb-3">Regular Maintenance</Text>
-                <Text variant="body" color="muted">
-                  Scheduled maintenance and cleaning to keep your machines running smoothly in {areaData.name}.
-                </Text>
-              </div>
-              <div className="bg-[#111111] p-6 rounded-xl border border-[#333333]">
-                <Text variant="h3" className="text-[#FD5A1E] mb-3">Product Restocking</Text>
-                <Text variant="body" color="muted">
-                  Regular restocking with popular snacks, beverages, and healthy options for your {areaData.name} workplace.
-                </Text>
-              </div>
-              <div className="bg-[#111111] p-6 rounded-xl border border-[#333333]">
-                <Text variant="h3" className="text-[#FD5A1E] mb-3">24/7 Support</Text>
-                <Text variant="body" color="muted">
-                  Round-the-clock technical support for all vending machine issues in {areaData.name}.
-                </Text>
-              </div>
-            </div>
-          </section>
-          
-          {/* Landmarks */}
-          <section className="mb-16">
-            <Text variant="h2" className="text-[#F5F5F5] mb-6 text-center">
-              Serving {areaData.name} Landmarks
-            </Text>
-            <div className="flex flex-wrap justify-center gap-4">
-              {areaData.landmarks.map((landmark, index) => (
-                <div key={index} className="bg-[#FD5A1E]/10 border border-[#FD5A1E]/30 px-4 py-2 rounded-lg">
-                  <Text variant="body" className="text-[#F5F5F5]">{landmark}</Text>
-                </div>
-              ))}
-            </div>
-          </section>
-        </Container>
-      </div>
-      
-      {/* CTA Section */}
-      <CTASection />
-      
+    <>
       {/* Structured Data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "serviceType": "Commercial Vending Machine Services",
-            "provider": {
-              "@type": "LocalBusiness",
-              "name": "AMP Vending",
-              "telephone": "(209) 403-5450"
-            },
-            "areaServed": {
-              "@type": "City",
-              "name": areaData.name,
-              "containedInPlace": {
-                "@type": "State",
-                "name": "California"
-              }
-            },
-            "description": areaData.description
-          })
+          __html: JSON.stringify(generateStructuredData(cityData)),
         }}
       />
-    </div>
+
+      {/* Main Content */}
+      <ServiceAreaPageClient
+        cityData={cityData}
+        nearbyCities={nearbyCities}
+      />
+    </>
   );
 }

@@ -98,7 +98,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
-  // 5. Service area pages for local SEO - Critical for local rankings
+  // 5. Service Areas index and regional pages
+  urls.push(
+    {
+      url: `${baseUrl}/service-areas`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.95,
+    },
+    {
+      url: `${baseUrl}/service-areas/central-valley`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.95,
+    }
+  );
+
+  // 6. Individual service area city pages for local SEO - Critical for local rankings
   SERVICE_AREAS.forEach(area => {
     urls.push({
       url: `${baseUrl}/service-areas/${area.slug}`,
@@ -108,7 +124,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
-  // 6. County-specific pages - High priority local SEO pages
+  // 7. County-specific pages - High priority local SEO pages
   urls.push(
     {
       url: `${baseUrl}/stanislaus-county`,
@@ -124,7 +140,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   );
 
-  // 7. Contact and feedback pages - Conversion pages
+  // 8. Contact and feedback pages - Conversion pages
   urls.push(
     {
       url: `${baseUrl}/contact`,
@@ -140,7 +156,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   );
 
-  // 8. Accessibility statement - Static content
+  // 9. Accessibility statement - Static content
   urls.push({
     url: `${baseUrl}/accessibility`,
     lastModified: '2025-01-01',
@@ -148,7 +164,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.3,
   });
 
-  // 9. Terms of Service and Privacy Policy - Legal pages
+  // 10. Terms of Service and Privacy Policy - Legal pages
   urls.push(
     {
       url: `${baseUrl}/terms-of-service`,
