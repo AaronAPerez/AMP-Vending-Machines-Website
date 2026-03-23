@@ -57,8 +57,8 @@ const ResizableNavbar = () => {
   const navItems: NavItem[] = [
     { name: 'Home', path: '/' },
     { name: 'Services', path: '/services' },
+    { name: 'Service Areas', path: '/service-areas' },
     { name: 'Vending Machines', path: '/vending-machines' },
-    { name: 'Feedback', path: '/feedback' },
     { name: 'Contact', path: '/contact' },
   ];
 

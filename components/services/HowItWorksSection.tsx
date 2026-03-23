@@ -140,7 +140,7 @@ const HowItWorksSection: React.FC = () => {
               <div className="relative bg-[#111111] rounded-xl border border-[#333333] p-6 sm:p-8 h-full flex flex-col">
                 {/* Step number badge */}
                 <div
-                  className={`absolute -top-8 left-6 w-12 h-12 rounded-full bg-gradient-to-r ${step.gradient} flex items-center justify-center shadow-lg`}
+                  className={`absolute top-8 left-6 w-12 h-12 rounded-full bg-gradient-to-r ${step.gradient} flex items-center justify-center shadow-lg`}
                   aria-label={`Step ${step.number}`}
                 >
                   <span className="text-white text-xl font-bold">{step.number}</span>
