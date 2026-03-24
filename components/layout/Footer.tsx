@@ -190,7 +190,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 font-medium hover:text-[#FD5A1E] transition-colors focus:outline-none focus:text-[#FD5A1E]"
           >
-            <img
+            <Image
               src="/icons/AP-Designs-Icon-48x48.svg"
               alt="AP Designs Logo"
               width={20}
