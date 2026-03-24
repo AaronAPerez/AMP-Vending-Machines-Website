@@ -38,15 +38,15 @@ export const StickyContactButton: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleCall = () => {
-    if (typeof window !== 'undefined' && 'gtag' in window) {
-      const gtag = window.gtag as (command: string, eventName: string, params: Record<string, unknown>) => void;
-      gtag('event', 'click_to_call', {
-        event_category: 'Contact',
-        event_label: 'Sticky Button Call',
-      });
-    }
-  };
+  // const handleCall = () => {
+  //   if (typeof window !== 'undefined' && 'gtag' in window) {
+  //     const gtag = window.gtag as (command: string, eventName: string, params: Record<string, unknown>) => void;
+  //     gtag('event', 'click_to_call', {
+  //       event_category: 'Contact',
+  //       event_label: 'Sticky Button Call',
+  //     });
+  //   }
+  // };
 
   // WhatsApp handler - commented out, can be re-enabled when WhatsApp option is needed
   // const handleWhatsApp = () => {
