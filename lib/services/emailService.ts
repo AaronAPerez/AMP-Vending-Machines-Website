@@ -193,7 +193,7 @@ export class EmailService {
       results.push(
         this.sendEmail({
           to: data.email,
-          subject: `🎉 Your FREE Vending Machine Awaits - AMP Vending`,
+          subject: `🎉 Your Premium Vending Solution Awaits - AMP Vending`,
           html: customerHtml,
           from: process.env.FROM_EMAIL || 'AMP Vending <ampdesignandconsulting@gmail.com>',
         })

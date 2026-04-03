@@ -134,7 +134,7 @@ const HomeContactSection = () => {
                 <span className="text-[#FD5A1E] mr-2">✓</span> 24-Hour Response Time
               </div>
               <div className="bg-[#0a0a0a] px-4 py-2 rounded-full border border-[#FD5A1E]/30 text-[#F5F5F5] text-sm">
-                <span className="text-[#FD5A1E] mr-2">✓</span> Free Consultation
+                <span className="text-[#FD5A1E] mr-2">✓</span> Professional Consultation
               </div>
               <div className="bg-[#0a0a0a] px-4 py-2 rounded-full border border-[#FD5A1E]/30 text-[#F5F5F5] text-sm">
                 <span className="text-[#FD5A1E] mr-2">✓</span> Ongoing Support

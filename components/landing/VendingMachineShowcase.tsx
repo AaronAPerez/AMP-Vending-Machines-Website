@@ -173,7 +173,7 @@ const VendingMachineShowcase = ({
                           'Custom capacity & dimensions for any space',
                           'Latest touchscreen & payment technology',
                           'Factory-direct from premium manufacturers',
-                          'Free expert consultation & site assessment'
+                          'Professional consultation & site assessment'
                         ].map((feature, index) => (
                           <motion.div
                             key={index}

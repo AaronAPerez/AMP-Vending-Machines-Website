@@ -73,7 +73,7 @@ export const rootMetadata: Metadata = {
         url: `${SEO_CONSTANTS.BASE_URL}/images/promos/amp-vending-promo-modesto.webp`,
         width: 1200,
         height: 630,
-        alt: "Free vending machine placement for businesses in Modesto and Central California",
+        alt: "Professional vending machine placement for businesses in Modesto and Central California",
         type: "image/webp",
       },
       {
@@ -102,7 +102,7 @@ export const rootMetadata: Metadata = {
     description: SEO_CONSTANTS.SITE_DESCRIPTION,
     images: {
       url: `${SEO_CONSTANTS.BASE_URL}/images/promos/amp-vending-promo-modesto.webp`,
-      alt: "Free vending machine placement for offices and workplaces in Central California",
+      alt: "Professional vending machine placement for offices and workplaces in Central California",
     },
   },
 

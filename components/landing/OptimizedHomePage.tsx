@@ -161,11 +161,11 @@ const HeroLoadingFallback = React.memo(() => (
   <div className="min-h-screen bg-black flex items-center justify-center">
     <div className="text-center px-4">
       <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#F5F5F5] mb-6 animate-pulse">
-        Free Vending Machines
+        Premium Vending Machines
         <br /><span className="text-[#FD5A1E]">For Qualifying Workplaces</span>
       </h1>
       <p className="text-xl md:text-2xl text-[#F5F5F5] mb-8 max-w-3xl mx-auto opacity-75">
-        Snack & drink vending machines with cashless payment. Free placement for qualifying offices & workplaces in Central CA...
+        Snack & drink vending machines with cashless payment. Professional placement for qualifying offices & workplaces in Central CA...
       </p>
     </div>
   </div>

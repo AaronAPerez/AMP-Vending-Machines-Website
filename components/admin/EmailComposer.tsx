@@ -39,9 +39,9 @@ const EMAIL_TEMPLATES: EmailTemplate[] = [
 
 <p><strong>Why choose AMP Vending?</strong></p>
 <ul>
-  <li>✅ FREE installation and setup</li>
-  <li>✅ NO upfront costs</li>
-  <li>✅ 24/7 support and maintenance</li>
+  <li>✅ Professional installation and setup</li>
+  <li>✅ Full-service maintenance</li>
+  <li>✅ 24/7 support and service</li>
   <li>✅ Wide selection of products</li>
 </ul>
 

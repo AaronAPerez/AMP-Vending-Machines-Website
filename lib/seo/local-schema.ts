@@ -8,7 +8,7 @@ export function generateEnhancedLocalBusinessSchema(): LocalBusiness {
   return {
     '@type': 'LocalBusiness',
     '@id': 'https://www.ampvendingmachines.com/#localbusiness',
-    name: 'AMP Vending Machines',
+    name: 'AMP Vending',
     alternateName: ['ampvendingmachines', 'AMP Vending', 'AMP Design and Consulting'],
     description: 'ampvendingmachines.com - Premier vending machine provider serving Modesto, Stanislaus County & Central California with state-of-the-art touchscreen technology and full-service maintenance packages.',
     
@@ -85,16 +85,6 @@ export function generateEnhancedLocalBusinessSchema(): LocalBusiness {
         '@type': 'City',
         name: 'Tracy, CA',
         '@id': 'https://en.wikipedia.org/wiki/Tracy,_California',
-      },
-      {
-        '@type': 'City',
-        name: 'Merced, CA',
-        '@id': 'https://en.wikipedia.org/wiki/Merced,_California',
-      },
-      {
-        '@type': 'City',
-        name: 'Fresno, CA',
-        '@id': 'https://en.wikipedia.org/wiki/Fresno,_California',
       },
     ],
     

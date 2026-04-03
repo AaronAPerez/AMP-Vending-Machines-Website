@@ -9,7 +9,7 @@ import GlareCard from '@/components/ui/effects/glare-card';
 /**
  * HowItWorksSection Component
  *
- * Displays the 3-step process for getting a free vending machine.
+ * Displays the 3-step process for getting a vending machine.
  * Optimized for clarity and conversion with visual step indicators.
  *
  * Steps:
@@ -110,7 +110,7 @@ const HowItWorksSection: React.FC = () => {
           transition={{ delay: 0.2 }}
           className="text-lg sm:text-xl text-[#A5ACAF] max-w-2xl mx-auto"
         >
-          Getting a free vending machine for your business is simple
+          Getting a vending machine for your business is simple
         </motion.p>
       </div>
 

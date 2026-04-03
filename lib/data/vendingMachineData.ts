@@ -74,7 +74,7 @@ export function getLongTailKeywords(): string[] {
     "professional vending machine service Stockton Fresno",
     "workplace refreshment solutions employee satisfaction",
     "commercial vending equipment supplier Central Valley",
-    "business vending machine consultation free estimate",
+    "business vending machine consultation professional estimate",
   ];
 }
 

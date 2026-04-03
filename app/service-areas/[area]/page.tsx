@@ -43,7 +43,7 @@ const CITY_DETAILS: Record<string, Omit<CityDetails, keyof ServiceCity>> = {
     landmarks: ['University of the Pacific', 'San Joaquin Delta College', 'Weberstown Mall', 'Stockton Arena'],
   },
   turlock: {
-    description: 'Commercial vending machines for Turlock businesses. Free consultation and professional installation with touchscreen technology and modern payment options.',
+    description: 'Commercial vending machines for Turlock businesses. Professional consultation and installation with touchscreen technology and modern payment options.',
     businesses: '2,000+',
     landmarks: ['California State University Stanislaus', 'Downtown Turlock', 'Turlock Regional Sports Complex'],
   },
@@ -53,7 +53,7 @@ const CITY_DETAILS: Record<string, Omit<CityDetails, keyof ServiceCity>> = {
     landmarks: ['Tracy Transit Center', 'West Valley Mall', 'Tracy Community Center', 'Tracy Historical Museum'],
   },
   manteca: {
-    description: 'Commercial vending services in Manteca, CA. Reliable vending machine solutions for businesses of all sizes with free installation and maintenance.',
+    description: 'Commercial vending services in Manteca, CA. Reliable vending machine solutions for businesses of all sizes with professional installation and maintenance.',
     businesses: '2,300+',
     landmarks: ['Manteca Transit Center', 'Bass Pro Shops', 'Tidewater Bikeway', 'Big League Dreams'],
   },
@@ -177,12 +177,12 @@ export async function generateMetadata({
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ampvendingmachines.com';
 
   return {
-    title: `Vending Machines ${cityData.name}, CA | Free Installation | AMP Vending`,
+    title: `Vending Machines ${cityData.name}, CA | Professional Installation | AMP Vending`,
     description: cityData.description,
     keywords: [
       `vending machines ${cityData.name}`,
       `${cityData.name} vending service`,
-      `free vending machine ${cityData.name}`,
+      `professional vending machine ${cityData.name}`,
       `commercial vending ${cityData.county} County`,
       `office vending ${cityData.name} CA`,
     ],
@@ -258,7 +258,7 @@ function generateStructuredData(cityData: CityDetails) {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Free Vending Machine Installation"
+            "name": "Professional Vending Machine Installation"
           }
         },
         {
@@ -270,7 +270,7 @@ function generateStructuredData(cityData: CityDetails) {
         }
       ]
     },
-    "priceRange": "Free",
+    "priceRange": "Full-Service",
   };
 }
 

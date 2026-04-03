@@ -60,7 +60,7 @@ const Footer = () => {
 
             {/* Company Description */}
             <p className="text-[#A5ACAF] text-sm leading-relaxed max-w-xs">
-              Premium vending solutions with zero-cost installation and maintenance-free operation for modern workplaces.
+              Premium vending solutions with professional installation and full-service operation for modern workplaces.
             </p>
           </div>
 

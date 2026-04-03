@@ -499,16 +499,16 @@ export const generateExitIntentConfirmationEmail = (data: any): string => {
 
     <p>Dear ${data.name || 'Valued Customer'},</p>
 
-    <p>Thank you for your interest in our <strong>FREE Premium Touchscreen Vending Machines</strong>! We're excited to help transform your workplace with state-of-the-art vending solutions.</p>
+    <p>Thank you for your interest in our <strong>Premium Touchscreen Vending Machines</strong>! We're excited to help transform your workplace with state-of-the-art vending solutions.</p>
 
     <div class="info-box">
-        <h2>✨ What You Get (100% FREE)</h2>
+        <h2>✨ What You Get</h2>
         <p>✓ Premium 21.5" HD touchscreen vending machine</p>
         <p>✓ Contactless payment support (Apple Pay, Google Pay, cards)</p>
-        <p>✓ Free installation and setup</p>
+        <p>✓ Professional installation and setup</p>
         <p>✓ Weekly restocking service</p>
         <p>✓ 50+ customizable products</p>
-        <p>✓ No upfront costs, no contracts</p>
+        <p>✓ Full-service maintenance included</p>
     </div>
 
     <div class="info-box">
@@ -521,7 +521,7 @@ export const generateExitIntentConfirmationEmail = (data: any): string => {
     <p>A member of our team will contact you within <strong>24 hours</strong> to:</p>
     <ul style="color: #555; font-size: 16px; line-height: 1.8;">
         <li>Discuss your specific vending needs</li>
-        <li>Schedule a FREE consultation</li>
+        <li>Schedule a professional consultation</li>
         <li>Answer any questions you may have</li>
         <li>Start the installation process</li>
     </ul>
@@ -534,7 +534,7 @@ export const generateExitIntentConfirmationEmail = (data: any): string => {
 
   return generateEmailHTML(
     content,
-    `Get Your FREE Vending Machine - AMP Vending`,
+    `Your Professional Vending Solution - AMP Vending`,
     {
       text: 'View Our Machines',
       url: `${BUSINESS_INFO.website}/vending-machines`
@@ -572,7 +572,7 @@ export const generateExitIntentNotificationEmail = (data: any): string => {
     <ul style="color: #555; font-size: 16px; line-height: 1.8;">
         <li>Review lead information above</li>
         <li>Call or email to schedule consultation</li>
-        <li>Prepare FREE vending machine proposal</li>
+        <li>Prepare vending machine proposal</li>
         <li>Track follow-up in CRM</li>
     </ul>
   `;

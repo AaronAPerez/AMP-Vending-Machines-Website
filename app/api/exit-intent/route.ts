@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
     if (businessResult.success) {
       return NextResponse.json({
         success: true,
-        message: 'Thank you for your interest! We\'ll contact you within 24 hours about your FREE vending machine.',
+        message: 'Thank you for your interest! We\'ll contact you within 24 hours about your premium vending solution.',
         submissionId,
         emailStatus: {
           customerConfirmation: customerResult.success ? 'sent' : 'skipped',
@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
       console.log('⚠️ Exit intent emails failed, but lead captured');
       return NextResponse.json({
         success: true,
-        message: 'Thank you for your interest! We\'ll contact you within 24 hours about your FREE vending machine.',
+        message: 'Thank you for your interest! We\'ll contact you within 24 hours about your premium vending solution.',
         submissionId,
         emailStatus: {
           customerConfirmation: customerResult.success ? 'sent' : 'failed',

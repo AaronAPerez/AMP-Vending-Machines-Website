@@ -102,8 +102,8 @@ const VendingMachinesPage = () => {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "CollectionPage",
-            "name": "Snack & Drink Vending Machines | Free Placement for Qualifying Businesses | Central CA",
-            "description": "Browse our snack, drink & combo vending machines. Free vending machine placement for qualifying offices, warehouses, and workplaces. Cashless payment with tap-to-pay technology. No cost installation in Modesto, Stockton & Central California.",
+            "name": "Snack & Drink Vending Machines | Professional Placement for Qualifying Businesses | Central CA",
+            "description": "Browse our snack, drink & combo vending machines. Professional vending machine placement for qualifying offices, warehouses, and workplaces. Cashless payment with tap-to-pay technology. Full-service installation in Modesto, Stockton & Central California.",
             "url": "https://www.ampvendingmachines.com/vending-machines/",
             "publisher": {
               "@type": "Organization",
@@ -185,8 +185,8 @@ const VendingMachinesPage = () => {
             </h1>
 
             <p className="text-lg sm:text-xl lg:text-2xl text-[#A5ACAF] max-w-4xl mx-auto mb-8">
-              Free vending machine placement for qualifying offices, warehouses, and workplaces. Snack, drink & combo machines
-              with cashless payment and tap-to-pay technology. No cost installation in Central California.
+              Professional vending machine placement for qualifying offices, warehouses, and workplaces. Snack, drink & combo machines
+              with cashless payment and tap-to-pay technology. Full-service installation in Central California.
             </p>
 
             {/* Enhanced Machine Count Display with SEO Keywords */}

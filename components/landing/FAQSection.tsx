@@ -17,8 +17,8 @@ const FAQSection = () => {
   const faqItems = [
     {
       id: 1,
-      question: "How do I qualify for a free vending machine?",
-      answer: "AMP Vending provides free snack and drink vending machine placement for qualifying offices, warehouses, and workplaces in Modesto, Stockton, and Central Valley California. Businesses with 50+ employees or high foot traffic typically qualify. We handle everything - free installation, free maintenance, and free restocking. Contact us to see if your location qualifies.",
+      question: "How do I qualify for a vending machine?",
+      answer: "AMP Vending provides snack and drink vending machine placement for qualifying offices, warehouses, and workplaces in Modesto, Stockton, and Central Valley California. Businesses with 50+ employees or high foot traffic typically qualify. We handle everything - professional installation, maintenance, and restocking. Contact us to see if your location qualifies.",
       icon: <Zap size={20} />,
       category: "qualification"
     },
@@ -38,8 +38,8 @@ const FAQSection = () => {
     },
     {
       id: 4,
-      question: "What locations qualify for free vending machine placement?",
-      answer: "Qualifying locations include offices, warehouses, factories, schools, gyms, hotels, hospitals, and break rooms with 50+ employees or regular foot traffic. Our full-service vending includes free installation, maintenance, and restocking in Modesto, Stockton, Stanislaus County, San Joaquin County and throughout Central Valley California. Contact us to check if your business qualifies.",
+      question: "What locations qualify for vending machine placement?",
+      answer: "Qualifying locations include offices, warehouses, factories, schools, gyms, hotels, hospitals, and break rooms with 50+ employees or regular foot traffic. Our full-service vending includes professional installation, maintenance, and restocking in Modesto, Stockton, Stanislaus County, San Joaquin County and throughout Central Valley California. Contact us to check if your business qualifies.",
       icon: <HelpCircle size={20} />,
       category: "qualification"
     }
@@ -70,14 +70,14 @@ const FAQSection = () => {
     >
       <div className="text-center mb-12">
         <div className="inline-flex items-center px-4 py-2 bg-[#FD5A1E]/10 rounded-full mb-6">
-          <span className="text-[#FD5A1E] font-medium text-sm">Free Placement for Qualifying Businesses</span>
+          <span className="text-[#FD5A1E] font-medium text-sm">Full-Service Vending for Qualifying Businesses</span>
         </div>
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-[#F5F5F5]">
           Vending Machine <span className="text-[#FD5A1E]">FAQs</span>
         </h2>
 
         <p className="text-lg text-[#A5ACAF] max-w-3xl mx-auto">
-          Learn how to qualify for a free vending machine. Snack, drink & cashless vending machines for offices and workplaces in Central Valley California.
+          Learn how to qualify for a vending machine. Snack, drink & cashless vending machines for offices and workplaces in Central Valley California.
         </p>
       </div>
 
@@ -128,7 +128,7 @@ const FAQSection = () => {
           See If Your Business Qualifies
         </h3>
         <p className="text-[#A5ACAF] max-w-2xl mx-auto mb-6">
-          Contact us to check if your office, warehouse, or workplace qualifies for free vending machine placement.
+          Contact us to check if your office, warehouse, or workplace qualifies for vending machine placement.
           We serve Modesto, Stockton, and all of Central Valley California with snack, drink & combo vending machines.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

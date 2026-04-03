@@ -6,16 +6,16 @@ import AMP_VENDING_BUSINESS_INFO from '@/lib/data/businessData';
  * Services Page
  *
  * Main services landing page optimized for Google Ads and SEO.
- * Showcases free vending machine services for businesses in Central Valley, CA.
+ * Showcases professional vending machine services for businesses in Central Valley, CA.
  *
  * Target Keywords:
- * - Free vending machine service Central Valley
+ * - Professional vending machine service Central Valley
  * - Vending machine installation Modesto CA
  * - Office vending machines Stockton
  * - Commercial vending services Central California
  *
  * Page Structure:
- * 1. Hero - Free service value proposition
+ * 1. Hero - Full-service value proposition
  * 2. How It Works - 3-step process
  * 3. Types of Service - Service offerings
  * 4. Ideal Locations - Target businesses
@@ -26,24 +26,24 @@ import AMP_VENDING_BUSINESS_INFO from '@/lib/data/businessData';
 
 // SEO Metadata for the services page
 export const metadata: Metadata = {
-  title: 'Free Vending Machine Services | Central Valley CA | AMP Vending',
+  title: 'Professional Vending Machine Services | Central Valley CA | AMP Vending',
   description:
-    'Get a free vending machine for your business in Central Valley, CA. AMP Vending provides installation, stocking, and maintenance at no cost. Serving Modesto, Stockton, Turlock & more.',
+    'Get a vending machine for your business in Central Valley, CA. AMP Vending provides professional installation, stocking, and maintenance. Serving Modesto, Stockton, Turlock & more.',
   keywords: [
-    'free vending machine service',
+    'professional vending machine service',
     'vending machine installation Central Valley',
     'office vending machines Modesto',
     'commercial vending Stockton CA',
-    'free snack machines for businesses',
+    'snack machines for businesses',
     'vending machine company Central California',
     'workplace vending solutions',
-    'no cost vending machines',
+    'full service vending machines',
     'AMP Vending services'
   ],
   openGraph: {
-    title: 'Free Vending Machine Services for Businesses | AMP Vending',
+    title: 'Professional Vending Machine Services for Businesses | AMP Vending',
     description:
-      'Premium vending machines installed, stocked, and maintained at no cost. Serving businesses throughout Central Valley, CA.',
+      'Premium vending machines installed, stocked, and maintained professionally. Serving businesses throughout Central Valley, CA.',
     url: `${AMP_VENDING_BUSINESS_INFO.contact.website}/services`,
     siteName: AMP_VENDING_BUSINESS_INFO.name,
     locale: 'en_US',
@@ -53,15 +53,15 @@ export const metadata: Metadata = {
         url: '/images/og/services-page.jpg',
         width: 1200,
         height: 630,
-        alt: 'AMP Vending - Free Vending Machine Services'
+        alt: 'AMP Vending - Professional Vending Machine Services'
       }
     ]
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Free Vending Machine Services | AMP Vending',
+    title: 'Professional Vending Machine Services | AMP Vending',
     description:
-      'Get a free vending machine for your Central Valley business. No cost installation, stocking, or maintenance.',
+      'Get a vending machine for your Central Valley business. Professional installation, stocking, and maintenance.',
     images: ['/images/og/services-page.jpg']
   },
   alternates: {
@@ -88,9 +88,9 @@ function generateServicesStructuredData() {
         '@type': 'WebPage',
         '@id': `${business.contact.website}/services#webpage`,
         url: `${business.contact.website}/services`,
-        name: 'Free Vending Machine Services | AMP Vending',
+        name: 'Professional Vending Machine Services | AMP Vending',
         description:
-          'Professional vending machine services including free installation, stocking, and maintenance for businesses in Central Valley, CA.',
+          'Professional vending machine services including installation, stocking, and maintenance for businesses in Central Valley, CA.',
         isPartOf: {
           '@id': `${business.contact.website}/#website`
         },
@@ -178,18 +178,18 @@ function generateServicesStructuredData() {
               '@type': 'Offer',
               itemOffered: {
                 '@type': 'Service',
-                name: 'Free Installation',
+                name: 'Professional Installation',
                 description:
-                  'Professional installation at no cost to your business.'
+                  'Professional installation for your business.'
               }
             },
             {
               '@type': 'Offer',
               itemOffered: {
                 '@type': 'Service',
-                name: 'Free Maintenance',
+                name: 'Full-Service Maintenance',
                 description:
-                  'Regular maintenance and repairs included at no additional charge.'
+                  'Regular maintenance and repairs included with our service.'
               }
             }
           ]
@@ -201,15 +201,15 @@ function generateServicesStructuredData() {
         mainEntity: [
           {
             '@type': 'Question',
-            name: 'Is the vending machine service really free?',
+            name: 'How does your vending machine service work?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'Yes! AMP Vending provides vending machines, installation, stocking, and maintenance completely free of charge to qualifying businesses. We earn revenue from product sales.'
+              text: 'AMP Vending provides vending machines, installation, stocking, and maintenance for qualifying businesses. We handle all aspects of the service so you can focus on your business.'
             }
           },
           {
             '@type': 'Question',
-            name: 'What types of businesses qualify for free vending machines?',
+            name: 'What types of businesses qualify for vending machines?',
             acceptedAnswer: {
               '@type': 'Answer',
               text: 'We serve offices, warehouses, schools, gyms, hotels, government buildings, and many other business types throughout Central Valley, CA. Contact us to check if your location qualifies.'

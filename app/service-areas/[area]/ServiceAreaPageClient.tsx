@@ -156,7 +156,7 @@ function CityHeroSection({
             size="lg"
             rightIcon={<ArrowRight className="w-5 h-5" />}
           >
-            Get Free Machine in {cityData.name}
+            Request Quote for {cityData.name}
           </AccessibleButton>
           <AccessibleButton href="tel:+12094035450" variant="secondary" size="lg">
             Call (209) 403-5450
@@ -222,8 +222,8 @@ function CityServicesSection({ cityName }: { cityName: string }) {
   const services = [
     {
       icon: <Package className="w-6 h-6" />,
-      title: 'Free Installation',
-      description: `Professional installation of touchscreen vending machines at your ${cityName} location with no upfront costs.`,
+      title: 'Professional Installation',
+      description: `Professional installation of touchscreen vending machines at your ${cityName} location.`,
     },
     {
       icon: <Wrench className="w-6 h-6" />,

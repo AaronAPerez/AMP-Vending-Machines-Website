@@ -92,7 +92,7 @@ export async function POST(request: NextRequest) {
         benefits: benefits || [],
         stats: stats || [],
         special_offer_badge,
-        primary_cta_text: primary_cta_text || 'Get Your Free Machine',
+        primary_cta_text: primary_cta_text || 'See If You Qualify',
         primary_cta_link: primary_cta_link || '/contact',
         phone_button_text: phone_button_text || 'Call (209) 403-5450',
         phone_number: phone_number || '+12094035450',

@@ -18,16 +18,16 @@ export async function GET() {
         success: true,
         data: {
           headline: "Wait! Don't Miss Out...",
-          subheadline: "FREE Vending for Qualifying Businesses!",
-          value_proposition: "Join the many qualifying businesses in Modesto & Stanislaus County providing premium vending at zero cost!",
+          subheadline: "Professional Vending for Qualifying Businesses!",
+          value_proposition: "Join the many qualifying businesses in Modesto & Stanislaus County providing premium vending solutions!",
           benefits: [
-            "100% FREE Installation & Setup",
-            "NO Upfront Costs or Contracts",
+            "Professional Installation & Setup",
+            "Full-Service Maintenance",
             "24/7 Service & Support",
             "Wide Product Selection"
           ],
           stats: [
-            { value: "100% Free", label: "Setup" },
+            { value: "Full", label: "Service" },
             { value: "24/7", label: "Service" },
             { value: "50+", label: "Products" }
           ],
@@ -52,16 +52,16 @@ export async function GET() {
         success: true,
         data: {
           headline: "Wait! Don't Miss Out...",
-          subheadline: "FREE Vending for Qualifying Businesses!",
-          value_proposition: "Join the many qualifying businesses in Modesto & Stanislaus County providing premium vending at zero cost!",
+          subheadline: "Professional Vending for Qualifying Businesses!",
+          value_proposition: "Join the many qualifying businesses in Modesto & Stanislaus County providing premium vending solutions!",
           benefits: [
-            "100% FREE Installation & Setup",
-            "NO Upfront Costs or Contracts",
+            "Professional Installation & Setup",
+            "Full-Service Maintenance",
             "24/7 Service & Support",
             "Wide Product Selection"
           ],
           stats: [
-            { value: "100% Free", label: "Setup" },
+            { value: "Full", label: "Service" },
             { value: "24/7", label: "Service" },
             { value: "50+", label: "Products" }
           ],
@@ -104,16 +104,16 @@ export async function GET() {
       success: true,
       data: {
         headline: "Wait! Don't Miss Out...",
-        subheadline: "FREE Vending for Qualifying Businesses!",
-        value_proposition: "Join the many qualifying businesses in Modesto & Stanislaus County providing premium vending at zero cost!",
+        subheadline: "Professional Vending for Qualifying Businesses!",
+        value_proposition: "Join the many qualifying businesses in Modesto & Stanislaus County providing premium vending solutions!",
         benefits: [
-          "100% FREE Installation & Setup",
-          "NO Upfront Costs or Contracts",
+          "Professional Installation & Setup",
+          "Full-Service Maintenance",
           "24/7 Service & Support",
           "Wide Product Selection"
         ],
         stats: [
-          { value: "100% Free", label: "Setup" },
+          { value: "Full", label: "Service" },
           { value: "24/7", label: "Service" },
           { value: "50+", label: "Products" }
         ],

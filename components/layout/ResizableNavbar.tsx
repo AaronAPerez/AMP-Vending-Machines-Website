@@ -161,7 +161,7 @@ const ResizableNavbar = () => {
                 size="sm"
                 animate
               >
-                Free Consultation
+                Get a Quote
               </AccessibleButton>
             </div>
 
@@ -203,7 +203,7 @@ const ResizableNavbar = () => {
                 fullWidth
                 animate
               >
-                Free Consultation
+                Get a Quote
               </AccessibleButton>
             </div>
 

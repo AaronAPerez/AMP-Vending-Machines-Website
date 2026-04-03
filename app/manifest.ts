@@ -25,7 +25,7 @@ export default function manifest(): MetadataRoute.Manifest {
     // Basic App Information
     name: 'AMP Vending - Premium Workplace Vending Solutions',
     short_name: 'AMP Vending',
-    description: 'Zero-cost installation, maintenance-free vending machines with touchscreen technology for enhanced workplace satisfaction.',
+    description: 'Professional installation, full-service vending machines with touchscreen technology for enhanced workplace satisfaction.',
     
     // PWA Configuration
     start_url: '/',
