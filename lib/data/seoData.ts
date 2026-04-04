@@ -473,7 +473,7 @@ export const BASE_ORGANIZATION_SCHEMA = {
   url: SEO_CONSTANTS.BASE_URL,
   logo: SEO_CONSTANTS.LOGO_FULL_URL,
   image: SEO_CONSTANTS.DEFAULT_OG_IMAGE_FULL,
-  description: 'ampvendingmachines.com - Premier vending machine provider serving Modesto, Stockton, Stanislaus County, San Joaquin County & Central Valley, CA with professional touchscreen vending solutions.',
+  description: 'AMP Vending - Premier vending machine provider serving Modesto, Stockton, Stanislaus County, San Joaquin County & Central Valley, CA with professional touchscreen vending solutions.',
   telephone: SEO_CONSTANTS.PHONE,
   email: SEO_CONSTANTS.EMAIL,
   priceRange: 'Full-service installation and maintenance',

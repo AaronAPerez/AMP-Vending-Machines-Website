@@ -86,10 +86,10 @@ export const AMP_VENDING_BUSINESS_INFO = {
   slogan: "Premium Vending Solutions for Modern Workplaces",
   
   // SEO-Optimized Business Description for Google Business Profile
-  description: `Professional commercial vending machine solutions for offices, schools, and businesses throughout Central California. AMP Vending provides state-of-the-art touchscreen vending machines with complete installation, maintenance, and restocking services. Serving Modesto, Stockton, Turlock, and surrounding areas with refrigerated and snack vending machines featuring contactless payment technology. Contact us for professional consultations on workplace vending solutions that enhance employee satisfaction and convenience.`,
+  description: `Professional commercial vending machine solutions for offices, schools, and businesses throughout Central Valley,California. AMP Vending provides state-of-the-art touchscreen vending machines with complete installation, maintenance, and restocking services. Serving Modesto, Stockton, Turlock, and surrounding areas with refrigerated and snack vending machines featuring contactless payment technology. Contact us for professional consultations on workplace vending solutions that enhance employee satisfaction and convenience.`,
   
   // Short description for citations and directories
-  shortDescription: `Commercial vending machines with professional installation and maintenance service throughout Central California. Touchscreen technology, contactless payments, 50+ product options.`,
+  shortDescription: `Commercial vending machines with professional installation and maintenance service throughout Central Valley,California. Touchscreen technology, contactless payments, 50+ product options.`,
   
   // Address Information
   address: {
@@ -174,7 +174,7 @@ export const AMP_VENDING_BUSINESS_INFO = {
 export const AMP_VENDING_SERVICES: BusinessService[] = [
   {
     name: "Commercial Vending Machine Installation",
-    description: "Professional installation of touchscreen vending machines for offices and businesses throughout Central California. Our certified technicians ensure proper setup, configuration, and employee training for optimal performance.",
+    description: "Professional installation of touchscreen vending machines for offices and businesses throughout Central Valley, California. Our certified technicians ensure proper setup, configuration, and employee training for optimal performance.",
     keywords: [
       "commercial vending machine installation",
       "office vending machine setup", 
