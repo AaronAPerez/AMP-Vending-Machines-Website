@@ -70,7 +70,7 @@ export default function RootLayout({
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:title" content="AMP Vending Machines – Professional Vending for Modesto, Stockton, Stanislaus & San Joaquin County" />
-        <meta property="og:description" content="We provide high‑quality vending machines at no cost to your business." />
+        <meta property="og:description" content="We provide high‑quality vending machines to your business." />
 
         <meta name="google-site-verification" content="rQUz_b0dTF5gHNCSHXdNfzEI6LDoPxg54ZppJQjiFFg" />
 

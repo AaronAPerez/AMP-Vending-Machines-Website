@@ -52,8 +52,8 @@ export async function GET() {
         success: true,
         data: {
           headline: "Wait! Don't Miss Out...",
-          subheadline: "Professional Vending for Qualifying Businesses!",
-          value_proposition: "Join the many qualifying businesses in Modesto & Stanislaus County providing premium vending solutions!",
+          subheadline: "We'll Beat any Vending Machine service offer for Qualifying Businesses!",
+          value_proposition: "Join the many qualifying businesses in Modesto & Stanislaus County receiving premium vending solutions!",
           benefits: [
             "Professional Installation & Setup",
             "Full-Service Maintenance",
@@ -104,7 +104,7 @@ export async function GET() {
       success: true,
       data: {
         headline: "Wait! Don't Miss Out...",
-        subheadline: "Professional Vending for Qualifying Businesses!",
+         subheadline: "We'll Beat any Vending Machine service offer for Qualifying Businesses!",
         value_proposition: "Join the many qualifying businesses in Modesto & Stanislaus County providing premium vending solutions!",
         benefits: [
           "Professional Installation & Setup",

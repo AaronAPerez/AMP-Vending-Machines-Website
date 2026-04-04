@@ -32,20 +32,20 @@ export function generateOrganizationSchema(): OrganizationSchema {
     '@type': 'Organization',
     name: 'AMP Vending',
     description: 'Professional vending machine solutions for workplaces with maintenance-free service and premium touchscreen technology.',
-    url: 'https://ampvending.com',
-    logo: 'https://ampvending.com/images/amp-vending-logo.png',
+    url: 'https://ampvendingmachines.com',
+    logo: 'https://ampvendingmachines.com/images/logo/AMP_logo.png',
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '+1-XXX-XXX-XXXX',
+      telephone: '+1-209- 403-5450',
       contactType: 'Customer Service',
       availableLanguage: 'English'
     },
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'Your Street Address',
-      addressLocality: 'Your City',
-      addressRegion: 'Your State',
-      postalCode: 'Your ZIP',
+      streetAddress: '4120 Dale Rd ste j8 1005',
+      addressLocality: 'Modesto',
+      addressRegion: 'CA',
+      postalCode: '95354',
       addressCountry: 'US'
     }
   };
