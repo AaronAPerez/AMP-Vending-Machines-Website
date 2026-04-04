@@ -11,17 +11,17 @@ import AMP_VENDING_BUSINESS_INFO from '@/lib/data/businessData';
  * ServicesCTASection Component
  *
  * Final call-to-action section for the Services page.
- * Emphasizes the free service model and provides clear contact options.
+ * Emphasizes the full-service model and provides clear contact options.
  *
- * Primary CTA: "Request a Free Machine"
+ * Primary CTA: "Request a Quote"
  */
 
 const ServicesCTASection: React.FC = () => {
   // Benefits to highlight
   const benefits = [
-    "Free installation",
-    "Free maintenance",
-    "Free restocking",
+    "Professional installation",
+    "Full-service maintenance",
+    "Regular restocking",
     "Modern machines",
     "Cashless payments"
   ];
@@ -60,7 +60,7 @@ const ServicesCTASection: React.FC = () => {
           className="inline-flex items-center px-4 py-2 bg-[#FD5A1E]/20 border border-[#FD5A1E]/30 rounded-full mb-6"
         >
           <span className="text-[#FD5A1E] font-semibold text-sm">
-            100% Free Service
+            Full-Service Vending
           </span>
         </motion.div>
 
@@ -73,7 +73,7 @@ const ServicesCTASection: React.FC = () => {
           className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#F5F5F5] mb-6"
         >
           Ready to Get a{' '}
-          <span className="text-[#FD5A1E]">Free Vending Machine</span>?
+          <span className="text-[#FD5A1E]">Vending Machine</span>?
         </motion.h2>
 
         {/* Subheadline */}
@@ -84,8 +84,8 @@ const ServicesCTASection: React.FC = () => {
           transition={{ delay: 0.2 }}
           className="text-lg sm:text-xl text-[#A5ACAF] max-w-2xl mx-auto mb-8"
         >
-          Join businesses across the Central Valley enjoying premium vending services
-          at absolutely no cost. Get started today!
+          Join businesses across the Central Valley enjoying premium vending services.
+          Get started today!
         </motion.p>
 
         {/* Benefits row */}
@@ -123,9 +123,9 @@ const ServicesCTASection: React.FC = () => {
             variant="cta"
             size="xl"
             rightIcon={<ArrowRight className="w-6 h-6" />}
-            aria-label="Request a free vending machine"
+            aria-label="Request a vending machine"
           >
-            Request a Free Machine
+            Request a Quote
           </AccessibleButton>
 
           <AccessibleButton

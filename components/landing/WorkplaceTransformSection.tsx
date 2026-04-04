@@ -73,7 +73,7 @@ const PREMIUM_FEATURES = [
 const SERVICE_BENEFITS = [
   {
     id: 'installation',
-    title: 'Free Professional Installation',
+    title: 'Professional Installation',
     description: 'Complete setup and configuration included for Modesto and Stanislaus County locations',
     icon: <ZapIcon size={24} />,
   },

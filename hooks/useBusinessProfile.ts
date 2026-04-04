@@ -118,14 +118,14 @@ export function useBusinessProfile() {
         isActive: true,
       },
       {
-        id: 'free-consultation-' + Date.now(),
+        id: 'professional-consultation-' + Date.now(),
         type: 'OFFER',
-        title: 'Free Commercial Vending Machine Consultation',
+        title: 'Professional Commercial Vending Machine Consultation',
         description: 'Get a complimentary assessment for your workplace vending needs. Our experts will recommend the perfect commercial vending solution for your business in Central California. No obligation required.',
         image: '/images/consultation/amp-vending-consultation.jpg',
         ctaButton: 'CALL_NOW',
         targetKeywords: [
-          'free vending consultation',
+          'professional vending consultation',
           'commercial vending machines',
           'workplace vending solutions'
         ],
@@ -202,8 +202,8 @@ export function useBusinessProfile() {
       {
         id: 'installation-cost-pricing',
         question: 'How much does commercial vending machine installation cost?',
-        answer: 'We provide free consultations and competitive pricing for all commercial vending machine installations. Pricing varies based on machine type, location requirements, and service package. Contact us at (209) 403-5450 for a customized quote based on your specific business needs.',
-        keywords: ['installation cost', 'vending machine pricing', 'free consultation'],
+        answer: 'We provide professional consultations and competitive pricing for all commercial vending machine installations. Pricing varies based on machine type, location requirements, and service package. Contact us at (209) 403-5450 for a customized quote based on your specific business needs.',
+        keywords: ['installation cost', 'vending machine pricing', 'professional consultation'],
         category: 'pricing',
         isPublished: true,
         lastUpdated: currentDate,

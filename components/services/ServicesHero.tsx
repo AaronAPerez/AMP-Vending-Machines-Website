@@ -12,7 +12,7 @@ import { AccessibleButton } from '@/components/ui/AccessibleButton';
  * Hero section for the Services page optimized for Google Ads conversions.
  * Features a clear value proposition, trust indicators, and prominent CTA.
  *
- * SEO Focus: "Free Vending Machine Service Central Valley CA"
+ * SEO Focus: "Professional Vending Machine Service Central Valley CA"
  */
 
 interface ServicesHeroProps {
@@ -25,14 +25,14 @@ interface ServicesHeroProps {
 }
 
 const ServicesHero: React.FC<ServicesHeroProps> = ({
-  headline = "Free Vending Machine Service for Businesses",
-  subheadline = "Premium vending machines installed, stocked, and maintained at no cost to you. Serving offices, warehouses, and facilities throughout the Central Valley.",
+  headline = "Professional Vending Machine Service for Businesses",
+  subheadline = "Premium vending machines installed, stocked, and maintained professionally. Serving offices, warehouses, and facilities throughout the Central Valley.",
   location = "Central Valley, CA"
 }) => {
   // Trust indicators displayed below headline
   const trustIndicators = [
-    "No Cost Installation",
-    "Free Maintenance",
+    "Professional Installation",
+    "Full-Service Maintenance",
     "Weekly Restocking"
   ];
 
@@ -85,8 +85,8 @@ const ServicesHero: React.FC<ServicesHeroProps> = ({
               className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-bold text-[#F5F5F5] mb-6 leading-tight"
             >
               {headline.split(' ').map((word, index) => {
-                // Highlight "Free" with orange color
-                if (word.toLowerCase() === 'free') {
+                // Highlight "Professional" with orange color
+                if (word.toLowerCase() === 'professional') {
                   return (
                     <span key={index} className="text-[#FD5A1E]">
                       {word}{' '}
@@ -143,9 +143,9 @@ const ServicesHero: React.FC<ServicesHeroProps> = ({
                 variant="cta"
                 size="lg"
                 rightIcon={<ArrowRight className="w-5 h-5" />}
-                aria-label="Request a free vending machine for your business"
+                aria-label="Request a vending machine for your business"
               >
-                Request Free Machine
+                Request a Quote
               </AccessibleButton>
 
               <AccessibleButton

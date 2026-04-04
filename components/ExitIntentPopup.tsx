@@ -140,21 +140,21 @@ export function ExitIntentPopup({ delay = 5000, isOpen, onClose, content: provid
   // Default content (fallback)
   const defaultContent: ExitIntentContent = {
     headline: "Wait! Don't Miss Out...",
-    subheadline: "FREE Vending for Qualifying Businesses!",
-    valueProposition: "Join the many qualifying businesses in Modesto & Stanislaus County providing premium vending at zero cost!",
+    subheadline: "Vending Solutions for Qualifying Businesses!",
+    valueProposition: "Join the many qualifying businesses in Modesto & Stanislaus County providing premium vending services!",
     benefits: [
-      "100% FREE Installation & Setup",
-      "NO Upfront Costs or Contracts",
+      "Professional Installation & Setup",
+      "Full-Service Maintenance",
       "24/7 Service & Support",
       "Wide Product Selection"
     ],
     stats: [
-      { value: "100% Free", label: "Setup" },
+      { value: "Full", label: "Service" },
       { value: "24/7", label: "Service" },
       { value: "50+", label: "Products" }
     ],
     specialOfferBadge: "LIMITED TIME OFFER",
-    ctaButton: "Get Your Free Machine",
+    ctaButton: "Request a Quote",
     ctaLink: "/contact",
     phoneButton: "Call (209) 403-5450",
     phoneNumber: "+12094035450"
@@ -395,7 +395,7 @@ export function ExitIntentPopup({ delay = 5000, isOpen, onClose, content: provid
                       <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
                       <div className="text-sm text-green-500">
                         <p className="font-semibold">Success!</p>
-                        <p className="text-xs">We&apos;ll contact you within 24 hours about your FREE vending machine.</p>
+                        <p className="text-xs">We&apos;ll contact you within 24 hours about your vending machine solution.</p>
                       </div>
                     </div>
                   )}

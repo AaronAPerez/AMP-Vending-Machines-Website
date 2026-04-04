@@ -19,14 +19,14 @@ import AMP_VENDING_BUSINESS_INFO from '@/lib/data/businessData';
  */
 export const metadata: Metadata = {
   title: 'Service Areas | Vending Machines in Central Valley CA | AMP Vending',
-  description: 'AMP Vending serves Stanislaus County, San Joaquin County, and the Central Valley. Free vending machine installation in Modesto, Stockton, Turlock, Tracy, Manteca, and 25+ cities.',
+  description: 'AMP Vending serves Stanislaus County, San Joaquin County, and the Central Valley. Professional vending machine installation in Modesto, Stockton, Turlock, Tracy, Manteca, and 25+ cities.',
   keywords: [
     'vending machines Central Valley',
     'vending service Stanislaus County',
     'vending machines San Joaquin County',
     'Modesto vending machines',
     'Stockton vending service',
-    'free vending machine installation',
+    'professional vending machine installation',
     'commercial vending California',
   ],
   alternates: {
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Service Areas | AMP Vending - Central Valley CA',
-    description: 'Free vending machine services throughout the Central Valley. Serving Modesto, Stockton, Turlock, and 25+ cities in Stanislaus & San Joaquin Counties.',
+    description: 'Professional vending machine services throughout the Central Valley. Serving Modesto, Stockton, Turlock, and 25+ cities in Stanislaus & San Joaquin Counties.',
     url: `${process.env.NEXT_PUBLIC_BASE_URL}/service-areas`,
     siteName: 'AMP Vending',
     type: 'website',
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Service Areas | AMP Vending',
-    description: 'Free vending machine services in Modesto, Stockton, and the Central Valley.',
+    description: 'Professional vending machine services in Modesto, Stockton, and the Central Valley.',
   },
 };
 
@@ -115,8 +115,8 @@ function generateStructuredData() {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Free Vending Machine Installation",
-            "description": "Professional installation at no cost to your business"
+            "name": "Professional Vending Machine Installation",
+            "description": "Professional installation for your business"
           }
         },
         {
@@ -129,7 +129,7 @@ function generateStructuredData() {
         }
       ]
     },
-    "priceRange": "Free",
+    "priceRange": "Full-Service",
   };
 }
 

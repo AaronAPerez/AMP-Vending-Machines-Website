@@ -10,12 +10,12 @@ export default function HomePage() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "AMP Vending Machines",
-    "alternateName": "AMP Vending - Free Vending Machine Placement",
-    "description": "Free vending machine placement for offices, warehouses, and workplaces. Snack, drink & combo vending machines with cashless payment. No cost installation in Modesto, Stockton & Central Valley, CA.",
+    "alternateName": "AMP Vending - Professional Vending Machine Solutions",
+    "description": "Professional vending machine placement for offices, warehouses, and workplaces. Snack, drink & combo vending machines with cashless payment. Full-service installation in Modesto, Stockton & Central Valley, CA.",
     "image": "https://www.ampvendingmachines.com/images/promos/amp-vending-promo-modesto.webp",
     "url": "https://www.ampvendingmachines.com",
     "telephone": "+12094035450",
-    "priceRange": "Free Installation",
+    "priceRange": "Full-Service Solutions",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "4120 Dale Rd ste j8 1005",
@@ -41,8 +41,8 @@ export default function HomePage() {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Free Vending Machine Placement",
-            "description": "Free snack and drink vending machine placement for businesses with no cost installation"
+            "name": "Professional Vending Machine Placement",
+            "description": "Full-service snack and drink vending machine placement for businesses with professional installation"
           }
         },
         {

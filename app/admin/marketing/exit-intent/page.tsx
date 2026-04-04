@@ -45,7 +45,7 @@ export default function ExitIntentManagementPage() {
       { value: '', label: '' }
     ],
     special_offer_badge: '',
-    primary_cta_text: 'Get Your Free Machine',
+    primary_cta_text: 'See If You Qualify',
     primary_cta_link: '/contact',
     phone_button_text: 'Call (209) 403-5450',
     phone_number: '+12094035450'
@@ -178,7 +178,7 @@ export default function ExitIntentManagementPage() {
         { value: '', label: '' }
       ],
       special_offer_badge: '',
-      primary_cta_text: 'Get Your Free Machine',
+      primary_cta_text: 'See If You Qualify',
       primary_cta_link: '/contact',
       phone_button_text: 'Call (209) 403-5450',
       phone_number: '+12094035450'

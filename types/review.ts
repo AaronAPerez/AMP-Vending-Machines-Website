@@ -324,7 +324,7 @@ export type ReviewMetricsWithTrends = ReviewMetrics & {
 export const SERVICE_TYPE_LABELS: Record<ServiceType, string> = {
   installation: 'Vending Machine Installation',
   maintenance: 'Maintenance Service',
-  consultation: 'Free Consultation',
+  consultation: 'Professional Consultation',
   repair: 'Equipment Repair',
   restocking: 'Product Restocking',
   upgrade: 'System Upgrade',

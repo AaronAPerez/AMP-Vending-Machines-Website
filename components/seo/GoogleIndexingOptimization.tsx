@@ -188,7 +188,7 @@ export function GoogleIndexingOptimization({
       'vending-machines': 'Vending Machines',
       'contact': 'Contact Us',
       'feedback': 'Feedback',
-      'about': 'About Us',
+      'services': 'Services',
     };
 
     return segmentMap[segment] || segment
@@ -210,6 +210,7 @@ export function GoogleIndexingOptimization({
       'Modesto vending machines',
       'Stanislaus County vending machines',
       'vending machines Modesto CA',
+      'vending machines near me',
       'commercial vending Modesto',
       'office vending Modesto CA',
       'Central California vending machines',
@@ -290,7 +291,7 @@ export function GoogleIndexingOptimization({
       />
       
       {/* Google Search Console verification (add your verification code) */}
-      {/* <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" /> */}
+      <meta name="google-site-verification" content="GOOGLE_SITE_VERIFICATION" />
       
       {/* Bing Webmaster Tools verification (add your verification code) */}
       {/* <meta name="msvalidate.01" content="YOUR_BING_VERIFICATION_CODE" /> */}

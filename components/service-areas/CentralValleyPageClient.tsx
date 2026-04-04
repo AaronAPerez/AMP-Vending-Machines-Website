@@ -118,7 +118,7 @@ function CentralValleyHero() {
               transition={{ delay: 0.1 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#F5F5F5] mb-6"
             >
-              Free Vending Machines for{' '}
+              Professional Vending Machines for{' '}
               <span className="text-[#FD5A1E]">Central Valley</span> Businesses
             </motion.h1>
 
@@ -142,7 +142,7 @@ function CentralValleyHero() {
               className="space-y-3 mb-8"
             >
               {[
-                '100% Free Installation & Maintenance',
+                'Professional Installation & Maintenance',
                 'Modern Touchscreen Machines',
                 'Cashless Payment Options',
                 'Weekly Restocking Service',
@@ -167,7 +167,7 @@ function CentralValleyHero() {
                 size="lg"
                 rightIcon={<ArrowRight className="w-5 h-5" />}
               >
-                Get Free Machine
+                Request a Quote
               </AccessibleButton>
               <AccessibleButton
                 href="tel:+12094035450"
@@ -241,8 +241,8 @@ function WhyChooseUsSection() {
     },
     {
       icon: <Shield className="w-6 h-6" />,
-      title: 'Zero Cost',
-      description: 'Free installation, maintenance, repairs, and restocking. No hidden fees ever.',
+      title: 'Full Service',
+      description: 'Professional installation, maintenance, repairs, and restocking included.',
     },
     {
       icon: <CreditCard className="w-6 h-6" />,
@@ -452,8 +452,8 @@ function FAQSection() {
 
   const faqs = [
     {
-      question: 'Is vending machine installation really free in the Central Valley?',
-      answer: 'Yes! AMP Vending provides completely free installation for qualifying locations throughout the Central Valley. We also cover all maintenance, repairs, and restocking at no cost to your business. Our revenue comes from product sales, not service fees.',
+      question: 'How does vending machine installation work in the Central Valley?',
+      answer: 'AMP Vending provides professional installation for qualifying locations throughout the Central Valley. We also handle all maintenance, repairs, and restocking as part of our full-service solution.',
     },
     {
       question: 'What cities in the Central Valley do you serve?',
@@ -464,8 +464,8 @@ function FAQSection() {
       answer: 'For most locations in our primary service area, we can complete installation within 1-2 weeks of approval. The process includes a site visit, machine selection, delivery, and professional installation. We work around your schedule to minimize disruption.',
     },
     {
-      question: 'What types of businesses qualify for free vending machines?',
-      answer: 'We serve a wide range of locations including offices, warehouses, manufacturing facilities, schools, gyms, hotels, apartment complexes, government buildings, and more. Generally, locations with 30+ employees or regular visitors qualify for our free service.',
+      question: 'What types of businesses qualify for vending machines?',
+      answer: 'We serve a wide range of locations including offices, warehouses, manufacturing facilities, schools, gyms, hotels, apartment complexes, government buildings, and more. Generally, locations with 30+ employees or regular visitors qualify for our service.',
     },
     {
       question: 'Do your machines accept credit cards and mobile payments?',
@@ -539,10 +539,10 @@ function CentralValleyCTA() {
         className="max-w-4xl mx-auto text-center"
       >
         <h2 className="text-3xl sm:text-4xl font-bold text-[#F5F5F5] mb-4">
-          Ready to Get a Free Vending Machine?
+          Ready to Get a Vending Machine?
         </h2>
         <p className="text-lg text-[#A5ACAF] mb-8 max-w-2xl mx-auto">
-          Join hundreds of Central Valley businesses enjoying free, professional vending service.
+          Join hundreds of Central Valley businesses enjoying professional vending service.
           Contact us today for a no-obligation consultation.
         </p>
 
@@ -553,7 +553,7 @@ function CentralValleyCTA() {
             size="lg"
             rightIcon={<ArrowRight className="w-5 h-5" />}
           >
-            Request Free Machine
+            Request a Quote
           </AccessibleButton>
           <AccessibleButton
             href="tel:+12094035450"

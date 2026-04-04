@@ -123,7 +123,7 @@ function ServiceAreasHero() {
             transition={{ delay: 0.2 }}
             className="text-lg sm:text-xl text-[#A5ACAF] mb-8 max-w-2xl mx-auto"
           >
-            Free vending machine installation, maintenance, and restocking for businesses
+            Professional vending machine installation, maintenance, and restocking for businesses
             throughout Stanislaus County, San Joaquin County, and surrounding areas.
           </motion.p>
 
@@ -427,7 +427,7 @@ function ServiceAreasCTA() {
           Ready to Get Started?
         </h2>
         <p className="text-lg text-[#A5ACAF] mb-8 max-w-2xl mx-auto">
-          Contact us today for a free consultation. We&apos;ll assess your location,
+          Contact us today for a consultation. We&apos;ll assess your location,
           recommend the best vending solution, and handle everything from installation
           to ongoing maintenance.
         </p>
@@ -439,7 +439,7 @@ function ServiceAreasCTA() {
             size="lg"
             rightIcon={<ArrowRight className="w-5 h-5" />}
           >
-            Request Free Machine
+            Request a Quote
           </AccessibleButton>
           <AccessibleButton
             href="/services"

@@ -113,7 +113,7 @@ export const STANISLAUS_COUNTY_CITIES: ServiceCity[] = [
     type: 'unincorporated',
     coordinates: { lat: 37.7062, lng: -121.0896 },
     population: 14630,
-    priority: 0.75,
+    priority: 0.9, // Modesto-Stockton corridor
   },
   {
     name: 'Denair',
@@ -229,7 +229,7 @@ export const SAN_JOAQUIN_COUNTY_CITIES: ServiceCity[] = [
     type: 'incorporated',
     coordinates: { lat: 37.7416, lng: -121.1244 },
     population: 16049,
-    priority: 0.85,
+    priority: 0.95, // Modesto-Stockton corridor
   },
   {
     name: 'Lathrop',
@@ -238,7 +238,7 @@ export const SAN_JOAQUIN_COUNTY_CITIES: ServiceCity[] = [
     type: 'incorporated',
     coordinates: { lat: 37.8227, lng: -121.2766 },
     population: 29296,
-    priority: 0.85,
+    priority: 0.95, // Modesto-Stockton corridor
   },
   {
     name: 'Escalon',
@@ -247,7 +247,7 @@ export const SAN_JOAQUIN_COUNTY_CITIES: ServiceCity[] = [
     type: 'incorporated',
     coordinates: { lat: 37.7974, lng: -120.9960 },
     population: 7606,
-    priority: 0.8,
+    priority: 0.9, // Modesto-Stockton corridor
   },
 
   // Unincorporated Communities (Major CDPs)
@@ -267,7 +267,7 @@ export const SAN_JOAQUIN_COUNTY_CITIES: ServiceCity[] = [
     type: 'unincorporated',
     coordinates: { lat: 37.8763, lng: -121.2730 },
     population: 3643,
-    priority: 0.7,
+    priority: 0.85, // Modesto-Stockton corridor
   },
   {
     name: 'Country Club',

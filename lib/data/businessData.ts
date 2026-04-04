@@ -86,7 +86,7 @@ export const AMP_VENDING_BUSINESS_INFO = {
   slogan: "Premium Vending Solutions for Modern Workplaces",
   
   // SEO-Optimized Business Description for Google Business Profile
-  description: `Professional commercial vending machine solutions for offices, schools, and businesses throughout Central California. AMP Vending provides state-of-the-art touchscreen vending machines with complete installation, maintenance, and restocking services. Serving Modesto, Stockton, Turlock, and surrounding areas with refrigerated and snack vending machines featuring contactless payment technology. Contact us for free consultations on workplace vending solutions that enhance employee satisfaction and convenience.`,
+  description: `Professional commercial vending machine solutions for offices, schools, and businesses throughout Central California. AMP Vending provides state-of-the-art touchscreen vending machines with complete installation, maintenance, and restocking services. Serving Modesto, Stockton, Turlock, and surrounding areas with refrigerated and snack vending machines featuring contactless payment technology. Contact us for professional consultations on workplace vending solutions that enhance employee satisfaction and convenience.`,
   
   // Short description for citations and directories
   shortDescription: `Commercial vending machines with professional installation and maintenance service throughout Central California. Touchscreen technology, contactless payments, 50+ product options.`,
@@ -233,10 +233,10 @@ export const AMP_VENDING_SERVICES: BusinessService[] = [
     featured: false,
   },
   {
-    name: "Free Vending Machine Consultation",
+    name: "Professional Vending Machine Consultation",
     description: "Complimentary workplace assessment and vending machine recommendations. Our experts analyze your location, foot traffic, and employee preferences to suggest optimal vending solutions for your business.",
     keywords: [
-      "free vending machine consultation",
+      "professional vending machine consultation",
       "vending machine assessment Modesto",
       "commercial vending consultation Central California",
       "workplace vending evaluation"
@@ -277,7 +277,7 @@ export const BUSINESS_ATTRIBUTES = {
   acceptsGooglePay: true,
   
   // Service Features
-  freeEstimates: true,
+  complimentaryEstimates: true,
   licensedAndInsured: true,
   locallyOwned: true,
   professionalService: true,
@@ -371,7 +371,7 @@ export function getLongTailKeywords(): string[] {
     "professional vending machine service Stockton Turlock",
     "workplace refreshment solutions employee satisfaction",
     "commercial vending equipment supplier Central Valley",
-    "business vending machine consultation free estimate",
+    "business vending machine consultation complimentary estimate",
   ];
 }
 

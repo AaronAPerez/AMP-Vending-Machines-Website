@@ -18,11 +18,11 @@ import AMP_VENDING_BUSINESS_INFO from '@/lib/data/businessData';
  * SEO Metadata for Central Valley page
  */
 export const metadata: Metadata = {
-  title: 'Vending Machines Central Valley CA | Free Installation | AMP Vending',
-  description: 'Free vending machine installation throughout the Central Valley. Serving Modesto, Stockton, Turlock, Tracy, Manteca, and all of Stanislaus & San Joaquin Counties. No cost, full service.',
+  title: 'Vending Machines Central Valley CA | Professional Installation | AMP Vending',
+  description: 'Professional vending machine installation throughout the Central Valley. Serving Modesto, Stockton, Turlock, Tracy, Manteca, and all of Stanislaus & San Joaquin Counties. Full service solutions.',
   keywords: [
     'vending machines Central Valley CA',
-    'free vending machine installation Central California',
+    'professional vending machine installation Central California',
     'commercial vending Central Valley',
     'office vending machines Modesto',
     'workplace vending Stockton',
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Vending Machines Central Valley CA | AMP Vending',
-    description: 'Free vending machine services for businesses throughout the Central Valley. Professional installation, maintenance, and restocking at no cost.',
+    description: 'Professional vending machine services for businesses throughout the Central Valley. Installation, maintenance, and restocking included.',
     url: `${process.env.NEXT_PUBLIC_BASE_URL}/service-areas/central-valley`,
     siteName: 'AMP Vending',
     type: 'website',
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Vending Machines Central Valley CA',
-    description: 'Free vending machine installation for Central Valley businesses.',
+    description: 'Professional vending machine installation for Central Valley businesses.',
   },
 };
 
@@ -68,7 +68,7 @@ function generateStructuredData() {
       "@type": "LocalBusiness",
       "@id": `${business.contact.website}/#organization`,
       "name": business.name,
-      "description": "Professional commercial vending machine services for the Central Valley. Free installation, maintenance, and restocking for offices, warehouses, schools, and businesses.",
+      "description": "Professional commercial vending machine services for the Central Valley. Installation, maintenance, and restocking for offices, warehouses, schools, and businesses.",
       "url": `${business.contact.website}/service-areas/central-valley`,
       "telephone": business.contact.phone,
       "email": business.contact.email,
@@ -94,7 +94,7 @@ function generateStructuredData() {
         },
         "geoRadius": "96560" // 60 miles in meters
       },
-      "priceRange": "Free",
+      "priceRange": "Full-Service",
       "openingHoursSpecification": {
         "@type": "OpeningHoursSpecification",
         "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
@@ -127,8 +127,8 @@ function generateStructuredData() {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Free Vending Machine Installation",
-              "description": "Professional installation of touchscreen vending machines at no cost"
+              "name": "Professional Vending Machine Installation",
+              "description": "Professional installation of touchscreen vending machines"
             }
           },
           {
@@ -136,7 +136,7 @@ function generateStructuredData() {
             "itemOffered": {
               "@type": "Service",
               "name": "Maintenance & Restocking",
-              "description": "Weekly restocking and maintenance included at no additional cost"
+              "description": "Weekly restocking and maintenance included with our service"
             }
           },
           {
@@ -149,7 +149,7 @@ function generateStructuredData() {
           }
         ]
       },
-      "description": "Complete vending machine solutions for Central Valley businesses including free installation, regular maintenance, product restocking, and 24/7 support."
+      "description": "Complete vending machine solutions for Central Valley businesses including professional installation, regular maintenance, product restocking, and 24/7 support."
     },
     // FAQ Schema
     {
@@ -158,10 +158,10 @@ function generateStructuredData() {
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Is vending machine installation really free in the Central Valley?",
+          "name": "How does your vending machine installation work in the Central Valley?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes! AMP Vending provides completely free installation for qualifying locations throughout the Central Valley. We also cover all maintenance, repairs, and restocking at no cost to your business."
+            "text": "AMP Vending provides professional installation for qualifying locations throughout the Central Valley. We also handle all maintenance, repairs, and restocking as part of our full-service solution."
           }
         },
         {
