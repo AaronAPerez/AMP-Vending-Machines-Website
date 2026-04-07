@@ -1,6 +1,9 @@
 /**
  * Contact Form E2E Tests
  * End-to-end tests using Playwright
+ *
+ * Tests the ContactForm component at /contact page
+ * Form uses role="form" with aria-labelledby="contact-form-heading"
  */
 
 import { test, expect } from '@playwright/test';
@@ -10,8 +13,8 @@ test.describe('Contact Form E2E', () => {
     // Navigate to contact page
     await page.goto('/contact');
 
-    // Wait for form to be visible
-    await page.waitForSelector('form[aria-label*="contact" i]', { timeout: 5000 });
+    // Wait for form to be visible (form has role="form")
+    await page.waitForSelector('form[role="form"]', { timeout: 5000 });
   });
 
   test.describe('Form Display and Layout', () => {
@@ -24,8 +27,8 @@ test.describe('Contact Form E2E', () => {
       await expect(page.getByLabel(/company/i)).toBeVisible();
       await expect(page.getByLabel(/message/i)).toBeVisible();
 
-      // Check submit button
-      await expect(page.getByRole('button', { name: /send message/i })).toBeVisible();
+      // Check submit button (button text is "Request Information")
+      await expect(page.getByRole('button', { name: /request information/i })).toBeVisible();
     });
 
     test('should have proper page title and heading', async ({ page }) => {
@@ -48,7 +51,7 @@ test.describe('Contact Form E2E', () => {
   test.describe('Form Validation', () => {
     test('should show validation errors for empty required fields', async ({ page }) => {
       // Click submit without filling form
-      await page.getByRole('button', { name: /send message/i }).click();
+      await page.getByRole('button', { name: /request information/i }).click();
 
       // Check for error messages
       await expect(page.getByText(/first name is required/i)).toBeVisible();
@@ -65,7 +68,7 @@ test.describe('Contact Form E2E', () => {
       await page.getByLabel(/company/i).fill('Test Company');
 
       // Submit form
-      await page.getByRole('button', { name: /send message/i }).click();
+      await page.getByRole('button', { name: /request information/i }).click();
 
       // Check for email validation error
       await expect(page.getByText(/invalid email/i)).toBeVisible();
@@ -73,7 +76,7 @@ test.describe('Contact Form E2E', () => {
 
     test('should clear validation errors when user types', async ({ page }) => {
       // Submit empty form to show errors
-      await page.getByRole('button', { name: /send message/i }).click();
+      await page.getByRole('button', { name: /request information/i }).click();
       await expect(page.getByText(/first name is required/i)).toBeVisible();
 
       // Start typing in first name field
@@ -107,18 +110,19 @@ test.describe('Contact Form E2E', () => {
       });
 
       // Submit the form
-      await page.getByRole('button', { name: /send message/i }).click();
+      await page.getByRole('button', { name: /request information/i }).click();
 
       // Wait for success message
-      await expect(page.getByText(/message sent successfully/i)).toBeVisible({ timeout: 10000 });
+      await expect(page.getByText(/thank you/i)).toBeVisible({ timeout: 10000 });
     });
 
     test('should show loading state during submission', async ({ page }) => {
-      // Fill out the form
+      // Fill out all required fields
       await page.getByLabel(/first name/i).fill('John');
       await page.getByLabel(/last name/i).fill('Doe');
       await page.getByLabel(/email/i).fill('john.doe@example.com');
       await page.getByLabel(/company/i).fill('Acme Corp');
+      await page.getByLabel(/message/i).fill('Test message for loading state verification.');
 
       // Mock slow API response
       await page.route('**/api/contact', async route => {
@@ -130,19 +134,21 @@ test.describe('Contact Form E2E', () => {
       });
 
       // Submit form
-      await page.getByRole('button', { name: /send message/i }).click();
+      await page.getByRole('button', { name: /request information/i }).click();
 
-      // Check for loading state
+      // Check for loading state (button shows "Sending..." and is disabled)
       const submitButton = page.getByRole('button', { name: /sending/i });
+      await expect(submitButton).toBeVisible();
       await expect(submitButton).toBeDisabled();
     });
 
     test('should handle API errors gracefully', async ({ page }) => {
-      // Fill out the form
+      // Fill out all required fields
       await page.getByLabel(/first name/i).fill('John');
       await page.getByLabel(/last name/i).fill('Doe');
       await page.getByLabel(/email/i).fill('john.doe@example.com');
       await page.getByLabel(/company/i).fill('Acme Corp');
+      await page.getByLabel(/message/i).fill('Test message for error handling verification.');
 
       // Mock API error
       await page.route('**/api/contact', async route => {
@@ -153,7 +159,7 @@ test.describe('Contact Form E2E', () => {
       });
 
       // Submit form
-      await page.getByRole('button', { name: /send message/i }).click();
+      await page.getByRole('button', { name: /request information/i }).click();
 
       // Check for error message
       await expect(page.getByText(/error/i)).toBeVisible();
@@ -176,7 +182,7 @@ test.describe('Contact Form E2E', () => {
       });
 
       // Submit form
-      await page.getByRole('button', { name: /send message/i }).click();
+      await page.getByRole('button', { name: /request information/i }).click();
 
       // Wait for success
       await expect(page.getByText(/success/i)).toBeVisible();
@@ -202,8 +208,9 @@ test.describe('Contact Form E2E', () => {
     });
 
     test('should have proper ARIA labels', async ({ page }) => {
-      const form = page.locator('form[aria-label*="contact" i]');
-      await expect(form).toHaveAttribute('aria-label');
+      const form = page.locator('form[role="form"]');
+      // Form uses aria-labelledby to reference the form heading
+      await expect(form).toHaveAttribute('aria-labelledby', 'contact-form-heading');
 
       // Check required fields have aria-required
       await expect(page.getByLabel(/first name/i)).toHaveAttribute('aria-required', 'true');
@@ -213,7 +220,7 @@ test.describe('Contact Form E2E', () => {
 
     test('should announce errors to screen readers', async ({ page }) => {
       // Submit empty form
-      await page.getByRole('button', { name: /send message/i }).click();
+      await page.getByRole('button', { name: /request information/i }).click();
 
       // Check error messages have proper role
       const errors = page.locator('[role="alert"]');
@@ -228,7 +235,7 @@ test.describe('Contact Form E2E', () => {
 
       // Form should still be functional
       await expect(page.getByLabel(/first name/i)).toBeVisible();
-      await expect(page.getByRole('button', { name: /send message/i })).toBeVisible();
+      await expect(page.getByRole('button', { name: /request information/i })).toBeVisible();
 
       // Fill and submit form
       await page.getByLabel(/first name/i).fill('John');
@@ -243,7 +250,7 @@ test.describe('Contact Form E2E', () => {
         });
       });
 
-      await page.getByRole('button', { name: /send message/i }).click();
+      await page.getByRole('button', { name: /request information/i }).click();
       await expect(page.getByText(/success/i)).toBeVisible();
     });
 
@@ -252,7 +259,7 @@ test.describe('Contact Form E2E', () => {
       await page.setViewportSize({ width: 768, height: 1024 });
 
       await expect(page.getByLabel(/first name/i)).toBeVisible();
-      await expect(page.getByRole('button', { name: /send message/i })).toBeVisible();
+      await expect(page.getByRole('button', { name: /request information/i })).toBeVisible();
     });
   });
 
@@ -260,7 +267,7 @@ test.describe('Contact Form E2E', () => {
     test('should load quickly', async ({ page }) => {
       const startTime = Date.now();
       await page.goto('/contact');
-      await page.waitForSelector('form[aria-label*="contact" i]');
+      await page.waitForSelector('form[role="form"]');
       const loadTime = Date.now() - startTime;
 
       // Page should load in under 3 seconds

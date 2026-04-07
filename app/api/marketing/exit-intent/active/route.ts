@@ -6,6 +6,29 @@ import { supabaseServer } from '@/lib/supabase';
 export const runtime = 'nodejs';
 export const revalidate = 60; // Cache for 60 seconds
 
+// Default exit intent content - used as fallback when database is unavailable
+const DEFAULT_EXIT_INTENT_CONTENT = {
+  headline: "Wait! Don't Miss Out...",
+  subheadline: "We'll Beat Any Vending Service Offer!",
+  value_proposition: "Join the many qualifying businesses in Modesto & Stanislaus County receiving premium vending solutions - we guarantee to beat any competitor's offer!",
+  benefits: [
+    "Professional Installation & Setup",
+    "Full-Service Maintenance",
+    "24/7 Service & Support",
+    "Price Match Guarantee"
+  ],
+  stats: [
+    { value: "Full", label: "Service" },
+    { value: "24/7", label: "Support" },
+    { value: "50+", label: "Products" }
+  ],
+  special_offer_badge: "PRICE MATCH GUARANTEE",
+  primary_cta_text: "Get Your Quote",
+  primary_cta_link: "/contact",
+  phone_button_text: "Call (209) 403-5450",
+  phone_number: "+12094035450"
+};
+
 /**
  * GET /api/marketing/exit-intent/active
  * Get the currently active exit intent setting (PUBLIC endpoint)
@@ -16,27 +39,7 @@ export async function GET() {
       // Fallback to default if database not available
       return NextResponse.json({
         success: true,
-        data: {
-          headline: "Wait! Don't Miss Out...",
-          subheadline: "Professional Vending for Qualifying Businesses!",
-          value_proposition: "Join the many qualifying businesses in Modesto & Stanislaus County providing premium vending solutions!",
-          benefits: [
-            "Professional Installation & Setup",
-            "Full-Service Maintenance",
-            "24/7 Service & Support",
-            "Wide Product Selection"
-          ],
-          stats: [
-            { value: "Full", label: "Service" },
-            { value: "24/7", label: "Service" },
-            { value: "50+", label: "Products" }
-          ],
-          special_offer_badge: "LIMITED TIME OFFER",
-          primary_cta_text: "See If You Qualify",
-          primary_cta_link: "/contact",
-          phone_button_text: "Call (209) 403-5450",
-          phone_number: "+12094035450"
-        }
+        data: DEFAULT_EXIT_INTENT_CONTENT
       });
     }
 
@@ -50,27 +53,7 @@ export async function GET() {
       // Return default if no active setting found
       return NextResponse.json({
         success: true,
-        data: {
-          headline: "Wait! Don't Miss Out...",
-          subheadline: "We'll Beat any Vending Machine service offer for Qualifying Businesses!",
-          value_proposition: "Join the many qualifying businesses in Modesto & Stanislaus County receiving premium vending solutions!",
-          benefits: [
-            "Professional Installation & Setup",
-            "Full-Service Maintenance",
-            "24/7 Service & Support",
-            "Wide Product Selection"
-          ],
-          stats: [
-            { value: "Full", label: "Service" },
-            { value: "24/7", label: "Service" },
-            { value: "50+", label: "Products" }
-          ],
-          special_offer_badge: "LIMITED TIME OFFER",
-          primary_cta_text: "See If You Qualify",
-          primary_cta_link: "/contact",
-          phone_button_text: "Call (209) 403-5450",
-          phone_number: "+12094035450"
-        }
+        data: DEFAULT_EXIT_INTENT_CONTENT
       });
     }
 
@@ -96,33 +79,13 @@ export async function GET() {
         phone_number: setting.phone_number
       }
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('GET /api/marketing/exit-intent/active error:', error);
 
     // Return default on error
     return NextResponse.json({
       success: true,
-      data: {
-        headline: "Wait! Don't Miss Out...",
-         subheadline: "We'll Beat any Vending Machine service offer for Qualifying Businesses!",
-        value_proposition: "Join the many qualifying businesses in Modesto & Stanislaus County providing premium vending solutions!",
-        benefits: [
-          "Professional Installation & Setup",
-          "Full-Service Maintenance",
-          "24/7 Service & Support",
-          "Wide Product Selection"
-        ],
-        stats: [
-          { value: "Full", label: "Service" },
-          { value: "24/7", label: "Service" },
-          { value: "50+", label: "Products" }
-        ],
-        special_offer_badge: "LIMITED TIME OFFER",
-        primary_cta_text: "See If You Qualify",
-        primary_cta_link: "/contact",
-        phone_button_text: "Call (209) 403-5450",
-        phone_number: "+12094035450"
-      }
+      data: DEFAULT_EXIT_INTENT_CONTENT
     });
   }
 }

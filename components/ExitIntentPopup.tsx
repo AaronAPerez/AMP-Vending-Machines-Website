@@ -140,21 +140,21 @@ export function ExitIntentPopup({ delay = 5000, isOpen, onClose, content: provid
   // Default content (fallback)
   const defaultContent: ExitIntentContent = {
     headline: "Wait! Don't Miss Out...",
-    subheadline: "Vending Solutions for Qualifying Businesses!",
-    valueProposition: "Join the many qualifying businesses in Modesto & Stanislaus County providing premium vending services!",
+    subheadline: "We'll Beat Any Vending Service Offer!",
+    valueProposition: "Join the many qualifying businesses in Modesto & Stanislaus County receiving premium vending solutions - we guarantee to beat any competitor's offer!",
     benefits: [
       "Professional Installation & Setup",
       "Full-Service Maintenance",
       "24/7 Service & Support",
-      "Wide Product Selection"
+      "Price Match Guarantee"
     ],
     stats: [
       { value: "Full", label: "Service" },
-      { value: "24/7", label: "Service" },
+      { value: "24/7", label: "Support" },
       { value: "50+", label: "Products" }
     ],
-    specialOfferBadge: "LIMITED TIME OFFER",
-    ctaButton: "Request a Quote",
+    specialOfferBadge: "PRICE MATCH GUARANTEE",
+    ctaButton: "Get Your Quote",
     ctaLink: "/contact",
     phoneButton: "Call (209) 403-5450",
     phoneNumber: "+12094035450"

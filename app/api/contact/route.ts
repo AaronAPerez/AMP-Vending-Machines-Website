@@ -14,7 +14,9 @@ const contactFormSchema = z.object({
   email: z.string().email('Invalid email address'),
   phone: z.string().optional(),
   companyName: z.string().min(1, 'Company name is required').max(100, 'Company name is too long'),
-  message: z.string().optional().default(''),
+   message: z.string()
+    .min(10, 'Message must be at least 10 characters')
+    .max(1000, 'Message must be less than 1000 characters'),
   // UTM Attribution fields for tracking lead sources
   attribution: z.string().optional().default('direct'),
   utmSource: z.string().nullable().optional(),
