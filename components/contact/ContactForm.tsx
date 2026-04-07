@@ -27,14 +27,8 @@ interface FormErrors {
   lastName?: string;
   email?: string;
   companyName?: string;
+  message?: string;
 }
-
-
-
-
-
-
-
 
 
 export default function ContactForm({ className = '' }: ContactFormProps) {
@@ -84,6 +78,9 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
 
     if (!formData.companyName.trim()) {
       newErrors.companyName = 'Company name is required';
+    }
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
     }
 
     setErrors(newErrors);
@@ -382,7 +379,7 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
                 className="block text-white text-sm font-medium mb-1 text-left"
                 htmlFor="message"
               >
-                Message <span className="text-[#A5ACAF]">(Optional)</span>
+                Message <span className="text-[#FD5A1E]">*</span>
               </label>
               <textarea
                 id="message"

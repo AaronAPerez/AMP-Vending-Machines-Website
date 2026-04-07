@@ -85,7 +85,7 @@ export function GoogleIndexingOptimization({
   useEffect(() => {
     if (requestIndexing && typeof window !== 'undefined') {
       // Request indexing via Google Search Console API (if configured)
-      requestGoogleIndexing(finalCanonicalUrl);
+      GoogleIndexing(finalCanonicalUrl);
       
       // Also submit to Bing (additional search engine coverage)
       requestBingIndexing(finalCanonicalUrl);
@@ -272,7 +272,7 @@ export function GoogleIndexingOptimization({
       {/* Business-specific meta tags */}
       <meta name="author" content="AMP Vending Machines" />
       <meta name="publisher" content="AMP Vending Machines" />
-      <meta name="coverage" content="Modesto, Stanislaus County, Central California" />
+      <meta name="coverage" content="Modesto, Stanislaus County, Central Valley,California" />
       <meta name="distribution" content="global" />
       <meta name="rating" content="general" />
       
@@ -309,41 +309,6 @@ export function GoogleIndexingOptimization({
       <link rel="dns-prefetch" href="//fonts.googleapis.com" />
     </Head>
   );
-}
-
-/**
- * Request Google to index the current page
- * Note: Requires Google Search Console API setup
- */
-async function requestGoogleIndexing(url: string): Promise<void> {
-  try {
-    // In a real implementation, you would use Google Search Console API
-    // For now, we'll use the IndexNow protocol which is supported by Bing and Yandex
-    const indexNowEndpoint = 'https://api.indexnow.org/indexnow';
-    
-    // You would need to add your API key and implement proper authentication
-    console.log(`Requesting indexing for URL: ${url}`);
-    
-    // For development/testing, we'll just log this
-    if (process.env.NODE_ENV === 'development') {
-      console.log('🔍 Google indexing request (development mode):', url);
-    }
-    
-    // Real implementation would look like:
-    /*
-    const response = await fetch('/api/request-indexing', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ url }),
-    });
-    
-    if (response.ok) {
-      console.log('✅ Indexing request sent successfully');
-    }
-    */
-  } catch (error) {
-    console.error('Error requesting Google indexing:', error);
-  }
 }
 
 /**
@@ -417,3 +382,7 @@ function escapeXml(text: string): string {
 }
 
 export default GoogleIndexingOptimization;
+
+function GoogleIndexing(finalCanonicalUrl: string) {
+  throw new Error('Function not implemented.');
+}

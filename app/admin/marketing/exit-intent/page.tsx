@@ -32,20 +32,20 @@ export default function ExitIntentManagementPage() {
   const [previewSetting, setPreviewSetting] = useState<ExitIntentSetting | null>(null);
   const [showPreview, setShowPreview] = useState(false);
 
-  // Form state
+  // Form state - defaults match the "We'll beat any offer" messaging
   const [formData, setFormData] = useState({
     name: '',
-    headline: '',
-    subheadline: '',
-    value_proposition: '',
-    benefits: ['', '', '', ''],
+    headline: "Wait! Don't Miss Out...",
+    subheadline: "We'll Beat Any Vending Service Offer!",
+    value_proposition: "Join the many qualifying businesses in Modesto & Stanislaus County receiving premium vending solutions - we guarantee to beat any competitor's offer!",
+    benefits: ['Professional Installation & Setup', 'Full-Service Maintenance', '24/7 Service & Support', 'Price Match Guarantee'],
     stats: [
-      { value: '', label: '' },
-      { value: '', label: '' },
-      { value: '', label: '' }
+      { value: 'Full', label: 'Service' },
+      { value: '24/7', label: 'Support' },
+      { value: '50+', label: 'Products' }
     ],
-    special_offer_badge: '',
-    primary_cta_text: 'See If You Qualify',
+    special_offer_badge: 'PRICE MATCH GUARANTEE',
+    primary_cta_text: 'Get Your Quote',
     primary_cta_link: '/contact',
     phone_button_text: 'Call (209) 403-5450',
     phone_number: '+12094035450'

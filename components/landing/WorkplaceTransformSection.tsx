@@ -407,30 +407,30 @@ const WorkplaceTransformSection: React.FC<WorkplaceTransformSectionProps> = ({
         {/* Machine Showcase Card */}
         <div className="space-y-6 rounded-xl">
 
-          {/* Machine Image */}
-          <div className="relative overflow-hidden rounded-xl border border-[#333333] hover:border-[#FD5A1E] transition-all duration-300 flex justify-center bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d]">
+          {/* Dual Machine Showcase - Office Installation */}
+          <div className="relative overflow-hidden rounded-xl border border-[#333333] hover:border-[#FD5A1E] transition-all duration-300 bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d]">
             <Image
-              src="/images/machines/amp-vending-machines-touchscreen.webp"
-              alt="AMP Premium Vending Machine with 21.5 inch touchscreen interface"
-              width={400}
+              src="/images/machines/office-vending-machines-hallway-installation.webp"
+              alt="Two AMP premium vending machines installed in office hallway - snack and beverage options"
+              width={600}
               height={400}
-              loading="lazy" // Explicit lazy loading
+              loading="lazy"
               quality={90}
-              className="object-cover transition-transform duration-500 rounded-xl hover:scale-105"
+              className="object-cover w-full transition-transform duration-500 rounded-xl hover:scale-105"
               style={{ height: 'auto' }}
             />
 
             {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/80 to-transparent opacity-60 rounded-xl" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/80 via-transparent to-transparent opacity-70 rounded-xl" />
 
             {/* Technology badges */}
             <div className="absolute top-4 left-4 right-4 flex justify-between">
               <span className="bg-[#FD5A1E] text-[#000000] px-3 py-1 rounded-full text-xs font-bold flex items-center">
                 <MonitorIcon size={12} className="mr-1" />
-                21.5&quot; HD
+                Dual Machine Setup
               </span>
               <span className="bg-[#000000]/90 text-[#FD5A1E] px-3 py-1 rounded-full text-xs font-bold border border-[#FD5A1E]/30">
-                Touchscreen
+                Office Ready
               </span>
             </div>
 
@@ -463,6 +463,40 @@ const WorkplaceTransformSection: React.FC<WorkplaceTransformSectionProps> = ({
               </div>
             </div>
           </div>
+
+          {/* Individual Machine Images Grid */}
+          <div className="grid grid-cols-2 gap-4">
+            {/* Snack Machine */}
+            <div className="relative overflow-hidden rounded-xl border border-[#333333] hover:border-[#FD5A1E] transition-all duration-300 group">
+              <Image
+                src="/images/machines/snack-vending-machine-product-display.webp"
+                alt="Snack vending machine with variety of products on display"
+                width={300}
+                height={300}
+                loading="lazy"
+                quality={85}
+                className="object-cover w-full h-48 transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/80 to-transparent" />
+              <span className="absolute bottom-3 left-3 text-[#F5F5F5] text-sm font-semibold">Snack Machine</span>
+            </div>
+
+            {/* Beverage Machine */}
+            <div className="relative overflow-hidden rounded-xl border border-[#333333] hover:border-[#FD5A1E] transition-all duration-300 group">
+              <Image
+                src="/images/machines/combo-vending-machine-snacks-drinks-front-view.webp"
+                alt="Combo vending machine with snacks and cold beverages"
+                width={300}
+                height={300}
+                loading="lazy"
+                quality={85}
+                className="object-cover w-full h-48 transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/80 to-transparent" />
+              <span className="absolute bottom-3 left-3 text-[#F5F5F5] text-sm font-semibold">Combo Machine</span>
+            </div>
+          </div>
+
           <MachineCard variant="premium" />
 
         </div>

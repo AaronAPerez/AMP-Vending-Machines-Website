@@ -169,38 +169,79 @@ const ServicesHero: React.FC<ServicesHeroProps> = ({
             </motion.p>
           </div>
 
-          {/* Right column - Vending machine image */}
+          {/* Right column - Dual vending machine showcase */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             className="relative hidden lg:block"
           >
-            <div className="relative aspect-[3/4] max-w-md mx-auto">
-              {/* Glow effect behind image */}
+            <div className="relative max-w-lg mx-auto">
+              {/* Glow effect behind images */}
               <div
                 className="absolute inset-0 bg-gradient-to-br from-[#FD5A1E]/20 to-transparent rounded-3xl blur-3xl"
                 aria-hidden="true"
               />
 
-              {/* Main vending machine image */}
-              <Image
-                src="/images/machines/amp-vending-machines-touchscreen.webp"
-                alt="AMP Vending premium refrigerated vending machine with touchscreen display"
-                fill
-                className="object-contain drop-shadow-2xl"
-                sizes="(max-width: 1024px) 0vw, 400px"
-                priority
-              />
+              {/* Dual machine display - stacked layout */}
+              <div className="relative space-y-4">
+                {/* Main office installation image showing both machines */}
+                <div className="relative rounded-2xl overflow-hidden border border-[#333333] shadow-2xl">
+                  <Image
+                    src="/images/machines/office-vending-machines-hallway-installation.webp"
+                    alt="Two AMP premium vending machines installed in office hallway - snack and beverage machines"
+                    width={500}
+                    height={350}
+                    className="object-cover w-full"
+                    priority
+                  />
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-              {/* Feature callouts */}
-              <div className="absolute right-2 top-1/4 bg-[#111111]/90 border border-[#FD5A1E] backdrop-blur-lg px-4 py-2 rounded-lg shadow-xl">
+                  {/* Badge overlay */}
+                  <div className="absolute top-4 left-4 bg-[#FD5A1E] text-black px-3 py-1.5 rounded-full text-sm font-bold">
+                    Complete Setup
+                  </div>
+                </div>
+
+                {/* Two individual machine thumbnails */}
+                <div className="grid grid-cols-2 gap-4">
+                  {/* Snack machine */}
+                  <div className="relative rounded-xl overflow-hidden border border-[#333333] hover:border-[#FD5A1E] transition-all duration-300 group">
+                    <Image
+                      src="/images/machines/snack-vending-machine-product-display.webp"
+                      alt="Snack vending machine with variety of products"
+                      width={240}
+                      height={180}
+                      className="object-cover w-full h-32 group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                    <span className="absolute bottom-2 left-2 text-white text-xs font-semibold">Snacks</span>
+                  </div>
+
+                  {/* Combo machine */}
+                  <div className="relative rounded-xl overflow-hidden border border-[#333333] hover:border-[#FD5A1E] transition-all duration-300 group">
+                    <Image
+                      src="/images/machines/combo-vending-machine-snacks-drinks-front-view.webp"
+                      alt="Combo vending machine with snacks and beverages"
+                      width={240}
+                      height={180}
+                      className="object-cover w-full h-32 group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                    <span className="absolute bottom-2 left-2 text-white text-xs font-semibold">Beverages</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Feature callouts - repositioned for new layout */}
+              <div className="absolute -right-2 top-16 bg-[#111111]/90 border border-[#FD5A1E] backdrop-blur-lg px-4 py-2 rounded-lg shadow-xl z-10">
                 <span className="text-[#FD5A1E] text-sm font-semibold">Touchscreen</span>
               </div>
-              <div className="absolute right-12 top-1/2 bg-[#111111]/90 backdrop-blur-lg border border-[#FD5A1E] px-4 py-2 rounded-lg shadow-xl">
+              <div className="absolute -left-4 top-1/3 bg-[#111111]/90 backdrop-blur-lg border border-[#FD5A1E] px-4 py-2 rounded-lg shadow-xl z-10">
                 <span className="text-[#FD5A1E] text-sm font-semibold">Cashless Pay</span>
               </div>
-              <div className="absolute -left-4 bottom-1/4 bg-[#111111]/90 border border-[#FD5A1E] backdrop-blur-lg px-4 py-2 rounded-lg shadow-xl">
+              <div className="absolute right-8 bottom-40 bg-[#111111]/90 border border-[#FD5A1E] backdrop-blur-lg px-4 py-2 rounded-lg shadow-xl z-10">
                 <span className="text-[#FD5A1E] text-sm font-semibold">Energy Efficient</span>
               </div>
             </div>
