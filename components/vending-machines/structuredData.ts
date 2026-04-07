@@ -55,13 +55,14 @@ export function generateProductStructuredData(data: VendingMachineData) {
         },
       ],
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.8',
-      reviewCount: '47',
-      bestRating: '5',
-      worstRating: '1',
-    },
+    // Note: Add aggregateRating when you have verified reviews
+    // aggregateRating: {
+    //   '@type': 'AggregateRating',
+    //   ratingValue: '5.0',
+    //   reviewCount: '10',
+    //   bestRating: '5',
+    //   worstRating: '1',
+    // },
     additionalProperty: [
       {
         '@type': 'PropertyValue',
