@@ -1,6 +1,6 @@
 import { emailService } from '@/lib/services/emailService';
 import { databaseService } from '@/lib/services/databaseService';
-import { NextRequest, NextResponse, after } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 
 /**
@@ -60,40 +60,46 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Respond immediately — DB save and email sending happen in the background
-    // so the user gets instant feedback regardless of third-party service latency.
+    // Respond immediately — DB save and email sending run in the background.
+    // Using a fire-and-forget IIFE (not awaited) so the response returns in ~ms
+    // regardless of third-party service latency (Resend, Supabase).
+    // In Node.js the event loop keeps running after the response is sent.
     const submissionId = `contact_${Date.now()}`;
 
-    after(async () => {
-      // Save submission to Supabase database for admin dashboard viewing
-      const dbSaveResult = await databaseService.saveContactSubmission(validatedData);
-      if (!dbSaveResult) {
-        console.warn('⚠️ Failed to save contact submission to database');
-      } else {
-        console.log('✅ Contact submission saved to database');
+    void (async () => {
+      try {
+        // Save submission to Supabase database for admin dashboard viewing
+        const dbSaveResult = await databaseService.saveContactSubmission(validatedData);
+        if (!dbSaveResult) {
+          console.warn('⚠️ Failed to save contact submission to database');
+        } else {
+          console.log('✅ Contact submission saved to database');
+        }
+
+        // Send emails using professional templates
+        const { customerResult, businessResult } = await emailService.sendContactFormEmails(customerData);
+
+        if (customerResult.success) {
+          console.log('✅ Customer confirmation email sent successfully');
+        } else {
+          console.error('❌ Customer confirmation email failed:', customerResult.error);
+        }
+
+        if (businessResult.success) {
+          console.log('✅ Business notification email sent successfully');
+        } else {
+          console.error('❌ Business notification email failed:', businessResult.error);
+        }
+
+        // Log the submission for analytics
+        await logContactSubmission(customerData, {
+          customerEmailSuccess: customerResult.success,
+          businessEmailSuccess: businessResult.success
+        });
+      } catch (bgError) {
+        console.error('❌ Background task error:', bgError);
       }
-
-      // Send emails using professional templates
-      const { customerResult, businessResult } = await emailService.sendContactFormEmails(customerData);
-
-      if (customerResult.success) {
-        console.log('✅ Customer confirmation email sent successfully');
-      } else {
-        console.error('❌ Customer confirmation email failed:', customerResult.error);
-      }
-
-      if (businessResult.success) {
-        console.log('✅ Business notification email sent successfully');
-      } else {
-        console.error('❌ Business notification email failed:', businessResult.error);
-      }
-
-      // Log the submission for analytics
-      await logContactSubmission(customerData, {
-        customerEmailSuccess: customerResult.success,
-        businessEmailSuccess: businessResult.success
-      });
-    });
+    })();
 
     return NextResponse.json({
       success: true,
