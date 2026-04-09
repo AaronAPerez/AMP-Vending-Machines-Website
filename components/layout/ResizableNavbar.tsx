@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { AccessibleButton } from '@/components/ui/AccessibleButton';
 import { X, Menu } from 'lucide-react';
+import Button from '../ui/core/Button';
 
 interface NavItem {
   name: string;
@@ -161,14 +162,14 @@ const ResizableNavbar = () => {
                 size="sm"
                 animate
               >
-                Get a Quote
+                Request Consultation
               </AccessibleButton>
             </div>
 
             {/* Mobile menu button */}
             <div className="md:hidden">
               {/* // Mobile menu button: */}
-              <button
+              <Button
                 onClick={() => setIsOpen(!isOpen)}
                 aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
                 aria-expanded={isOpen}
@@ -176,7 +177,7 @@ const ResizableNavbar = () => {
                 className="inline-flex items-center justify-center p-2 rounded-md text-[#F5F5F5] hover:text-[#FD5A1E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FD5A1E] focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-colors"
               >
                 {isOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
+              </Button>
             </div>
           </div>
         </div>

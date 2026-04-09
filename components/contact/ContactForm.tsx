@@ -9,6 +9,7 @@ import { getUTMForSubmission, getAttributionSummary } from '@/lib/analytics/utm'
 import { clarityUpgrade, claritySetTag } from '@/components/analytics/MicrosoftClarity';
 import { AccessibleButton } from '@/components/ui/AccessibleButton';
 import { Send } from 'lucide-react';
+import { SEO_CONSTANTS } from '@/lib/data/seoData';
 
 interface ContactFormProps {
   className?: string;
@@ -176,7 +177,7 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
           toast.error('Request timed out. Please try again or call us at (209) 403-5450.');
         } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
           toast.error(
-            'Unable to submit online. Please contact us directly at ampdesignandconsulting@gmail.com or (209) 403-5450.',
+            `Unable to submit online. Please contact us directly at ${SEO_CONSTANTS.EMAIL} or (209) 403-5450.`,
             { duration: 8000 }
           );
         } else {
@@ -480,7 +481,7 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
                 <Text variant="body-sm" color="default" className="font-medium">Email</Text>
                 {/* Email with overflow-wrap for better breaking */}
                 <a
-                  href="mailto:ampdesignandconsulting@gmail.com"
+                  href={`mailto:${SEO_CONSTANTS.EMAIL}`}
                   className="block hover:text-[#FD5A1E] transition-colors text-[#A5ACAF]"
                   style={{
                     wordBreak: 'break-all',      // CSS property for aggressive breaking
@@ -488,7 +489,7 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
                     hyphens: 'auto'              // Add hyphens where appropriate
                   }}
                 >
-                  ampdesignandconsulting@gmail.com
+                  {SEO_CONSTANTS.EMAIL}
                 </a>
               </div>
             </div>

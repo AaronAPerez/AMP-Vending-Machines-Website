@@ -13,6 +13,7 @@
 
 import React from 'react';
 import EmailLink from './EmailLink';
+import { SEO_CONSTANTS } from '@/lib/data/seoData';
 
 /**
  * Footer Email Link Component
@@ -26,14 +27,14 @@ import EmailLink from './EmailLink';
 const FooterEmailLink = () => (
   <div className="text-left"> {/* Explicit left alignment */}
     <EmailLink
-      email="ampdesignandconsulting@gmail.com"
+      email={SEO_CONSTANTS.EMAIL}
       subject="Inquiry from AMP Vending Website"
-      className="text-[#A5ACAF] text-sm hover:text-[#FD5A1E] transition-colors duration-300 
+      className="text-[#A5ACAF] text-sm hover:text-[#FD5A1E] transition-colors duration-300
                  focus:outline-none focus:text-[#FD5A1E] focus:underline
-                 break-words leading-relaxed inline-block text-left" // Added text-left and inline-block
-      aria-label="Email us at ampdesignandconsulting@gmail.com"
+                 break-words leading-relaxed inline-block text-left"
+      aria-label={`Email us at ${SEO_CONSTANTS.EMAIL}`}
     >
-      ampdesignandconsulting@gmail.com
+      {SEO_CONSTANTS.EMAIL}
     </EmailLink>
   </div>
 );

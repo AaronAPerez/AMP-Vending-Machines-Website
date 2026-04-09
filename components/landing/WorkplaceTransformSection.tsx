@@ -284,9 +284,9 @@ const MachineCard: React.FC<MachineCardProps> = ({
       role="article"
       aria-label="Premium vending machine showcase"
     >
-      {/* Content section */}
+      {/* Content section 
       <div className="p-6 sm:p-8">
-        {/* Header */}
+        {/* Header
         <div className="mb-6">
           <h3 className="text-xl sm:text-2xl font-bold text-[#F5F5F5] mb-3 leading-tight">
             {title}
@@ -295,24 +295,9 @@ const MachineCard: React.FC<MachineCardProps> = ({
             {description}
           </p>
         </div>
-
+ */}    
         {/* Features list */}
-        <div className="space-y-3 mb-6">
-          {features.map((feature, index) => (
-            <motion.div
-              key={`${feature.text}-${index}`}
-              className="flex items-center text-sm"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.1 * index + 0.2, duration: 0.4 }}
-            >
-              <div className="w-5 h-5 bg-[#FD5A1E]/20 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
-                <feature.icon size={12} className="text-[#FD5A1E]" />
-              </div>
-              <span className="text-[#F5F5F5]">{feature.text}</span>
-            </motion.div>
-          ))}
-        </div>
+  
 
         {/* Action button */}
         <Link
@@ -339,7 +324,7 @@ const MachineCard: React.FC<MachineCardProps> = ({
             </span>
           </motion.div>
         </Link>
-      </div>
+      {/* </div> */}
     </motion.div>
   );
 };
@@ -410,7 +395,7 @@ const WorkplaceTransformSection: React.FC<WorkplaceTransformSectionProps> = ({
           {/* Dual Machine Showcase - Office Installation */}
           <div className="relative overflow-hidden rounded-xl border border-[#333333] hover:border-[#FD5A1E] transition-all duration-300 bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d]">
             <Image
-              src="/images/machines/office-vending-machines-hallway-installation.webp"
+              src="/images/machines/premium-black-vending-machine-modern-design.webp"
               alt="Two AMP premium vending machines installed in office hallway - snack and beverage options"
               width={600}
               height={400}
@@ -504,7 +489,7 @@ const WorkplaceTransformSection: React.FC<WorkplaceTransformSectionProps> = ({
         {/* Premium Features List */}
         <div>
           <h3 className="text-2xl sm:text-3xl font-bold text-[#F5F5F5] mb-8 leading-tight">
-            Premium Features for Modern Workplaces
+            Premium Features
           </h3>
           <div className="space-y-4">
             {PREMIUM_FEATURES.map((feature, index) => (

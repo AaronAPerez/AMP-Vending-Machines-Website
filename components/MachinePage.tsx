@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { getVendingMachineById, getAllVendingMachines, normalizeMachineData, type MachineData } from '@/lib/data/vendingMachineData';
 import { Loading } from '@/components/ui/core/Loading';
-import Breadcrumbs from '@/components/Breadcrumbs';
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import MachineHero from '@/components/MachineHero';
 import ImageGallery from '@/components/ImageGallery';
 import TechIndicators from './TechIndicators';
@@ -46,7 +46,12 @@ export default function MachinePage({ id }: { id: string }) {
 
   return (
     <div className="min-h-screen bg-black">
-      <Breadcrumbs machine={machine} />
+      {/* Uses shared ui/Breadcrumbs for consistent navigation across the site */}
+      <Breadcrumbs items={[
+        { label: 'Home', href: '/' },
+        { label: 'Vending Machines', href: '/vending-machines' },
+        { label: machine.name },
+      ]} />
       <MachineHero machine={machine} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 lg:grid-cols-2 gap-12">

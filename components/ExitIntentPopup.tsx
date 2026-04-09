@@ -139,22 +139,22 @@ export function ExitIntentPopup({ delay = 5000, isOpen, onClose, content: provid
 
   // Default content (fallback)
   const defaultContent: ExitIntentContent = {
-    headline: "Wait! Don't Miss Out...",
-    subheadline: "We'll Beat Any Vending Service Offer!",
-    valueProposition: "Join the many qualifying businesses in Modesto & Stanislaus County receiving premium vending solutions - we guarantee to beat any competitor's offer!",
+    headline: "Wait! Before You Go...",
+    subheadline: "Let's Find the Right Vending Solution for You",
+    valueProposition: "AMP Vending serves businesses across Modesto & Stanislaus County with premium vending machines, full-service maintenance, and personalized service. Let's talk about what works for your location.",
     benefits: [
       "Professional Installation & Setup",
       "Full-Service Maintenance",
       "24/7 Service & Support",
-      "Price Match Guarantee"
+      "Tailored to Your Business"
     ],
     stats: [
       { value: "Full", label: "Service" },
       { value: "24/7", label: "Support" },
       { value: "50+", label: "Products" }
     ],
-    specialOfferBadge: "PRICE MATCH GUARANTEE",
-    ctaButton: "Get Your Quote",
+    specialOfferBadge: "LOCAL & TRUSTED",
+    ctaButton: "Request a Consultation",
     ctaLink: "/contact",
     phoneButton: "Call (209) 403-5450",
     phoneNumber: "+12094035450"

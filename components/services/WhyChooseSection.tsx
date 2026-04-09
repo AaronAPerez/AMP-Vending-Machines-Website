@@ -17,13 +17,13 @@ import GlareCard from '@/components/ui/effects/glare-card';
  * WhyChooseSection Component
  *
  * Displays the key differentiators and value propositions for AMP Vending.
- * Emphasizes local presence, reliability, and zero-cost model.
+ * Emphasizes local presence, reliability, and flexible service model.
  *
  * Key Points:
  * - Local business
  * - Fast restocking
  * - Modern machines
- * - No cost to you
+ * - Flexible pricing discussed with each client
  * - Reliable service
  */
 
@@ -61,11 +61,11 @@ const WhyChooseSection: React.FC = () => {
       highlight: "Latest Technology"
     },
     {
-      id: "no-cost",
-      title: "Zero Cost",
-      description: "No installation fees, no maintenance charges, no hidden costs. We provide the machine, stock it, and maintain it - all at absolutely no cost to you.",
+      id: "flexible-pricing",
+      title: "Flexible Pricing",
+      description: "Every business is different. We work with you to find a service arrangement that fits your location and needs — let's talk about what works best for you.",
       icon: <CircleDollarSign className="w-8 h-8" aria-hidden="true" />,
-      highlight: "$0 Investment"
+      highlight: "Custom Plans"
     },
     {
       id: "reliable",
