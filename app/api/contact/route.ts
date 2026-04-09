@@ -1,6 +1,6 @@
 import { emailService } from '@/lib/services/emailService';
 import { databaseService } from '@/lib/services/databaseService';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse, after } from 'next/server';
 import { z } from 'zod';
 
 /**
@@ -60,75 +60,46 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Save submission to Supabase database for admin dashboard viewing
-    const dbSaveResult = await databaseService.saveContactSubmission(validatedData);
-    if (!dbSaveResult) {
-      console.warn('⚠️ Failed to save contact submission to database, but continuing with email send');
-    } else {
-      console.log('✅ Contact submission saved to database');
-    }
+    // Respond immediately — DB save and email sending happen in the background
+    // so the user gets instant feedback regardless of third-party service latency.
+    const submissionId = `contact_${Date.now()}`;
 
-    // Send emails using your professional templates
-    const { customerResult, businessResult } = await emailService.sendContactFormEmails(customerData);
+    after(async () => {
+      // Save submission to Supabase database for admin dashboard viewing
+      const dbSaveResult = await databaseService.saveContactSubmission(validatedData);
+      if (!dbSaveResult) {
+        console.warn('⚠️ Failed to save contact submission to database');
+      } else {
+        console.log('✅ Contact submission saved to database');
+      }
 
-    // Log results
-    if (customerResult.success) {
-      console.log('✅ Customer confirmation email sent successfully');
-    } else {
-      console.error('❌ Customer confirmation email failed:', customerResult.error);
-    }
+      // Send emails using professional templates
+      const { customerResult, businessResult } = await emailService.sendContactFormEmails(customerData);
 
-    if (businessResult.success) {
-      console.log('✅ Business notification email sent successfully');
-    } else {
-      console.error('❌ Business notification email failed:', businessResult.error);
-    }
+      if (customerResult.success) {
+        console.log('✅ Customer confirmation email sent successfully');
+      } else {
+        console.error('❌ Customer confirmation email failed:', customerResult.error);
+      }
 
-    // Log the submission for analytics
-    await logContactSubmission(customerData, {
-      customerEmailSuccess: customerResult.success,
-      businessEmailSuccess: businessResult.success
+      if (businessResult.success) {
+        console.log('✅ Business notification email sent successfully');
+      } else {
+        console.error('❌ Business notification email failed:', businessResult.error);
+      }
+
+      // Log the submission for analytics
+      await logContactSubmission(customerData, {
+        customerEmailSuccess: customerResult.success,
+        businessEmailSuccess: businessResult.success
+      });
     });
 
-    // Determine response based on email results
-    const submissionId = `contact_${Date.now()}`;
-    
-    if (customerResult.success && businessResult.success) {
-      return NextResponse.json({
-        success: true,
-        message: 'Thank you for your inquiry! We\'ve sent a confirmation email and will respond within 24 hours.',
-        submissionId,
-        emailStatus: {
-          customerConfirmation: 'sent',
-          businessNotification: 'sent'
-        }
-      }, { status: 200 });
-    } 
-    else if (businessResult.success) {
-      // Business got the email, that's most important
-      return NextResponse.json({
-        success: true,
-        message: 'Thank you for your inquiry! We will respond within 24 hours.',
-        submissionId,
-        emailStatus: {
-          customerConfirmation: customerResult.success ? 'sent' : 'failed',
-          businessNotification: 'sent'
-        }
-      }, { status: 200 });
-    }
-    else {
-      // Both emails failed, but don't fail the submission
-      console.error('❌ All emails failed, but submission logged');
-      return NextResponse.json({
-        success: true,
-        message: 'Thank you for your inquiry! We have received your submission and will respond within 24 hours.',
-        submissionId,
-        emailStatus: {
-          customerConfirmation: 'failed',
-          businessNotification: 'failed'
-        }
-      }, { status: 200 });
-    }
+    return NextResponse.json({
+      success: true,
+      message: 'Thank you for your inquiry! We\'ve received your submission and will respond within 24 hours.',
+      submissionId,
+    }, { status: 200 });
 
   } catch (error) {
     console.error('❌ Contact form submission error:', error);

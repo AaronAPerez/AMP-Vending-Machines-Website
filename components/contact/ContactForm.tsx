@@ -126,7 +126,7 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
           landingPage: utmData.lastTouch?.landing_page || null,
           referrer: utmData.lastTouch?.referrer || null,
         }),
-        signal: AbortSignal.timeout(30000), // 30 second timeout (CI/slow networks need more time)
+        signal: AbortSignal.timeout(10000), // 10 second timeout
       });
 
       if (!response.ok) {
