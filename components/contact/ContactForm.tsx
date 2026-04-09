@@ -126,7 +126,7 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
           landingPage: utmData.lastTouch?.landing_page || null,
           referrer: utmData.lastTouch?.referrer || null,
         }),
-        signal: AbortSignal.timeout(10000), // 10 second timeout
+        signal: AbortSignal.timeout(30000), // 30 second timeout (CI/slow networks need more time)
       });
 
       if (!response.ok) {
@@ -173,7 +173,7 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
 
       // Handle different error types
       if (error instanceof Error) {
-        if (error.name === 'AbortError' || error.message.includes('timeout')) {
+        if (error.name === 'AbortError' || error.name === 'TimeoutError' || error.message.includes('timeout')) {
           toast.error('Request timed out. Please try again or call us at (209) 403-5450.');
         } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
           toast.error(
