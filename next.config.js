@@ -17,12 +17,11 @@ const nextConfig = {
   reactStrictMode: true,
 
   // Transpile specific packages to use modern JavaScript
-  // This re-compiles node_modules with modern syntax per browserslist
+  // lucide-react and @heroicons/react ship modern ESM directly — no transpilation needed.
+  // framer-motion and lodash benefit from SWC re-compilation per browserslist.
   transpilePackages: [
     "framer-motion",
     "lodash",
-    "lucide-react",
-    "@heroicons/react",
   ],
 
   // Compiler optimizations using SWC (default bundler)
@@ -71,7 +70,7 @@ const nextConfig = {
   // Image optimization configuration
   // Quality is set per-image via the Image component, default is 75
   images: {
-    qualities: [20, 40, 60, 75, 90],
+    qualities: [20, 40, 50, 60, 75, 90],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 100, 128, 160, 256],
     formats: ["image/avif", "image/webp"],
@@ -84,11 +83,6 @@ const nextConfig = {
         protocol: "https",
         hostname: "**.ampvendingmachines.com",
       },
-      // Wikimedia Commons - reliable source for product images
-      {
-        protocol: "https",
-        hostname: "upload.wikimedia.org",
-      },
       // Common CDN providers used by brands
       {
         protocol: "https",
@@ -96,33 +90,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "cdn.shopify.com",
-      },
-      // Popular brand CDNs
-      {
-        protocol: "https",
-        hostname: "www.coca-cola.com",
-      },
-      {
-        protocol: "https",
-        hostname: "www.pepsico.com",
-      },
-      {
-        protocol: "https",
-        hostname: "*.amazonaws.com",
-      },
-      {
-        protocol: "https",
         hostname: "*.cloudinary.com",
-      },
-      // Product image aggregators
-      {
-        protocol: "https",
-        hostname: "images.openfoodfacts.org",
-      },
-      {
-        protocol: "https",
-        hostname: "world.openfoodfacts.org",
       },
     ],
     // Optimize for Core Web Vitals

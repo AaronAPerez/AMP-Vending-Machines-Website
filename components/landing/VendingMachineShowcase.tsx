@@ -104,7 +104,7 @@ const VendingMachineShowcase = ({
 
             <p className="text-lg sm:text-xl text-[#A5ACAF] max-w-3xl mx-auto leading-relaxed" itemProp="description">
               Professional commercial vending machines with advanced touchscreen technology, contactless payment systems,
-              and complete installation & maintenance service packages for offices, schools, and businesses throughout Central California.
+              complete installation & maintenance service packages for offices, schools, and businesses throughout Central Valley, California.
             </p>
           </motion.div>
         )}

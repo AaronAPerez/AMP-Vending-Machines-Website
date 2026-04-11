@@ -576,104 +576,6 @@ export function generateBreadcrumbStructuredData(
 }
 
 
-/**
- * Generate About page structured data
- * Includes organization, founder, and service area information
- */
-export function generateAboutPageStructuredData() {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'AboutPage',
-    name: 'About AMP Vending',
-    description: 'Learn about AMP Vending\'s commitment to providing premium workplace vending Machines in Central Valley, CA.',
-    url: `${SEO_CONSTANTS.BASE_URL}/about`,
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `${SEO_CONSTANTS.BASE_URL}/about`
-    },
-    about: {
-      '@type': 'Organization',
-      '@id': `${SEO_CONSTANTS.BASE_URL}/#organization`,
-      name: SEO_CONSTANTS.BUSINESS_NAME,
-      legalName: SEO_CONSTANTS.BUSINESS_LEGAL_NAME,
-      description: 'Professional vending machine Machines for workplaces across Central Valley, CA',
-      foundingDate: '2025',
-      founders: [
-        {
-          '@type': 'Person',
-          name: 'Andrew Perez',
-          jobTitle: 'Founder & CEO',
-          worksFor: {
-            '@type': 'Organization',
-            name: SEO_CONSTANTS.BUSINESS_NAME
-          }
-        }
-      ],
-      areaServed: {
-        '@type': 'Place',
-        name: SEO_CONSTANTS.SERVICE_AREA,
-        geo: {
-          '@type': 'GeoCircle',
-          geoMidpoint: {
-            '@type': 'GeoCoordinates',
-            latitude: SEO_CONSTANTS.ADDRESS.COORDINATES.LAT,
-            longitude: SEO_CONSTANTS.ADDRESS.COORDINATES.LNG,
-          },
-          geoRadius: '50 miles',
-        },
-      },
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: SEO_CONSTANTS.ADDRESS.STREET,
-        addressLocality: SEO_CONSTANTS.ADDRESS.CITY,
-        addressRegion: SEO_CONSTANTS.ADDRESS.STATE,
-        postalCode: SEO_CONSTANTS.ADDRESS.ZIP,
-        addressCountry: SEO_CONSTANTS.ADDRESS.COUNTRY,
-      },
-      contactPoint: {
-        '@type': 'ContactPoint',
-        telephone: SEO_CONSTANTS.PHONE,
-        contactType: 'customer service',
-        email: SEO_CONSTANTS.EMAIL,
-        areaServed: SEO_CONSTANTS.ADDRESS.COUNTRY,
-        availableLanguage: 'English',
-      },
-      specialty: [
-        'Workplace vending Machines',
-        'Touchscreen vending machines',
-        'Professional installation',
-        'Maintenance services',
-        '24/7 customer support'
-      ],
-      slogan: 'Premium Vending Machines for Modern Workplaces',
-      url: SEO_CONSTANTS.BASE_URL,
-      logo: SEO_CONSTANTS.LOGO_FULL_URL,
-      image: `${SEO_CONSTANTS.BASE_URL}/images/about/amp-vending-about.jpg`,
-      sameAs: [
-        // Add social media URLs when available
-        // 'https://www.facebook.com/ampvending',
-        // 'https://www.linkedin.com/company/amp-vending',
-      ]
-    },
-    breadcrumb: {
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: 'Home',
-          item: SEO_CONSTANTS.BASE_URL
-        },
-        {
-          '@type': 'ListItem',
-          position: 2,
-          name: 'About',
-          item: `${SEO_CONSTANTS.BASE_URL}/about`
-        }
-      ]
-    }
-  };
-}
 
 /**
  * Generate website search action structured data
@@ -723,39 +625,6 @@ export const SERVICE_AREA_SCHEMA = {
   },
 } as const;
 
-export const STATIC_PAGES = [
-  {
-    url: SEO_CONSTANTS.BASE_URL,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 1.0,
-  },
-  {
-    url: `${SEO_CONSTANTS.BASE_URL}/about`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.8,
-  },
-  {
-    url: `${SEO_CONSTANTS.BASE_URL}/vending-machines`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.9,
-  },
-  {
-    url: `${SEO_CONSTANTS.BASE_URL}/contact`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.8,
-  },
-  {
-    url: `${SEO_CONSTANTS.BASE_URL}/feedback`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.6,
-  },
-  // ... other static pages
-] as const;
 
 /**
  * Default robots meta content for different page types
@@ -774,16 +643,6 @@ export const ENHANCED_ROBOTS_CONFIG = {
 
 
 /**
- * Export all SEO-related utilities and configurations
- * This ensures consistent SEO implementation across the application
- */
-// export {
-//   generateMachineMetadata,
-//   generateMachineStructuredData,
-//   generateBreadcrumbStructuredData,
-// };
-
-/**
  * Type definitions for SEO-related data structures
  */
 export type SEOMetadata = Metadata;
@@ -792,7 +651,6 @@ export type BreadcrumbItem = { name: string; url: string };
 
 /**
  * Default export containing all SEO constants and utilities
- * Use this for importing all SEO-related functionality
  */
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -804,9 +662,7 @@ export default {
   SERVICE_AREA_SCHEMA,
   OPERATING_HOURS_SCHEMA,
   ROBOTS_CONFIG,
-  STATIC_PAGES,
   generateMachineMetadata,
   generateMachineStructuredData,
   generateBreadcrumbStructuredData,
-  generateAboutPageStructuredData,
 };

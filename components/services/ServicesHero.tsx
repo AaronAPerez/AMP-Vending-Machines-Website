@@ -145,7 +145,7 @@ const ServicesHero: React.FC<ServicesHeroProps> = ({
                 rightIcon={<ArrowRight className="w-5 h-5" />}
                 aria-label="Request a vending machine for your business"
               >
-                Request a Quote
+                Request Consultation
               </AccessibleButton>
 
               <AccessibleButton

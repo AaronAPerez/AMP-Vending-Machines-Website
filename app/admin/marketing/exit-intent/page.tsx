@@ -6,6 +6,7 @@ import { AccessibleButton } from '@/components/ui/AccessibleButton';
 import Card from '@/components/ui/core/Card';
 import LoadingSpinner from '@/components/admin/shared/LoadingSpinner';
 import { ExitIntentPopup } from '@/components/ExitIntentPopup';
+import { Input } from '@/components/ui/forms/Input';
 
 interface ExitIntentSetting {
   id: string;
@@ -32,20 +33,20 @@ export default function ExitIntentManagementPage() {
   const [previewSetting, setPreviewSetting] = useState<ExitIntentSetting | null>(null);
   const [showPreview, setShowPreview] = useState(false);
 
-  // Form state - defaults match the "We'll beat any offer" messaging
+  // Form state - defaults match current brand messaging (no free/zero-cost claims)
   const [formData, setFormData] = useState({
     name: '',
-    headline: "Wait! Don't Miss Out...",
-    subheadline: "We'll Beat Any Vending Service Offer!",
-    value_proposition: "Join the many qualifying businesses in Modesto & Stanislaus County receiving premium vending solutions - we guarantee to beat any competitor's offer!",
-    benefits: ['Professional Installation & Setup', 'Full-Service Maintenance', '24/7 Service & Support', 'Price Match Guarantee'],
+    headline: "Wait! Before You Go...",
+    subheadline: "Let's Find the Right Vending Solution for You",
+    value_proposition: "AMP Vending serves businesses across Modesto & Stanislaus County with premium vending machines, full-service maintenance, and personalized service. Let's talk about what works for your location.",
+    benefits: ['Professional Installation & Setup', 'Full-Service Maintenance', '24/7 Service & Support', 'Tailored to Your Business'],
     stats: [
       { value: 'Full', label: 'Service' },
       { value: '24/7', label: 'Support' },
       { value: '50+', label: 'Products' }
     ],
-    special_offer_badge: 'PRICE MATCH GUARANTEE',
-    primary_cta_text: 'Get Your Quote',
+    special_offer_badge: 'LOCAL & TRUSTED',
+    primary_cta_text: 'Request a Consultation',
     primary_cta_link: '/contact',
     phone_button_text: 'Call (209) 403-5450',
     phone_number: '+12094035450'
@@ -212,7 +213,7 @@ export default function ExitIntentManagementPage() {
             <div>
               <h3 className="text-sm font-semibold text-[#F5F5F5]">Active Exit Intent</h3>
               <p className="text-sm text-[#A5ACAF] mt-1">
-                "{settings.find(s => s.is_active)?.name}" is currently active on the website
+                &quot;{settings.find(s => s.is_active)?.name}&quot; is currently active on the website
               </p>
             </div>
           </div>
@@ -266,7 +267,7 @@ export default function ExitIntentManagementPage() {
                 type="text"
                 value={formData.subheadline}
                 onChange={(e) => setFormData({ ...formData, subheadline: e.target.value })}
-                placeholder="Get a FREE Vending Machine!"
+                placeholder="e.g., Let's Find the Right Vending Solution for You"
                 className="w-full px-4 py-2 bg-[#0a0a0a] border border-[#333333] rounded-lg text-[#F5F5F5] placeholder-[#666666] focus:border-[#FD5A1E] focus:outline-none"
                 required
               />
@@ -322,7 +323,7 @@ export default function ExitIntentManagementPage() {
                       newStats[index].value = e.target.value;
                       setFormData({ ...formData, stats: newStats });
                     }}
-                    placeholder="100% Free"
+                    placeholder="e.g., Full"
                     className="px-4 py-2 bg-[#0a0a0a] border border-[#333333] rounded-lg text-[#F5F5F5] placeholder-[#666666] focus:border-[#FD5A1E] focus:outline-none"
                   />
                   <input
@@ -360,7 +361,7 @@ export default function ExitIntentManagementPage() {
                 <label className="block text-sm font-medium text-[#F5F5F5] mb-2">
                   Primary CTA Text
                 </label>
-                <input
+                <Input
                   type="text"
                   value={formData.primary_cta_text}
                   onChange={(e) => setFormData({ ...formData, primary_cta_text: e.target.value })}
@@ -371,7 +372,7 @@ export default function ExitIntentManagementPage() {
                 <label className="block text-sm font-medium text-[#F5F5F5] mb-2">
                   Primary CTA Link
                 </label>
-                <input
+                <Input
                   type="text"
                   value={formData.primary_cta_link}
                   onChange={(e) => setFormData({ ...formData, primary_cta_link: e.target.value })}
@@ -385,7 +386,7 @@ export default function ExitIntentManagementPage() {
                 <label className="block text-sm font-medium text-[#F5F5F5] mb-2">
                   Phone Button Text
                 </label>
-                <input
+                <Input
                   type="text"
                   value={formData.phone_button_text}
                   onChange={(e) => setFormData({ ...formData, phone_button_text: e.target.value })}
@@ -396,7 +397,7 @@ export default function ExitIntentManagementPage() {
                 <label className="block text-sm font-medium text-[#F5F5F5] mb-2">
                   Phone Number
                 </label>
-                <input
+                <Input
                   type="text"
                   value={formData.phone_number}
                   onChange={(e) => setFormData({ ...formData, phone_number: e.target.value })}

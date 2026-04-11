@@ -1,16 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { FeedbackBreadcrumbs } from "@/components/seo/BreadcrumbSchema";
 import FeedbackForm from "@/components/feedback/FeedbackForm";
 import { PhoneButton } from "@/components/ui/PhoneButton";
 
 // Force dynamic rendering to avoid SSR issues with client components
 export const dynamic = 'force-dynamic';
 
-// Define metadata for SEO
+// Feedback is an internal operational tool — exclude it from search index
 export const metadata: Metadata = {
   title: 'Share Your Feedback | AMP Vending',
   description: 'Share your questions, suggestions, compliments, or concerns about AMP Vending machines and services.',
+  robots: {
+    index: false,
+    follow: false,
+  },
   alternates: {
     canonical: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ampvendingmachines.com'}/feedback`,
   },

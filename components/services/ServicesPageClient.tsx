@@ -13,7 +13,7 @@ import ServicesHero from './ServicesHero';
  * Uses dynamic imports for below-the-fold sections to optimize initial load.
  *
  * Section Order:
- * 1. Hero - "Free Vending Machine Service"
+ * 1. Hero - "Professional Vending Machine Service"
  * 2. How It Works - 3-step process
  * 3. Types of Service - Service offerings
  * 4. Ideal Locations - Target business types

@@ -70,7 +70,8 @@ export const BackgroundImages = () => {
                             fetchPriority={isLCPImage ? 'high' : undefined}
                             // Below-fold images use lazy loading
                             loading={isAboveFold ? undefined : 'lazy'}
-                            quality={60}
+                            // Decorative background images (aria-hidden) can use lower quality
+                            quality={50}
                         />
                     </div>
                 );

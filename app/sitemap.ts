@@ -140,21 +140,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   );
 
-  // 8. Contact and feedback pages - Conversion pages
-  urls.push(
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/feedback`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    }
-  );
+  // 8. Contact page - Conversion page
+  // Note: /feedback is excluded (robots: noindex) — internal operational tool
+  urls.push({
+    url: `${baseUrl}/contact`,
+    lastModified: currentDate,
+    changeFrequency: 'monthly',
+    priority: 0.9,
+  });
 
   // 9. Accessibility statement - Static content
   urls.push({

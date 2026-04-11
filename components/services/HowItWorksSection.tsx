@@ -15,7 +15,7 @@ import GlareCard from '@/components/ui/effects/glare-card';
  * Steps:
  * 1. We install the machine
  * 2. We stock & maintain it
- * 3. You pay nothing
+ * 3. We discuss a plan that works for you
  */
 
 // Step data type definition
@@ -46,8 +46,8 @@ const HowItWorksSection: React.FC = () => {
     },
     {
       number: 3,
-      title: "You Pay Nothing",
-      description: "No installation fees, no maintenance costs, no hidden charges. We earn from product sales while you enjoy a valuable employee amenity.",
+      title: "We Work Out a Plan",
+      description: "Every business is unique. We'll discuss a service arrangement that makes sense for your location — reach out and let's find the right fit together.",
       icon: <DollarSign className="w-8 h-8" aria-hidden="true" />,
       gradient: "from-green-500 to-emerald-500"
     }

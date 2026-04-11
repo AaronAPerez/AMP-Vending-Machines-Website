@@ -63,54 +63,23 @@ export default function RootLayout({
           .hero-cta-secondary:hover{background:#A5ACAF;color:#000}
         `}</style>
 
+        {/* Content Security Policy */}
         <meta httpEquiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com https://googleads.g.doubleclick.net https://www.clarity.ms https://scripts.clarity.ms;" />
 
-        {/* Open Graph (OG) Tags  */}
-        <meta property="og:image" content="https://www.ampvendingmachines.com/images/promos/amp-vending-promo-modesto.webp" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:title" content="AMP Vending Machines – Professional Vending for Modesto, Stockton, Stanislaus & San Joaquin County" />
-        <meta property="og:description" content="We provide high‑quality vending machines to your business." />
-
+        {/* Search engine verification — not part of Next.js metadata API */}
         <meta name="google-site-verification" content="rQUz_b0dTF5gHNCSHXdNfzEI6LDoPxg54ZppJQjiFFg" />
+        <meta name="msvalidate.01" content="C0E2AE6FB973A8364053560636CE6EA8" />
 
-        {/* Mobile optimization */}
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-title" content="AMP Vending" />
-        <meta name="format-detection" content="telephone=yes" />
-
-        {/* Theme colors */}
-        <meta name="theme-color" content="#000000" />
-        <meta name="msapplication-TileColor" content="#000000" />
-
-        {/* Performance optimization hints */}
+        {/* Performance optimization */}
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
-        {/* Resource hints for faster loading */}
+        {/* Resource hints for analytics and tag manager */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-        <link rel="dns-prefetch" href="https://www.clarity.ms https://scripts.clarity.ms;" />
-
-        {/* Security headers */}
-        <meta name="referrer" content="origin-when-cross-origin" />
-
-        {/* Additional SEO enhancements */}
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta name="bingbot" content="index, follow" />
-
-        {/* Canonical URL (will be overridden by page-specific canonical) */}
-        <link rel="canonical" href="https://www.ampvendingmachines.com" />
-
-        {/* Alternate language versions (add when implementing i18n) */}
-        <link rel="alternate" hrefLang="en-US" href="https://www.ampvendingmachines.com" />
-        <link rel="alternate" hrefLang="x-default" href="https://www.ampvendingmachines.com" />
-
-        {/* Bing Verification */}
-        <meta name="msvalidate.01" content="C0E2AE6FB973A8364053560636CE6EA8" />
+        <link rel="dns-prefetch" href="https://www.clarity.ms" />
+        <link rel="dns-prefetch" href="https://scripts.clarity.ms" />
         
       </head>
 
