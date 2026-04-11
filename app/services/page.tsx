@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/images/og/services-page.jpg',
+        url: `${AMP_VENDING_BUSINESS_INFO.contact.website}/images/og/services-page.jpg`,
         width: 1200,
         height: 630,
         alt: 'AMP Vending - Professional Vending Machine Services'
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     title: 'Professional Vending Machine Services | AMP Vending',
     description:
       'Get a vending machine for your Central Valley business. Professional installation, stocking, and maintenance.',
-    images: ['/images/og/services-page.jpg']
+    images: [`${AMP_VENDING_BUSINESS_INFO.contact.website}/images/og/services-page.jpg`]
   },
   alternates: {
     canonical: `${AMP_VENDING_BUSINESS_INFO.contact.website}/services`

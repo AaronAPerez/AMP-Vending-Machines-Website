@@ -118,8 +118,12 @@ export function MicrosoftClarity() {
 export function claritySetTag(key: string, value: string | string[]): void {
   if (typeof window === 'undefined') return;
 
-  // Use the npm package's setTag method
-  Clarity.setTag(key, value);
+  // Guard: Clarity may not be initialized (e.g. no project ID, test env)
+  try {
+    Clarity.setTag(key, value);
+  } catch {
+    // Silently ignore — Clarity not loaded or not initialized
+  }
 }
 
 /**
@@ -152,8 +156,12 @@ export function clarityIdentify(
 export function clarityUpgrade(reason: string): void {
   if (typeof window === 'undefined') return;
 
-  // Use the npm package's upgrade method
-  Clarity.upgrade(reason);
+  // Guard: Clarity may not be initialized (e.g. no project ID, test env)
+  try {
+    Clarity.upgrade(reason);
+  } catch {
+    // Silently ignore — Clarity not loaded or not initialized
+  }
 }
 
 /**
