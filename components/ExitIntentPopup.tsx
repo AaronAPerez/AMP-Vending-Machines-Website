@@ -255,10 +255,10 @@ export function ExitIntentPopup({ delay = 5000, isOpen, onClose, content: provid
         <Card className="relative bg-gradient-to-br from-black via-[#1a1a1a] to-black shadow-2xl border-2 border-[#FD5A1E] overflow-hidden">
           {/* Close Button - Touch-friendly size */}
           <button
+            type="button"
             onClick={handleClose}
             className="absolute top-2 right-2 md:top-3 md:right-3 z-[50] p-3 rounded-lg bg-[#4d4d4d] hover:bg-[#FD5A1E] transition-colors touch-manipulation"
             aria-label="Close popup"
-            style={{ minWidth: '44px', minHeight: '44px' }} // WCAG touch target
           >
             <X className="h-5 w-5 text-[#F5F5F5]" />
           </button>
