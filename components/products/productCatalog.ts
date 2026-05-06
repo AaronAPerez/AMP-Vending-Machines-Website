@@ -34,6 +34,7 @@ export interface Product {
     // ═══════════════════════════════════════════════════════════════════════════
     { id: 'lays-classic', name: 'Lays Classic', category: 'chips', image: '/images/products/lays.webp', popular: true },
     { id: 'doritos-nacho', name: 'Doritos Nacho Cheese', category: 'chips', image: '/images/products/doritos-nacho.webp', popular: true },
+    { id: 'doritos-spicy', name: 'Doritos Spicy Nacho', category: 'chips', image: '/images/products/doritos-spicy.webp', popular: true },
     { id: 'cheetos', name: 'Cheetos Crunchy', category: 'chips', image: '/images/products/cheetos.webp' },
     { id: 'lays-sourcream', name: 'Lays Sour Cream & Onion', category: 'chips', image: '/images/products/layssourcream.webp' },
     { id: 'doritos-cool-ranch', name: 'Doritos Cool Ranch', category: 'chips', image: '/images/products/doritos-cool-ranch.webp' },
@@ -55,6 +56,7 @@ export interface Product {
     { id: '3musketeers', name: '3 Musketeers', category: 'candy', image: '/images/products/3musketeers.webp' },
     { id: 'mms', name: 'M&Ms', category: 'candy', image: '/images/products/mms.webp', popular: true },
     { id: 'skittles', name: 'Skittles', category: 'candy', image: '/images/products/skittles.webp' },
+    { id: 'skittles-sour', name: 'Skittles Sour', category: 'candy', image: '/images/products/skittles-sour.webp' },
     { id: 'starburst', name: 'Starburst', category: 'candy', image: '/images/products/starburst.webp' },
     { id: 'twix', name: 'Twix', category: 'candy', image: '/images/products/twix.webp' },
     { id: 'milkyway', name: 'Milky Way', category: 'candy', image: '/images/products/snickers.webp' },
@@ -117,7 +119,7 @@ export interface Product {
     // ═══════════════════════════════════════════════════════════════════════════
     // OTHER SNACKS - Variety of tasty options
     // ═══════════════════════════════════════════════════════════════════════════
-    { id: 'beef-jerky', name: 'Beef Jerky', category: 'snacks', image: '/images/products/peanuts.webp', popular: true, details: 'High protein snack' },
+    { id: 'beef-jerky', name: 'Beef Jerky', category: 'snacks', image: '/images/products/beef-jerky.webp', popular: true, details: 'High protein snack' },
     { id: 'slim-jim', name: 'Slim Jim', category: 'snacks', image: '/images/products/peanuts.webp' },
     { id: 'rice-krispies', name: 'Rice Krispies Treat', category: 'snacks', image: '/images/products/poptarts.webp', popular: true },
     { id: 'fruit-snacks', name: 'Fruit Snacks', category: 'snacks', image: '/images/products/skittles.webp' },
@@ -131,7 +133,7 @@ export interface Product {
     // ═══════════════════════════════════════════════════════════════════════════
     // BEVERAGES - Cold drinks and refreshments
     // ═══════════════════════════════════════════════════════════════════════════
-    { id: 'coke', name: 'Coca-Cola', category: 'beverages', image: '/images/products/coke-zero.webp', popular: true },
+    { id: 'coke', name: 'Coca-Cola', category: 'beverages', image: '/images/products/coca-cola.webp', popular: true },
     { id: 'coke-zero', name: 'Coca-Cola Zero', category: 'beverages', image: '/images/products/coke-zero.webp', popular: true },
     { id: 'diet-coke', name: 'Diet Coke', category: 'beverages', image: '/images/products/diet-coke.webp', healthy: true },
     { id: 'drpepper', name: 'Dr Pepper', category: 'beverages', image: '/images/products/drpepper.webp' },
@@ -142,12 +144,15 @@ export interface Product {
     { id: 'diet-pepsi', name: 'Diet Pepsi', category: 'beverages', image: '/images/products/diet-coke.webp', healthy: true },
     { id: 'fanta', name: 'Fanta Orange', category: 'beverages', image: '/images/products/orangecrush.webp' },
     { id: 'gatorade', name: 'Gatorade', category: 'beverages', image: '/images/products/mountaindew.webp', popular: true, details: 'Sports hydration' },
+    { id: 'gatorade-zero', name: 'Gatorade Zero', category: 'beverages', image: '/images/products/gatorade-zero.webp', healthy: true, details: 'Zero sugar electrolyte drink' },
     { id: 'powerade', name: 'Powerade', category: 'beverages', image: '/images/products/mountaindew.webp', details: 'Electrolyte drink' },
     { id: 'bottled-water', name: 'Dasani Water', category: 'beverages', image: '/images/products/coke-zero.webp', healthy: true },
     { id: 'smartwater', name: 'Smartwater', category: 'beverages', image: '/images/products/coke-zero.webp', healthy: true },
     { id: 'vitamin-water', name: 'Vitaminwater', category: 'beverages', image: '/images/products/orangecrush.webp', healthy: true },
     { id: 'lemonade', name: 'Minute Maid Lemonade', category: 'beverages', image: '/images/products/orangecrush.webp' },
     { id: 'iced-tea', name: 'Gold Peak Iced Tea', category: 'beverages', image: '/images/products/drpepper.webp' },
+    { id: 'lemon-ice-tea', name: 'Lemon Iced Tea', category: 'beverages', image: '/images/products/lemon-ice-tea.webp' },
+    { id: 'green-tea-mixed-berry', name: 'Green Tea Mixed Berry', category: 'beverages', image: '/images/products/green-tea-mixed-berry.webp', healthy: true },
     { id: 'apple-juice', name: 'Apple Juice', category: 'beverages', image: '/images/products/orangecrush.webp', healthy: true },
     { id: 'orange-juice', name: 'Orange Juice', category: 'beverages', image: '/images/products/orangecrush.webp', healthy: true },
 
@@ -159,13 +164,15 @@ export interface Product {
     { id: 'monster', name: 'Monster Energy', category: 'energy', image: '/images/products/monster.webp', popular: true },
     { id: 'monster-zero', name: 'Monster Zero Ultra', category: 'energy', image: '/images/products/monster.webp', healthy: true },
     { id: 'bang', name: 'Bang Energy Drink', category: 'energy', image: '/images/products/monster.webp', popular: true, details: '300mg caffeine' },
-    { id: 'rockstar', name: 'Rockstar Energy', category: 'energy', image: '/images/products/monster.webp' },
+    { id: 'rockstar', name: 'Rockstar Fruit Punch', category: 'energy', image: '/images/products/rockstar-fruit-punch.webp' },
     { id: 'celsius', name: 'Celsius', category: 'energy', image: '/images/products/redbull.webp', healthy: true, popular: true, details: 'Fitness drink' },
     { id: 'nos', name: 'NOS Energy', category: 'energy', image: '/images/products/monster.webp' },
     { id: 'reign', name: 'Reign Total Body Fuel', category: 'energy', image: '/images/products/monster.webp', healthy: true, details: 'Zero sugar, BCAAs' },
     { id: 'ghost', name: 'Ghost Energy', category: 'energy', image: '/images/products/monster.webp', details: 'Gaming energy drink' },
     { id: 'c4-energy', name: 'C4 Energy', category: 'energy', image: '/images/products/redbull.webp', healthy: true, details: 'Pre-workout energy' },
     { id: '5-hour-energy', name: '5-Hour Energy', category: 'energy', image: '/images/products/redbull.webp', details: 'Compact energy shot' },
+    { id: 'starbucks-frappuccino', name: 'Starbucks Frappuccino', category: 'energy', image: '/images/products/starbucks.webp', popular: true, details: 'Chilled coffee drink' },
+    { id: 'starbucks-double-shot', name: 'Starbucks Double Shot', category: 'energy', image: '/images/products/starbucks-double-shot.webp', popular: true, details: 'Espresso & cream' },
 
     // ═══════════════════════════════════════════════════════════════════════════
     // HEALTHY OPTIONS - Better-for-you choices

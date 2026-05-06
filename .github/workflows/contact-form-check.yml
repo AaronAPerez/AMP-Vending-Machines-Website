@@ -4,12 +4,12 @@ on:
   schedule:
     - cron: "0 */12 * * *"   # Runs every 12 hours
   workflow_dispatch:
-  # Optionally run on push to specific branches
+  # Run when contact-form related files change
   push:
     paths:
       - 'components/contact/**'
       - 'app/api/contact/**'
-      - 'e2e/contact-form.spec.ts'
+      - 'tests/e2e/contact-form-email-verification.spec.ts'
 
 jobs:
   test:
@@ -20,7 +20,7 @@ jobs:
       - name: Install Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: 'npm'
 
       - name: Install dependencies
@@ -32,9 +32,12 @@ jobs:
       - name: Run Contact Form E2E Tests
         run: npx playwright test tests/e2e/contact-form-email-verification.spec.ts --project=chromium
         env:
+          # Required for email delivery verification test.
+          # Without TEST_BASE_URL the email delivery test is automatically skipped.
+          # Add TEST_BASE_URL as a repo secret (e.g. https://ampvendingmachines.com)
+          # to enable full email delivery verification against production.
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          # For production testing, set this secret to your production URL
-          # TEST_BASE_URL: ${{ secrets.TEST_BASE_URL }}
+          TEST_BASE_URL: ${{ secrets.TEST_BASE_URL }}
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v4

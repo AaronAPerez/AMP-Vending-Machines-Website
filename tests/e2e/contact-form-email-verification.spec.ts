@@ -106,8 +106,13 @@ test.describe('Contact Form', () => {
  * Use sparingly to avoid unnecessary email sends.
  */
 test.describe('Contact Form Email Delivery', () => {
-  // Skip this test suite if RESEND_API_KEY is not configured
-  test.skip(!process.env.RESEND_API_KEY, 'RESEND_API_KEY not configured - skipping email verification');
+  // Skip this test suite if RESEND_API_KEY is not configured OR if no production URL is set.
+  // Email delivery verification requires a real deployed server (not dev) to reliably send
+  // emails through Resend. Running against localhost/dev is unreliable in CI.
+  test.skip(
+    !process.env.RESEND_API_KEY || !process.env.TEST_BASE_URL,
+    'RESEND_API_KEY and TEST_BASE_URL must both be set to run email delivery verification'
+  );
 
   test('verifies email delivery via Resend API', async ({ page, baseURL }) => {
     const RESEND_API_KEY = process.env.RESEND_API_KEY;

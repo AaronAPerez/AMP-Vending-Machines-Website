@@ -21,6 +21,8 @@ interface FormData {
   phone: string;
   companyName: string;
   message: string;
+  /** Honeypot field — hidden from humans; bots fill it automatically */
+  honeypot: string;
 }
 
 interface FormErrors {
@@ -40,6 +42,7 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
     phone: '',
     companyName: '',
     message: '',
+    honeypot: '',
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
@@ -157,6 +160,7 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
           phone: '',
           companyName: '',
           message: '',
+          honeypot: '',
         });
 
         // Reset status after delay
@@ -219,6 +223,23 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
             onSubmit={handleSubmit}
             noValidate
           >
+            {/*
+              Honeypot trap — positioned off-screen so real users never see it.
+              Bots that auto-fill all fields will populate this, triggering spam detection on the server.
+              aria-hidden keeps it invisible to screen readers; tabIndex prevents keyboard focus.
+            */}
+            <div aria-hidden="true" className="absolute -left-[9999px] top-[-9999px] w-px h-px overflow-hidden">
+              <label htmlFor="website">Website URL</label>
+              <input
+                type="text"
+                id="website"
+                name="honeypot"
+                value={formData.honeypot}
+                onChange={handleChange}
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
             {/* Success/Error Messages */}
             {submitStatus === 'success' && (
               <div
@@ -482,12 +503,7 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
                 {/* Email with overflow-wrap for better breaking */}
                 <a
                   href={`mailto:${SEO_CONSTANTS.EMAIL}`}
-                  className="block hover:text-[#FD5A1E] transition-colors text-[#A5ACAF]"
-                  style={{
-                    wordBreak: 'break-all',      // CSS property for aggressive breaking
-                    overflowWrap: 'break-word',  // More intelligent word breaking
-                    hyphens: 'auto'              // Add hyphens where appropriate
-                  }}
+                  className="block hover:text-[#FD5A1E] transition-colors text-[#A5ACAF] break-all break-words hyphens-auto"
                 >
                   {SEO_CONSTANTS.EMAIL}
                 </a>

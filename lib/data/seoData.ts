@@ -14,7 +14,7 @@ export const SEO_CONSTANTS = {
   DOMAIN: 'ampvendingmachines.com',
   
   // Business Information
-  BUSINESS_NAME: 'AMP Vending Machines',
+  BUSINESS_NAME: 'AMP Vending',
   BUSINESS_LEGAL_NAME: 'AMP Design and Consulting LLC',
   BRAND_KEYWORDS: ['ampvendingmachines', 'amp vending machines', 'amp vending', 'ampvending'],
   
