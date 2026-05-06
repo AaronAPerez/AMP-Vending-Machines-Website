@@ -40,13 +40,13 @@ test.describe('Contact Form', () => {
 
     await page.goto(`${testUrl}/contact`);
 
-    // Fill out all required form fields
-    await page.fill('#firstName', 'Test');
-    await page.fill('#lastName', 'User');
-    await page.fill('#email', 'testuser@example.com');
-    await page.fill('#phone', '555-555-5555');
-    await page.fill('#companyName', 'Test Company Inc');
-    await page.fill('#message', 'This is an automated test message for the contact form. Please disregard.');
+    // Fill out all required form fields with realistic data (avoids spam filter)
+    await page.fill('#firstName', 'Playwright');
+    await page.fill('#lastName', 'CI');
+    await page.fill('#email', 'playwright.ci@protonmail.com');
+    await page.fill('#phone', '(209) 876-5432');
+    await page.fill('#companyName', 'CI Pipeline Corp');
+    await page.fill('#message', 'Checking the contact form submission flow works correctly in CI.');
 
     // Submit the form
     await page.click('button[type="submit"]');
@@ -118,19 +118,21 @@ test.describe('Contact Form Email Delivery', () => {
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
     const testUrl = process.env.TEST_BASE_URL || baseURL || 'http://localhost:3000';
 
-    // Generate unique test identifier to find this specific email
-    const testId = `test-${Date.now()}`;
-    const testEmail = `test-${testId}@example.com`;
+    // Generate unique reference ID to identify this specific email in Resend logs.
+    // Use a prefix that does NOT match spam filter patterns (no "test-\d{8,}" or @example.com).
+    const refId = `ci-${Date.now()}`;
+    const testEmail = `playwright+${refId}@protonmail.com`;
 
     await page.goto(`${testUrl}/contact`);
 
-    // Fill out the form with identifiable test data
-    await page.fill('#firstName', 'E2E');
-    await page.fill('#lastName', 'Test');
+    // Fill out the form with realistic data that passes spam filters.
+    // Avoid: @example.com, 555-000-xxxx phones, "E2E Test" / "please disregard" in text.
+    await page.fill('#firstName', 'Playwright');
+    await page.fill('#lastName', 'CI');
     await page.fill('#email', testEmail);
-    await page.fill('#phone', '555-000-0000');
-    await page.fill('#companyName', `E2E Test Company ${testId}`);
-    await page.fill('#message', `Automated E2E test submission. Test ID: ${testId}. Please disregard this message.`);
+    await page.fill('#phone', '(209) 876-5432');
+    await page.fill('#companyName', `Pipeline Verification ${refId}`);
+    await page.fill('#message', `CI pipeline contact form check. Reference: ${refId}. Verifying end-to-end delivery.`);
 
     // Submit the form
     await page.click('button[type="submit"]');
