@@ -8,15 +8,107 @@ import { z } from 'zod';
  * Uses existing professional email templates from emailBranding.ts
  */
 
+// ---------------------------------------------------------------------------
+// Spam Detection
+// ---------------------------------------------------------------------------
+
+/** Email domains used only for testing or known disposable/spam sources */
+const BLOCKED_EMAIL_DOMAINS = new Set([
+  'example.com', 'example.org', 'example.net',
+  'test.com', 'test.org', 'test.net',
+  'mailinator.com', 'guerrillamail.com', 'throwaway.email',
+  'tempmail.com', 'yopmail.com', 'maildrop.cc',
+  'trashmail.com', 'dispostable.com', 'spam4.me',
+  'sharklasers.com', 'grr.la', 'guerrillamail.info',
+  'fakeinbox.com', 'getnada.com', 'tempr.email',
+]);
+
+/** Patterns that indicate automated/test message content */
+const SPAM_MESSAGE_PATTERNS = [
+  /\be2e\s*test\b/i,
+  /automated\s*(e2e\s*)?test/i,
+  /please\s+disregard/i,
+  /test\s+submission/i,
+  /test\s+id\s*:/i,
+  /\btest-\d{8,}/i,          // e.g. test-1778028041566
+  /ignore\s+this\s+(message|email)/i,
+];
+
+/** Patterns that indicate obviously fake names or company names */
+const SPAM_FIELD_PATTERNS = [
+  /\be2e\s*test\b/i,
+  /test\s+company/i,
+  /test\s+user/i,
+  /\btest-\d{8,}/i,
+];
+
+/**
+ * Detects whether a submission looks like spam or an automated test.
+ * Returns silently so bots don't know they were blocked.
+ */
+function detectSpam(data: {
+  email: string;
+  phone?: string;
+  message: string;
+  firstName: string;
+  lastName: string;
+  companyName: string;
+  honeypot?: string;
+}): { isSpam: boolean; reason: string } {
+  // Honeypot: hidden field humans never fill — bots do
+  if (data.honeypot && data.honeypot.trim() !== '') {
+    return { isSpam: true, reason: 'honeypot_triggered' };
+  }
+
+  // Blocked email domains (example.com, mailinator.com, etc.)
+  const emailDomain = data.email.split('@')[1]?.toLowerCase();
+  if (emailDomain && BLOCKED_EMAIL_DOMAINS.has(emailDomain)) {
+    return { isSpam: true, reason: `blocked_domain:${emailDomain}` };
+  }
+
+  // Spam keywords in message body
+  for (const pattern of SPAM_MESSAGE_PATTERNS) {
+    if (pattern.test(data.message)) {
+      return { isSpam: true, reason: `spam_message:${pattern.source}` };
+    }
+  }
+
+  // Spam keywords in name / company fields
+  for (const field of [data.firstName, data.lastName, data.companyName]) {
+    for (const pattern of SPAM_FIELD_PATTERNS) {
+      if (pattern.test(field)) {
+        return { isSpam: true, reason: `spam_field:${pattern.source}` };
+      }
+    }
+  }
+
+  // Fake US phone numbers — 555-0xxx are reserved for fiction; 555-000-0000 is a classic test number
+  if (data.phone) {
+    const digits = data.phone.replace(/\D/g, '');
+    // Matches 555-000-xxxx or 555-0000000 patterns (10-digit with 555 area code starting with 0)
+    if (/^1?555(000|010[0-9]|0[0-9]{2}0{4})/.test(digits) || digits === '5550000000') {
+      return { isSpam: true, reason: 'fake_phone_number' };
+    }
+  }
+
+  return { isSpam: false, reason: '' };
+}
+
+// ---------------------------------------------------------------------------
+// Schema
+// ---------------------------------------------------------------------------
+
 const contactFormSchema = z.object({
   firstName: z.string().min(1, 'First name is required').max(50, 'First name is too long'),
   lastName: z.string().min(1, 'Last name is required').max(50, 'Last name is too long'),
   email: z.string().email('Invalid email address'),
   phone: z.string().optional(),
   companyName: z.string().min(1, 'Company name is required').max(100, 'Company name is too long'),
-   message: z.string()
+  message: z.string()
     .min(10, 'Message must be at least 10 characters')
     .max(1000, 'Message must be less than 1000 characters'),
+  // Honeypot — must be empty; bots fill it
+  honeypot: z.string().optional().default(''),
   // UTM Attribution fields for tracking lead sources
   attribution: z.string().optional().default('direct'),
   utmSource: z.string().nullable().optional(),
@@ -39,6 +131,27 @@ export async function POST(request: NextRequest) {
 
     // Validate the form data
     const validatedData = contactFormSchema.parse(body);
+
+    // Spam detection — silently return 200 so bots don't retry
+    const spamCheck = detectSpam({
+      email: validatedData.email,
+      phone: validatedData.phone,
+      message: validatedData.message,
+      firstName: validatedData.firstName,
+      lastName: validatedData.lastName,
+      companyName: validatedData.companyName,
+      honeypot: validatedData.honeypot,
+    });
+    if (spamCheck.isSpam) {
+      console.warn('🚫 Spam submission blocked:', {
+        reason: spamCheck.reason,
+        email: validatedData.email,
+        ip: request.headers.get('x-forwarded-for') || 'unknown',
+        timestamp: new Date().toISOString(),
+      });
+      // Return 200 so automated bots believe the submission succeeded
+      return NextResponse.json({ success: true, message: 'Thank you for your message!' }, { status: 200 });
+    }
 
     const customerData = {
       ...validatedData,

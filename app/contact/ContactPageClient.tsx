@@ -204,12 +204,7 @@ export default function ContactPage() {
                   <br />
                   <a
                     href="mailto:ampdesignandconsulting@gmail.com"
-                    className="text-[#FD5A1E] hover:underline"
-                    style={{
-                      wordBreak: 'break-all',      // CSS property for aggressive breaking
-                      overflowWrap: 'break-word',  // More intelligent word breaking
-                      hyphens: 'auto'              // Add hyphens where appropriate
-                    }}
+                    className="text-[#FD5A1E] hover:underline break-all break-words hyphens-auto"
                   >
                     ampdesignandconsulting@gmail.com
                   </a>
