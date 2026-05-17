@@ -31,13 +31,10 @@ jobs:
 
       - name: Run Contact Form E2E Tests
         run: npx playwright test tests/e2e/contact-form-email-verification.spec.ts --project=chromium
-        env:
-          # Required for email delivery verification test.
-          # Without TEST_BASE_URL the email delivery test is automatically skipped.
-          # Add TEST_BASE_URL as a repo secret (e.g. https://ampvendingmachines.com)
-          # to enable full email delivery verification against production.
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          TEST_BASE_URL: ${{ secrets.TEST_BASE_URL }}
+        # No TEST_BASE_URL here — tests run against the local dev server (started by
+        # Playwright's webServer config). This means the email delivery verification
+        # test is automatically skipped (it requires TEST_BASE_URL + RESEND_API_KEY).
+        # The form submission test mocks the API so no real emails are sent on push.
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v4
@@ -46,3 +43,20 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 7
+
+      - name: Send failure alert email
+        # Only runs when the tests above fail — this is the only time a real email is sent.
+        if: failure()
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          curl -s -X POST https://api.resend.com/emails \
+            -H "Authorization: Bearer $RESEND_API_KEY" \
+            -H "Content-Type: application/json" \
+            --data-raw "$(jq -n \
+              --arg from 'AMP Vending <ampdesignandconsulting@gmail.com>' \
+              --arg to 'aaronperezdev@gmail.com' \
+              --arg subject 'Contact Form Test Failed' \
+              --arg url "$RUN_URL" \
+              '{from: $from, to: [$to], subject: $subject, html: ("<h2>Contact Form Test Failed</h2><p>The E2E contact form test failed in GitHub CI.</p><p><a href=\"" + $url + "\">View the failed workflow run \u2192</a></p>")}')"
