@@ -40,6 +40,22 @@ test.describe('Contact Form', () => {
 
     await page.goto(`${testUrl}/contact`);
 
+    // Intercept the contact form API call and return a mocked success response.
+    // This tests the full UI flow (form fill → submit → success message) without
+    // sending real emails on every CI push. Email delivery is verified separately
+    // only when the form is actually broken (see the failure alert in the CI workflow).
+    await page.route('**/api/contact', async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          success: true,
+          message: "Thank you for your inquiry! We've received your submission and will respond within 24 hours.",
+          submissionId: `contact_mock_${Date.now()}`,
+        }),
+      });
+    });
+
     // Fill out all required form fields with realistic data (avoids spam filter)
     await page.fill('#firstName', 'Playwright');
     await page.fill('#lastName', 'CI');
@@ -137,17 +153,21 @@ test.describe('Contact Form Email Delivery', () => {
     // Submit the form
     await page.click('button[type="submit"]');
 
+    // Record time before submission so we can filter Resend results to only THIS run
+    const submittedAt = new Date();
+
     // Wait for success message
     const successAlert = page.locator('[role="alert"]').filter({
       hasText: /Thank you! Your message has been sent successfully/i
     });
     await expect(successAlert).toBeVisible({ timeout: 15000 });
 
-    // Wait for Resend to process the email (delivery can take a few seconds)
-    await page.waitForTimeout(5000);
+    // Wait for the background task (fire-and-forget after()) to call Resend.
+    // 12 s gives Resend time to accept the request and log it.
+    await page.waitForTimeout(12000);
 
-    // Check Resend API for the delivered email
-    const response = await fetch('https://api.resend.com/emails', {
+    // Fetch the 25 most recent emails — covers concurrent CI runs without pulling too much history
+    const response = await fetch('https://api.resend.com/emails?limit=25', {
       headers: {
         'Authorization': `Bearer ${RESEND_API_KEY}`,
         'Content-Type': 'application/json',
@@ -157,23 +177,34 @@ test.describe('Contact Form Email Delivery', () => {
     expect(response.ok).toBeTruthy();
 
     const data = (await response.json()) as ResendEmailsResponse;
+    // Guard against unexpected API response shapes
+    const emails: ResendEmail[] = Array.isArray(data?.data) ? data.data : [];
 
-    // Verify at least one email was delivered to one of the target addresses
-    // and contains the expected subject
-    const deliveredEmail = data.data.find((email) => {
-      // Check if any of the target emails are in the 'to' array
+    // Look for an email that was:
+    // 1. Created AFTER this test run started (avoids matching stale emails from earlier runs)
+    // 2. Addressed to one of the business notification addresses
+    // 3. Has "contact" in the subject line
+    // 4. Has any non-failure status — freshly sent mail is often still "queued" or "processing"
+    const deliveredEmail = emails.find((email) => {
+      const createdAt = new Date(email.created_at);
+      const sentDuringThisRun = createdAt >= submittedAt;
+
       const sentToTargetEmail = email.to.some((recipient) =>
         TARGET_EMAILS.some((target) => recipient.toLowerCase().includes(target.toLowerCase()))
       );
 
-      // Check if subject contains expected text
       const hasExpectedSubject = email.subject.toLowerCase().includes('contact');
 
-      // Check delivery status (accept 'delivered' or 'sent' as the email may still be in transit)
-      const isDelivered = email.status === 'delivered' || email.status === 'sent';
+      // Accept any non-failure status — email may still be in transit
+      const notFailed = email.status !== 'failed' && email.status !== 'bounced';
 
-      return sentToTargetEmail && hasExpectedSubject && isDelivered;
+      return sentDuringThisRun && sentToTargetEmail && hasExpectedSubject && notFailed;
     });
+
+    // Log available emails to help diagnose future failures
+    if (!deliveredEmail) {
+      console.error('Resend email not found. Emails returned by API:', JSON.stringify(emails, null, 2));
+    }
 
     expect(deliveredEmail).toBeDefined();
   });
