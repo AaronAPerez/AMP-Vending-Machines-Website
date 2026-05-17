@@ -12,9 +12,14 @@
 
 **[https://www.ampvendingmachines.com](https://www.ampvendingmachines.com)**
 
+## 📸 Website Preview
+
+### Hero Section
+![AMP Vending Hero Section](public/images/preview/hero-section-preview.webp)
+
 ## Project Overview
 
-AMP Vending is a modern, full-stack web application built for a vending machine company serving Central California. The platform showcases advanced vending solutions with comprehensive service packages, featuring an admin dashboard for business management and analytics.
+AMP Vending is a modern, full-stack web application built for a vending machine company serving Stanislaus County, San Joaquin County, and Central Valley California. The platform showcases advanced vending solutions with comprehensive service packages, featuring an admin dashboard for business management and analytics.
 
 ### Business Focus
 - **Target Market**: Corporate offices, educational facilities, healthcare centers
