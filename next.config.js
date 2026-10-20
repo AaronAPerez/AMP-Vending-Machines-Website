@@ -18,10 +18,9 @@ const nextConfig = {
 
   // Transpile specific packages to use modern JavaScript
   // lucide-react and @heroicons/react ship modern ESM directly — no transpilation needed.
-  // framer-motion and lodash benefit from SWC re-compilation per browserslist.
+  // framer-motion benefits from SWC re-compilation per browserslist.
   transpilePackages: [
     "framer-motion",
-    "lodash",
   ],
 
   // Compiler optimizations using SWC (default bundler)
@@ -36,8 +35,6 @@ const nextConfig = {
     optimizePackageImports: [
       "lucide-react",
       "@heroicons/react",
-      "date-fns",
-      "lodash",
       "framer-motion",
       "zod",
       "react-hook-form",
