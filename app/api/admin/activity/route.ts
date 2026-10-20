@@ -1,6 +1,7 @@
 // app/api/admin/activity/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseServer } from '@/lib/supabase';
+import { requireAdmin, AuthError } from '@/lib/middleware/adminAuth';
 
 export const runtime = 'nodejs';
 
@@ -8,8 +9,10 @@ export const runtime = 'nodejs';
  * GET /api/admin/activity
  * Fetch admin activity logs
  */
+
 export async function GET(request: NextRequest) {
   try {
+    await requireAdmin(request);
     // Get query parameters
     const searchParams = request.nextUrl.searchParams;
     const limit = parseInt(searchParams.get('limit') || '10', 10);
