@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.9.0"
   },
   "scripts": {
     "pre-commit": "npm run type-check && npm run lint",
@@ -19,8 +19,6 @@
     "test:unit": "jest --passWithNoTests",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage --watchAll=false",
-    "test:coverage:report": "jest --coverage --watchAll=false --passWithNoTests --coverageReporters=text-lcov | coveralls",
-    "test:coverage:html": "jest --coverage --watchAll=false --passWithNoTests --coverageReporters=html && open coverage/lcov-report/index.html",
     "test:ci": "jest --ci --coverage --watchAll=false",
     "test:ci:no-coverage": "jest --ci --watchAll=false --passWithNoTests --maxWorkers=2",
     "test:e2e": "playwright test",
@@ -33,27 +31,14 @@
     "test:all:coverage": "npm run type-check && npm run test:ci && npm run test:e2e",
     "test:setup": "playwright install",
     "test:setup:deps": "playwright install-deps",
-    "test:debug": "jest --config=jest.unit.config.js --detectOpenHandles --forceExit",
-    "test:verbose": "jest --config=jest.unit.config.js --verbose --passWithNoTests",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "build:analyze": "ANALYZE=true npm run build",
-    "export": "next export",
-    "build:production": "NODE_ENV=production npm run build",
-    "clean": "rm -rf  .next node_modules/.cache .next && rm -rf coverage && rm -rf test-results && rm -rf playwright-report",
+    "clean": "node -e \"for (const d of ['.next','coverage','test-results','playwright-report']) require('fs').rmSync(d, { recursive: true, force: true })\"",
     "lighthouse": "tsx ./scripts/lighthouse-test.ts",
-    "lighthouse:ci": "npm run build && npm run start & sleep 10 && npm run lighthouse && kill %1",
     "performance": "npm run lighthouse",
     "accessibility": "npm run test:e2e -- --grep @accessibility",
-    "email:test": "node -e \"require('./lib/services/emailService.js').emailService.verifyConnection().then(console.log)\"",
-    "test:types": "tsc --noEmit --skipLibCheck",
-    "lint:strict": "eslint . --ext .js,.jsx,.ts,.tsx --max-warnings 0",
     "lint:check": "eslint . --ext .js,.jsx,.ts,.tsx --max-warnings 0",
-    "index:request": "tsx scripts/request-indexing.ts",
-    "refactor:setup": "powershell -ExecutionPolicy Bypass -File ./scripts/create-refactored-structure.ps1",
-    "refactor:backup": "powershell -ExecutionPolicy Bypass -File ./scripts/backup-current-pages.ps1",
-    "refactor:validate": "powershell -ExecutionPolicy Bypass -File ./scripts/validate-refactoring.ps1",
-    "refactor:all": "npm run refactor:backup && npm run refactor:setup"
+    "index:request": "tsx scripts/request-indexing.ts"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -114,14 +99,5 @@
       "react": "$react",
       "react-dom": "$react-dom"
     }
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{json,md}": [
-      "prettier --write"
-    ]
   }
 }
