@@ -3,7 +3,15 @@
  * Tests for /api/contact endpoint
  */
 
+import { after } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { POST } from '@/app/api/contact/route';
+import { databaseService } from '@/lib/services/databaseService';
+import { emailService } from '@/lib/services/emailService';
 import { mockContactFormData, mockApiResponses } from '../utils/testHelpers';
+
+// Callbacks the route has passed to after() that haven't run yet (see the mock below)
+const mockAfterCallbacks: Array<() => unknown> = [];
 
 // Mock Next.js server components
 jest.mock('next/server', () => ({
@@ -14,7 +22,13 @@ jest.mock('next/server', () => ({
       json: async () => data,
       ok: (init?.status || 200) < 400
     }))
-  }
+  },
+  // Next.js runs after() callbacks once the response has been sent. The mock stores
+  // the callback instead, so a test can check the response first and then await the
+  // background work with runAfterCallbacks().
+  after: jest.fn((callback: () => unknown) => {
+    mockAfterCallbacks.push(callback);
+  })
 }));
 
 // Mock email service
@@ -24,12 +38,92 @@ jest.mock('@/lib/services/emailService', () => ({
   }
 }));
 
+// Mock database service so tests never touch Supabase
+jest.mock('@/lib/services/databaseService', () => ({
+  databaseService: {
+    saveContactSubmission: jest.fn()
+  }
+}));
+
+/** Runs the callbacks the route scheduled with after(), as Next.js does after responding */
+async function runAfterCallbacks() {
+  for (const callback of mockAfterCallbacks.splice(0)) {
+    await callback();
+  }
+}
+
+/**
+ * Minimal stand-in for NextRequest. The route only reads the JSON body and two
+ * headers, and the real NextRequest needs the Fetch API, which jsdom doesn't provide.
+ */
+function makeRequest(body: unknown): NextRequest {
+  const headers = new Map([
+    ['x-forwarded-for', '203.0.113.7'],
+    ['user-agent', 'jest'],
+  ]);
+  return {
+    json: async () => body,
+    headers: { get: (name: string) => headers.get(name.toLowerCase()) ?? null },
+  } as unknown as NextRequest;
+}
+
+// A submission that passes validation and the spam filter. (mockContactFormData.valid
+// uses an example.com address, which the route silently drops as spam.)
+const validSubmission = {
+  firstName: 'Jane',
+  lastName: 'Rivera',
+  email: 'jane.rivera@acme.test',
+  phone: '(209) 555-0147',
+  companyName: 'Acme Logistics',
+  message: 'We would like a vending machine for our warehouse break room.',
+};
+
 describe('Contact API Endpoint', () => {
   let mockEmailService: jest.Mock;
 
   beforeEach(() => {
     jest.clearAllMocks();
     mockEmailService = require('@/lib/services/emailService').emailService.sendContactFormEmails;
+  });
+
+  describe('POST /api/contact background work', () => {
+    beforeEach(() => {
+      mockAfterCallbacks.length = 0;
+      jest.mocked(databaseService.saveContactSubmission).mockResolvedValue(true);
+      jest.mocked(emailService.sendContactFormEmails).mockResolvedValue({
+        customerResult: { success: true },
+        businessResult: { success: true }
+      });
+    });
+
+    it('responds first, then saves the submission and sends the emails exactly once', async () => {
+      const response = await POST(makeRequest(validSubmission));
+
+      expect(response.status).toBe(200);
+      expect(await response.json()).toMatchObject({ success: true });
+
+      // The work is handed to after() (not left as a bare promise) and hasn't run yet
+      expect(after).toHaveBeenCalledTimes(1);
+      expect(databaseService.saveContactSubmission).not.toHaveBeenCalled();
+      expect(emailService.sendContactFormEmails).not.toHaveBeenCalled();
+
+      await runAfterCallbacks();
+
+      expect(databaseService.saveContactSubmission).toHaveBeenCalledTimes(1);
+      expect(databaseService.saveContactSubmission).toHaveBeenCalledWith(
+        expect.objectContaining({
+          email: validSubmission.email,
+          companyName: validSubmission.companyName
+        })
+      );
+      expect(emailService.sendContactFormEmails).toHaveBeenCalledTimes(1);
+      expect(emailService.sendContactFormEmails).toHaveBeenCalledWith(
+        expect.objectContaining({
+          email: validSubmission.email,
+          source: 'website_contact_form'
+        })
+      );
+    });
   });
 
   describe('POST /api/contact', () => {
