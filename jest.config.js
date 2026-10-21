@@ -49,6 +49,8 @@ const customJestConfig = {
     '<rootDir>/tests/**/unit/**/*.{test,spec}.{js,jsx,ts,tsx}',
     '<rootDir>/tests/**/components/**/*.{test,spec}.{js,jsx,ts,tsx}',
     '<rootDir>/tests/**/integration/**/*.{test,spec}.{js,jsx,ts,tsx}',
+    // API route tests (contactApi.test.ts) were never matched before, so they never ran in CI
+    '<rootDir>/tests/**/api/**/*.{test,spec}.{js,jsx,ts,tsx}',
   ],
   
   // Paths to ignore during testing

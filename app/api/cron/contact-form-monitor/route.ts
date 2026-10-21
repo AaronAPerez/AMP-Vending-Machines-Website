@@ -33,8 +33,15 @@ export async function GET(request: NextRequest) {
   const authHeader = request.headers.get('authorization');
   const cronSecret = process.env.CRON_SECRET;
 
-  // In production, require authorization
-  if (process.env.NODE_ENV === 'production' && cronSecret) {
+  // In production, require authorization. Fail CLOSED: if CRON_SECRET isn't set,
+  // refuse every request rather than letting anyone trigger the monitor (which
+  // hits the database and can send alert emails through Resend).
+  // Vercel Cron sends `Authorization: Bearer <CRON_SECRET>` when the env var exists.
+  if (process.env.NODE_ENV === 'production') {
+    if (!cronSecret) {
+      console.error('❌ CRON_SECRET is not set; refusing cron request');
+      return NextResponse.json({ error: 'Cron not configured' }, { status: 500 });
+    }
     if (authHeader !== `Bearer ${cronSecret}`) {
       console.error('❌ Unauthorized cron job attempt');
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });

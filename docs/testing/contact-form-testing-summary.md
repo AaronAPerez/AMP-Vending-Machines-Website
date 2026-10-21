@@ -119,9 +119,9 @@ npm run test:e2e -- tests/e2e/contactForm.spec.ts
 
 ### Generate Coverage Report
 ```bash
-npm run test:coverage:html
+npm run test:coverage
 ```
-Opens HTML coverage report in `coverage/lcov-report/index.html`
+Then open `coverage/lcov-report/index.html` in a browser.
 
 ## 📈 Test Coverage
 
@@ -296,10 +296,10 @@ This will:
 ### Debugging Failed Tests
 ```bash
 # Verbose output
-npm run test:verbose
+npx jest --verbose
 
-# Debug mode
-npm run test:debug
+# Find handles that keep Jest from exiting
+npx jest --detectOpenHandles
 
 # E2E UI mode
 npm run test:e2e:ui
