@@ -33,6 +33,7 @@
     "test:setup:deps": "playwright install-deps",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "catalog:pdf": "node scripts/generate-catalog-pdf.mjs",
     "clean": "node -e \"for (const d of ['.next','coverage','test-results','playwright-report']) require('fs').rmSync(d, { recursive: true, force: true })\"",
     "lighthouse": "tsx ./scripts/lighthouse-test.ts",
     "performance": "npm run lighthouse",
