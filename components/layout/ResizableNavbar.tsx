@@ -67,7 +67,7 @@ const ResizableNavbar = () => {
     <div className="fixed top-0 z-50 w-full">
       <header
         className={`
-          text-[#F5F5F5] border-b border-[#4d4d4d] mx-auto bg-black shadow-lg
+          text-[#F5F5F5] mx-auto bg-black shadow-lg
           transition-all duration-300 ease-out
           ${isScrolled ? 'w-[96%] backdrop-blur-md' : 'w-full'}
         `}
@@ -89,7 +89,7 @@ const ResizableNavbar = () => {
                   height={73}
                   style={{ height: "auto" }}
                   className={`object-contain transition-all duration-300 ${
-                    isScrolled ? 'w-[80px] sm:w-[90px]' : 'w-[100px] sm:w-[120px]'
+                    isScrolled ? 'w-[80px] sm:w-[90px]' : 'w-[100px] sm:w-[110px]'
                   }`}
                   priority
                 />

@@ -24,6 +24,12 @@ interface EmailResponse {
   error?: string;
 }
 
+/** Outcome of checkConnection(), reported by the health-check endpoints */
+export interface EmailConnectionResult {
+  status: 'ready' | 'not_configured' | 'error';
+  message: string;
+}
+
 export class EmailService {
   private static instance: EmailService;
   
@@ -221,28 +227,49 @@ export class EmailService {
   }
 
   /**
+   * Check the connection to Resend, and say why it isn't usable if it isn't
+   * (key missing vs. Resend rejecting the request).
+   *
+   * Pass `signal` to cap how long the request to Resend may take. A network
+   * failure or an aborted request rejects instead of returning a status, so the
+   * caller can tell a timeout apart from other errors.
+   */
+  async checkConnection(signal?: AbortSignal): Promise<EmailConnectionResult> {
+    if (process.env.NODE_ENV === 'development') {
+      return { status: 'ready', message: 'Development mode - using console logging' };
+    }
+
+    if (!process.env.RESEND_API_KEY) {
+      return { status: 'not_configured', message: 'RESEND_API_KEY not set' };
+    }
+
+    const response = await fetch('https://api.resend.com/domains', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+      },
+      signal,
+    });
+
+    if (!response.ok) {
+      // The key is set but Resend refused the request (e.g. 401 for an invalid key)
+      return { status: 'error', message: `Resend returned ${response.status}` };
+    }
+
+    return { status: 'ready', message: 'Resend API connected' };
+  }
+
+  /**
    * Verify email service connection
+   * Returns true only when Resend is usable (always true in development).
    */
   async verifyConnection(): Promise<boolean> {
     try {
-      if (process.env.NODE_ENV === 'development') {
-        console.log('📧 Email Service: Development mode - using console logging');
-        return true;
+      const result = await this.checkConnection();
+      if (result.status !== 'ready') {
+        console.warn(`⚠️ Email service not ready: ${result.message}`);
       }
-
-      if (!process.env.RESEND_API_KEY) {
-        console.warn('⚠️ RESEND_API_KEY not configured. Using fallback mode.');
-        return false;
-      }
-
-      const response = await fetch('https://api.resend.com/domains', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
-        },
-      });
-
-      return response.ok;
+      return result.status === 'ready';
     } catch (error) {
       console.error('Email service verification failed:', error);
       return false;

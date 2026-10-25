@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { emailService } from '@/lib/services/emailService';
+import { checkDatabase, checkEmailService, type ServiceCheckResult } from '@/lib/services/healthChecks';
 
 /**
  * Health Check API Route for UptimeRobot Monitoring
@@ -23,7 +23,14 @@ import { emailService } from '@/lib/services/emailService';
  * 3. Keyword Type: Keyword exists
  * 4. Keyword: "healthy"
  * 5. Monitoring Interval: 5 minutes (recommended)
+ *
+ * The database and email checks run in parallel, each with a 4-second limit
+ * (lib/services/healthChecks.ts), so a hung service can't make this time out.
  */
+
+// Longest Vercel lets this function run, in seconds: a backstop, since the checks
+// themselves give up after 4 s
+export const maxDuration = 10;
 
 interface ServiceHealth {
   status: 'healthy' | 'degraded' | 'unhealthy';
@@ -73,8 +80,11 @@ export async function GET(): Promise<NextResponse<HealthCheckResponse>> {
   let hasCriticalFailure = false;
   let hasDegradation = false;
 
-  // Check Database (Supabase) - Critical service
-  const dbHealth = await checkDatabaseHealth();
+  // Run both checks at once; each has its own time limit
+  const [dbCheck, emailCheck] = await Promise.all([checkDatabase(), checkEmailService()]);
+
+  // Database (Supabase) - Critical service
+  const dbHealth = toDatabaseHealth(dbCheck);
   healthCheck.services.database = dbHealth;
   if (dbHealth.status === 'unhealthy') {
     hasCriticalFailure = true;
@@ -82,8 +92,8 @@ export async function GET(): Promise<NextResponse<HealthCheckResponse>> {
     hasDegradation = true;
   }
 
-  // Check Email Service (Resend) - Important but not critical
-  const emailHealth = await checkEmailHealth();
+  // Email Service (Resend) - Important but not critical
+  const emailHealth = toEmailHealth(emailCheck);
   healthCheck.services.email = emailHealth;
   if (emailHealth.status === 'unhealthy') {
     hasDegradation = true; // Email failure is degradation, not critical
@@ -121,107 +131,44 @@ export async function GET(): Promise<NextResponse<HealthCheckResponse>> {
 }
 
 /**
- * Check Supabase database connectivity
- * Performs a lightweight query to verify connection
+ * Translate the shared database check into this endpoint's healthy/degraded/unhealthy terms
  */
-async function checkDatabaseHealth(): Promise<ServiceHealth> {
-  const startTime = Date.now();
+function toDatabaseHealth(check: ServiceCheckResult): ServiceHealth {
+  const { latencyMs } = check;
 
-  try {
-    const { supabaseServer } = await import('@/lib/supabase');
-
-    if (!supabaseServer) {
-      return {
-        status: 'degraded',
-        message: 'Supabase not configured (missing credentials)',
-        latencyMs: Date.now() - startTime,
-      };
-    }
-
-    // Perform a lightweight health check query
-    const { error } = await supabaseServer
-      .from('contact_submissions')
-      .select('id')
-      .limit(1);
-
-    const latencyMs = Date.now() - startTime;
-
-    if (error) {
-      console.error('[Health Check] Database error:', error.message);
-      return {
-        status: 'unhealthy',
-        message: `Database query failed: ${error.message}`,
-        latencyMs,
-      };
-    }
-
-    // Check for slow response (over 2 seconds)
-    if (latencyMs > 2000) {
-      return {
-        status: 'degraded',
-        message: `Database responding slowly (${latencyMs}ms)`,
-        latencyMs,
-      };
-    }
-
-    return {
-      status: 'healthy',
-      message: 'Supabase connected',
-      latencyMs,
-    };
-  } catch (error) {
-    const latencyMs = Date.now() - startTime;
-    console.error('[Health Check] Database exception:', error);
-    return {
-      status: 'unhealthy',
-      message: error instanceof Error ? error.message : 'Database check failed',
-      latencyMs,
-    };
+  switch (check.status) {
+    case 'ready':
+      // Check for slow response (over 2 seconds)
+      if (latencyMs > 2000) {
+        return { status: 'degraded', message: `Database responding slowly (${latencyMs}ms)`, latencyMs };
+      }
+      return { status: 'healthy', message: 'Supabase connected', latencyMs };
+    case 'not_configured':
+      return { status: 'degraded', message: 'Supabase not configured (missing credentials)', latencyMs };
+    case 'timeout':
+      console.error('[Health Check] Database timeout:', check.message);
+      return { status: 'unhealthy', message: `Database timed out: ${check.message}`, latencyMs };
+    case 'error':
+      console.error('[Health Check] Database error:', check.message);
+      return { status: 'unhealthy', message: `Database query failed: ${check.message}`, latencyMs };
   }
 }
 
 /**
- * Check Email Service (Resend) connectivity
- * Verifies API key is valid and service is reachable
+ * Translate the shared email check into this endpoint's healthy/degraded/unhealthy terms
  */
-async function checkEmailHealth(): Promise<ServiceHealth> {
-  const startTime = Date.now();
+function toEmailHealth(check: ServiceCheckResult): ServiceHealth {
+  const { latencyMs } = check;
 
-  try {
-    // Use the email service's built-in verification
-    const isConnected = await emailService.verifyConnection();
-    const latencyMs = Date.now() - startTime;
-
-    if (!isConnected) {
-      // In development mode, this is expected
-      if (process.env.NODE_ENV === 'development') {
-        return {
-          status: 'healthy',
-          message: 'Development mode - console logging',
-          latencyMs,
-        };
-      }
-
-      return {
-        status: 'degraded',
-        message: 'Resend API key not configured',
-        latencyMs,
-      };
-    }
-
-    return {
-      status: 'healthy',
-      message: 'Resend API connected',
-      latencyMs,
-    };
-  } catch (error) {
-    const latencyMs = Date.now() - startTime;
-    console.error('[Health Check] Email service exception:', error);
-    return {
-      status: 'unhealthy',
-      message: error instanceof Error ? error.message : 'Email check failed',
-      latencyMs,
-    };
+  switch (check.status) {
+    case 'ready':
+      return { status: 'healthy', message: check.message, latencyMs };
+    case 'not_configured':
+      return { status: 'degraded', message: 'Resend API key not configured', latencyMs };
+    case 'timeout':
+    case 'error':
+      console.error('[Health Check] Email service problem:', check.message);
+      return { status: 'unhealthy', message: check.message, latencyMs };
   }
 }
 
@@ -232,23 +179,13 @@ async function checkEmailHealth(): Promise<ServiceHealth> {
  * Returns only HTTP status code without body.
  */
 export async function HEAD(): Promise<NextResponse> {
-  try {
-    // Quick database connectivity check
-    const { supabaseServer } = await import('@/lib/supabase');
+  // Quick database connectivity check. Missing credentials isn't an outage here;
+  // only a failed or timed-out query is.
+  const db = await checkDatabase();
+  const isDown = db.status === 'error' || db.status === 'timeout';
 
-    if (supabaseServer) {
-      const { error } = await supabaseServer
-        .from('contact_submissions')
-        .select('id')
-        .limit(1);
-
-      if (error) {
-        return new NextResponse(null, { status: 503 });
-      }
-    }
-
-    return new NextResponse(null, { status: 200 });
-  } catch {
-    return new NextResponse(null, { status: 503 });
-  }
+  return new NextResponse(null, {
+    status: isDown ? 503 : 200,
+    headers: { 'Cache-Control': 'no-store, no-cache, must-revalidate' },
+  });
 }
