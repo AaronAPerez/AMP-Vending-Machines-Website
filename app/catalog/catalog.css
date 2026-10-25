@@ -1,0 +1,109 @@
+/*
+ * Catalog page styles: theme colors + print layout
+ *
+ * Makes the /catalog brochure print (or "Save as PDF") as exact US-Letter pages:
+ * one .catalog-sheet per paper page, no site navigation/footer, backgrounds preserved.
+ * The same rules are used by scripts/generate-catalog-pdf.mjs, which renders this page
+ * to the PDFs in public/downloads/.
+ */
+
+/* ───────────────────────────────────────────────────────────────────────────
+   Theme colors. The brochure markup uses these variables (see the `C` map in
+   components/catalog/CatalogBrochure.tsx), so one set of markup renders both looks.
+   --c-accent is the orange used for TEXT; the light theme uses a darker orange so
+   small orange text stays readable on white.
+   ─────────────────────────────────────────────────────────────────────────── */
+.catalog-brochure[data-theme='dark'] {
+  --c-page: #000000;
+  --c-text: #ffffff;
+  --c-body: #d1d5db;
+  --c-muted: #9ca3af;
+  --c-faint: #6b7280;
+  --c-accent: #fd5a1e;
+  --c-card: #171717;
+  --c-line: rgba(255, 255, 255, 0.1);
+  --c-panel-from: #262626;
+  --c-panel-to: #0a0a0a;
+}
+
+.catalog-brochure[data-theme='light'] {
+  --c-page: #ffffff;
+  --c-text: #111827;
+  --c-body: #374151;
+  --c-muted: #4b5563;
+  --c-faint: #6b7280;
+  --c-accent: #d13a00;
+  --c-card: #f5f5f5;
+  --c-line: rgba(0, 0, 0, 0.12);
+  --c-panel-from: #f5f5f5;
+  --c-panel-to: #d4d4d4;
+}
+
+/* Every sheet is exactly one Letter page with no browser margins */
+@page {
+  size: 8.5in 11in;
+  margin: 0;
+}
+
+.catalog-sheet {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+@media print {
+  /* Without this browsers drop background colors and the design prints blank */
+  html,
+  body,
+  .catalog-root,
+  .catalog-sheet {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  html,
+  body {
+    background: #000 !important;
+  }
+
+  /* Hide the site navbar, footer, sticky button and popups (marked in PublicLayoutWrapper) */
+  body:has(.catalog-root) [data-print-hide] {
+    display: none !important;
+  }
+
+  /* Remove the site's top margin/gradient so the first sheet starts at the page edge */
+  body:has(.catalog-root) #main-content {
+    margin: 0 !important;
+    min-height: 0 !important;
+    background: #000 !important;
+  }
+
+  /* White version: no black hairline can show at page edges */
+  html:has(.catalog-brochure[data-theme='light']),
+  body:has(.catalog-brochure[data-theme='light']),
+  body:has(.catalog-brochure[data-theme='light']) #main-content {
+    background: #fff !important;
+  }
+
+  /* Undo the on-screen "shrink to fit" scaling */
+  .catalog-scaler {
+    zoom: 1 !important;
+    padding: 0 !important;
+  }
+
+  .catalog-brochure {
+    display: block !important;
+    gap: 0 !important;
+  }
+
+  .catalog-sheet {
+    box-shadow: none !important;
+    margin: 0 !important;
+    break-after: page;
+    page-break-after: always;
+    break-inside: avoid;
+  }
+
+  .catalog-sheet:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+}
