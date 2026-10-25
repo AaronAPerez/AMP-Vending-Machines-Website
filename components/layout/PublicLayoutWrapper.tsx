@@ -48,8 +48,10 @@ export function PublicLayoutWrapper({ children }: PublicLayoutWrapperProps) {
         Skip to main content
       </a>
 
+      {/* data-print-hide: site chrome that must not appear when the /catalog brochure is
+          printed or saved as PDF (rule lives in app/catalog/catalog.css) */}
       {/* Navigation */}
-      <div className="relative z-50">
+      <div className="relative z-50" data-print-hide>
         <ResizableNavbar />
       </div>
 
@@ -65,13 +67,15 @@ export function PublicLayoutWrapper({ children }: PublicLayoutWrapperProps) {
       </main>
 
       {/* Deferred non-critical components */}
-      <DeferredComponents exitIntentDelay={5000} />
+      <div data-print-hide>
+        <DeferredComponents exitIntentDelay={5000} />
 
-      {/* Sticky Contact Button */}
-      <StickyContactButton />
+        {/* Sticky Contact Button */}
+        <StickyContactButton />
+      </div>
 
       {/* Footer */}
-      <footer role="contentinfo" aria-label="Site footer">
+      <footer role="contentinfo" aria-label="Site footer" data-print-hide>
         <Footer />
       </footer>
     </>

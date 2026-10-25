@@ -1,12 +1,19 @@
 import { emailService } from '@/lib/services/emailService';
 import { databaseService } from '@/lib/services/databaseService';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse, after } from 'next/server';
 import { z } from 'zod';
+import { checkDatabase, checkEmailService } from '@/lib/services/healthChecks';
 
 /**
  * Contact Form API Route
  * Uses existing professional email templates from emailBranding.ts
  */
+
+// Longest Vercel lets any handler in this file run, in seconds. It is a backstop for
+// the GET health check (whose checks time out after 4 s), but it also limits POST,
+// including the lead save and emails that run after POST responds. Keep it well
+// above what those take.
+export const maxDuration = 30;
 
 // ---------------------------------------------------------------------------
 // Spam Detection
@@ -173,13 +180,16 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Respond immediately — DB save and email sending run in the background.
-    // Using a fire-and-forget IIFE (not awaited) so the response returns in ~ms
-    // regardless of third-party service latency (Resend, Supabase).
-    // In Node.js the event loop keeps running after the response is sent.
+    // Respond immediately — DB save and email sending run in the background, so the
+    // visitor doesn't wait on Supabase or Resend.
+    // The background work must be registered with after(). On Vercel's serverless
+    // functions the instance can be frozen as soon as the response is sent, so a plain
+    // un-awaited promise may never finish, and the lead would be lost with no error
+    // (the visitor has already seen "success"). after() tells the platform to keep the
+    // function running until this callback settles, up to the route's max duration.
     const submissionId = `contact_${Date.now()}`;
 
-    void (async () => {
+    after(async () => {
       try {
         // Save submission to Supabase database for admin dashboard viewing
         const dbSaveResult = await databaseService.saveContactSubmission(validatedData);
@@ -212,7 +222,7 @@ export async function POST(request: NextRequest) {
       } catch (bgError) {
         console.error('❌ Background task error:', bgError);
       }
-    })();
+    });
 
     return NextResponse.json({
       success: true,
@@ -285,75 +295,36 @@ async function logContactSubmission(
  * Use this endpoint with uptime monitoring services (UptimeRobot, Better Uptime, etc.)
  * to get notified when any service goes down.
  *
- * @returns JSON with status of all services (email, database)
+ * Both checks run in parallel, each with a 4-second limit (lib/services/healthChecks.ts),
+ * so this answers in about 4 seconds at worst, and a slow service shows up as "timeout".
+ *
+ * @returns JSON with the status of each service: ready | not_configured | error | timeout.
+ *   HTTP 200 when healthy or degraded (a service isn't configured), 503 when unhealthy.
  */
 export async function GET() {
-  const healthCheck = {
-    status: 'healthy' as 'healthy' | 'degraded' | 'unhealthy',
-    timestamp: new Date().toISOString(),
-    services: {
-      email: { status: 'unknown' as string, message: '' },
-      database: { status: 'unknown' as string, message: '' }
-    }
-  };
+  // Neither check rejects (failures come back as a status), so Promise.all is safe
+  const [email, database] = await Promise.all([checkEmailService(), checkDatabase()]);
+  const statuses = [email.status, database.status];
 
-  let hasFailure = false;
-  let hasDegradation = false;
-
-  // Check Email Service (Resend)
-  try {
-    const emailServiceReady = await emailService.verifyConnection();
-    if (emailServiceReady) {
-      healthCheck.services.email = { status: 'ready', message: 'Resend API connected' };
-    } else {
-      healthCheck.services.email = { status: 'not_configured', message: 'RESEND_API_KEY not set' };
-      hasDegradation = true;
-    }
-  } catch (error) {
-    healthCheck.services.email = {
-      status: 'error',
-      message: error instanceof Error ? error.message : 'Email service check failed'
-    };
-    hasFailure = true;
+  // A failed or timed-out service means the form can't work; a missing setting is degraded
+  let status: 'healthy' | 'degraded' | 'unhealthy' = 'healthy';
+  if (statuses.some((s) => s === 'error' || s === 'timeout')) {
+    status = 'unhealthy';
+  } else if (statuses.includes('not_configured')) {
+    status = 'degraded';
   }
 
-  // Check Database (Supabase)
-  try {
-    const { supabaseServer } = await import('@/lib/supabase');
-    if (!supabaseServer) {
-      healthCheck.services.database = { status: 'not_configured', message: 'Supabase credentials not set' };
-      hasDegradation = true;
-    } else {
-      // Test actual database connectivity with a simple query
-      const { error } = await supabaseServer
-        .from('contact_submissions')
-        .select('id')
-        .limit(1);
-
-      if (error) {
-        healthCheck.services.database = { status: 'error', message: error.message };
-        hasFailure = true;
-      } else {
-        healthCheck.services.database = { status: 'ready', message: 'Supabase connected' };
-      }
+  return NextResponse.json(
+    {
+      status,
+      timestamp: new Date().toISOString(),
+      services: { email, database },
+    },
+    {
+      // 503 tells monitors the service is down; degraded still returns 200
+      status: status === 'unhealthy' ? 503 : 200,
+      // Monitors must always get a fresh result, never a cached one
+      headers: { 'Cache-Control': 'no-store' },
     }
-  } catch (error) {
-    healthCheck.services.database = {
-      status: 'error',
-      message: error instanceof Error ? error.message : 'Database check failed'
-    };
-    hasFailure = true;
-  }
-
-  // Determine overall status
-  if (hasFailure) {
-    healthCheck.status = 'unhealthy';
-  } else if (hasDegradation) {
-    healthCheck.status = 'degraded';
-  }
-
-  // Return appropriate HTTP status code for monitoring services
-  const httpStatus = hasFailure ? 500 : hasDegradation ? 200 : 200;
-
-  return NextResponse.json(healthCheck, { status: httpStatus });
+  );
 }
