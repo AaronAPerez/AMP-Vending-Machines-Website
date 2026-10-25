@@ -1,6 +1,6 @@
 import { emailService } from '@/lib/services/emailService';
 import { databaseService } from '@/lib/services/databaseService';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse, after } from 'next/server';
 import { z } from 'zod';
 
 /**
@@ -173,13 +173,16 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Respond immediately — DB save and email sending run in the background.
-    // Using a fire-and-forget IIFE (not awaited) so the response returns in ~ms
-    // regardless of third-party service latency (Resend, Supabase).
-    // In Node.js the event loop keeps running after the response is sent.
+    // Respond immediately — DB save and email sending run in the background, so the
+    // visitor doesn't wait on Supabase or Resend.
+    // The background work must be registered with after(). On Vercel's serverless
+    // functions the instance can be frozen as soon as the response is sent, so a plain
+    // un-awaited promise may never finish, and the lead would be lost with no error
+    // (the visitor has already seen "success"). after() tells the platform to keep the
+    // function running until this callback settles, up to the route's max duration.
     const submissionId = `contact_${Date.now()}`;
 
-    void (async () => {
+    after(async () => {
       try {
         // Save submission to Supabase database for admin dashboard viewing
         const dbSaveResult = await databaseService.saveContactSubmission(validatedData);
@@ -212,7 +215,7 @@ export async function POST(request: NextRequest) {
       } catch (bgError) {
         console.error('❌ Background task error:', bgError);
       }
-    })();
+    });
 
     return NextResponse.json({
       success: true,
