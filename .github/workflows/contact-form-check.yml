@@ -10,15 +10,20 @@ on:
       - 'components/contact/**'
       - 'app/api/contact/**'
       - 'tests/e2e/contact-form-email-verification.spec.ts'
+      - '.github/workflows/contact-form-check.yml'
+      - 'playwright.config.ts'
 
 jobs:
   test:
+    # ubuntu-latest moved to Ubuntu 26.04 in Oct 2026. Playwright supports it from
+    # 1.63; older versions fail at "Install Playwright Browsers" on this image.
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Install Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: 'npm'
@@ -37,12 +42,13 @@ jobs:
         # The form submission test mocks the API so no real emails are sent on push.
 
       - name: Upload Test Results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: playwright-report
           path: playwright-report/
           retention-days: 7
+          if-no-files-found: ignore
 
       - name: Send failure alert email
         # Only runs when the tests above fail — this is the only time a real email is sent.
@@ -59,4 +65,4 @@ jobs:
               --arg to 'aaronperezdev@gmail.com' \
               --arg subject 'Contact Form Test Failed' \
               --arg url "$RUN_URL" \
-              '{from: $from, to: [$to], subject: $subject, html: ("<h2>Contact Form Test Failed</h2><p>The E2E contact form test failed in GitHub CI.</p><p><a href=\"" + $url + "\">View the failed workflow run \u2192</a></p>")}')"
+              '{from: $from, to: [$to], subject: $subject, html: ("<h2>Contact Form Test Failed</h2><p>The E2E contact form test failed in GitHub CI.</p><p><a href=\"" + $url + "\">View the failed workflow run →</a></p>")}')"
