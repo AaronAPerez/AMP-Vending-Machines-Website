@@ -133,7 +133,7 @@ export default function FeedbackForm({ className = '', onSubmitSuccess }: Feedba
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors: Record<string, string> = {};
-        error.errors.forEach((err) => {
+        error.issues.forEach((err) => {
           if (err.path && err.path.length > 0 && err.path[0] !== undefined) {
             newErrors[err.path[0].toString()] = err.message;
           }

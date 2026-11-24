@@ -55,7 +55,7 @@ export const createMachineSchema = z.object({
     .max(200, 'Name is too long'),
 
   category: z.enum(['refrigerated', 'non-refrigerated'], {
-    errorMap: () => ({ message: 'Category must be either "refrigerated" or "non-refrigerated"' })
+    error: 'Category must be either "refrigerated" or "non-refrigerated"'
   }),
 
   shortDescription: z.string()
@@ -127,7 +127,7 @@ export const updateMachineSchema = createMachineSchema.partial();
  * Machine image validation schema
  */
 export const machineImageSchema = z.object({
-  machineId: z.string().uuid('Invalid machine ID'),
+  machineId: z.guid('Invalid machine ID'),
   altText: z.string()
     .min(10, 'Alt text must be at least 10 characters')
     .max(200, 'Alt text is too long'),
@@ -151,8 +151,8 @@ export const updateMachineImageSchema = z.object({
  * Reorder images schema
  */
 export const reorderImagesSchema = z.object({
-  machineId: z.string().uuid('Invalid machine ID'),
-  imageOrder: z.array(z.string().uuid('Invalid image ID'))
+  machineId: z.guid('Invalid machine ID'),
+  imageOrder: z.array(z.guid('Invalid image ID'))
     .min(1, 'At least one image ID required')
 });
 

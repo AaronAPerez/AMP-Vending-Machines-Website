@@ -224,7 +224,7 @@ export function ExitIntentPopup({ delay = 5000, isOpen, onClose, content: provid
       if (error instanceof z.ZodError) {
         // Handle validation errors
         const fieldErrors: Record<string, string> = {};
-        error.errors.forEach((err) => {
+        error.issues.forEach((err) => {
           const field = err.path[0] as string;
           fieldErrors[field] = err.message;
         });

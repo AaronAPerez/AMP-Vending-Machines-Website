@@ -45,7 +45,7 @@ export const seoSettingsSchema = z.object({
     .optional()
     .nullable(),
 
-  structuredData: z.record(z.any())
+  structuredData: z.record(z.string(), z.any())
     .optional()
     .nullable()
 });

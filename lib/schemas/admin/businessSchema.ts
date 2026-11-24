@@ -83,8 +83,9 @@ export const updateBusinessInfoSchema = z.object({
     .regex(/^\d{5}(-\d{4})?$/, 'Invalid ZIP code format')
     .optional(),
 
+  // No .default('USA') here: zod 3 never applied a default inside .optional(),
+  // but zod 4 does, which would overwrite country on every partial update.
   country: z.string()
-    .default('USA')
     .optional(),
 
   latitude: z.number()

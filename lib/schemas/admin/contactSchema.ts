@@ -14,7 +14,7 @@ export const contactStatusSchema = z.enum([
   'resolved',
   'archived'
 ], {
-  errorMap: () => ({ message: 'Invalid contact status' })
+  error: 'Invalid contact status'
 });
 
 /**
@@ -23,8 +23,7 @@ export const contactStatusSchema = z.enum([
 export const updateContactSchema = z.object({
   status: contactStatusSchema.optional(),
 
-  assignedTo: z.string()
-    .uuid('Invalid admin user ID')
+  assignedTo: z.guid('Invalid admin user ID')
     .optional()
     .nullable(),
 
@@ -50,7 +49,7 @@ export const respondToContactSchema = z.object({
  */
 export const contactFiltersSchema = z.object({
   status: contactStatusSchema.optional(),
-  assignedTo: z.string().uuid('Invalid admin user ID').optional(),
+  assignedTo: z.guid('Invalid admin user ID').optional(),
   search: z.string().optional(),
   dateFrom: z.string().datetime().optional(),
   dateTo: z.string().datetime().optional(),
