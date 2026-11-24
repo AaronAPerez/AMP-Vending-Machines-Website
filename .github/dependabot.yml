@@ -2,8 +2,9 @@ version: 2
 
 updates:
   # npm: one PR per week for all minor + patch updates, one PR for all security
-  # fixes. Major updates (e.g. zod 3 -> 4, tailwindcss 3 -> 4) still arrive as
-  # their own PRs because they usually need code changes.
+  # fixes. Routine major upgrades (e.g. tailwindcss 3 -> 4) are skipped: they
+  # need code changes, so they're done on purpose in their own branch. Alerts
+  # that need a major upgrade still show under Security > Dependabot.
   - package-ecosystem: npm
     directory: /
     schedule:
@@ -12,6 +13,9 @@ updates:
       time: "06:00"
       timezone: America/Los_Angeles
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
     commit-message:
       prefix: chore
       include: scope # -> "chore(deps): ..." / "chore(deps-dev): ..."
