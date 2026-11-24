@@ -1,20 +1,28 @@
 name: Request Google Indexing
 
 on:
-  schedule:
-    - cron: '0 9 * * 1' # Every Monday at 9 AM
+  # Schedule paused: this job has never succeeded. The script read the wrong env
+  # var (fixed), and the GOOGLE_SERVICE_ACCOUNT_KEY secret has not been confirmed
+  # to work. Run it once by hand (Actions > Request Google Indexing > Run workflow);
+  # when it passes, uncomment the schedule below.
+  # schedule:
+  #   - cron: '0 9 * * 1' # Every Monday at 9 AM UTC
   workflow_dispatch: # Allow manual trigger
 
 jobs:
   request-indexing:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
-          node-version: '24'
+          node-version: 24
+          cache: 'npm'
       - run: npm ci
       - run: npm run index:request
         env:
           NEXT_PUBLIC_BASE_URL: https://www.ampvendingmachines.com
+          # Full JSON key of a Google Cloud service account that has the Indexing API
+          # enabled and is an Owner of the site in Google Search Console.
           GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
