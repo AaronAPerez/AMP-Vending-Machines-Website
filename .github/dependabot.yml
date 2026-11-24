@@ -1,0 +1,40 @@
+version: 2
+
+updates:
+  # npm: one PR per week for all minor + patch updates, one PR for all security
+  # fixes. Major updates (e.g. zod 3 -> 4, tailwindcss 3 -> 4) still arrive as
+  # their own PRs because they usually need code changes.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: America/Los_Angeles
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: chore
+      include: scope # -> "chore(deps): ..." / "chore(deps-dev): ..."
+    groups:
+      npm-minor-and-patch:
+        applies-to: version-updates
+        patterns: ["*"]
+        update-types: [minor, patch]
+      npm-security:
+        applies-to: security-updates
+        patterns: ["*"]
+
+  # GitHub Actions: keeps action versions current (e.g. Node runtime deprecations)
+  # in a single PR.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: America/Los_Angeles
+    commit-message:
+      prefix: ci
+    groups:
+      github-actions:
+        patterns: ["*"]
