@@ -12,13 +12,14 @@ jobs:
   test:
     name: Test & Build
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
-      - name: Setup Node.js 20
-        uses: actions/setup-node@v4
+      - name: Setup Node.js 24
+        uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: 'npm'
@@ -39,6 +40,8 @@ jobs:
         run: npm run build
         env:
           NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL || 'https://www.ampvendingmachines.com' }}
+          # Dependabot PRs don't get Actions secrets, so this is empty there.
+          # The build must not need it (don't create API clients at module load).
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
 
   # Note: Deployment is handled automatically by Vercel

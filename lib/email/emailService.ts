@@ -1,8 +1,7 @@
-import { Resend } from 'resend';
-
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-
+// Emails go through the Resend REST API with fetch (see sendEmailResend below).
+// Don't create a `new Resend(...)` client at module load: it throws when
+// RESEND_API_KEY is missing, which breaks `next build` wherever the secret isn't
+// available (Dependabot PRs, forks, local builds without .env).
 
 interface EmailConfig {
   to: string;

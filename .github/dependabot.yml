@@ -1,0 +1,44 @@
+version: 2
+
+updates:
+  # npm: one PR per week for all minor + patch updates, one PR for all security
+  # fixes. Routine major upgrades (e.g. tailwindcss 3 -> 4) are skipped: they
+  # need code changes, so they're done on purpose in their own branch. Alerts
+  # that need a major upgrade still show under Security > Dependabot.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: America/Los_Angeles
+    open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    commit-message:
+      prefix: chore
+      include: scope # -> "chore(deps): ..." / "chore(deps-dev): ..."
+    groups:
+      npm-minor-and-patch:
+        applies-to: version-updates
+        patterns: ["*"]
+        update-types: [minor, patch]
+      npm-security:
+        applies-to: security-updates
+        patterns: ["*"]
+
+  # GitHub Actions: keeps action versions current (e.g. Node runtime deprecations)
+  # in a single PR.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: America/Los_Angeles
+    commit-message:
+      prefix: ci
+    groups:
+      github-actions:
+        patterns: ["*"]
