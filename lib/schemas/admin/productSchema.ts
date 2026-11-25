@@ -19,7 +19,7 @@ export const productCategorySchema = z.enum([
   'energy',
   'healthy'
 ], {
-  errorMap: () => ({ message: 'Invalid product category' })
+  error: 'Invalid product category'
 });
 
 /**
@@ -71,7 +71,7 @@ export const updateProductSchema = createProductSchema.partial();
 export const bulkUpdateProductsSchema = z.object({
   products: z.array(
     z.object({
-      id: z.string().uuid('Invalid product ID'),
+      id: z.guid('Invalid product ID'),
       displayOrder: z.number().int().min(0).optional(),
       isActive: z.boolean().optional(),
       isPopular: z.boolean().optional(),
